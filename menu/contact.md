@@ -11,4 +11,4 @@ title: Contact
 
 ### [Github](https://github.com/dustinwicker)
 
-Feel free to reach out to me at any of the above!
+Feel free to reach out to me at any of the above. I look forward to hearing from you!
