@@ -3,7 +3,7 @@ layout: page
 title: Contact
 ---
 
-### [Email](dustinlwicker@gmail.com)
+### [Email](mailto:dustinlwicker@gmail.com)
 
 ### [Upwork](https://www.upwork.com/o/profiles/users/~01d8db63e27557c1eb/)
 
