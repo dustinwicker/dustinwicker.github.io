@@ -11,4 +11,4 @@ title: Contact
 
 ### [Github](https://github.com/dustinwicker)
 
-If you are having any problems, any questions or suggestions.
+Feel free to reach out to me at any of the above!
