@@ -7,7 +7,7 @@ title: Contact
 
 ### [Upwork](https://www.upwork.com/o/profiles/users/~01d8db63e27557c1eb/)
 
-### [Linkedin](https://www.linkedin.com/in/dustin-wicker/)
+### [Linkedin](https://www.linkedin.com/in/dustin-wicker/ "Click to go to my Linkedin profile")
 
 ### [Github](https://github.com/dustinwicker)
 
