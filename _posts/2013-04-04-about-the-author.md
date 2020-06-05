@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "About the Author"
-author: "Paul Le"
-categories: journal
-tags: [documentation,sample]
+title: "Predicting the Presence of Heart Disease in Patients"
+author: "Dustin Wicker"
+categories: data science
+tags: [healthcare,data science,data analytics,data analysis,machine learning,sample]
 image: cutting.jpg
 ---
 
