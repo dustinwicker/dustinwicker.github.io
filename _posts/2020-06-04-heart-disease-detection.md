@@ -29,7 +29,7 @@ After the data was properly read into into Python and the appropriate column nam
 ## Exploratory Data Analysis
 The following two images provide a sample of the analysis performed.
 
-![Distribution_of_Continuous_Features_by_Target](distribution_of_continuous_features_by_target.png "Distribution of Continuous Features by Target")
+![Distribution_of_Continuous_Features_by_Target](/assets/img/distribution_of_continuous_features_by_target.png "Distribution of Continuous Features by Target")
 
 
 Hi there! I'm Paul. I’m a physics major turned programmer. Ever since I first learned how to program while taking a scientific computing for physics course, I have pursued programming as a passion, and as a career. Check out [my personal website](https://www.lenpaul.com/) for more information on my other projects (including more Jekyll themes!), as well as some of my writing.
