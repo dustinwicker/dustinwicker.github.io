@@ -77,7 +77,8 @@ After exploring our data to obtain a greater understanding of it and using that 
 (add visual of all ROC curves - the 4 and explain SVC's absence)
 * The best model for each algorithm was selected based on a combination of the total patients predicted correctly and F1 Score.
 * From there, model predictions were assembled to determine which combination (or stand alone model) provided the best results.
-* A summary of the model results can be seen in the fourth image (titled "Model Results") (build table)
+* A summary of the model results can be seen below.
+* The best model, the Support Vector Machine Classification Model #4, is bolded. It is the most parsimonious model which provided the optimal combination of total patients predicted correctly and F1 Score.
 
 | Model(s)                                                                                                                                                   | F1 Score | Recall | Precision | Total Correct | Total Incorrect |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | :------: | :----: | :-------: | :-----------: | :-------------: |
@@ -98,15 +99,8 @@ After exploring our data to obtain a greater understanding of it and using that 
 | Random Forest Classifer Six                                                                                                                                | 0.768    | 0.717  | 0.826     | 246           | 46              |
 | Logistic Regression Three                                                                                                                                  | 0.765    | 0.736  | 0.796     | 244           | 48              |
 
-
-
-
-
-
-* The best model, the Support Vector Machine Classification Model #4, is outlined in green.
-* It is the parsimonious model which provided the optimal combination of total patients predicted correctly and F1 Score.
-
 ## Visualze Best Model and Explain Usefulness
+The final step was visualizing the results of the best model and explaining how the model could be utilized in a hospital setting for both....
 
 
 
