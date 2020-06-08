@@ -4,7 +4,7 @@ title: "Predicting the Presence of Heart Disease in Patients"
 author: "Dustin Wicker"
 categories: journal
 tags: [healthcare,data science,data analytics,data analysis,machine learning,sample]
-image: bar_chart_confusion_matrix_svc.png
+image: heart.png
 ---
 
 ## Project Summary  
