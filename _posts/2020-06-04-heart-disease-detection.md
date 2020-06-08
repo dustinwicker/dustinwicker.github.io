@@ -8,6 +8,14 @@ image: bar_chart_confusion_matrix_svc.png
 ---
 
 Project Summary:  
-Statistical analysis, data mining techniques, and five machine learning models (include the five models?) were built and ensembled to accurately predict the presence of heart disease in patients from the Hungarian Institute of Cardiology in Budapest.
+Statistical analysis, data mining techniques, and five machine learning models (include the five models?) were built and ensembled to accurately predict the presence of heart disease in patients from the Hungarian Institute of Cardiology in Budapest. All told, the model which provided the optimal combination of total patients predicted correctly and F1 Score, while being the most parsimonious one, was the Support Vector Machine Classification Model #4 (bold important words.)
+
+ (Put overall summary of model results)
+ 
+Project Overview:  
+The first step was obtaining the [data](https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/hungarian.data) from the UCI Machine Learning Repository.  
+  
+The Hungarian data was ingested into Python and data cleaning was performed. This involved:
+
 
 Hi there! I'm Paul. I’m a physics major turned programmer. Ever since I first learned how to program while taking a scientific computing for physics course, I have pursued programming as a passion, and as a career. Check out [my personal website](https://www.lenpaul.com/) for more information on my other projects (including more Jekyll themes!), as well as some of my writing.
