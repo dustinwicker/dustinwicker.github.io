@@ -19,6 +19,8 @@ Statistical analysis, data mining techniques, and five machine learning models (
 
 ## Data Ingestion
 The first step was obtaining the [data](https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/hungarian.data) from the UCI Machine Learning Repository. The data was then ingested into Python.
+
+(Explain the data set - what target is)
   
 ## Data Cleaning  
 After the data was properly read into into Python and the appropriate column names were supplied, data cleaning was performed. This involved: 
@@ -30,6 +32,21 @@ After the data was properly read into into Python and the appropriate column nam
 The following two images provide a sample of the analysis performed.
 
 ![Distribution_of_Continuous_Features_by_Target](/assets/img/distribution_of_continuous_features_by_target.png "Distribution of Continuous Features by Target")
+
+There is a histogram for each of the initial continuous features against the target variable (diagnosis of heart disease). This visualization allows you to see which of the predictor variables have noticeable differences in their distributions when split on the target and would therefore be useful in prediction (a good example of this is "Maximum Heart Rate Achieved.")
+
+![Heatmap Continous Predictor Variables](/assets/img/heatmap_continous_predictor_variables.png "Heatmap of Continous Predictor Variables")
+
+
+
+
+
+
+
+
+
+
+(Put code at bottom - base off table of contents)
 
 
 Hi there! I'm Paul. I’m a physics major turned programmer. Ever since I first learned how to program while taking a scientific computing for physics course, I have pursued programming as a passion, and as a career. Check out [my personal website](https://www.lenpaul.com/) for more information on my other projects (including more Jekyll themes!), as well as some of my writing.
