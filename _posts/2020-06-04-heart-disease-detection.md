@@ -16,6 +16,7 @@ Statistical analysis, data mining techniques, and five machine learning models (
 ## [Data Ingestion](#data-ingestion)
 ## [Data Cleaning](#data-cleaning)
 ## [Exploratory Data Analysis](#exploratory-data-analysis)
+## [Model Building](#model-building)
 
 ## Data Ingestion
 The first step was obtaining the [data](https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/hungarian.data) from the UCI Machine Learning Repository. The data was then ingested into Python.
@@ -46,11 +47,24 @@ Including the details above, this step also involved:
    * Odds Ratios
    * Contingency Tables
    * Normality Tests
-* Feature Engineering
+* Feature Engineering (do visualization will of this done?)
 * Data Visualization
-* Data Transformations (add section for this?)
+* Data Transformations (add section for this? visualizaton showing the differences - chol)
 
-
+## Model Building
+After exploring our data to obtain a greater understanding of it and using that information to perform feature engineering and data transformations, it was time to build and optimize models.
+* Five different machine learning algorithms were used  
+   * Logistic Regression  
+   * Random Forest 
+   * K-Nearest Neighbors
+   * Support Vector Machine
+   * Gradient Boosting
+* Seven unique sets of variables were created with each set containing continuous and categorical features
+* Each model was run on every set of variables (for a total of 35 models) - bold 35 models
+* Every model run was optimized using
+   * Grid search  
+   * Cross-validation
+   * Feature importance techniques
 
 
 
