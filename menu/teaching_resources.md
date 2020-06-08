@@ -2,7 +2,7 @@
 layout: page
 title: Teaching Resources
 ---
-<ul class="Teaching Resources">
+<ul class="posts">
   {% for post in site.posts %}
 
     {% unless post.next %}
