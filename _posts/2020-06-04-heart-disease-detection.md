@@ -41,11 +41,11 @@ This heatmap shows correlation coefficients between the initial continuous varia
 
 Including the details above, this step also involved:
 * Statistical Analysis  
- * Chi-Square Tests  
- * Fisher's Exact Chi-Square Tests  
- * Odds Ratios
- * Contingency Tables
- * Normality Tests
+   * Chi-Square Tests  
+   * Fisher's Exact Chi-Square Tests  
+   * Odds Ratios
+   * Contingency Tables
+   * Normality Tests
 * Feature Engineering
 * Data Visualization
 * Data Transformations (add section for this?)
