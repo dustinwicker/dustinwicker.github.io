@@ -13,9 +13,17 @@ Statistical analysis, data mining techniques, and five machine learning models (
  (Put overall summary of model results)
  
 ## Project Overview  
+# [Data Ingestion and Data Cleaning]
+# [Exploratory Data Analysis](#exploratory-data-analysis)
 The first step was obtaining the [data](https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/hungarian.data) from the UCI Machine Learning Repository.  
   
-The Hungarian data was ingested into Python and data cleaning was performed. This involved:
+The Hungarian data was ingested into Python and data cleaning was performed. This involved:  
+* Removing unnecessary columns
+* Removing rows with a large percentage of missing values
+* Imputing missing values for patients using K-Nearest Neighbors, an advanced data imputation method  
+
+## Exploratory Data Analysis
+Test
 
 
 Hi there! I'm Paul. I’m a physics major turned programmer. Ever since I first learned how to program while taking a scientific computing for physics course, I have pursued programming as a passion, and as a career. Check out [my personal website](https://www.lenpaul.com/) for more information on my other projects (including more Jekyll themes!), as well as some of my writing.
