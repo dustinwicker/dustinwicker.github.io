@@ -79,7 +79,7 @@ After exploring our data to obtain a greater understanding of it and using that 
 * From there, model predictions were assembled to determine which combination (or stand alone model) provided the best results.
 
 | Model(s)                                                                                                                                                   | F1 Score | Recall | Precision | Total Correct | Total Incorrect |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------- | :------: | :----: | --------- | ------------- | --------------- |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------- | :------: | :----: | :-------: | :-----------: | :-------------: |
 | Gradient Boosting Classifer Five, K-Nearest Neighbors Five, Support Vector Machine Classifier Four                                                         | 0.802    | 0.745  | 0.868     | 253           | 39              |
 | Support Vector Machine Classifier Four                                                                                                                     | 0.804    | 0.774  | 0.837     | 252           | 40              |
 | Gradient Boosting Classifer Five, Random Forest Classifer Six, Support Vector Machine Classifier Four                                                      | 0.798    | 0.745  | 0.859     | 252           | 40              |
