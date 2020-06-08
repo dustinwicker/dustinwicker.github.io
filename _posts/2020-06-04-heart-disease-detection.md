@@ -12,10 +12,12 @@ Statistical analysis, data mining techniques, and five machine learning models (
 
  (Put overall summary of model results)
  
+ (Link to full code)
+ 
 # Project Overview  
 ## [Data Ingestion](#data-ingestion)
 ## [Data Cleaning](#data-cleaning)
-## [Exploratory Data Analysis](#exploratory-data-analysis)
+## [Exploratory Analysis](#exploratory-data-analysis)
 ## [Model Building](#model-building)
 
 ## Data Ingestion
@@ -33,6 +35,8 @@ After the data was properly read into into Python and the appropriate column nam
 The following two images provide a sample of the analysis performed.
 
 ![Distribution_of_Continuous_Features_by_Target](/assets/img/distribution_of_continuous_features_by_target.png "Distribution of Continuous Features by Target")
+
+(Link to code snippet at bottom of page for all independent code bodies)
 
 There is a histogram for each of the initial continuous features against the target variable (diagnosis of heart disease). This visualization allows you to see which of the predictor variables have noticeable differences in their distributions when split on the target and would therefore be useful in prediction (a good example of this is "Maximum Heart Rate Achieved.")
 
