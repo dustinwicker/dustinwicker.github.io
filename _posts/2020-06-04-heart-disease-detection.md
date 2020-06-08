@@ -18,7 +18,7 @@ Statistical analysis, data mining techniques, and five machine learning models (
 # Project Overview  
 ## [Data Ingestion](#data-ingestion)
 ## [Data Cleaning](#data-cleaning)
-## [Exploratory Data Analysis](#exploratory-data-analysis)
+## [Exploratory Data Analysis](#exploratory-data-analysis-1)
 ## [Model Building](#model-building)
 
 ## Data Ingestion
