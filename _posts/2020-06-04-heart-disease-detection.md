@@ -16,10 +16,11 @@ Statistical analysis, data mining techniques, and five machine learning models (
  (Link to full code)
  
 # Project Overview  
-## [Data Ingestion](#data-ingestion)
-## [Data Cleaning](#data-cleaning)
+## [Data Ingestion](#data-ingestion-1)
+## [Data Cleaning](#data-cleaning-1)
 ## [Exploratory Data Analysis](#exploratory-data-analysis-1)
-## [Model Building](#model-building)
+## [Model Building](#model-building-1)
+## [Model Visualization, Comparison, and Selection](#model-visualization-comparison-and-selection) 
 
 ## Data Ingestion
 The first step was obtaining the [data](https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/hungarian.data) from the UCI Machine Learning Repository. The data was then ingested into Python.
@@ -71,7 +72,7 @@ After exploring our data to obtain a greater understanding of it and using that 
    * Cross-validation
    * Feature importance techniques
    
-  ## Model Visualization, Comparison, and Selection  
+## Model Visualization, Comparison, and Selection  
 * ROC Curves were built based on each model's predicted probabilities to visually compare model performance at various cut-off values.
 (add visual of all ROC curves - the 4 and explain SVC's absence)
 * The best model for each algorithm was selected based on a combination of the total patients predicted correctly and F1 Score.
