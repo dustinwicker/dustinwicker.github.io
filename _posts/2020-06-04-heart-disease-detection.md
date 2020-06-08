@@ -35,7 +35,20 @@ The following two images provide a sample of the analysis performed.
 
 There is a histogram for each of the initial continuous features against the target variable (diagnosis of heart disease). This visualization allows you to see which of the predictor variables have noticeable differences in their distributions when split on the target and would therefore be useful in prediction (a good example of this is "Maximum Heart Rate Achieved.")
 
-![Heatmap Continous Predictor Variables](/assets/img/heatmap_continous_predictor_variables.png "Heatmap of Continous Predictor Variables")
+![Heatmap of Continous Predictor Variables](/assets/img/heatmap_continous_predictor_variables.png "Heatmap of Continous Predictor Variables")
+
+This heatmap shows correlation coefficients between the initial continuous variables plus two features, "Days Between Cardiac Catheterization and Electrocardiogram" and "PCA variable for 'Height at Rest' and 'Height at Peak Exercise'", created in the early stages of feature enginering. This visualization gives you information that is useful in performing data transformations and (further) feature engineering.  
+
+Including the details above, this step also involved:
+* Statistical Analysis  
+ * Chi-Square Tests  
+ * Fisher's Exact Chi-Square Tests  
+ * Odds Ratios
+ * Contingency Tables
+ * Normality Tests
+* Feature Engineering
+* Data Visualization
+* Data Transformations (add section for this?)
 
 
 
@@ -45,8 +58,7 @@ There is a histogram for each of the initial continuous features against the tar
 
 
 
-
-(Put code at bottom - base off table of contents)
+(Put code at bottom - base off table of contents and say for all code (script) - go to the Github page for the project (give link to heart disease))
 
 
 Hi there! I'm Paul. I’m a physics major turned programmer. Ever since I first learned how to program while taking a scientific computing for physics course, I have pursued programming as a passion, and as a career. Check out [my personal website](https://www.lenpaul.com/) for more information on my other projects (including more Jekyll themes!), as well as some of my writing.
