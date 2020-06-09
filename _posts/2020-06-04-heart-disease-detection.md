@@ -17,8 +17,8 @@ image: heart.png
  (Link to full code)
  
 # Project Overview  
-## i. [Data Ingestion](#data-ingestion-1)
-## ii. [Data Cleaning](#data-cleaning-1)
+## i. [Data Ingestion](#data-ingestion)
+## ii. [Data Cleaning](#data-cleaning)
 ## iii. [Exploratory Data Analysis](#exploratory-data-analysis-1)
 ## iv. [Model Building](#model-building)
 ## v. [Model Visualization, Comparison, and Selection](#model-visualization-comparison-and-selection-1)
