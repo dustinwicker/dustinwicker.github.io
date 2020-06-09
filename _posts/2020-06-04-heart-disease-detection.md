@@ -17,13 +17,13 @@ image: heart.png
  (Link to full code)
  
 # Project Overview  
-## i. [Data Ingestion](#data-ingestion)
-## ii. [Data Cleaning](#data-cleaning)
-## iii. [Exploratory Data Analysis](#exploratory-data-analysis-1)
-## iv. [Model Building](#model-building)
-## v. [Model Visualization, Comparison, and Selection](#model-visualization-comparison-and-selection-1)
-## vi. [Visualze Best Model](#visualze-best-model-1)
-## vii. [Model Usefulness](#model-usefulness-1)
+## i.   [Data Ingestion](#data-ingestion)
+## ii.  [Data Cleaning](#data-cleaning)
+## iii. [Exploratory Data Analysis](#exploratory-data-analysis)
+## iv.  [Model Building](#model-building)
+## v.   [Model Visualization, Comparison, and Selection](#model-visualization-comparison-and-selection)
+## vi.  [Visualize Best Model](#visualize-best-model)
+## vii. [Model Usefulness](#model-usefulness)
   
 ## Data Ingestion
 The first step was obtaining the [data](https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/hungarian.data) from the UCI Machine Learning Repository. The data was then ingested into Python.
@@ -102,7 +102,7 @@ After exploring our data to obtain a greater understanding of it and using that 
 | Random Forest Classifer Six                                                                                                                                | 0.768    | 0.717  | 0.826     | 246           | 46              |
 | Logistic Regression Three                                                                                                                                  | 0.765    | 0.736  | 0.796     | 244           | 48              |
 
-## Visualze Best Model
+## Visualize Best Model
 The next step was visualizing the results of the best model in an easy to understand way. 
 
 
