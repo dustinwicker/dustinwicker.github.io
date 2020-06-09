@@ -21,7 +21,7 @@ Statistical analysis, data mining techniques, and five machine learning models (
 ## [Exploratory Data Analysis](#exploratory-data-analysis-1)
 ## [Model Building](#model-building-1)
 ## [Model Visualization, Comparison, and Selection](#model-visualization-comparison-and-selection-1)
-## [Visualze Best Model and Explain Usefulness](#visualze-best-model-and-explain-usefulness)
+## [Visualze Best Model and Explain Usefulness](#visualze-best-model-and-explain-usefulness-1)
   
 ## Data Ingestion
 The first step was obtaining the [data](https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/hungarian.data) from the UCI Machine Learning Repository. The data was then ingested into Python.
@@ -101,7 +101,7 @@ After exploring our data to obtain a greater understanding of it and using that 
 | Logistic Regression Three                                                                                                                                  | 0.765    | 0.736  | 0.796     | 244           | 48              |
 
 ## Visualze Best Model and Explain Usefulness
-The final step was visualizing the results of the best model and explaining how the model could be utilized in a hospital setting for both....
+The final step was visualizing the results of the best model and explaining how the model could be utilized in a hospital setting for both ...
 
 
 
