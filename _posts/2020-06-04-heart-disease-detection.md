@@ -20,7 +20,7 @@ image: heart.png
 ## i. [Data Ingestion](#data-ingestion-1)
 ## ii. [Data Cleaning](#data-cleaning-1)
 ## iii. [Exploratory Data Analysis](#exploratory-data-analysis-1)
-## iv. [Model Building](#model-building-1)
+## iv. [Model Building](#model-building)
 ## v. [Model Visualization, Comparison, and Selection](#model-visualization-comparison-and-selection-1)
 ## vi. [Visualze Best Model](#visualze-best-model-1)
 ## vii. [Model Usefulness](#model-usefulness-1)
