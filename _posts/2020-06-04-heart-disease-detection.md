@@ -8,7 +8,8 @@ image: heart.png
 ---
 
 ## Project Summary  
-Statistical analysis, data mining techniques, and five machine learning models (include the five models?) were built and ensembled to accurately predict the presence of heart disease in patients from the Hungarian Institute of Cardiology in Budapest. All told, the model which provided the optimal combination of total patients predicted correctly and F1 Score, while being the most parsimonious one, was the Support Vector Machine Classification Model #4 (bold important words.)
+* Statistical analysis, data mining techniques, and five machine learning models (include the five models?) were built and ensembled to accurately predict the presence of heart disease in patients from the Hungarian Institute of Cardiology in Budapest.  
+* The model which provided the optimal combination of total patients predicted correctly and F1 Score, while being the most parsimonious, was the **Support Vector Machine Classification Model #4**. It was able to **correctly predict** the presence, or lack thereof, of heart disease in **86% of patients**.
 
  (Put overall summary of model results)
  (Put usefulness up here as well)
@@ -21,7 +22,8 @@ Statistical analysis, data mining techniques, and five machine learning models (
 ## [Exploratory Data Analysis](#exploratory-data-analysis-1)
 ## [Model Building](#model-building-1)
 ## [Model Visualization, Comparison, and Selection](#model-visualization-comparison-and-selection-1)
-## [Visualze Best Model and Explain Usefulness](#visualze-best-model-and-explain-usefulness-1)
+## [Visualze Best Model](#visualze-best-model-1)
+## [Model Usefulness](#model-usefulness-1)
   
 ## Data Ingestion
 The first step was obtaining the [data](https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/hungarian.data) from the UCI Machine Learning Repository. The data was then ingested into Python.
@@ -100,16 +102,22 @@ After exploring our data to obtain a greater understanding of it and using that 
 | Random Forest Classifer Six                                                                                                                                | 0.768    | 0.717  | 0.826     | 246           | 46              |
 | Logistic Regression Three                                                                                                                                  | 0.765    | 0.736  | 0.796     | 244           | 48              |
 
-## Visualze Best Model and Explain Usefulness
-The final step was visualizing the results of the best model and explaining how the model could be utilized in a hospital setting to benefit medical practitioners and their patients.
+## Visualze Best Model
+The next step was visualizing the results of the best model in an easy to understand way. 
 
 
+ ## Model Usefulness
+The final step, and argubably most critical one, is explaining how the results could be utilized in a medical facility setting to benefit medical practitioners and their patients.
+* The model could be implemented, along with the patient's formal checkups and examinations, to assist medical practitioners in correctly diagnosing heart disease in their patients.  
+* It would allow practitioners to get an in-depth understanding of which factors contribute to heart disease, and set up a prehabilitation routine for their patients that would help decrease those factors (such as helping the patient establish a diet and exercise regimen to decrease their serum cholesterol). This would provide patients a path towards a clean bill of health, and prevent possible heart disease in the future.
 
 
 
 
 
 (Put code at bottom - base off table of contents and say for all code (script) - go to the Github page for the project (give link to heart disease))
+
+Questions: how else could the model be useful? Other visuals that could be useful to visualize the results?
 
 
 Hi there! I'm Paul. I’m a physics major turned programmer. Ever since I first learned how to program while taking a scientific computing for physics course, I have pursued programming as a passion, and as a career. Check out [my personal website](https://www.lenpaul.com/) for more information on my other projects (including more Jekyll themes!), as well as some of my writing.
