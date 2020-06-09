@@ -17,13 +17,13 @@ image: heart.png
  (Link to full code)
  
 # Project Overview  
-## i.[Data Ingestion](#data-ingestion-1)
-## ii.[Data Cleaning](#data-cleaning-1)
-## iii.[Exploratory Data Analysis](#exploratory-data-analysis-1)
-## iv.[Model Building](#model-building-1)
-## v.[Model Visualization, Comparison, and Selection](#model-visualization-comparison-and-selection-1)
-## vi.[Visualze Best Model](#visualze-best-model-1)
-## vii.[Model Usefulness](#model-usefulness-1)
+## i. [Data Ingestion](#data-ingestion-1)
+## ii. [Data Cleaning](#data-cleaning-1)
+## iii. [Exploratory Data Analysis](#exploratory-data-analysis-1)
+## iv. [Model Building](#model-building-1)
+## v. [Model Visualization, Comparison, and Selection](#model-visualization-comparison-and-selection-1)
+## vi. [Visualze Best Model](#visualze-best-model-1)
+## vii. [Model Usefulness](#model-usefulness-1)
   
 ## Data Ingestion
 The first step was obtaining the [data](https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/hungarian.data) from the UCI Machine Learning Repository. The data was then ingested into Python.
