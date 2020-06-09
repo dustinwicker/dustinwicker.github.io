@@ -20,7 +20,8 @@ Statistical analysis, data mining techniques, and five machine learning models (
 ## [Data Cleaning](#data-cleaning-1)
 ## [Exploratory Data Analysis](#exploratory-data-analysis-1)
 ## [Model Building](#model-building-1)
-## [Model Visualization, Comparison, and Selection](#model-visualization-comparison-and-selection-1) 
+## [Model Visualization, Comparison, and Selection](#model-visualization-comparison-and-selection-1)
+## [Visualze Best Model and Explain Usefulness](#visualze-best-model-and-explain-usefulness)
   
 ## Data Ingestion
 The first step was obtaining the [data](https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/hungarian.data) from the UCI Machine Learning Repository. The data was then ingested into Python.
