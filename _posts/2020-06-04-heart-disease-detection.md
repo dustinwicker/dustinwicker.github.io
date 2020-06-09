@@ -101,7 +101,7 @@ After exploring our data to obtain a greater understanding of it and using that 
 | Logistic Regression Three                                                                                                                                  | 0.765    | 0.736  | 0.796     | 244           | 48              |
 
 ## Visualze Best Model and Explain Usefulness
-The final step was visualizing the results of the best model and explaining how the model could be utilized in a hospital setting for both ...
+The final step was visualizing the results of the best model and explaining how the model could be utilized in a hospital setting to benefit medical practitioners and their patients.
 
 
 
