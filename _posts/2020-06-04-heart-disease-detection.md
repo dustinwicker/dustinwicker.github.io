@@ -4,7 +4,7 @@ title: "Predicting the Presence of Heart Disease in Patients"
 author: "Dustin Wicker"
 categories: journal
 tags: [healthcare,data science,data analytics,data analysis,machine learning,sample]
-image: bar_chart_confusion_matrix_svc.png
+image: heart.png
 ---
 
 ## Project Summary  
@@ -77,11 +77,13 @@ After exploring our data to obtain a greater understanding of it and using that 
 (add visual of all ROC curves - the 4 and explain SVC's absence)
 * The best model for each algorithm was selected based on a combination of the total patients predicted correctly and F1 Score.
 * From there, model predictions were assembled to determine which combination (or stand alone model) provided the best results.
+* A summary of the model results can be seen below.
+* The best model, the Support Vector Machine Classification Model #4, is bolded. It is the most parsimonious model which provided the optimal combination of total patients predicted correctly and F1 Score.
 
 | Model(s)                                                                                                                                                   | F1 Score | Recall | Precision | Total Correct | Total Incorrect |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | :------: | :----: | :-------: | :-----------: | :-------------: |
 | Gradient Boosting Classifer Five, K-Nearest Neighbors Five, Support Vector Machine Classifier Four                                                         | 0.802    | 0.745  | 0.868     | 253           | 39              |
-| Support Vector Machine Classifier Four                                                                                                                     | 0.804    | 0.774  | 0.837     | 252           | 40              |
+| **Support Vector Machine Classifier Four**                                                                                                                      | **0.804**    | **0.774**  | **0.837**     | **252**           | **40**             |
 | Gradient Boosting Classifer Five, Random Forest Classifer Six, Support Vector Machine Classifier Four                                                      | 0.798    | 0.745  | 0.859     | 252           | 40              |
 | Gradient Boosting Classifer Five, K-Nearest Neighbors Five, Logistic Regression Three, Random Forest Classifer Six, Support Vector Machine Classifier Four | 0.798    | 0.745  | 0.859     | 252           | 40              |
 | Logistic Regression Three, Random Forest Classifer Six, Support Vector Machine Classifier Four                                                             | 0.792    | 0.755  | 0.833     | 250           | 42              |
@@ -97,15 +99,8 @@ After exploring our data to obtain a greater understanding of it and using that 
 | Random Forest Classifer Six                                                                                                                                | 0.768    | 0.717  | 0.826     | 246           | 46              |
 | Logistic Regression Three                                                                                                                                  | 0.765    | 0.736  | 0.796     | 244           | 48              |
 
-
-
-
-
-* A summary of the model results can be seen in the fourth image (titled "Model Results") (build table)
-* The best model, the Support Vector Machine Classification Model #4, is outlined in green.
-* It is the parsimonious model which provided the optimal combination of total patients predicted correctly and F1 Score.
-
 ## Visualze Best Model and Explain Usefulness
+The final step was visualizing the results of the best model and explaining how the model could be utilized in a hospital setting for both....
 
 
 
