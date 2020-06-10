@@ -39,7 +39,7 @@ The first step was obtaining the [data](https://archive.ics.uci.edu/ml/machine-l
 After the data was properly read into into Python and the appropriate column names were supplied, data cleaning was performed. This involved: 
 * Removing unnecessary columns
 * Removing patients with a large percentage of missing values
-   * In this particular case, large meant 10%. Patients with greater than 10% of their values missing were removed from the data set.
+   * In this particular case, large meant 10% and as a result, two patients were removed from the data set.
 * Imputing missing values for patients using K-Nearest Neighbors, an advanced data imputation method  
 
 ## Exploratory Data Analysis
