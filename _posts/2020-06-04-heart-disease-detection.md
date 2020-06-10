@@ -10,6 +10,7 @@ image: heart.png
 ## Project Summary  
 * Statistical analysis, data mining techniques, and five machine learning models were built and ensembled to accurately predict the presence of heart disease in patients from the Hungarian Institute of Cardiology in Budapest.  
 * The model which provided the optimal combination of total patients predicted correctly and F1 Score, while being the most parsimonious, was the **Support Vector Machine Classification Model #4**. It was able to **correctly predict** the presence, or lack thereof, of heart disease in **86% of patients**.  
+<br>
 A summary of this models results can be seen directly below, and a full summary of all sixteen models can be found in the [Model Visualization, Comparison, and Selection section](#model-visualization-comparison-and-selection).
 
 | Model                                                                                                                                                   | F1 Score | Recall | Precision | Total Correct | Total Incorrect |
