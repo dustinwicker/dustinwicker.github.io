@@ -24,16 +24,16 @@ A summary of this models results can be seen directly below, and a full summary 
 Code snippets will be provided for each section outlined in the Project Overview at the bottom of this page. If you would like to view the entire code script, please click this [link](put in link to heart disease github code script).
  
 # Project Overview  
-## i.   [Data Ingestion](#data-ingestion)
-## ii.  [Data Cleaning](#data-cleaning)
-## iii. [Exploratory Data Analysis](#exploratory-data-analysis)
+## i.    [Data Ingestion](#data-ingestion)
+## ii.   [Data Cleaning](#data-cleaning)
+## iii.   [Exploratory Data Analysis](#exploratory-data-analysis)
 ## iv.  [Model Building](#model-building)
 ## v.   [Model Visualization, Comparison, and Selection](#model-visualization-comparison-and-selection)
 ## vi.  [Visualize Best Model](#visualize-best-model)
 ## vii. [Model Usefulness](#model-usefulness)
   
 ## Data Ingestion
-The first step was obtaining the [data](https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/hungarian.data) from the UCI Machine Learning Repository. The data was then ingested into Python.
+The first step was obtaining the [data](https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/hungarian.data) from the UCI Machine Learning Repository. The file was saved in an appropriate location on my machine and then read into into Python.
   
 ## Data Cleaning  
 After the data was properly read into into Python and the appropriate column names were supplied, data cleaning was performed. This involved: 
