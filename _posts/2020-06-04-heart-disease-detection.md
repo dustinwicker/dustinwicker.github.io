@@ -76,7 +76,8 @@ After exploring our data to obtain a greater understanding of it and using that 
    
 ## Model Visualization, Comparison, and Selection  
 * ROC Curves were built based on each model's predicted probabilities to visually compare model performance at various cut-off values.
-(add visual of all ROC curves - the 4 and explain SVC's absence)
+
+![ROC Curves](/assets/img/roc_cruves.png "ROC Curves")
 
 * The best model for each algorithm was selected based on a combination of the total patients predicted correctly and F1 Score.
 * From there, model predictions were assembled to determine which combination (or stand alone model) provided the best results.
