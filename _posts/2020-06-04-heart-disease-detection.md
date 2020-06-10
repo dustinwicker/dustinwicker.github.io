@@ -11,10 +11,11 @@ image: heart.png
 * Statistical analysis, data mining techniques, and five machine learning models (include the five models?) were built and ensembled to accurately predict the presence of heart disease in patients from the Hungarian Institute of Cardiology in Budapest.  
 * The model which provided the optimal combination of total patients predicted correctly and F1 Score, while being the most parsimonious, was the **Support Vector Machine Classification Model #4**. It was able to **correctly predict** the presence, or lack thereof, of heart disease in **86% of patients**.
 
+(Explain the data set - what target is)
  (Put overall summary of model results)
  (Put usefulness up here as well)
  
- (Link to full code)
+Code snippets will be provided for each section outlined in the Project Overview at the bottom of this page. If you would like to view the entire code script, please click this [link](put in link to heart disease github code script).
  
 # Project Overview  
 ## i.   [Data Ingestion](#data-ingestion)
@@ -27,8 +28,6 @@ image: heart.png
   
 ## Data Ingestion
 The first step was obtaining the [data](https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/hungarian.data) from the UCI Machine Learning Repository. The data was then ingested into Python.
-
-(Explain the data set - what target is)
   
 ## Data Cleaning  
 After the data was properly read into into Python and the appropriate column names were supplied, data cleaning was performed. This involved: 
@@ -78,6 +77,7 @@ After exploring our data to obtain a greater understanding of it and using that 
 ## Model Visualization, Comparison, and Selection  
 * ROC Curves were built based on each model's predicted probabilities to visually compare model performance at various cut-off values.
 (add visual of all ROC curves - the 4 and explain SVC's absence)
+
 * The best model for each algorithm was selected based on a combination of the total patients predicted correctly and F1 Score.
 * From there, model predictions were assembled to determine which combination (or stand alone model) provided the best results.
 * A summary of the model results can be seen below.
