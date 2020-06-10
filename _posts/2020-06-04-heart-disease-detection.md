@@ -8,10 +8,13 @@ image: heart.png
 ---
 
 ## Project Summary  
-* Statistical analysis, data mining techniques, and five machine learning models (include the five models?) were built and ensembled to accurately predict the presence of heart disease in patients from the Hungarian Institute of Cardiology in Budapest.  
+* Statistical analysis, data mining techniques, and five machine learning models were built and ensembled to accurately predict the presence of heart disease in patients from the Hungarian Institute of Cardiology in Budapest.  
 * The model which provided the optimal combination of total patients predicted correctly and F1 Score, while being the most parsimonious, was the **Support Vector Machine Classification Model #4**. It was able to **correctly predict** the presence, or lack thereof, of heart disease in **86% of patients**.
 
-(Explain the data set - what target is)
+| Model                                                                                                                                                   | F1 Score | Recall | Precision | Total Correct | Total Incorrect |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------- | :------: | :----: | :-------: | :-----------: | :-------------: |
+| **Support Vector Machine Classifier Four**                                                                                                                      | **0.804**    | **0.774**  | **0.837**     | **252**           | **40**             |
+
  (Put overall summary of model results)
  (Put usefulness up here as well)
  
@@ -75,7 +78,8 @@ After exploring our data to obtain a greater understanding of it and using that 
    * Feature importance techniques
    
 ## Model Visualization, Comparison, and Selection  
-* ROC Curves were built based on each model's predicted probabilities to visually compare model performance at various cut-off values.
+* ROC Curves were built based on each model's predicted probabilities to visually compare model performance at various cut-off values.  
+Below the four models which give predicted probabilities (Support Vector Machines do not give predicted probabilities, only class membership) are plotted, and each plot contains seven ROC curves - one for each unique sets of variables. The most amount of variation can be seen in the Random Forest Classifier models, and the least amount in the Logistic Regression models due to the fact variables had to be statistically signifcant to be included in the model.
 
 ![ROC Curves](/assets/img/roc_cruves.png "ROC Curves")
 
