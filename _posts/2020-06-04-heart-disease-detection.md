@@ -202,7 +202,7 @@ headers = ['id', 'ccf', 'age', 'sex', 'painloc', 'painexer', 'relrest', 'pncaden
 
 # Convert lists of list into DataFrame and supply column names
 hungarian = pd.DataFrame(new_file, columns=headers)
-```  
+```
   
 # b
 * Remove unnecessary columns
@@ -216,11 +216,13 @@ cols_to_drop =['ccf', 'pncaden', 'smoke', 'cigs', 'years', 'dm', 'famhist', 'dig
 # Drop columns from above list
 hungarian = hungarian.drop(columns=cols_to_drop)
 ```
+
 * Convert column types
 ```python
 # Convert all columns to numeric
 hungarian = hungarian.apply(pd.to_numeric)
 ```
+
 * Correct data discrepancies
 ```python
 ### Fix possible patient id issues
