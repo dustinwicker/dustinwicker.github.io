@@ -205,7 +205,7 @@ hungarian = pd.DataFrame(new_file, columns=headers)
 ```
   
 # b
-* Remove unnecessary columns  
+Remove unnecessary columns  
 ```python
 # List of columns to drop
 cols_to_drop =['ccf', 'pncaden', 'smoke', 'cigs', 'years', 'dm', 'famhist', 'dig', 'ca', 'restckm', 'exerckm',
