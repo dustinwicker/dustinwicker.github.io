@@ -36,8 +36,10 @@ Code snippets will be provided for each section outlined in the [Project Overvie
 The first step was obtaining the [data](https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/hungarian.data) from the UCI Machine Learning Repository. The file was saved in an appropriate location on my machine and then read into Python. [<sub><sup>View code</sup></sub>](#a)
 
 ## Data Cleaning  
-After the data was properly read into into Python and the appropriate column names were supplied, data cleaning was performed. This involved: 
+After the data was properly read into into Python and the appropriate column names were supplied, data cleaning was performed. This involved: [<sub><sup>View code</sup></sub>](#b)
 * Removing unnecessary columns
+* Converting column types
+* Correcting any data discrepancies
 * Removing patients with a large percentage of missing values
    * In this particular case, large meant 10% and as a result, two patients were removed from the data set.
 * Imputing missing values for patients using K-Nearest Neighbors, an advanced data imputation method  
@@ -199,22 +201,34 @@ headers = ['id', 'ccf', 'age', 'sex', 'painloc', 'painexer', 'relrest', 'pncaden
 
 # Convert lists of list into DataFrame and supply column names
 hungarian = pd.DataFrame(new_file, columns=headers)
+```  
+  
+# b
+* Remove unnecessary columns
+```python
+# List of columns to drop
+cols_to_drop =['ccf', 'pncaden', 'smoke', 'cigs', 'years', 'dm', 'famhist', 'dig', 'ca', 'restckm', 'exerckm',
+               'restef', 'restwm', 'exeref', 'exerwm', 'thal', 'thalsev', 'thalpul', 'earlobe', 'lmt',
+               'ladprox', 'laddist', 'diag', 'cxmain', 'ramus', 'om1', 'om2', 'rcaprox', 'rcadist', 'lvx1',
+               'cathef', 'junk', 'name', 'thaltime', 'xhypo', 'slope', 'dummy', 'lvx1', 'lvx2']
+
+# Drop columns from above list
+hungarian = hungarian.drop(columns=cols_to_drop)
 ```
+* Convert column types
+```python
+# Convert all columns to numeric
+hungarian = hungarian.apply(pd.to_numeric)
+```
+* Correct data discrepancies
+```python
+### Fix possible patient id issues
+# Find ids that are not unique to patients
+print(hungarian.id.value_counts()[hungarian.id.value_counts()!=1])
 
-{% highlight python %}
-# List of column names
-headers = ['id', 'ccf', 'age', 'sex', 'painloc', 'painexer', 'relrest', 'pncaden', 'cp', 'trestbps', 'htn', 'chol',
-           'smoke', 'cigs', 'years', 'fbs', 'dm', 'famhist', 'restecg', 'ekgmo', 'ekgday', 'ekgyr', 'dig', 'prop',
-           'nitr', 'pro', 'diuretic', 'proto', 'thaldur', 'thaltime', 'met', 'thalach', 'thalrest', 'tpeakbps',
-           'tpeakbpd', 'dummy', 'trestbpd', 'exang', 'xhypo', 'oldpeak', 'slope', 'rldv5', 'rldv5e', 'ca', 'restckm',
-           'exerckm', 'restef', 'restwm', 'exeref', 'exerwm', 'thal', 'thalsev', 'thalpul', 'earlobe', 'cmo',
-           'cday', 'cyr', 'num', 'lmt', 'ladprox', 'laddist', 'diag', 'cxmain', 'ramus', 'om1', 'om2', 'rcaprox',
-           'rcadist', 'lvx1', 'lvx2', 'lvx3', 'lvx4', 'lvf', 'cathef', 'junk', 'name']
-
-# Convert lists of list into DataFrame and supply column names
-hungarian = pd.DataFrame(new_file, columns=headers)
-{% endhighlight %}
-
+# Fix id 1132 (two different patients are both assigned to this id) - give second patient next id number (id max + 1)
+hungarian.loc[hungarian.loc[hungarian.id==1132].index[-1], 'id'] = hungarian.id.max() + 1
+```
 
 (Put code at bottom - base off table of contents and say for all code (script) - go to the Github page for the project (give link to heart disease))
 
