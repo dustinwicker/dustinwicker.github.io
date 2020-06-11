@@ -217,7 +217,7 @@ cols_to_drop =['ccf', 'pncaden', 'smoke', 'cigs', 'years', 'dm', 'famhist', 'dig
 hungarian = hungarian.drop(columns=cols_to_drop)  
 ```
 
-* Convert column types
+* Convert column types  
 ```python
 # Convert all columns to numeric
 hungarian = hungarian.apply(pd.to_numeric)
