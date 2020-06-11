@@ -205,7 +205,7 @@ hungarian = pd.DataFrame(new_file, columns=headers)
 ```
   
 # b
-* Remove unnecessary columns
+* Remove unnecessary columns  
 ```python
 # List of columns to drop
 cols_to_drop =['ccf', 'pncaden', 'smoke', 'cigs', 'years', 'dm', 'famhist', 'dig', 'ca', 'restckm', 'exerckm',
@@ -214,7 +214,7 @@ cols_to_drop =['ccf', 'pncaden', 'smoke', 'cigs', 'years', 'dm', 'famhist', 'dig
                'cathef', 'junk', 'name', 'thaltime', 'xhypo', 'slope', 'dummy', 'lvx1', 'lvx2']
 
 # Drop columns from above list
-hungarian = hungarian.drop(columns=cols_to_drop)
+hungarian = hungarian.drop(columns=cols_to_drop)  
 ```
 
 * Convert column types
