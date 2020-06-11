@@ -49,23 +49,22 @@ This involved:
 ## Exploratory Data Analysis 
 The following two images provide a sample of the analysis performed.
 
-![Distribution_of_Continuous_Features_by_Target](/assets/img/distribution_of_continuous_features_by_target.png "Distribution of Continuous Features by Target")
-
-(Link to code snippet at bottom of page for all independent code bodies)
-
-There is a histogram for each of the initial continuous features against the target variable (diagnosis of heart disease). This visualization allows you to see which of the predictor variables have noticeable differences in their distributions when split on the target and would therefore be useful in prediction (a good example of this is "Maximum Heart Rate Achieved.")
-
 ![Heatmap of Continous Predictor Variables](/assets/img/heatmap_continous_predictor_variables.png "Heatmap of Continous Predictor Variables")
 
-This heatmap shows correlation coefficients between the initial continuous variables plus two features, "Days Between Cardiac Catheterization and Electrocardiogram" and "PCA variable for 'Height at Rest' and 'Height at Peak Exercise'", created in the early stages of feature enginering. This visualization gives you information that is useful in performing data transformations and (further) feature engineering.  
+This heatmap shows correlation coefficients between the initial continuous variables plus two features, "Days Between Cardiac Catheterization and Electrocardiogram" and "PCA variable for 'Height at Rest' and 'Height at Peak Exercise'", created in the early stages of feature enginering. This visualization gives you information that is useful in performing data transformations and (further) feature engineering. 
+
+![Distribution_of_Continuous_Features_by_Target](/assets/img/distribution_of_continuous_features_by_target.png "Distributions of Continuous Features by Target")
+
+There is a histogram for each of the initial continuous features against the target variable (diagnosis of heart disease). This visualization allows you to see which of the predictor variables have noticeable differences in their distributions when split on the target and would therefore be useful in prediction  
+* A good example of this is "Maximum Heart Rate Achieved." 
 
 Including the details above, this step also involved:
-* Statistical Analysis  
+* Statistical Analysis
+   * Normality Tests
    * Chi-Square Tests  
    * Fisher's Exact Chi-Square Tests  
    * Odds Ratios
    * Contingency Tables
-   * Normality Tests
 * Feature Engineering (do visualization will of this done?)
 * Data Visualization
 * Data Transformations (add section for this? visualizaton showing the differences - chol) [<sub><sup>View code</sup></sub>](#c)
@@ -155,13 +154,15 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 import seaborn as sns
 
-
 # Increase maximum width in characters of columns - will put all columns in same line in console readout
 pd.set_option('expand_frame_repr', False)
 # Be able to read entire value in each column (no longer truncating values)
 pd.set_option('display.max_colwidth', -1)
 # Increase number of rows printed out in console
 pd.set_option('display.max_rows', 200)
+
+# Set aesthetic parameters of seaborn plots
+sns.set()
 
 # Change current working directory to main directory
 def main_directory():
@@ -839,6 +840,133 @@ hungarian.loc[hungarian.num > 0, "num"] = 1
 ```
 
 # c
+```python
+# Determine 'strong' alpha value based on sample size
+sample_size_one, strong_alpha_value_one = 100, 0.001
+sample_size_two, strong_alpha_value_two = 1000, 0.0003
+slope = (strong_alpha_value_two - strong_alpha_value_one)/(sample_size_two - sample_size_one)
+strong_alpha_value = slope * (hungarian.shape[0] - sample_size_one) + strong_alpha_value_one
+print(f"The alpha value for use in hypothesis tests is {strong_alpha_value}.")
+
+# List of continuous variables
+continuous_variables = ['age', 'trestbps', 'chol', 'thaldur', 'met', 'thalach', 'thalrest', 'tpeakbps', 'tpeakbpd',
+                        'trestbpd', 'oldpeak', 'rldv5', 'rldv5e']
+
+# List of categorical variables
+categorical_variables = ['sex', 'painloc', 'painexer', 'relrest', 'cp', 'htn', 'fbs', 'restecg', 'prop', 'nitr',
+                         'pro', 'diuretic', 'proto', 'exang', 'lvx3', 'lvx4', 'lvf']
+
+# Target variable
+target_variable = 'num'
+
+### Feature engineering ###
+
+# Create column of time between ekg and cardiac cath
+# Create column of ekg dates
+ekg_date = []
+for year, month, day in zip(hungarian.ekgyr, hungarian.ekgmo, hungarian.ekgday):
+    x = str(year) + '-' + str(month) + '-' + str(day)
+    ekg_date.append(dt.datetime.strptime(x, '%y-%m-%d').strftime('%Y-%m-%d'))
+# Append list to datetime to create column
+hungarian['ekg_date'] = ekg_date
+
+# Correct 2-30-86 issue (1986 was not a leap year)
+hungarian.loc[(hungarian.cyr==86) & (hungarian.cmo==2) & (hungarian.cday==30), ('cmo', 'cday')] = (3,1)
+
+cardiac_cath_date = []
+for year, month, day in zip(hungarian.cyr, hungarian.cmo, hungarian.cday):
+    x = str(year) + '-' + str(month) + '-' + str(day)
+    print(x)
+    cardiac_cath_date.append(dt.datetime.strptime(x, '%y-%m-%d').strftime('%Y-%m-%d'))
+# Append list to datetime to create column
+hungarian['cardiac_cath_date'] = cardiac_cath_date
+
+# Days between cardiac cath and ekg
+hungarian['days_between_c_ekg'] = (pd.to_datetime(hungarian.cardiac_cath_date) - pd.to_datetime(hungarian.ekg_date)).dt.days
+
+# Append days between cardiac cath and ekg to continuous variable list
+continuous_variables.append('days_between_c_ekg')
+
+# Create PCA variable from rldv5 and rldv5e
+hungarian['rldv5_rldv5e_pca'] = PCA(n_components=1).fit_transform(hungarian[['rldv5', 'rldv5e']])
+
+# Append new PCA'd variable to continuous variable list
+continuous_variables.append('rldv5_rldv5e_pca')
+
+# Dicitionary with continuous variable as key and spelled out version of variablea as value
+continuous_variables_spelled_out_dict = {'age': 'Age', 'trestbps': 'Resting Blood Pressure (On Admission)',
+                                         'chol': 'Serum Cholestoral', 'thaldur': 'Duration of Exercise Test (Minutes)',
+                                         'met': 'METs Achieved', 'thalach': 'Maximum Heart Rate Achieved',
+                                         'thalrest': 'Resting Heart Rate',
+                                         'tpeakbps': 'Peak Exercise Blood Pressure (Systolic)',
+                                         'tpeakbpd': 'Peak Exercise Blood Pressure (Diastolic)',
+                                         'trestbpd': 'Resting Blood Pressure',
+                                         'oldpeak': 'ST Depression Induced by Exercise Relative to Rest',
+                                         'rldv5': 'Height at Rest',
+                                         'rldv5e': 'Height at Peak Exercise',
+                                         'days_between_c_ekg': 'Days Between Cardiac Catheterization and Electrocardiogram',
+                                         'rldv5_rldv5e_pca': "PCA variable for 'Height at Rest' and 'Height at Peak Exercise'"}
+```
+
+Heatmap of Continous Predictor Variables
+```python
+# Heatmap of correlations
+# Only return bottom portion of heatmap as top is duplicate and diagonal is redundant
+continuous_variable_correlations = hungarian[continuous_variables].corr()
+# Array of zeros with same shape as continuous_variable_correlations
+mask = np.zeros_like(continuous_variable_correlations)
+# Mark upper half and diagonal of mask as True
+mask[np.triu_indices_from(mask)] = True
+# Correlation heatmap
+f, ax = plt.subplots(figsize=(9, 6))
+f.subplots_adjust(left=0.32, right=0.89, top=0.95, bottom=0.32)
+ax = sns.heatmap(hungarian[continuous_variables].corr(), cmap='PiYG', mask=mask, linewidths=.5, linecolor="white", cbar=True)
+ax.set_xticklabels(labels=continuous_variables_spelled_out_dict.values(),fontdict ={'fontweight': 'bold', 'fontsize':10},
+                   rotation=45, ha="right",
+                   rotation_mode="anchor")
+ax.set_yticklabels(labels=continuous_variables_spelled_out_dict.values(),fontdict ={'fontweight': 'bold', 'fontsize':10})
+ax.set_title("Heatmap of Continuous Predictor Features", fontdict ={'fontweight': 'bold', 'fontsize': 22})
+```
+DataFrame of continuous variable correlations greater than 0.6 and less than -0.6 (more numerical alternative to above heatmap)
+```python
+print(hungarian[continuous_variables].corr()[(hungarian[continuous_variables].corr()>0.6) | (hungarian[continuous_variables].corr()<-0.6)])
+```
+Histograms of Continuous Features by Target
+```python
+fig, axes = plt.subplots(nrows=5, ncols=3)
+fig.subplots_adjust(left=0.17, right=0.83, top=0.90, bottom=0.10, hspace=0.7, wspace = 0.25)
+fig.suptitle('Distributions of Continuous Features by Target', fontweight='bold', fontsize= 22)
+for ax, continuous in zip(axes.flatten(), continuous_variables):
+    for num_value in hungarian.num.unique():
+        ax.hist(hungarian.loc[hungarian.num == num_value, continuous], alpha=0.7, label=num_value)
+        ax.set_title(continuous_variables_spelled_out_dict[continuous], fontdict ={'fontweight': 'bold', 'fontsize': 10})
+handles, legends = ax.get_legend_handles_labels()
+legends_spelled_out_dict = {0: "No Presence of Heart Disease", 1: "Presence of Heart Disease"}
+fig.legend(handles, legends_spelled_out_dict.values(), loc='upper left', bbox_to_anchor=(0.68, 0.99), prop={'weight':'bold'})
+```
+
+Normality Tests
+```python
+# Check normality of continuous variables
+for continuous in continuous_variables:
+    print(continuous)
+    print(f"Kurtosis value: {stats.kurtosis(a=hungarian[continuous], fisher=True)}")
+    print(f"Sknewness value: {stats.skew(a=hungarian[continuous])}")
+    print(f"P-value from normal test: {stats.normaltest(a=hungarian[continuous])[1]}")
+    if stats.normaltest(a=hungarian[continuous])[1] < strong_alpha_value:
+        print("Reject null hypothesis the samples comes from a normal distribution.")
+        print("-------------------------------------------------------------------")
+        try:
+            print(f"Kurtosis value: {stats.kurtosis(a=stats.boxcox(x=hungarian[continuous])[0], fisher=True)}")
+            print(f"Sknewness value: {stats.skew(a=stats.boxcox(x=hungarian[continuous])[0])}")
+            print(f"P-value from normal test: {stats.normaltest(a=stats.boxcox(x=hungarian[continuous])[0])[1]}")
+        except ValueError as a:
+            if str(a) == "Data must be positive.":
+                print(f"{continuous} contains zero or negative values.")
+    else:
+        print("Do not reject the null hypothesis")
+    print('\n')
+```
 
 (Put code at bottom - base off table of contents and say for all code (script) - go to the Github page for the project (give link to heart disease))
 
