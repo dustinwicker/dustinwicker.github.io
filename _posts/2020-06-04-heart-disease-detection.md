@@ -229,6 +229,604 @@ print(hungarian.id.value_counts()[hungarian.id.value_counts()!=1])
 # Fix id 1132 (two different patients are both assigned to this id) - give second patient next id number (id max + 1)
 hungarian.loc[hungarian.loc[hungarian.id==1132].index[-1], 'id'] = hungarian.id.max() + 1
 ```
+* Remove patients with a large percentage of missing values
+```python
+# Drop patients with "significant" number of missing values (use 10%, can adjust accordingly)
+# Determine missing value percentage per patient (-9 is the missing attribute value)
+missing_value_perc_per_patient = (hungarian == -9).sum(axis=1)[(hungarian == -9).sum(axis=1) > 0]\
+                                     .sort_values(ascending=False)/len([x for x in hungarian.columns if x != 'id'])
+
+# Remove patients with > 10% missing values
+hungarian = hungarian.drop(missing_value_perc_per_patient[missing_value_perc_per_patient>0.10].index.values)
+```
+* Impute missing values
+```python
+### Imputing missing values (marked as -9 per data dictionary)
+cols_with_missing_values = [(col, hungarian[col].value_counts()[-9]) for col in list(hungarian) if -9 in hungarian[col].unique()]
+# Sort tuples by number of missing values
+cols_with_missing_values.sort(key=lambda x: x[1])
+
+# Use K-Nearest Neighbors (KNN) to impute missing values
+# Method to scale continuous and binary variables (z-score standardization)
+scaler = StandardScaler()
+variables_not_to_use_for_imputation = ['ekgday', 'cmo', 'cyr', 'ekgyr', 'cday', 'ekgmo', 'num']
+
+# Impute htn
+impute_variable = 'htn'
+
+# Obtain list of variables to use for imputation
+x_variables = [x for x in list(hungarian) if x not in [x[0] for x in cols_with_missing_values] +
+                        variables_not_to_use_for_imputation + ['id']]
+
+# Select x and y variables to use
+fix_htn = hungarian[x_variables + [impute_variable]]
+
+# Create list of categorical variables to one-hot encode
+categorical_x_variables = ['sex', 'painloc', 'painexer', 'relrest', 'cp', 'nitr', 'pro', 'diuretic', 'exang',
+                           'lvx3', 'lvx4', 'lvf']
+
+# One-hot encode categorical variables
+for value in categorical_x_variables:
+    one_hot = pd.get_dummies(fix_htn[value], prefix=value)
+    fix_htn = fix_htn.join(one_hot)
+    fix_htn = fix_htn.drop(columns=value)
+
+# Create list of x variables
+x_variables = [x for x in list(fix_htn) if x != impute_variable]
+
+# Create DataFrame with missing value(s) to predict on
+predict = fix_htn.loc[fix_htn[impute_variable]==-9]
+# Set x and y predict DataFrames
+predict_x, predict_y = predict[x_variables], predict[impute_variable]
+
+# Create DataFrame to train on
+train = fix_htn.loc[~(fix_htn[impute_variable]==-9)]
+# Set x and y train DataFrames
+train_x, train_y = train[x_variables], train[impute_variable]
+
+# Fit and transform scaler on train_x
+train_x = scaler.fit_transform(train_x)
+
+# Transform predict_x
+predict_x = scaler.transform(predict_x)
+
+# Obtain k (number of neighbors) by using sqrt(n)
+k = round(sqrt(len(train_x)))
+print(f"k is {k}.")
+
+# Check to make sure k is odd number
+if divmod(k, 2)[1] == 1:
+    print("k is an odd number. Good to proceed.")
+else:
+    print("Need to make k an odd number.")
+
+# Predict value for predict_y
+htn_prediction = KNeighborsClassifier(n_neighbors=k, metric='minkowski', weights='distance').fit(train_x, train_y).predict(predict_x)
+print(f'The prediction for htn is {htn_prediction[0]}.')
+
+# Supply prediction back to appropriate patient
+hungarian.loc[hungarian[impute_variable]==-9, 'htn'] = htn_prediction
+
+# Imputing missing values (marked as -9 per data dictionary)
+cols_with_missing_values = [(col, hungarian[col].value_counts()[-9]) for col in list(hungarian) if -9 in hungarian[col].unique()]
+# Sort tuples by number of missing values
+cols_with_missing_values.sort(key=lambda x:x[1])
+
+# Impute restecg
+impute_variable = 'restecg'
+
+# Obtain list of variables to use for imputation
+x_variables = [x for x in list(hungarian) if x not in [x[0] for x in cols_with_missing_values] +
+                        variables_not_to_use_for_imputation + ['id']]
+
+# Select x and y variables to use - added in 'htn'
+fix_restecg = hungarian[x_variables + [impute_variable]]
+
+# Create list of categorical variables to one-hot encode
+categorical_x_variables = ['sex', 'painloc', 'painexer', 'relrest', 'cp', 'htn', 'nitr', 'pro', 'diuretic', 'exang',
+                           'lvx3', 'lvx4', 'lvf']
+
+# One-hot encode categorical variables
+for value in categorical_x_variables:
+    one_hot = pd.get_dummies(fix_restecg[value], prefix=value)
+    fix_restecg = fix_restecg.join(one_hot)
+    fix_restecg = fix_restecg.drop(columns=value)
+
+# Create list of x variables
+x_variables = [x for x in list(fix_restecg) if x != impute_variable]
+
+# Create DataFrame with missing value(s) - will predict on
+predict = fix_restecg.loc[fix_restecg[impute_variable]==-9]
+# Set x and y predict DataFrames
+predict_x, predict_y = predict[x_variables], predict[impute_variable]
+
+# Create DataFrame to train on
+train = fix_restecg.loc[~(fix_restecg[impute_variable]==-9)]
+# Set x and y train DataFrames
+train_x, train_y = train[x_variables], train[impute_variable]
+
+# Fit and transform scaler on train_x
+train_x = scaler.fit_transform(train_x)
+
+# Transform predict_x
+predict_x = scaler.transform(predict_x)
+
+# Obtain k (number of neighbors) by using sqrt(n)
+k = round(sqrt(len(train_x)))
+print(f"k is {k}.")
+
+# Check to make sure k is odd number
+if divmod(k, 2)[1] == 1:
+    print("k is an odd number. Good to proceed.")
+else:
+    print("Need to make k an odd number.")
+
+# Predict value for predict_y
+restecg_prediction = KNeighborsClassifier(n_neighbors=k, metric='minkowski', weights='distance').fit(train_x, train_y).predict(predict_x)
+print(f'The prediction for restecg is {restecg_prediction[0]}.')
+
+# Supply prediction back to appropriate patient
+hungarian.loc[hungarian[impute_variable]==-9, 'restecg'] = restecg_prediction
+
+# Imputing missing values (marked as -9 per data dictionary)
+cols_with_missing_values = [(col, hungarian[col].value_counts()[-9]) for col in list(hungarian) if -9 in hungarian[col].unique()]
+# Sort tuples by number of missing values
+cols_with_missing_values.sort(key=lambda x:x[1])
+
+# Impute prop
+# Set y variable
+impute_variable = 'prop'
+
+# Obtain list of variables to use for imputation
+x_variables = [x for x in list(hungarian) if x not in [x[0] for x in cols_with_missing_values] +
+                        variables_not_to_use_for_imputation + ['id']]
+
+# Select x and y variables to use - add in 'htn'
+fix_prop = hungarian[x_variables + [impute_variable]]
+
+# Create list of categorical variables to one-hot encode
+categorical_x_variables = ['sex', 'painloc', 'painexer', 'relrest', 'cp', 'htn', 'restecg', 'nitr', 'pro', 'diuretic', 'exang',
+                           'lvx3', 'lvx4', 'lvf']
+
+# One-hot encode categorical variables
+for value in categorical_x_variables:
+    one_hot = pd.get_dummies(fix_prop[value], prefix=value)
+    fix_prop = fix_prop.join(one_hot)
+    fix_prop = fix_prop.drop(columns=value)
+
+# Create list of x variables
+x_variables = [x for x in list(fix_prop) if x != impute_variable]
+
+# Create DataFrame with missing value(s) - will predict on
+predict = fix_prop.loc[fix_prop[impute_variable]==-9]
+# Set x and y predict DataFrames
+predict_x, predict_y = predict[x_variables], predict[impute_variable]
+
+# Create DataFrame to train on
+train = fix_prop.loc[~(fix_prop[impute_variable]==-9)]
+# Set x and y train DataFrames
+train_x, train_y = train[x_variables], train[impute_variable]
+
+# Fit and transform scaler on train_x
+train_x = scaler.fit_transform(train_x)
+
+# Transform predict_x
+predict_x = scaler.transform(predict_x)
+
+# Obtain k (number of neighbors) by using sqrt(n)
+k = round(sqrt(len(train_x)))
+print(f"k is {k}.")
+
+# Check to make sure k is odd number
+if divmod(k, 2)[1] == 1:
+    print("k is an odd number. Good to proceed.")
+else:
+    print("Need to make k an odd number.")
+
+# Predict value for predict_y
+prop_prediction = KNeighborsClassifier(n_neighbors=k, metric='minkowski', weights='distance').fit(train_x, train_y).predict(predict_x)
+print(f'The prediction for prop is {prop_prediction[0]}.')
+
+# Supply prediction back to appropriate patient
+hungarian.loc[hungarian[impute_variable]==-9, 'prop'] = prop_prediction
+
+# Imputing missing values (marked as -9 per data dictionary)
+cols_with_missing_values = [(col, hungarian[col].value_counts()[-9]) for col in list(hungarian) if -9 in hungarian[col].unique()]
+# Sort tuples by number of missing values
+cols_with_missing_values.sort(key=lambda x:x[1])
+
+# Impute thaldur
+# Set y variable
+impute_variable = 'thaldur'
+
+# Obtain list of variables to use for imputation
+x_variables = [x for x in list(hungarian) if x not in [x[0] for x in cols_with_missing_values] +
+                        variables_not_to_use_for_imputation + ['id']]
+
+# Select x and y variables to use - add in 'prop'
+fix_thaldur = hungarian[x_variables + [impute_variable]]
+
+# Create list of categorical variables to one-hot encode
+categorical_x_variables = ['sex', 'painloc', 'painexer', 'relrest', 'cp', 'htn', 'restecg', 'prop', 'nitr', 'pro',
+                           'diuretic', 'exang', 'lvx3', 'lvx4', 'lvf']
+
+# One-hot encode categorical variables
+for value in categorical_x_variables:
+    one_hot = pd.get_dummies(fix_thaldur[value], prefix=value)
+    fix_thaldur = fix_thaldur.join(one_hot)
+    fix_thaldur = fix_thaldur.drop(columns=value)
+
+# Create list of x variables
+x_variables = [x for x in list(fix_thaldur) if x != impute_variable]
+
+# Create DataFrame with missing value(s) - will predict on
+predict = fix_thaldur.loc[fix_thaldur[impute_variable]==-9]
+# Set x and y predict DataFrames
+predict_x, predict_y = predict[x_variables], predict[impute_variable]
+
+# Create DataFrame to train on
+train = fix_thaldur.loc[~(fix_thaldur[impute_variable]==-9)]
+# Set x and y train DataFrames
+train_x, train_y = train[x_variables], train[impute_variable]
+
+# Fit scaler on train_x
+train_x = scaler.fit_transform(train_x)
+
+# Transform predict_x
+predict_x = scaler.transform(predict_x)
+
+# Obtain k (number of neighbors) by using sqrt(n)
+k = round(sqrt(len(train_x)))
+print(f"k is {k}.")
+
+# Check to make sure k is odd number
+if divmod(k, 2)[1] == 1:
+    print("k is an odd number. Good to proceed.")
+else:
+    print("Need to make k an odd number.")
+
+# Predict value for predict_y
+thaldur_prediction = KNeighborsRegressor(n_neighbors=k, metric='minkowski', weights='distance').fit(train_x, train_y).predict(predict_x)
+print("The prediction for thaldur is " + str(thaldur_prediction[0]) + ".")
+# Round thaldur_prediction to integer
+thaldur_prediction = round(number=thaldur_prediction[0])
+print("The prediction for thaldur has been rounded to " + str(thaldur_prediction) + ".")
+
+# Supply prediction back to appropriate patient
+hungarian.loc[hungarian[impute_variable]==-9, 'thaldur'] = thaldur_prediction
+
+# Imputing missing values (marked as -9 per data dictionary)
+cols_with_missing_values = [(col, hungarian[col].value_counts()[-9]) for col in list(hungarian) if -9 in hungarian[col].unique()]
+# Sort tuples by number of missing values
+cols_with_missing_values.sort(key=lambda x:x[1])
+
+# Impute rldv5
+# Set y variable
+impute_variable = 'rldv5'
+
+# Obtain list of variables to use for imputation
+x_variables = [x for x in list(hungarian) if x not in [x[0] for x in cols_with_missing_values] +
+                        variables_not_to_use_for_imputation + ['id']]
+
+# Select x and y variables to use - add in 'prop'
+fix_rldv5 = hungarian[x_variables + [impute_variable]]
+
+# Create list of categorical variables to one-hot encode
+categorical_x_variables = ['sex', 'painloc', 'painexer', 'relrest', 'cp', 'htn', 'restecg', 'prop', 'nitr', 'pro',
+                           'diuretic', 'exang', 'lvx3', 'lvx4', 'lvf']
+
+# One-hot encode categorical variables
+for value in categorical_x_variables:
+    one_hot = pd.get_dummies(fix_rldv5[value], prefix=value)
+    fix_rldv5 = fix_rldv5.join(one_hot)
+    fix_rldv5 = fix_rldv5.drop(columns=value)
+
+# Create list of x variables
+x_variables = [x for x in list(fix_rldv5) if x != impute_variable]
+
+# Create DataFrame with missing value(s) - will predict on
+predict = fix_rldv5.loc[fix_rldv5[impute_variable]==-9]
+# Set x and y predict DataFrames
+predict_x, predict_y = predict[x_variables], predict[impute_variable]
+
+# Create DataFrame to train on
+train = fix_rldv5.loc[~(fix_rldv5[impute_variable]==-9)]
+# Set x and y train DataFrames
+train_x, train_y = train[x_variables], train[impute_variable]
+
+# Fit scaler on train_x
+train_x = scaler.fit_transform(train_x)
+
+# Transform predict_x
+predict_x = scaler.transform(predict_x)
+
+# Obtain k (number of neighbors) by using sqrt(n)
+k = round(sqrt(len(train_x)))
+print(f"k is {k}.")
+
+# Check to make sure k is odd number
+if divmod(k, 2)[1] == 1:
+    print("k is an odd number. Good to proceed.")
+else:
+    print("Need to make k an odd number.")
+
+# Predict value for predict_y
+rldv5_prediction = KNeighborsRegressor(n_neighbors=k, metric='minkowski', weights='distance').fit(train_x, train_y).predict(predict_x)
+print("The prediction for rldv5 is " + str(rldv5_prediction[0]) + ".")
+# Round rldv5_prediction to integer
+rldv5_prediction = round(number=rldv5_prediction[0])
+print("The prediction for rldv5 has been rounded to " + str(rldv5_prediction) + ".")
+
+# Supply prediction back to appropriate patient
+hungarian.loc[hungarian[impute_variable]==-9, 'rldv5'] = rldv5_prediction
+
+# Imputing missing values (marked as -9 per data dictionary)
+cols_with_missing_values = [(col, hungarian[col].value_counts()[-9]) for col in list(hungarian) if -9 in hungarian[col].unique()]
+# Sort tuples by number of missing values
+cols_with_missing_values.sort(key=lambda x:x[1])
+
+# Impute met
+# Set y variable
+impute_variable = 'met'
+
+# Obtain list of variables to use for imputation
+x_variables = [x for x in list(hungarian) if x not in [x[0] for x in cols_with_missing_values] +
+                        variables_not_to_use_for_imputation + ['id']]
+
+# Select x and y variables to use - add in 'rldv5'
+fix_met = hungarian[x_variables + [impute_variable]]
+
+# Create list of categorical variables to one-hot encode
+categorical_x_variables = ['sex', 'painloc', 'painexer', 'relrest', 'cp', 'htn', 'restecg', 'prop', 'nitr', 'pro',
+                           'diuretic', 'exang', 'lvx3', 'lvx4', 'lvf']
+
+# One-hot encode categorical variables
+for value in categorical_x_variables:
+    one_hot = pd.get_dummies(fix_met[value], prefix=value)
+    fix_met = fix_met.join(one_hot)
+    fix_met = fix_met.drop(columns=value)
+
+# Create list of x variables
+x_variables = [x for x in list(fix_met) if x != impute_variable]
+
+# Create DataFrame with missing value(s) - will predict on
+predict = fix_met.loc[fix_met[impute_variable]==-9]
+# Set x and y predict DataFrames
+predict_x, predict_y = predict[x_variables], predict[impute_variable]
+
+# Create DataFrame to train on
+train = fix_met.loc[~(fix_met[impute_variable]==-9)]
+# Set x and y train DataFrames
+train_x, train_y = train[x_variables], train[impute_variable]
+
+# Fit scaler on train_x
+train_x = scaler.fit_transform(train_x)
+
+# Transform predict_x
+predict_x = scaler.transform(predict_x)
+
+# Obtain k (number of neighbors) by using sqrt(n)
+k = round(sqrt(len(train_x)))
+print(f"k is {k}.")
+
+# Check to make sure k is odd number
+if divmod(k, 2)[1] == 1:
+    print("k is an odd number. Good to proceed.")
+else:
+    print("Need to make k an odd number.")
+
+# Predict value for predict_y
+met_prediction = KNeighborsRegressor(n_neighbors=k, metric='minkowski', weights='distance').fit(train_x, train_y).predict(predict_x)
+print("The predictions for met are:")
+print(met_prediction)
+
+# Round met_prediction to integer
+for i in range(len(met_prediction)):
+    met_prediction[i] = round(number=met_prediction[i])
+    print("The prediction for met_prediction" + "[" + str(i) + "]" + " has been rounded to " + str(met_prediction[i]) + ".")
+
+# Supply prediction back to appropriate patient
+hungarian.loc[hungarian[impute_variable]==-9, impute_variable] = met_prediction
+
+# Imputing missing values (marked as -9 per data dictionary)
+cols_with_missing_values = [(col, hungarian[col].value_counts()[-9]) for col in list(hungarian) if -9 in hungarian[col].unique()]
+# Sort tuples by number of missing values
+cols_with_missing_values.sort(key=lambda x:x[1])
+
+# Impute fbs
+# Set y variable
+impute_variable = 'fbs'
+
+# Obtain list of variables to use for imputation
+x_variables = [x for x in list(hungarian) if x not in [x[0] for x in cols_with_missing_values] +
+                        variables_not_to_use_for_imputation + ['id']]
+
+# Select x and y variables to use - add in 'met'
+fix_fbs = hungarian[x_variables + [impute_variable]]
+
+# Create list of categorical variables to one-hot encode
+categorical_x_variables = ['sex', 'painloc', 'painexer', 'relrest', 'cp', 'htn', 'restecg', 'prop', 'nitr', 'pro',
+                           'diuretic', 'exang', 'lvx3', 'lvx4', 'lvf']
+
+# One-hot encode categorical variables
+for value in categorical_x_variables:
+    one_hot = pd.get_dummies(fix_fbs[value], prefix=value)
+    fix_fbs = fix_fbs.join(one_hot)
+    fix_fbs = fix_fbs.drop(columns=value)
+
+# Create list of x variables
+x_variables = [x for x in list(fix_fbs) if x != impute_variable]
+
+# Create DataFrame with missing value(s) - will predict on
+predict = fix_fbs.loc[fix_fbs[impute_variable]==-9]
+# Set x and y predict DataFrames
+predict_x, predict_y = predict[x_variables], predict[impute_variable]
+
+# Create DataFrame to train on
+train = fix_fbs.loc[~(fix_fbs[impute_variable]==-9)]
+# Set x and y train DataFrames
+train_x, train_y = train[x_variables], train[impute_variable]
+
+# Fit scaler on train_x
+train_x = scaler.fit_transform(train_x)
+
+# Transform predict_x
+predict_x = scaler.transform(predict_x)
+
+# Obtain k (number of neighbors) by using sqrt(n)
+k = round(sqrt(len(train_x)))
+print(f"k is {k}.")
+
+# Check to make sure k is odd number
+if divmod(k, 2)[1] == 1:
+    print("k is an odd number. Good to proceed.")
+else:
+    print("Need to make k an odd number.")
+
+# Predict value for predict_y
+fbs_prediction = KNeighborsClassifier(n_neighbors=k, metric='minkowski', weights='distance').fit(train_x, train_y).predict(predict_x)
+print("The predictions for fbs are:")
+print(fbs_prediction)
+
+# Supply prediction back to appropriate patient
+hungarian.loc[hungarian[impute_variable]==-9, impute_variable] = fbs_prediction
+
+# Imputing missing values (marked as -9 per data dictionary)
+cols_with_missing_values = [(col, hungarian[col].value_counts()[-9]) for col in list(hungarian) if -9 in hungarian[col].unique()]
+# Sort tuples by number of missing values
+cols_with_missing_values.sort(key=lambda x:x[1])
+
+# Impute fbs
+# Set y variable
+impute_variable = 'proto'
+
+# Obtain list of variables to use for imputation
+x_variables = [x for x in list(hungarian) if x not in [x[0] for x in cols_with_missing_values] +
+                        variables_not_to_use_for_imputation + ['id']]
+
+# Select x and y variables to use - add in 'fbs'
+fix_proto = hungarian[x_variables + [impute_variable]]
+
+# Create list of categorical variables to one-hot encode
+categorical_x_variables = ['sex', 'painloc', 'painexer', 'relrest', 'cp', 'htn', 'fbs', 'restecg', 'prop', 'nitr', 'pro',
+                           'diuretic', 'exang', 'lvx3', 'lvx4', 'lvf']
+
+# One-hot encode categorical variables
+for value in categorical_x_variables:
+    one_hot = pd.get_dummies(fix_proto[value], prefix=value)
+    fix_proto = fix_proto.join(one_hot)
+    fix_proto = fix_proto.drop(columns=value)
+
+# Create list of x variables
+x_variables = [x for x in list(fix_proto) if x != impute_variable]
+
+# Create DataFrame with missing value(s) - will predict on
+predict = fix_proto.loc[fix_proto[impute_variable]==-9]
+# Set x and y predict DataFrames
+predict_x, predict_y = predict[x_variables], predict[impute_variable]
+
+# Create DataFrame to train on
+train = fix_proto.loc[~(fix_proto[impute_variable]==-9)]
+# Set x and y train DataFrames
+train_x, train_y = train[x_variables], train[impute_variable]
+
+# Fit scaler on train_x
+train_x = scaler.fit_transform(train_x)
+# Transform train_x
+train_x = scaler.transform(train_x)
+
+# Transform predict_x
+predict_x = scaler.transform(predict_x)
+
+# Obtain k (number of neighbors) by using sqrt(n)
+k = round(sqrt(len(train_x)))
+print(f"k is {k}.")
+
+# Check to make sure k is odd number
+if divmod(k, 2)[1] == 1:
+    print("k is an odd number. Good to proceed.")
+else:
+    print("Need to make k an odd number.")
+
+# Predict value for predict_y
+proto_prediction = KNeighborsClassifier(n_neighbors=k, metric='minkowski', weights='distance').fit(train_x, train_y).predict(predict_x)
+print("The predictions for proto are:")
+print(proto_prediction)
+
+# Supply prediction back to appropriate patient
+hungarian.loc[hungarian[impute_variable]==-9, impute_variable] = proto_prediction
+
+# Imputing missing values (marked as -9 per data dictionary)
+cols_with_missing_values = [(col, hungarian[col].value_counts()[-9]) for col in list(hungarian) if -9 in hungarian[col].unique()]
+# Sort tuples by number of missing values
+cols_with_missing_values.sort(key=lambda x:x[1])
+
+# Impute chol
+impute_variable = 'chol'
+
+# Obtain list of variables to use for imputation
+x_variables = [x for x in list(hungarian) if x not in [x[0] for x in cols_with_missing_values] +
+                        variables_not_to_use_for_imputation + ['id']]
+
+# Select x and y variables to use - add in 'fbs'
+fix_chol = hungarian[x_variables + [impute_variable]]
+
+# Create list of categorical variables to one-hot encode
+categorical_x_variables = ['sex', 'painloc', 'painexer', 'relrest', 'cp', 'htn', 'fbs', 'restecg', 'prop', 'nitr', 'pro',
+                           'diuretic', 'proto', 'exang', 'lvx3', 'lvx4', 'lvf']
+
+
+# One-hot encode categorical variables
+for value in categorical_x_variables:
+    one_hot = pd.get_dummies(fix_chol[value], prefix=value)
+    fix_chol = fix_chol.join(one_hot)
+    fix_chol = fix_chol.drop(columns=value)
+
+# Create list of x variables
+x_variables = [x for x in list(fix_chol) if x != impute_variable]
+
+# Create DataFrame with missing value(s) - will predict on
+predict = fix_chol.loc[fix_chol[impute_variable]==-9]
+# Set x and y predict DataFrames
+predict_x, predict_y = predict[x_variables], predict[impute_variable]
+
+# Create DataFrame to train on
+train = fix_chol.loc[~(fix_chol[impute_variable]==-9)]
+# Set x and y train DataFrames
+train_x, train_y = train[x_variables], train[impute_variable]
+
+# Fit scaler on train_x
+train_x = scaler.fit_transform(train_x)
+
+# Transform predict_x
+predict_x = scaler.transform(predict_x)
+
+# Obtain k (number of neighbors) by using sqrt(n)
+k = round(sqrt(len(train_x)))
+print(f"k is {k}.")
+
+# Check to make sure k is odd number
+if divmod(k, 2)[1] == 1:
+    print("k is an odd number. Good to proceed.")
+else:
+    print("Need to make k an odd number.")
+    # Substract one to make k odd number
+    k -= 1
+    print(f"k is now {k}.")
+
+# Predict value for predict_y
+chol_prediction = KNeighborsRegressor(n_neighbors=k, metric='minkowski', weights='distance').fit(train_x, train_y).predict(predict_x)
+print("The predictions for chol are:")
+print(chol_prediction)
+
+# Round chol_prediction to integer
+for i in range(0, len(chol_prediction)):
+    chol_prediction[i] = round(number=chol_prediction[i])
+    print(f"The prediction for chol_prediction [{str(i)}] has been rounded to {chol_prediction[i]}.")
+
+# Supply prediction back to appropriate patient
+hungarian.loc[hungarian[impute_variable]==-9, impute_variable] = chol_prediction
+```
 
 (Put code at bottom - base off table of contents and say for all code (script) - go to the Github page for the project (give link to heart disease))
 
