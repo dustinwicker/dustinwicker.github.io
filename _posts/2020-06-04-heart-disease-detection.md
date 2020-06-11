@@ -33,7 +33,7 @@ Code snippets will be provided for each section outlined in the [Project Overvie
 ## vii. [Model Usefulness](#model-usefulness)
   
 ## Data Ingestion
-The first step was obtaining the [data](https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/hungarian.data) from the UCI Machine Learning Repository. The file was saved in an appropriate location on my machine and then read into into Python. #####[View code](#a)
+The first step was obtaining the [data](https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/hungarian.data) from the UCI Machine Learning Repository. The file was saved in an appropriate location on my machine and then read into into Python. ##### [View code](#a)
   
 ## Data Cleaning  
 After the data was properly read into into Python and the appropriate column names were supplied, data cleaning was performed. This involved: 
