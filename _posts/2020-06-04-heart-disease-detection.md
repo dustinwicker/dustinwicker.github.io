@@ -43,9 +43,10 @@ This involved:
 * Correcting any data discrepancies
 * Removing patients with a large percentage of missing values
    * In this particular case, large meant 10% and as a result, two patients were removed from the data set.
-* Imputing missing values for patients using K-Nearest Neighbors, an advanced data imputation method  
+* Imputing missing values for patients using K-Nearest Neighbors, an advanced data imputation method
+* Setting the target variable ("num") to a binary range as previous studies have done
 
-## Exploratory Data Analysis
+## Exploratory Data Analysis 
 The following two images provide a sample of the analysis performed.
 
 ![Distribution_of_Continuous_Features_by_Target](/assets/img/distribution_of_continuous_features_by_target.png "Distribution of Continuous Features by Target")
@@ -67,7 +68,7 @@ Including the details above, this step also involved:
    * Normality Tests
 * Feature Engineering (do visualization will of this done?)
 * Data Visualization
-* Data Transformations (add section for this? visualizaton showing the differences - chol)
+* Data Transformations (add section for this? visualizaton showing the differences - chol) [<sub><sup>View code</sup></sub>](#c)
 
 ## Model Building
 After exploring our data to obtain a greater understanding of it and using that information to perform feature engineering and data transformations, it was time to build and optimize models.
@@ -217,13 +218,13 @@ cols_to_drop =['ccf', 'pncaden', 'smoke', 'cigs', 'years', 'dm', 'famhist', 'dig
 hungarian = hungarian.drop(columns=cols_to_drop)  
 ```
 
-* Convert column types  
+Convert column types  
 ```python
 # Convert all columns to numeric
 hungarian = hungarian.apply(pd.to_numeric)
 ```
 
-* Correct data discrepancies
+Correct data discrepancies  
 ```python
 ### Fix possible patient id issues
 # Find ids that are not unique to patients
@@ -232,7 +233,8 @@ print(hungarian.id.value_counts()[hungarian.id.value_counts()!=1])
 # Fix id 1132 (two different patients are both assigned to this id) - give second patient next id number (id max + 1)
 hungarian.loc[hungarian.loc[hungarian.id==1132].index[-1], 'id'] = hungarian.id.max() + 1
 ```
-* Remove patients with a large percentage of missing values
+
+Remove patients with a large percentage of missing values  
 ```python
 # Drop patients with "significant" number of missing values (use 10%, can adjust accordingly)
 # Determine missing value percentage per patient (-9 is the missing attribute value)
@@ -242,7 +244,7 @@ missing_value_perc_per_patient = (hungarian == -9).sum(axis=1)[(hungarian == -9)
 # Remove patients with > 10% missing values
 hungarian = hungarian.drop(missing_value_perc_per_patient[missing_value_perc_per_patient>0.10].index.values)
 ```
-* Impute missing values
+Impute missing values  
 ```python
 ### Imputing missing values (marked as -9 per data dictionary)
 cols_with_missing_values = [(col, hungarian[col].value_counts()[-9]) for col in list(hungarian) if -9 in hungarian[col].unique()]
@@ -830,6 +832,13 @@ for i in range(0, len(chol_prediction)):
 # Supply prediction back to appropriate patient
 hungarian.loc[hungarian[impute_variable]==-9, impute_variable] = chol_prediction
 ```
+Set target variable to binary range
+```python
+# Set y variable to 0-1 range (as previous studies have done)
+hungarian.loc[hungarian.num > 0, "num"] = 1
+```
+
+# c
 
 (Put code at bottom - base off table of contents and say for all code (script) - go to the Github page for the project (give link to heart disease))
 
