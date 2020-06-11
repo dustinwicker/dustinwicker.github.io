@@ -21,12 +21,12 @@ A summary of this models results can be seen directly below, and a full summary 
  (Put overall summary of model results)
  (Put usefulness up here as well)
  
-Code snippets will be provided for each section outlined in the Project Overview at the bottom of this page. If you would like to view the entire code script, please click this [link](put in link to heart disease github code script).
+Code snippets will be provided for each section outlined in the [Project Overview](#project-overview) at the bottom of this page. If you would like to view the entire code script, please click this [link](https://github.com/dustinwicker/Heart-Disease-Detection/blob/master/heart_disease_code.py).
  
 # Project Overview  
 ## i.    [Data Ingestion](#data-ingestion)
 ## ii.   [Data Cleaning](#data-cleaning)
-## iii.   [Exploratory Data Analysis](#exploratory-data-analysis)
+## iii.  [Exploratory Data Analysis](#exploratory-data-analysis)
 ## iv.  [Model Building](#model-building)
 ## v.   [Model Visualization, Comparison, and Selection](#model-visualization-comparison-and-selection)
 ## vi.  [Visualize Best Model](#visualize-best-model)
