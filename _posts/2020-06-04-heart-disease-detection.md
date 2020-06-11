@@ -8,7 +8,7 @@ image: heart.png
 ---
 
 ## Project Summary  
-* Statistical analysis, data mining techniques, and five machine learning models were built and ensembled to accurately predict the presence of heart disease in patients from the Hungarian Institute of Cardiology in Budapest.  
+* **Statistical analysis**, **data mining techniques**, and **five machine learning models** were built and ensembled to **accurately predict the presence of heart disease in patients from the Hungarian Institute of Cardiology in Budapest**.  
 * The model which provided the optimal combination of total patients predicted correctly and F1 Score, while being the most parsimonious, was the **Support Vector Machine Classification Model #4**. It was able to **correctly predict** the presence, or lack thereof, of heart disease in **86% of patients**.  
   
   
@@ -18,10 +18,10 @@ A summary of this models results can be seen directly below, and a full summary 
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | :------: | :----: | :-------: | :-----------: | :-------------: |
 | **Support Vector Machine Classifier Four**                                                                                                                      | **0.804**    | **0.774**  | **0.837**     | **252**           | **40**             |
 
- (Put overall summary of model results)
- (Put usefulness up here as well)
  
-Code snippets will be provided for each section outlined in the [Project Overview](#project-overview) at the bottom of this page. If you would like to view the entire code script, please click this [link](https://github.com/dustinwicker/Heart-Disease-Detection/blob/master/heart_disease_code.py).
+ (Put usefulness up here as well in bullets)
+ 
+Code snippets will be provided for each section outlined in the [Project Overview](#project-overview) at the bottom of this page. If you would like to view the entire code script, please visit this [link](https://github.com/dustinwicker/Heart-Disease-Detection/blob/master/heart_disease_code.py).
  
 # Project Overview  
 ## i.    [Data Ingestion](#data-ingestion)
@@ -33,7 +33,7 @@ Code snippets will be provided for each section outlined in the [Project Overvie
 ## vii. [Model Usefulness](#model-usefulness)
   
 ## Data Ingestion
-The first step was obtaining the [data](https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/hungarian.data) from the UCI Machine Learning Repository. The file was saved in an appropriate location on my machine and then read into into Python.
+The first step was obtaining the [data](https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/hungarian.data) from the UCI Machine Learning Repository. The file was saved in an appropriate location on my machine and then read into into Python. #####[View code](#a)
   
 ## Data Cleaning  
 After the data was properly read into into Python and the appropriate column names were supplied, data cleaning was performed. This involved: 
@@ -122,11 +122,13 @@ The final step, and argubably most critical one, is explaining how the results c
 
 
 
+# a
+
 
 
 (Put code at bottom - base off table of contents and say for all code (script) - go to the Github page for the project (give link to heart disease))
 
-Questions: how else could the model be useful? Other visuals that could be useful to visualize the results?
+Questions: how else could the model be useful? Other visuals that could be useful to visualize the results? Any strategies that could make the model more useful? Feature engineering ideas?
 
 
 Hi there! I'm Paul. I’m a physics major turned programmer. Ever since I first learned how to program while taking a scientific computing for physics course, I have pursued programming as a passion, and as a career. Check out [my personal website](https://www.lenpaul.com/) for more information on my other projects (including more Jekyll themes!), as well as some of my writing.
