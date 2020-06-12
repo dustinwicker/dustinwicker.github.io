@@ -1296,7 +1296,7 @@ hungarian["thalrest_boxcox_div_by_rldv5"] = hungarian["thalrest_boxcox"]/hungari
 hungarian['agebinned'] = pd.cut(x=hungarian.age, bins=5, labels = ['0', '1', '2', '3', '4'])
 ```
 
-DataFrame of continuous variable correlations greater than 0.6 and less than 1.0 and less than -0.6 and greater than -1.0 with all null columns dropped - with all feature engineered variables included
+DataFrame of continuous variable correlations greater than 0.6 and less than 1.0 and less than -0.6 and greater than -1.0 with entirely null columns dropped - all feature engineered variables included
 ```python
 # Add boxcox'd variables to continuous_variables list
 continuous_variables.extend([x for x in list(hungarian) if 'boxcox' in x])
