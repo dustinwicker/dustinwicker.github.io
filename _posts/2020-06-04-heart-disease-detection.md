@@ -75,7 +75,7 @@ Including the details above, this step also involved:
 * Additional Data Visualizations
 * Additonal Data Transformations [<sub><sup>View code</sup></sub>](#c)
 
-## Model Building
+## Model Building [<sub><sup>View code</sup></sub>](#d)
 After exploring our data to obtain a greater understanding of it and using that information to perform feature engineering and data transformations, it was time to build and optimize models.
 * Five different machine learning algorithms were used  
    * Logistic Regression  
@@ -1308,6 +1308,292 @@ hungarian[continuous_variables].corr()[((hungarian[continuous_variables].corr() 
                                               (hungarian[continuous_variables].corr() < 1.0)) | 
                                              ((hungarian[continuous_variables].corr()<-0.6) & 
                                               (hungarian[continuous_variables].corr()>-1.0))].dropna(axis=1, how='all')
+```
+
+# d
+
+DataFrame to append model results
+```python
+# Create empty DataFrame to append all model results to
+all_model_results = pd.DataFrame()
+# Create DataFrame to append top model results to
+top_model_results = pd.DataFrame(columns=['model_type', 'solver', 'best_model_params_grid_search', 'best_score_grid_search',
+                                          'true_negatives', 'false_positives', 'false_negatives', 'true_positives',
+                                          'recall', 'precision', 'f1_score', 'variables_not_used', 'variables_used',
+                                          'model_params_grid_search'])
+```
+
+Copy of patient DataFrame for regression modeling
+```python
+model = hungarian.copy()
+```
+
+Create unique set of variables
+```python
+# Drop columns
+variables_to_drop_for_modeling_one = ['id', 'ekgyr', 'ekgmo', 'ekgday', 'cyr', 'cmo', 'cday', 'lvx3', 'lvx4', 'lvf',
+                                      'proto', 'ekg_date', 'cardiac_cath_date', 'rldv5_rldv5e_pca',
+                                      'days_between_c_ekg', 'trestbps_boxcox', 'chol_boxcox', 'thalrest_boxcox',
+                                      'thalach_div_by_thalrest', 'tpeakbps_div_by_tpeakbpd', 'thaldur_div_by_met',
+                                      'chol_div_by_met', 'chol_div_by_thalach', 'chol_div_by_thalrest',
+                                      'chol_div_by_age', 'thalrest_div_by_rldv5', 'thalach_div_by_rldv5e', 'agebinned',
+                                      'trestbps_boxcox_div_by_tpeakbpd', 'chol_boxcox_div_by_age',
+                                      'chol_boxcox_div_by_met', 'chol_boxcox_div_by_thalach',
+                                      'chol_boxcox_div_by_thalrest', 'thalach_div_by_thalrest_boxcox',
+                                      'chol_div_by_thalrest_boxcox', 'thalrest_boxcox_div_by_rldv5']
+# Define categorical variables
+categorical_variables_for_modeling_one = ['sex', 'painloc', 'painexer', 'relrest', 'cp', 'htn', 'fbs', 'restecg',
+                                          'prop', 'nitr', 'pro', 'diuretic', 'exang']
+
+
+# Drop columns
+variables_to_drop_for_modeling_two = ['id', 'chol', 'thalrest', 'trestbps', 'ekgyr', 'ekgmo', 'ekgday', 'cyr', 'cmo',
+                                      'cday', 'ekg_date', 'cardiac_cath_date', 'rldv5', 'lvx3', 'lvx4', 'lvf', 'pro',
+                                      'proto', 'rldv5_rldv5e_pca', 'thalach_div_by_thalrest',
+                                      'tpeakbps_div_by_tpeakbpd', 'thaldur_div_by_met', 'chol_div_by_met',
+                                      'chol_div_by_thalach', 'chol_div_by_thalrest', 'chol_div_by_age',
+                                      'thalrest_div_by_rldv5', 'thalach_div_by_rldv5e', 'agebinned',
+                                      'trestbps_boxcox_div_by_tpeakbpd', 'chol_boxcox_div_by_age',
+                                      'chol_boxcox_div_by_met', 'chol_boxcox_div_by_thalach',
+                                      'chol_boxcox_div_by_thalrest', 'thalach_div_by_thalrest_boxcox',
+                                      'chol_div_by_thalrest_boxcox', 'thalrest_boxcox_div_by_rldv5']
+# Define categorical variables
+categorical_variables_for_modeling_two = ['sex', 'painloc', 'painexer', 'relrest', 'cp', 'htn', 'fbs', 'restecg',
+                                          'prop', 'nitr', 'diuretic', 'exang']
+
+# Drop columns
+variables_to_drop_for_modeling_three = ['id', 'chol', 'thalrest', 'trestbps', 'ekgyr', 'ekgmo', 'ekgday', 'cyr', 'cmo',
+                                      'cday', 'ekg_date', 'cardiac_cath_date', 'lvx3', 'lvx4', 'lvf', 'proto',
+                                      'rldv5_rldv5e_pca', 'thalach_div_by_thalrest',
+                                      'tpeakbps_div_by_tpeakbpd', 'thaldur_div_by_met', 'chol_div_by_met',
+                                      'chol_div_by_thalach', 'chol_div_by_thalrest', 'chol_div_by_age',
+                                      'thalrest_div_by_rldv5', 'thalach_div_by_rldv5e', 'agebinned',
+                                      'trestbps_boxcox_div_by_tpeakbpd', 'chol_boxcox_div_by_age',
+                                      'chol_boxcox_div_by_met', 'chol_boxcox_div_by_thalach',
+                                      'chol_boxcox_div_by_thalrest', 'thalach_div_by_thalrest_boxcox',
+                                      'chol_div_by_thalrest_boxcox', 'thalrest_boxcox_div_by_rldv5']
+
+# Define categorical variables
+categorical_variables_for_modeling_three = ['sex', 'painloc', 'painexer', 'relrest', 'cp', 'htn', 'fbs', 'restecg', 'prop',
+                                          'nitr', 'diuretic', 'exang', 'pro']
+
+# Drop columns
+variables_to_drop_for_modeling_four = ['id', 'ekgyr', 'ekgmo', 'ekgday', 'cyr', 'cmo', 'cday', 'lvx3', 'lvx4', 'lvf',
+                                      'proto', 'ekg_date', 'cardiac_cath_date', 'rldv5', 'rldv5e', 'trestbps_boxcox',
+                                       'chol_boxcox', 'thalrest_boxcox', 'agebinned',
+                                       'trestbps_boxcox_div_by_tpeakbpd', 'chol_boxcox_div_by_age',
+                                       'chol_boxcox_div_by_met', 'chol_boxcox_div_by_thalach',
+                                       'chol_boxcox_div_by_thalrest', 'thalach_div_by_thalrest_boxcox',
+                                       'chol_div_by_thalrest_boxcox', 'thalrest_boxcox_div_by_rldv5']
+# Define categorical variables
+categorical_variables_for_modeling_four = ['sex', 'painloc', 'painexer', 'relrest', 'cp', 'htn', 'fbs', 'restecg', 'prop',
+                                          'nitr', 'diuretic', 'exang', 'pro']
+
+# Drop columns
+variables_to_drop_for_modeling_five = ['id', 'age', 'ekgyr', 'ekgmo', 'ekgday', 'cyr', 'cmo', 'cday', 'lvx3', 'lvx4', 'lvf',
+                                      'proto', 'ekg_date', 'cardiac_cath_date','rldv5_rldv5e_pca', 'trestbps_boxcox',
+                                       'chol_boxcox', 'thalrest_boxcox', 'trestbps_boxcox_div_by_tpeakbpd',
+                                       'chol_boxcox_div_by_age', 'chol_boxcox_div_by_met', 'chol_boxcox_div_by_thalach',
+                                       'chol_boxcox_div_by_thalrest', 'thalach_div_by_thalrest_boxcox',
+                                       'chol_div_by_thalrest_boxcox', 'thalrest_boxcox_div_by_rldv5']
+
+# Define categorical variables
+categorical_variables_for_modeling_five = ['sex', 'painloc', 'painexer', 'relrest', 'cp', 'htn', 'fbs', 'restecg', 'prop',
+                                          'nitr', 'diuretic', 'exang', 'pro', 'agebinned']
+
+# Drop columns
+variables_to_drop_for_modeling_six = ['id', 'age', 'chol', 'thalrest', 'trestbps', 'ekgyr', 'ekgmo', 'ekgday', 'cyr',
+                                      'cmo', 'cday', 'lvx3', 'lvx4', 'lvf',
+                                      'proto', 'ekg_date', 'cardiac_cath_date','rldv5_rldv5e_pca',
+                                      'thalach_div_by_thalrest', 'tpeakbps_div_by_tpeakbpd', 'thaldur_div_by_met',
+                                      'chol_div_by_met', 'chol_div_by_thalach', 'chol_div_by_thalrest',
+                                      'chol_div_by_age', 'thalrest_div_by_rldv5', 'thalach_div_by_rldv5e']
+
+# Define categorical variables
+categorical_variables_for_modeling_six = ['sex', 'painloc', 'painexer', 'relrest', 'cp', 'htn', 'fbs', 'restecg', 'prop',
+                                          'nitr', 'diuretic', 'exang', 'pro', 'agebinned']
+
+# Drop columns
+variables_to_drop_for_modeling_seven = ['id', 'chol', 'thalrest', 'trestbps', 'ekgyr', 'ekgmo', 'ekgday', 'cyr',
+                                      'cmo', 'cday', 'lvx3', 'lvx4', 'lvf',
+                                      'proto', 'ekg_date', 'cardiac_cath_date','rldv5_rldv5e_pca',
+                                      'thalach_div_by_thalrest', 'tpeakbps_div_by_tpeakbpd', 'thaldur_div_by_met',
+                                      'chol_div_by_met', 'chol_div_by_thalach', 'chol_div_by_thalrest',
+                                      'chol_div_by_age', 'thalrest_div_by_rldv5', 'thalach_div_by_rldv5e', 'agebinned']
+
+# Define categorical variables
+categorical_variables_for_modeling_seven = ['sex', 'painloc', 'painexer', 'relrest', 'cp', 'htn', 'fbs', 'restecg', 'prop',
+                                          'nitr', 'diuretic', 'exang', 'pro']
+
+# Make list of lists for variables to drop
+variables_to_drop_list = [variables_to_drop_for_modeling_one, variables_to_drop_for_modeling_two,
+                          variables_to_drop_for_modeling_three, variables_to_drop_for_modeling_four,
+                          variables_to_drop_for_modeling_five,variables_to_drop_for_modeling_six,
+                          variables_to_drop_for_modeling_seven]
+
+# Make list of lists for categorical variables to model
+categorical_variables_for_modeling_list = [categorical_variables_for_modeling_one,
+                                           categorical_variables_for_modeling_two,
+                                           categorical_variables_for_modeling_three,
+                                           categorical_variables_for_modeling_four,
+                                           categorical_variables_for_modeling_five,
+                                           categorical_variables_for_modeling_six,
+                                           categorical_variables_for_modeling_seven]
+```
+Logistic Regression
+```python
+# Unique variable combination runs
+for index, (vars_to_drop, cat_vars_to_model) in enumerate(zip(variables_to_drop_list,
+                                                              categorical_variables_for_modeling_list), start=1):
+    print(f"Model run: {index}")
+    # Create copy of hungarian for regression modeling
+    model = hungarian.copy()
+    # Drop variables
+    model = model.drop(columns=vars_to_drop)
+    # Dummy variable categorical variables
+    model = pd.get_dummies(data=model, columns=cat_vars_to_model, drop_first=True)
+    # Create target variable
+    y = model['num']
+    # Create feature variables
+    x = model.drop(columns='num')
+
+    # Obtain recursive feature elimination values for all solvers and get average
+    # (not sure what to do about ConvergenceWarning - get warning but also get result for each solver)
+    rfe_logit = pd.DataFrame(data=list(x), columns=['variable'])
+    for solve in ['liblinear', 'newton-cg', 'lbfgs', 'sag', 'saga']:
+        rfe_logit = rfe_logit.merge(pd.DataFrame(data=[list(x), RFE(LogisticRegression(solver=solve, max_iter=100),
+                    n_features_to_select=1).fit(x, y).ranking_.tolist()]).T.rename(columns={0: 'variable', 1:
+                    'rfe_ranking_' + solve}), on='variable')
+    # Get average ranking for each variable
+    rfe_logit['rfe_ranking_avg'] = rfe_logit[['rfe_ranking_liblinear', 'rfe_ranking_newton-cg', 'rfe_ranking_lbfgs',
+                                              'rfe_ranking_sag', 'rfe_ranking_saga']].mean(axis=1)
+    # Sort DataFrame
+    rfe_logit = rfe_logit.sort_values(by='rfe_ranking_avg', ascending=True).reset_index(drop=True)
+
+    # Train/test split
+    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.33, random_state=43)
+    # Run models - start at top and add variables with each iteration
+    # Test 'weaker' alpha value
+    strong_alpha_value = 0.04
+    model_search_logit = []
+    logit_variable_list = []
+    insignificant_variables_list = []
+    for i in range(len(rfe_logit)):
+        if rfe_logit['variable'][i] not in logit_variable_list and rfe_logit['variable'][i] not in insignificant_variables_list:
+            logit_variable_list.extend([rfe_logit['variable'][i]])
+            # logit_variable_list = list(set(logit_variable_list).difference(set(insignificant_variables_list)))
+            logit_variable_list = [x for x in logit_variable_list if x not in insignificant_variables_list]
+            print(logit_variable_list)
+            # Add related one-hot encoded variables if variable is categorical
+            if logit_variable_list[-1].split('_')[-1] in sorted([x for x in list(set([x.split('_')[-1] for x in list(x)])) if len(x) == 1]):
+                logit_variable_list.extend([var for var in list(x) if logit_variable_list[-1].split('_')[0] in var and var != logit_variable_list[-1]])
+                print(logit_variable_list)
+            # Build logistic regression
+            sm_logistic = sm.Logit(y_train, x_train[logit_variable_list]).fit()
+            # All p-values are significant
+            if all(p_values < strong_alpha_value for p_values in sm_logistic.summary2().tables[1]._getitem_column("P>|z|").values):
+                print("-*"*60)
+                print((sm_logistic.summary2().tables[1]._getitem_column("P>|z|").index.tolist(),
+                                         sm_logistic.summary2().tables[1]._getitem_column("P>|z|").values.tolist()))
+                print("-*"*60)
+                print("-*"*60)
+                model_search_logit.append([(sm_logistic.summary2().tables[0][0][6], sm_logistic.summary2().tables[0][1][6]),
+                                        (sm_logistic.summary2().tables[0][2][0], sm_logistic.summary2().tables[0][3][0]),
+                                        (sm_logistic.summary2().tables[0][2][1], sm_logistic.summary2().tables[0][3][1]),
+                                        (sm_logistic.summary2().tables[0][2][2], sm_logistic.summary2().tables[0][3][2]),
+                                        (sm_logistic.summary2().tables[0][2][3], sm_logistic.summary2().tables[0][3][3]),
+                                        (sm_logistic.summary2().tables[0][2][4], sm_logistic.summary2().tables[0][3][4]),
+                                        (sm_logistic.summary2().tables[0][2][5], sm_logistic.summary2().tables[0][3][5]),
+                                        (sm_logistic.summary2().tables[1]._getitem_column("P>|z|").index.tolist(),
+                                         sm_logistic.summary2().tables[1]._getitem_column("P>|z|").values.tolist())])
+            # P-value(s) of particular variable(s) is not significant
+            elif any(p_values > strong_alpha_value for p_values in sm_logistic.summary2().tables[1]._getitem_column("P>|z|").values):
+                print('*'*60)
+                print(logit_variable_list[-1])
+                print('*'*60)
+                if logit_variable_list[-1].split('_')[-1] in sorted([x for x in list(set([x.split('_')[-1] for x in list(x)])) if len(x) == 1]):
+                    cat_var_level_check = sm_logistic.summary2().tables[1]._getitem_column("P>|z|")[sm_logistic.summary2().
+                        tables[1]._getitem_column("P>|z|").index.isin([var for var in list(x) if
+                                                                       logit_variable_list[-1].split('_')[0] in var])]
+                    # If True, at least one level of the categorical variable is significant so keep all levels of variable
+                    if any(p_values < strong_alpha_value for p_values in cat_var_level_check.values):
+                        model_search_logit.append([(sm_logistic.summary2().tables[0][0][6], sm_logistic.summary2().tables[0][1][6]),
+                                        (sm_logistic.summary2().tables[0][2][0], sm_logistic.summary2().tables[0][3][0]),
+                                        (sm_logistic.summary2().tables[0][2][1], sm_logistic.summary2().tables[0][3][1]),
+                                        (sm_logistic.summary2().tables[0][2][2], sm_logistic.summary2().tables[0][3][2]),
+                                        (sm_logistic.summary2().tables[0][2][3], sm_logistic.summary2().tables[0][3][3]),
+                                        (sm_logistic.summary2().tables[0][2][4], sm_logistic.summary2().tables[0][3][4]),
+                                        (sm_logistic.summary2().tables[0][2][5], sm_logistic.summary2().tables[0][3][5]),
+                                        (sm_logistic.summary2().tables[1]._getitem_column("P>|z|").index.tolist(),
+                                         sm_logistic.summary2().tables[1]._getitem_column("P>|z|").values.tolist())])
+                    # Else False - remove all levels of categorical variable
+                    else:
+                        print("-"*60)
+                        print(sm_logistic.summary2())
+                        insignificant_variables_list.extend(cat_var_level_check.index)
+                else:
+                    print('='*60)
+                    print(sm_logistic.summary2())
+                    print(logit_variable_list[-1])
+                    cont_var_check = sm_logistic.summary2().tables[1]._getitem_column("P>|z|")[sm_logistic.summary2().
+                        tables[1]._getitem_column("P>|z|").index.isin([logit_variable_list[-1]])]
+                    # Continuous variable is significant
+                    if cont_var_check.values[0] < strong_alpha_value:
+                        model_search_logit.append([(sm_logistic.summary2().tables[0][0][6], sm_logistic.summary2().tables[0][1][6]),
+                                        (sm_logistic.summary2().tables[0][2][0], sm_logistic.summary2().tables[0][3][0]),
+                                        (sm_logistic.summary2().tables[0][2][1], sm_logistic.summary2().tables[0][3][1]),
+                                        (sm_logistic.summary2().tables[0][2][2], sm_logistic.summary2().tables[0][3][2]),
+                                        (sm_logistic.summary2().tables[0][2][3], sm_logistic.summary2().tables[0][3][3]),
+                                        (sm_logistic.summary2().tables[0][2][4], sm_logistic.summary2().tables[0][3][4]),
+                                        (sm_logistic.summary2().tables[0][2][5], sm_logistic.summary2().tables[0][3][5]),
+                                        (sm_logistic.summary2().tables[1]._getitem_column("P>|z|").index.tolist(),
+                                         sm_logistic.summary2().tables[1]._getitem_column("P>|z|").values.tolist())])
+                    else:
+                        print('^'*60)
+                        print(logit_variable_list[-1])
+                        insignificant_variables_list.append(logit_variable_list[-1])
+    # Create DataFrame of logisitic regression results
+    model_search_logit = pd.DataFrame(model_search_logit, columns = ['converged', 'pseudo_r_squared', 'aic', 'bic',
+                                                'log_likelihood', 'll_null', 'llr_p_value', 'columns_significance'])
+    model_results_logit = []
+    for solve in ['liblinear', 'newton-cg', 'lbfgs', 'sag', 'saga']:
+        for col in model_search_logit['columns_significance']:
+            print(solve, col[0])
+            try:
+                logit_predict = cross_val_predict(LogisticRegression(solver=solve, max_iter=100), x[col[0]], y, cv=5)
+                print(confusion_matrix(y_true=y, y_pred=logit_predict))
+                conf_matr = confusion_matrix(y_true=y, y_pred=logit_predict)
+                model_results_logit.append([solve, col[0], conf_matr[0][0], conf_matr[0][1], conf_matr[1][0], conf_matr[1][1]])
+            except ConvergenceWarning:
+                print("#"*60)
+    # Create DataFrame of results
+    model_results_logit = pd.DataFrame(model_results_logit, columns = ['solver', 'variables_used', 'true_negatives', 'false_positives',
+                                                 'false_negatives', 'true_positives'])
+    # Create recall, precision, and f1-score columns
+    model_results_logit['recall'] = model_results_logit.true_positives/(model_results_logit.true_positives + model_results_logit.false_negatives)
+    model_results_logit['precision'] = model_results_logit.true_positives/(model_results_logit.true_positives + model_results_logit.false_positives)
+    model_results_logit['f1_score'] = 2 * (model_results_logit.precision * model_results_logit.recall) / (model_results_logit.precision + model_results_logit.recall)
+    # Sort DataFrame
+    model_results_logit = model_results_logit.sort_values(by=['f1_score'], ascending=False)
+    print(model_results_logit)
+
+    if len(model_results_logit.loc[model_results_logit.f1_score==model_results_logit.f1_score.max()]) > 1:
+        top_model_result_logit = model_results_logit.loc[(model_results_logit.f1_score == model_results_logit.f1_score.max()) &
+            (model_results_logit['variables_used'].apply(len) == min(map(lambda x: len(x[[1]][0]),
+            model_results_logit.loc[model_results_logit.f1_score==model_results_logit.f1_score.max()].values)))].sample(n=1)
+    else:
+        top_model_result_logit = model_results_logit.loc[model_results_logit.f1_score == model_results_logit.f1_score.max()]
+    top_model_results = top_model_results.append(other= top_model_result_logit, sort=False)
+    print(f"Top logit model: \n {top_model_result_logit}")
+
+    # Append top_model_result_logit results to all_model_results DataFrame
+    logit_predict_proba = cross_val_predict(LogisticRegression(solver=top_model_result_logit["solver"].values[0],
+                                max_iter=100), x[top_model_result_logit["variables_used"].values[0]], y, cv=5, method="predict_proba")
+    all_model_results['logit_'+inflect.engine().number_to_words(index)+'_pred_zero'] = logit_predict_proba[:,0]
+    all_model_results['logit_'+inflect.engine().number_to_words(index)+'_pred_one'] = logit_predict_proba[:,1]
+
+# Fill in model_type columns
+top_model_results['model_type'] = top_model_results['model_type'].fillna(value='logit')
 ```
 
 
