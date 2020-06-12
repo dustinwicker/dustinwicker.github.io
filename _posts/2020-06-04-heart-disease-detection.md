@@ -47,7 +47,7 @@ This involved:
 * Setting the target variable ("num") to a binary range as previous studies have done
 
 ## Exploratory Data Analysis 
-The following two images provide a sample of the analysis performed.
+The following three images provide a sample of the analysis performed.
 
 ![Heatmap of Continous Predictor Variables](/assets/img/heatmap_continous_predictor_variables.png "Heatmap of Continous Predictor Variables")
 
@@ -55,8 +55,9 @@ This heatmap shows correlation coefficients between the initial continuous varia
 
 ![Distribution_of_Continuous_Features_by_Target](/assets/img/distribution_of_continuous_features_by_target.png "Distributions of Continuous Features by Target")
 
-There is a histogram for each of the initial continuous features against the target variable (diagnosis of heart disease). This visualization allows you to see which of the predictor variables have noticeable differences in their distributions when split on the target and would therefore be useful in prediction  
-* A good example of this is "Maximum Heart Rate Achieved." 
+There is a histogram for each of the initial continuous features against the target variable (diagnosis of heart disease). This visualization allows you to see which of the predictor variables have noticeable differences in their distributions when split on the target and would therefore be useful in prediction  * A good example of this is "Maximum Heart Rate Achieved."
+
+![Serum_Cholesterol_Distribution_with_KDE_Overlaid](/assets/img/chol_data_transformation.png "Serum Cholesterol Distribution with KDE Overlaid")
 
 Including the details above, this step also involved:
 * Statistical Analysis
