@@ -72,8 +72,8 @@ Including the details above, this step also involved:
    * Odds Ratios
    * Descriptive Statistics
 * Feature Engineering (do visualization will of this done?)
-* Data Visualization
-* Data Transformations (add section for this? visualizaton showing the differences - chol) [<sub><sup>View code</sup></sub>](#c)
+* Additional Data Visualizations
+* Additonal Data Transformations [<sub><sup>View code</sup></sub>](#c)
 
 ## Model Building
 After exploring our data to obtain a greater understanding of it and using that information to perform feature engineering and data transformations, it was time to build and optimize models.
