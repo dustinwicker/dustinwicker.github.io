@@ -974,9 +974,78 @@ for continuous in continuous_variables:
     print('\n')
 ```
 
+Data Transformations (Box-Cox Transformation)
+```python
+# Boxcox necessary variables that reject the null hypothesis from normaltest in scipy.stats
+hungarian['trestbps_boxcox'] = stats.boxcox(x=hungarian.trestbps)[0]
+hungarian['chol_boxcox'] = stats.boxcox(x=hungarian.chol)[0]
+hungarian['thalrest_boxcox'] = stats.boxcox(x=hungarian.thalrest)[0]
+
+# Add boxcox'd variables to continuous_variables_spelled_out_dict
+for boxcox_var in filter(lambda x: '_boxcox' in x, hungarian.columns):
+    continuous_variables_spelled_out_dict[boxcox_var] = continuous_variables_spelled_out_dict[
+                                                            boxcox_var.split("_")[0]] + " Box-Cox"
+```
+
+Data Transformation of Serum Cholestrol - Distributions with KDE Overlaid
+```python
+# Compare original distribution with boxcox'd distribution for chol
+fig, axes = plt.subplots(nrows=1, ncols=2, sharey=True)
+fig.suptitle('Distributions with Kernel Density Estimation (KDE) Overlaid ', fontweight='bold', fontsize= 22)
+for ax, variable in zip(axes.flatten(), ['chol', 'chol_boxcox']):
+    print(ax, variable)
+    ax.hist(hungarian[variable])
+    ax2 = hungarian[variable].plot.kde(ax=ax, secondary_y=True)
+    ax2.grid(False)
+    ax2.set_yticks([])
+    ax2.set_title(continuous_variables_spelled_out_dict[variable], fontdict={'fontweight': 'bold', 'fontsize': 24})
+    ax.text(0.78, 0.75, f"Kurtosis value: {'{:.3}'.format(stats.kurtosis(a=hungarian[variable], fisher=True))}\n"
+                      f"Sknewness value: {'{:.3}'.format(stats.skew(a=hungarian[variable]))}",
+            horizontalalignment='center', verticalalignment='center', transform=ax.transAxes,
+            bbox=dict(facecolor='none', edgecolor='black', pad=10.0, linewidth=3), weight='bold', fontsize=14)
+    ax.set_ylabel('Density', fontdict={'fontweight': 'bold', 'fontsize': 18})
+# Expand figure to desired size first before running below code (this makes xtick labels appear and then can therefore be bolded)
+for i in range(len(axes)):
+    axes[i].set_xticklabels(axes[i].get_xticklabels(), fontweight='bold')
+```
+
+Histograms of Continuous Features and their Box-Cox'd Versions by Target
+```python
+# Plot original and boxcox'd distributions to each other and against num
+# Create list of boxcox'd variables and their originals
+variables_for_inspection = list(itertools.chain.from_iterable([[x, x.split("_")[0]] for x in list(hungarian) if 'boxcox' in x]))
+# Sort list in ascending order
+variables_for_inspection.sort(reverse=False)
+fig, axes = plt.subplots(nrows=len([x for x in variables_for_inspection if 'boxcox' in x]), ncols=2, figsize=(28,8))
+fig.subplots_adjust(hspace=0.5)
+fig.suptitle("Distributions of Continuous Features and their Box-Cox'd Versions", fontweight='bold', fontsize=20)
+for ax, variable in zip(axes.flatten(), variables_for_inspection):
+    for num_value in hungarian.num.unique():
+        ax.hist(hungarian.loc[hungarian.num == num_value, variable], alpha=0.7, label=num_value)
+        ax.set_title(continuous_variables_spelled_out_dict[variable], fontdict={'fontweight': 'bold', 'fontsize': 24})
+handles, legends = ax.get_legend_handles_labels()
+legends_spelled_out_dict = {0: "No Presence of Heart Disease", 1: "Presence of Heart Disease"}
+fig.legend(handles, legends_spelled_out_dict.values(), loc='upper left', bbox_to_anchor=(0.77, 1.0),
+           prop={'weight': 'bold', 'size': 14})
+```
+
+Chi-Square Tests
+```python
+
+# Pearson chi-square tests
+chi_square_analysis_list = []
+for categorical in categorical_variables:
+    chi, p, dof, expected = stats.chi2_contingency(pd.crosstab(index=hungarian[categorical], columns=hungarian[target_variable]))
+    print(f"The chi-square value for {categorical} and {target_variable} is {chi}, and the p-value is" f" {p}, respectfully.")
+    chi_square_analysis_list.append([categorical, target_variable, chi, p])
+
+# Create DataFrame from lists of lists
+chi_square_analysis_df = pd.DataFrame(chi_square_analysis_list, columns=['variable', 'target', 'chi',
+                                                            'p_value']).sort_values(by='p_value', ascending=True)
+# Determine categorical variables that reject null
+chi_square_analysis_df.loc[chi_square_analysis_df.p_value <= strong_alpha_value]
+```
+
 (Put code at bottom - base off table of contents and say for all code (script) - go to the Github page for the project (give link to heart disease))
 
 Questions: how else could the model be useful? Other visuals that could be useful to visualize the results? Any strategies that could make the model more useful? Feature engineering ideas? Any questions or lack of understanding on code?
-
-
-Hi there! I'm Paul. I’m a physics major turned programmer. Ever since I first learned how to program while taking a scientific computing for physics course, I have pursued programming as a passion, and as a career. Check out [my personal website](https://www.lenpaul.com/) for more information on my other projects (including more Jekyll themes!), as well as some of my writing.
