@@ -124,6 +124,10 @@ Below the four models which give predicted probabilities (Support Vector Machine
 ## Visualize Best Model
 The next step was visualizing the results of the best model in an easy to understand way. 
 
+![confusion_matrix_best_model](/assets/img/confusion_matrix_svc.png "Confusion Matrix of SVC Model Four")
+
+![stacked_bar_chart_best_model](/assets/img/stacked_bar_chart_confusion_matrix_svc.png "Stacked Bar Chart of SVC Model Four")
+
 
 ## Model Usefulness  
 The final step, and argubably most critical one, is explaining how the results could be utilized in a medical facility setting to benefit medical practitioners and their patients.
@@ -2128,6 +2132,8 @@ top_model_results.to_pickle('top_model_results.pkl')
 all_model_results.to_pickle('all_model_results.pkl')
 ```
 
+# e
+
 Load in model result DataFrames if needed
 ```python
 # Check if DataFrame is already loaded in - if not, load from pickle file
@@ -2151,8 +2157,159 @@ except NameError:
     with open('hungarian_target_variable.pkl', 'rb') as hungarian_target_variable_pkl:
         y = pickle.load(hungarian_target_variable_pkl)
 ```
+ROC Curves
+```python
+# Dict of model names and their spelled out verions
+model_names_spelled_out = {'logit': 'Logistic Regression', 'rfc': 'Random Forest Classifer', 'knn': 'K-Nearest Neighbors',
+                           'svc': 'Support Vector Machine Classifier', 'gbm': 'Gradient Boosting Classifer'}
 
-# e
+# Build ROC Curves for all models which give prediction probabilities (i.e. all but SVC)
+# Set figsize to size of second monitor
+plt.rcParams['figure.figsize'] = [19.2, 9.99]
+# Histograms for all continuous variable against num
+fig, axes = plt.subplots(nrows=2, ncols=2)
+fig.subplots_adjust(left=0.10, right=0.90, top=0.90, bottom=0.10, hspace=0.35, wspace=0.20)
+fig.suptitle('ROC (Receiver Operating Characteristic) Curves', fontweight= 'bold', fontsize= 22)
+for ax, value in zip(axes.flatten(), list(unique_everseen([x.split("_")[0] for x in all_model_results.columns if 'pred' in x]))):
+    # ROC Curve plot
+    # plt.figure(figsize=(13,7.5))
+    # Draw ROC Curves for all logit models on one plot
+    for pred_one_col in [x for x in all_model_results.columns if (x[0:len(value)] == value) & (x[-len('pred_one'):] == 'pred_one')]:
+        fpr, tpr, thresholds = roc_curve(y, all_model_results[pred_one_col])
+        ax.plot(fpr, tpr, label=pred_one_col.split("_")[1])
+        ax.plot([0, 1], [0, 1],'r--')
+        ax.set_xlim([0.0, 1.0])
+        ax.set_ylim([0.0, 1.05])
+        ax.set_xlabel('False Positive Rate', fontdict={'fontweight': 'bold', 'fontsize': 18})
+        ax.set_ylabel('True Positive Rate', fontdict={'fontweight': 'bold', 'fontsize': 18})
+        ax.set_title(f'{model_names_spelled_out[value]} Models', fontdict={'fontweight': 'bold', 'fontsize': 24})
+handles, legends = ax.get_legend_handles_labels()
+legends = ['Model ' + legend.title() for legend in legends]
+fig.legend(handles, legends, loc='upper left', bbox_to_anchor=(0.90, 0.85), prop={'weight':'bold'})
+```
+Select best model for each algorithm
+```python
+# Re-assign index of top_model_results
+top_model_results.index = list(itertools.chain.from_iterable(itertools.repeat(range(1,8), 5)))
+
+# Retreive best model run from each algorithm (base off f-1 score)
+top_model_from_each_algorithm = pd.DataFrame(columns=top_model_results.columns)
+for value in list(unique_everseen(top_model_results.model_type)):
+   if len(top_model_results.loc[(top_model_results.model_type == value) &
+        (top_model_results.f1_score == top_model_results.loc[(top_model_results.model_type == value), 'f1_score'].max())]) > 1:
+       # Create DataFrame to get best model from remaining
+       gt_one_top_model = top_model_results.loc[(top_model_results.model_type == value) &
+        (top_model_results.f1_score == top_model_results.loc[(top_model_results.model_type == value), 'f1_score'].max())]
+       if value == 'logit':
+           # Get DataFrame with least amount of variables used (parsimonious model)
+           if len(gt_one_top_model.loc[gt_one_top_model.variables_used.apply(len) == gt_one_top_model.variables_used.apply(len).min()])>1:
+               # Sample random one from remaining
+               top_model_from_each_algorithm = top_model_from_each_algorithm.append(other=gt_one_top_model.sample(n=1))
+       else:
+           print(value)
+           break
+   else:
+       top_model_from_each_algorithm = top_model_from_each_algorithm.append(other=top_model_results.loc[(top_model_results.model_type == value) &
+        (top_model_results.f1_score == top_model_results.loc[(top_model_results.model_type == value), 'f1_score'].max())])
+
+all_cut_offs = []
+# Go through various cut-offs for each model run that returns predicted probabilities
+for value in list(unique_everseen([x.split("_")[0] for x in all_model_results.columns if 'pred' in x])):
+    print("-" * 80)
+    print(value)
+    for pred_one_col in [x for x in all_model_results.columns if (x[0:len(value)] == value) & (x[-len('pred_one'):] == 'pred_one')]:
+        print(pred_one_col)
+        for cut_off in np.arange(0,1.01,step=0.001):
+            print(cut_off)
+            print("-" * 80)
+            cf = confusion_matrix(y_true=y, y_pred=np.where(all_model_results[pred_one_col] > cut_off, 1, 0))
+            all_cut_offs.append([pred_one_col, cut_off, cf[0][0], cf[0][1], cf[1][0], cf[1][1]])
+
+# Create DataFrame of results
+all_cut_offs = pd.DataFrame(all_cut_offs, columns=["model", "cut_off", 'true_negatives', 'false_positives',
+                                                   'false_negatives', 'true_positives'])
+# Create recall, precision, and f1_score columns
+all_cut_offs['recall'] = all_cut_offs.true_positives/(all_cut_offs.true_positives + all_cut_offs.false_negatives)
+all_cut_offs['precision'] = all_cut_offs.true_positives/(all_cut_offs.true_positives + all_cut_offs.false_positives)
+all_cut_offs['f1_score'] = 2 * (all_cut_offs.precision * all_cut_offs.recall) / (all_cut_offs.precision + all_cut_offs.recall)
+# Create total correct and total wrong columns
+all_cut_offs["total_correct"] = all_cut_offs.true_negatives + all_cut_offs.true_positives
+all_cut_offs["total_wrong"] = all_cut_offs.false_positives + all_cut_offs.false_negatives
+
+# Groupby and take top row from each groupby
+all_cut_offs = all_cut_offs.groupby(["model"]).apply(lambda x: (x.sort_values(["total_correct",
+                                            "f1_score"], ascending = [False, False])).head(1)).reset_index(drop=True)
+
+# Get the model type (first part of model before "_") to groupby on it
+all_cut_offs["model_type"] = all_cut_offs["model"].apply(lambda x: x.split("_")[0])
+
+# Get top model from each algorithm
+all_cut_offs = all_cut_offs.groupby(["model_type"]).apply(lambda x: (x.sort_values(["total_correct",
+                                            "f1_score"], ascending = [False, False])).head(1)).reset_index(drop=True)
+
+all_cut_offs_results = pd.DataFrame()
+# Get predictions with each of the models
+for model, cut_off in zip(all_cut_offs.model, all_cut_offs.cut_off):
+    print(model, cut_off)
+    all_cut_offs_results[model] = np.where(all_model_results[model] > cut_off, 1, 0)
+# Append best svc model to all_cut_offs_results
+all_cut_offs_results["svc_" + inflect.engine().number_to_words(
+    top_model_from_each_algorithm.loc[top_model_from_each_algorithm.model_type=="svc"].index[0])] = \
+    all_model_results["svc_" + inflect.engine().number_to_words(
+        top_model_from_each_algorithm.loc[top_model_from_each_algorithm.model_type=="svc"].index[0])]
+```
+
+Determine combination of models or stand alone model which provides best results
+```python
+# Get combinations of length 1,3, and 5 (take mode of 3 and 5)
+model_search_all = []
+for length in [1, 3, 5]:
+    for comb in itertools.combinations(all_cut_offs_results.columns, length):
+        print(list(comb))
+        print(confusion_matrix(y_true=y, y_pred=all_cut_offs_results[list(comb)].mode(axis=1)))
+        conf_matr = confusion_matrix(y_true=y, y_pred=all_cut_offs_results[list(comb)].mode(axis=1))
+        model_search_all.append([comb, conf_matr[0][0], conf_matr[0][1], conf_matr[1][0], conf_matr[1][1]])
+        print('\n')
+# Create DataFrame of results
+model_search_all = pd.DataFrame(model_search_all, columns=['cols', 'true_negatives', 'false_positives',
+                                             'false_negatives', 'true_positives'])
+# Create recall, precision, and f1-score columns
+model_search_all['recall'] = model_search_all.true_positives/(model_search_all.true_positives + model_search_all.false_negatives)
+model_search_all['precision'] = model_search_all.true_positives/(model_search_all.true_positives + model_search_all.false_positives)
+model_search_all['f1_score'] = 2 * (model_search_all.precision * model_search_all.recall) / (model_search_all.precision + model_search_all.recall)
+# Create total correct and total wrong columns
+model_search_all["total_correct"] = model_search_all.true_negatives + model_search_all.true_positives
+model_search_all["total_wrong"] = model_search_all.false_positives + model_search_all.false_negatives
+# Sort DataFrame
+model_search_all = model_search_all.sort_values(by=['total_correct','f1_score'], ascending=[False, False])
+print(model_search_all)
+```
+
+Create model results summary table for display
+```python
+# Spell out all model names - return list of lists
+column_all = []
+for index, value in enumerate(model_search_all['cols']):
+    one_column = []
+    for cols in model_search_all['cols'].iloc[index]:
+        if cols.split("_")[0] in model_names_spelled_out.keys():
+            cols_split = cols.split("_")
+            cols_split[0] = model_names_spelled_out[cols_split[0]]
+            cols_split = "_".join(cols_split)
+            cols_split = cols_split.replace("pred_one", "").replace("_", " ").title().strip()
+            one_column.extend([cols_split])
+    column_all.append(one_column)
+# Convert each list to a string and add as columns
+model_search_all['columns'] = [', '.join(map(str, l)) for l in column_all]
+
+# Create table for display
+model_search_all[['columns', 'f1_score', 'recall', 'precision', 'total_correct', 'total_wrong']].rename(columns={'columns': 'Model(s)',
+                                                            'f1_score': 'F1 Score',
+                                                            'recall': 'Recall', 'precision': 'Precision',
+                                                            'total_correct': 'Total Correct',
+                                                            'total_wrong': 'Total Incorrect'}).to_csv("final_models_table.csv", index=False)
+```
+
 
 (Put code at bottom - base off table of contents and say for all code (script) - go to the Github page for the project (give link to heart disease))
 
