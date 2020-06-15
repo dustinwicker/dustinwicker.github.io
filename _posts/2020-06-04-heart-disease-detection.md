@@ -1324,9 +1324,11 @@ top_model_results = pd.DataFrame(columns=['model_type', 'solver', 'best_model_pa
                                           'model_params_grid_search'])
 ```
 
-Copy of patient DataFrame for regression modeling
+Copy of patient DataFrame for modeling and save target variable for later use
 ```python
 model = hungarian.copy()
+# Save target variable for use with pickle files
+model['num'].to_pickle("hungarian_target_variable.pkl")
 ```
 
 Create unique set of variables
@@ -2141,6 +2143,13 @@ try:
 except NameError:
     with open('all_model_results.pkl', 'rb') as all_model_results_pkl:
         all_model_results = pickle.load(all_model_results_pkl)
+
+# Check if target variable is defined as y - if not, load from pickle file
+try:
+    y
+except NameError:
+    with open('hungarian_target_variable.pkl', 'rb') as hungarian_target_variable_pkl:
+        y = pickle.load(hungarian_target_variable_pkl)
 ```
 
 # e
