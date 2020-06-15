@@ -90,7 +90,8 @@ After exploring our data to obtain a greater understanding of it and using that 
    * Cross-validation
    * Feature importance techniques
    
-## Model Visualization, Comparison, and Selection  
+## Model Visualization, Comparison, and Selection [<sub><sup>View code</sup></sub>](#e)
+* The best model run was retrieved from each algorithm based 
 * ROC Curves were built based on each model's predicted probabilities to visually compare model performance at various cut-off values.  
 Below the four models which give predicted probabilities (Support Vector Machines do not give predicted probabilities, only class membership) are plotted, and each plot contains seven ROC curves - one for each unique sets of variables. The most amount of variation can be seen in the Random Forest Classifier models, and the least amount in the Logistic Regression models due to the fact variables had to be statistically signifcant to be included in the model.
 
@@ -124,8 +125,8 @@ Below the four models which give predicted probabilities (Support Vector Machine
 The next step was visualizing the results of the best model in an easy to understand way. 
 
 
- ## Model Usefulness  
- The final step, and argubably most critical one, is explaining how the results could be utilized in a medical facility setting to benefit medical practitioners and their patients.
+## Model Usefulness  
+The final step, and argubably most critical one, is explaining how the results could be utilized in a medical facility setting to benefit medical practitioners and their patients.
 * The model could be implemented, along with the patient's formal checkups and examinations, to assist medical practitioners in correctly diagnosing heart disease in their patients.  
 * It would allow practitioners to get an in-depth understanding of which factors contribute to heart disease, and set up a prehabilitation routine for their patients that would help decrease those factors (such as helping the patient establish a diet and exercise regimen to decrease their serum cholesterol). This would provide patients a path towards a clean bill of health, and prevent possible heart disease in the future.
 
@@ -1915,6 +1916,234 @@ for index, (vars_to_drop, cat_vars_to_model) in enumerate(zip(variables_to_drop_
 top_model_results['model_type'] = top_model_results['model_type'].fillna(value='knn')
 ```
 
+Gradient Boosting
+```python
+# Unique variable combination runs
+for index, (vars_to_drop, cat_vars_to_model) in enumerate(zip(variables_to_drop_list,
+                                                              categorical_variables_for_modeling_list), start=1):
+    print(f"Model run: {index}")
+    # Create copy of hungarian for non-regression modeling
+    model = hungarian.copy()
+    # Drop columns
+    model = model.drop(columns=vars_to_drop)
+    # Dummy variable categorical variables
+    model = pd.get_dummies(data=model, columns=cat_vars_to_model, drop_first=False)
+    # Create target variable
+    y = model['num']
+    # Create feature variables
+    x = model.drop(columns='num')
+
+    # Obtain list of all feature variables
+    x_all = list(x)
+    model_search_gbm = []
+
+    while True:
+        print(x.shape)
+        print('------')
+        print("\n")
+        # Baseline model
+        gbm_baseline = GradientBoostingClassifier()
+        # Cross-validate
+        cross_val_score_gbm = cross_val_score(gbm_baseline, x, y, cv=cv)
+
+        # Begin parameter tuning for GBM
+        # Set initial values (will be tuned later)
+        min_samples_split = 3
+        min_samples_leaf = 20
+        max_depth = 5
+        max_features = 'sqrt'
+        subsample = 0.8
+        learning_rate = 0.1
+        # Set param_grid to tune n_estimators
+        param_grid = {'n_estimators': np.arange(20,81,10)}
+
+        # Tune n_estimators
+        gbm_one = GradientBoostingClassifier(learning_rate= learning_rate, min_samples_split= min_samples_split,
+                                             min_samples_leaf= min_samples_leaf, max_depth= max_depth,
+                                             max_features= max_features, subsample= subsample)
+        grid_search = GridSearchCV(gbm_one, param_grid, cv=cv) # , scoring='recall'
+        grid_search.fit(x, y)
+        # Obain n_estimators from grid search
+        n_estimators_best_param_grid_search_one = grid_search.best_params_['n_estimators']
+
+        # Tune tree-specific parameters
+        param_grid2 = {'max_depth': np.arange(3,20,2), 'min_samples_split': np.arange(10,200,10)}
+        # Tune max_depth and min_samples_split
+        gbm_two = GradientBoostingClassifier(learning_rate= learning_rate, max_features= max_features,
+                                             subsample= subsample, n_estimators=n_estimators_best_param_grid_search_one)
+        grid_search = GridSearchCV(gbm_two, param_grid2, cv=cv) # , scoring='recall'
+        grid_search.fit(x, y)
+        # Obain max_depth and min_samples_split from grid search
+        max_depth_best_param_grid_search_two = grid_search.best_params_['max_depth']
+        min_samples_split_best_param_grid_search_two = grid_search.best_params_['min_samples_split']
+
+        # Tune min_samples_leaf
+        param_grid3 = {'min_samples_leaf': np.arange(1,15,1)}
+        gbm_three = GradientBoostingClassifier(learning_rate= learning_rate, max_features= max_features,
+                                             subsample= subsample, n_estimators=n_estimators_best_param_grid_search_one,
+                                               max_depth= max_depth_best_param_grid_search_two,
+                                               min_samples_split= min_samples_split_best_param_grid_search_two)
+        grid_search = GridSearchCV(gbm_three, param_grid3, cv=cv) # , scoring='recall'
+        grid_search.fit(x, y)
+        # Obain min_samples_leaf from grid search
+        min_samples_leaf_best_param_grid_search_three = grid_search.best_params_['min_samples_leaf']
+
+        # Tune max_features
+        param_grid4 = {'max_features': np.arange(2,20,1)}
+        gbm_four = GradientBoostingClassifier(learning_rate= learning_rate, subsample= subsample,
+                                              n_estimators=n_estimators_best_param_grid_search_one,
+                                              max_depth= max_depth_best_param_grid_search_two,
+                                              min_samples_split= min_samples_split_best_param_grid_search_two,
+                                              min_samples_leaf= min_samples_leaf_best_param_grid_search_three)
+        grid_search = GridSearchCV(gbm_four, param_grid4, cv=cv) # , scoring='recall'
+        grid_search.fit(x, y)
+        # Obain max_features from grid search
+        max_features_best_param_grid_search_four = grid_search.best_params_['max_features']
+
+        # Tune subsample
+        param_grid5 = {'subsample': np.arange(0.6,1,0.05)}
+        gbm_five = GradientBoostingClassifier(learning_rate= learning_rate,
+                                              n_estimators=n_estimators_best_param_grid_search_one,
+                                              max_depth=max_depth_best_param_grid_search_two,
+                                              min_samples_split=min_samples_split_best_param_grid_search_two,
+                                              min_samples_leaf=min_samples_leaf_best_param_grid_search_three,
+                                              max_features=max_features_best_param_grid_search_four)
+        grid_search = GridSearchCV(gbm_five, param_grid5, cv=cv) # , scoring='recall'
+        grid_search.fit(x, y)
+        # Obtain subsample from grid search
+        subsample_best_param_grid_search_five = grid_search.best_params_['subsample']
+
+        # Tune learning rate and increase n_estimators proportionally
+        param_grid_list = [[learning_rate, n_estimators_best_param_grid_search_one],
+                           [learning_rate/2, n_estimators_best_param_grid_search_one*2],
+                           [learning_rate/5, n_estimators_best_param_grid_search_one*5],
+                           [learning_rate/10, n_estimators_best_param_grid_search_one*10],
+                           [learning_rate/20, n_estimators_best_param_grid_search_one*20],
+                           [learning_rate/30, n_estimators_best_param_grid_search_one*30],
+                           [learning_rate/40, n_estimators_best_param_grid_search_one*40],
+                           [learning_rate/50, n_estimators_best_param_grid_search_one*50]]
+        # Append l_rate, n_ests, and cross_val_score mean
+        cross_val_score_gbm_six_means = []
+        for l_rate, n_ests in param_grid_list:
+            gbm_six = GradientBoostingClassifier(learning_rate=l_rate, n_estimators=n_ests,
+                                                 max_depth=max_depth_best_param_grid_search_two,
+                                                 min_samples_split=min_samples_split_best_param_grid_search_two,
+                                                 min_samples_leaf=min_samples_leaf_best_param_grid_search_three,
+                                                 max_features=max_features_best_param_grid_search_four,
+                                                 subsample=subsample_best_param_grid_search_five)
+            cross_val_score_gbm_six = cross_val_score(gbm_six, x, y, cv=cv)
+            cross_val_score_gbm_six_means.append([l_rate, n_ests, cross_val_score_gbm_six.mean()])
+            # Retrieve best values for learning_rate and n_estimators based on max value of cross_val_score_gbm_six.mean()
+            learning_rate_n_estimators_best_param_grid_list = list(filter(lambda x: x[2] == max(map(lambda x: x[2],
+                                                                cross_val_score_gbm_six_means)), cross_val_score_gbm_six_means))[0]
+
+        gbm_final = GradientBoostingClassifier(learning_rate=learning_rate_n_estimators_best_param_grid_list[0],
+                                               n_estimators=learning_rate_n_estimators_best_param_grid_list[1],
+                                               max_depth=max_depth_best_param_grid_search_two,
+                                               min_samples_split=min_samples_split_best_param_grid_search_two,
+                                               min_samples_leaf=min_samples_leaf_best_param_grid_search_three,
+                                               max_features=max_features_best_param_grid_search_four,
+                                               subsample=subsample_best_param_grid_search_five)
+        gbm_predict = cross_val_predict(gbm_final, x, y, cv=5)
+        conf_matr = confusion_matrix(y_true=y, y_pred=gbm_predict)
+        model_search_gbm.append([gbm_final.get_params(), conf_matr[0][0], conf_matr[0][1],
+                                 conf_matr[1][0], conf_matr[1][1], set(x_all).difference(x)])
+        # Obtain feature importances
+        gradient_boosting_feature_importance = pd.DataFrame(data=[list(x),
+            gbm_final.fit(x, y).feature_importances_.tolist()]).T.rename(columns={0:'variable',
+            1:'importance'}).sort_values(by='importance', ascending=False)
+        # Remove 'worst' variables one-by-one
+        print(gradient_boosting_feature_importance.loc[gradient_boosting_feature_importance.importance < 0.10])
+        if len(gradient_boosting_feature_importance.loc[gradient_boosting_feature_importance.importance < 0.01]) > 0:
+            for i in range(1, len(gradient_boosting_feature_importance.loc[gradient_boosting_feature_importance.importance < 0.01]) + 1):
+                print(f"'Worst' variable being examined: "
+                      f"{gradient_boosting_feature_importance.loc[gradient_boosting_feature_importance.importance < 0.01].variable.values[-i]}")
+                bottom_variable = gradient_boosting_feature_importance.loc[gradient_boosting_feature_importance.importance < 0.01].variable.values[-i]
+                # Add related one-hot encoded variables if variable is categorical
+                if bottom_variable.split('_')[-1] in sorted([x for x in list(set([x.split('_')[-1] for x in list(x)])) if len(x) == 1]):
+                    bottom_variable = bottom_variable.split('_')[0]
+                    bottom_variable = [col for col in list(x) if bottom_variable in col]
+                compare_counter = 0
+                for var in bottom_variable:
+                    if var in gradient_boosting_feature_importance.loc[gradient_boosting_feature_importance.importance<0.01].variable.values:
+                        compare_counter += 1
+                if len(bottom_variable) == compare_counter:
+                    print(f"Following variable(s) will be dropped from x {bottom_variable}")
+                    x = x.drop(columns=bottom_variable)
+                    break
+                else:
+                    print("Next 'worst' variable will be examined for dropping.")
+                    continue
+            # else:
+            #     x = x.drop(columns=bottom_variable)
+            else:
+                break
+    # Create DataFrame of random forest classifer results
+    model_search_gbm = pd.DataFrame(model_search_gbm, columns=['model_params_grid_search',
+                                                 'true_negatives', 'false_positives',
+                                                 'false_negatives', 'true_positives', 'variables_not_used'])
+    # Create recall and precision columns
+    model_search_gbm['recall'] = model_search_gbm.true_positives/(model_search_gbm.true_positives + model_search_gbm.false_negatives)
+    model_search_gbm['precision'] = model_search_gbm.true_positives/(model_search_gbm.true_positives + model_search_gbm.false_positives)
+    model_search_gbm['f1_score'] = 2 * (model_search_gbm.precision * model_search_gbm.recall) / (model_search_gbm.precision + model_search_gbm.recall)
+    # Sort DataFrame
+    model_search_gbm = model_search_gbm.sort_values(by=['f1_score'], ascending=False)
+    print(model_search_gbm)
+
+    # Choose top model from gbm model search
+    if len(model_search_gbm.loc[model_search_gbm.f1_score==model_search_gbm.f1_score.max()]) > 1:
+        top_model_result_gbm = model_search_gbm.loc[(model_search_gbm.f1_score == model_search_gbm.f1_score.max()) &
+            (model_search_gbm['variables_not_used'].apply(len) == max(map(lambda x: len(x[list(model_search_gbm).index('variables_not_used')]),
+             model_search_gbm.loc[model_search_gbm.f1_score==model_search_gbm.f1_score.max()].values)))]
+    else:
+        top_model_result_gbm = model_search_gbm.loc[model_search_gbm.f1_score == model_search_gbm.f1_score.max()]
+    top_model_results = top_model_results.append(other=top_model_result_gbm, sort=False)
+    print(f"Top gbm model: \n {top_model_result_gbm}")
+
+    # Append top_model_result_rfc results to all_model_results DataFrame
+    # Re-create feature variables
+    x = model.drop(columns='num')
+    gbm_predict_proba = cross_val_predict(GradientBoostingClassifier(learning_rate=top_model_result_gbm["model_params_grid_search"].values[0]["learning_rate"],
+                                               n_estimators=top_model_result_gbm["model_params_grid_search"].values[0]["n_estimators"],
+                                               max_depth=top_model_result_gbm["model_params_grid_search"].values[0]["max_depth"],
+                                               min_samples_split=top_model_result_gbm["model_params_grid_search"].values[0]["min_samples_split"],
+                                               min_samples_leaf=top_model_result_gbm["model_params_grid_search"].values[0]["min_samples_leaf"],
+                                               max_features=top_model_result_gbm["model_params_grid_search"].values[0]["max_features"],
+                                               subsample=top_model_result_gbm["model_params_grid_search"].values[0]["subsample"]),
+                     x[[x for x in list(x) if x not in list(top_model_result_gbm['variables_not_used'].values[0])]], y, cv=5, method='predict_proba')
+    all_model_results['gbm_'+inflect.engine().number_to_words(index)+'_pred_zero'] = gbm_predict_proba[:,0]
+    all_model_results['gbm_'+inflect.engine().number_to_words(index)+'_pred_one'] = gbm_predict_proba[:,1]
+
+# Fill in model_type columns
+top_model_results['model_type'] = top_model_results['model_type'].fillna(value='gbm')
+```
+
+Save created DataFrames
+```python
+# Save top_model_results to csv
+top_model_results.to_pickle('top_model_results.pkl')
+# Save all_model_results to csv
+all_model_results.to_pickle('all_model_results.pkl')
+```
+
+Load in model result DataFrames if needed
+```python
+# Check if DataFrame is already loaded in - if not, load from pickle file
+try:
+    top_model_results
+except NameError:
+    with open('top_model_results.pkl', 'rb') as top_model_results_pkl:
+        top_model_results = pickle.load(top_model_results_pkl)
+
+# Check if DataFrame is already loaded in - if not, load from pickle file
+try:
+    all_model_results
+except NameError:
+    with open('all_model_results.pkl', 'rb') as all_model_results_pkl:
+        all_model_results = pickle.load(all_model_results_pkl)
+```
+
+# e
 
 (Put code at bottom - base off table of contents and say for all code (script) - go to the Github page for the project (give link to heart disease))
 
