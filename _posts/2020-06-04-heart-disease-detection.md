@@ -2467,7 +2467,29 @@ plt.show()
 ```
 
 Create Heart
-
+```python
+plt.figure()
+x = np.linspace(-2, 2, 1500)
+y1 = np.lib.scimath.sqrt(1-(abs(x)-1)**2)
+y2 = -3 * np.lib.scimath.sqrt(1-(abs(x)/2)**0.5)
+plt.fill_between(x, y1, where = x>.7, color=colors['Incorrectly Predicted'])
+plt.fill_between(x, y1, where = x<=.7, color=colors['Correctly Predicted'])
+plt.fill_between(x, y2, color=colors['Correctly Predicted'])
+plt.xlim([-2.5, 3.7])
+correctly_predicted_patch = mpatches.Patch(color=colors['Correctly Predicted'],
+                           label="".join([key for key, value in colors.items() if value == colors['Correctly Predicted']]))
+incorrectly_predicted_patch = mpatches.Patch(color=colors['Incorrectly Predicted'],
+                           label="".join([key for key, value in colors.items() if value == colors['Incorrectly Predicted']]))
+plt.legend(title="Patient Outcomes", handles=[correctly_predicted_patch, incorrectly_predicted_patch],
+           prop={'weight':'bold', 'size': 15}, title_fontsize=18)
+# Add text if wanted
+# plt.text(0, -1.2, "{:.1%}".format(model_search_all.loc[model_search_all.cols==('svc_four',)]
+#         ['total_correct'].values[0]/(model_search_all.loc[model_search_all.cols==('svc_four',)]['total_correct'].values[0]
+#         +model_search_all.loc[model_search_all.cols==('svc_four',)]['total_wrong'].values[0])), fontsize=50, fontweight='bold',
+#            color='black', horizontalalignment='center')
+plt.axis('off')
+plt.show()
+```
 
 (Put code at bottom - base off table of contents and say for all code (script) - go to the Github page for the project (give link to heart disease))
 
