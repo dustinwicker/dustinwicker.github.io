@@ -24,7 +24,7 @@ A summary of this models results can be seen directly below, and a full summary 
 Code snippets will be provided for each section outlined in the [Project Overview](#project-overview) at the bottom of this page. If you would like to view the entire code script, please visit this [link](https://github.com/dustinwicker/Heart-Disease-Detection/blob/master/heart_disease_code.py).
  
 # Project Overview  
-## i.    [Data Ingestion](#data-ingestion-view-code)
+## i.    [Data Ingestion](#data-ingestionview-code)
 ## ii.   [Data Cleaning](#data-cleaningview-code)
 ## iii.  [Exploratory Data Analysis](#exploratory-data-analysis)
 ## iv.  [Model Building](#model-building)
@@ -32,7 +32,7 @@ Code snippets will be provided for each section outlined in the [Project Overvie
 ## vi.  [Visualize Best Model](#visualize-best-model)
 ## vii. [Model Usefulness](#model-usefulness)
   
-## Data Ingestion [<sub><sup>View code</sup></sub>](#a)  
+## Data Ingestion     [<sub><sup>View code</sup></sub>](#a)  
 The first step was obtaining the [data](https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/hungarian.data) and [data dictionary](https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/heart-disease.names) from the UCI Machine Learning Repository. The files were saved in an appropriate location on my machine and then read into Python.
 
 ## Data Cleaning     [<sub><sup>View code</sup></sub>](#b)
