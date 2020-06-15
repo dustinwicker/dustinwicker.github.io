@@ -3,7 +3,7 @@ layout: post
 title: "Predicting the Presence of Heart Disease in Patients"
 author: "Dustin Wicker"
 categories: journal
-tags: [healthcare,data science,data analytics,data analysis,machine learning,sample]
+tags: [healthcare,data science,data analysis,machine learning]
 image: heart.png
 ---
 
@@ -25,7 +25,7 @@ Code snippets will be provided for each section outlined in the [Project Overvie
  
 # Project Overview  
 ## i.    [Data Ingestion](#data-ingestion)
-## ii.   [Data Cleaning](#data-cleaning)
+## ii.   [Data Cleaning](#data-cleaning-[<sub><sup>View code</sup></sub>](#b))
 ## iii.  [Exploratory Data Analysis](#exploratory-data-analysis)
 ## iv.  [Model Building](#model-building)
 ## v.   [Model Visualization, Comparison, and Selection](#model-visualization-comparison-and-selection)
