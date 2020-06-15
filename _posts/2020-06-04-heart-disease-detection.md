@@ -25,7 +25,7 @@ Code snippets will be provided for each section outlined in the [Project Overvie
  
 # Project Overview  
 ## i.    [Data Ingestion](#data-ingestion)
-## ii.   [Data Cleaning](#data-cleaning   sub  sup View code  sup   sub   #b  )
+## ii.   [Data Cleaning](#data-cleaning-%5B<sub><sup>View code<%2Fsup><%2Fsub>%5D%28%23b%29 
 ## iii.  [Exploratory Data Analysis](#exploratory-data-analysis)
 ## iv.  [Model Building](#model-building)
 ## v.   [Model Visualization, Comparison, and Selection](#model-visualization-comparison-and-selection)
@@ -33,7 +33,7 @@ Code snippets will be provided for each section outlined in the [Project Overvie
 ## vii. [Model Usefulness](#model-usefulness)
   
 ## Data Ingestion  
-[<sub><sup>View code</sup></sub>](#a)
+[<sub><sup>View code</sup></sub>](#a)  
 The first step was obtaining the [data](https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/hungarian.data) and [data dictionary](https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/heart-disease.names) from the UCI Machine Learning Repository. The files were saved in an appropriate location on my machine and then read into Python.
 
 ## Data Cleaning [<sub><sup>View code</sup></sub>](#b) 
