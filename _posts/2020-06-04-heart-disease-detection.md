@@ -91,7 +91,6 @@ After exploring our data to obtain a greater understanding of it and using that 
    * Feature importance techniques
    
 ## Model Visualization, Comparison, and Selection [<sub><sup>View code</sup></sub>](#e)
-* The best model run was retrieved from each algorithm based 
 * ROC Curves were built based on each model's predicted probabilities to visually compare model performance at various cut-off values.  
 Below the four models which give predicted probabilities (Support Vector Machines do not give predicted probabilities, only class membership) are plotted, and each plot contains seven ROC curves - one for each unique sets of variables. The most amount of variation can be seen in the Random Forest Classifier models, and the least amount in the Logistic Regression models due to the fact variables had to be statistically signifcant to be included in the model.
 
@@ -122,9 +121,16 @@ Below the four models which give predicted probabilities (Support Vector Machine
 | Logistic Regression Three                                                                                                                                  | 0.765    | 0.736  | 0.796     | 244           | 48              |
 
 ## Visualize Best Model
-The next step was visualizing the results of the best model in an easy to understand way. 
+The next step was visualizing the results of the best model in an easy to understand way. The first visual below - a confusion matrix - is a fundamental assessement tool for classification problems. It is a crosstabulation of the acutal and predicted classes and _quantifies the confusion_ of the classifier. Here it details the prediction results of the best model, the Support Vector Machine Classification Model #4.
+* The top left corner of the confusion matrix indicates the 170 patients which had no presence of heart disease (i.e., their actual value) and were predicted as such (i.e., their predicted value). These are labeled as true negatives.
+* The top right corner, designated as false positives, denotes the 16 patients which had no presence of heart disease but were deemed to have heart disease by the model.
+* The bottom left corner, known as false negatives, represents the 24 patients who actually had the presence of heart disease but were predicted by the model to not have heart disease.
+* The bottom right corner shows the 82 patients who had a presence of heart disease and were correctly predicted by the model to have that presence. These patients are signified as true positives.
+When looking at a confusion matrix, we want the true negative and true positive values to be high and the false positive and false negative values to be low. This indicates a highly accurate model, which is exactly what we have here.
 
 ![confusion_matrix_best_model](/assets/img/confusion_matrix_svc.png "Confusion Matrix of SVC Model Four")
+
+The following visualziation shows the same results as above, just now in a more concise format. This stacked bar chart condenses our results into correctly predicted and incorrectly predicted. As expected, the true negatives and true positives make up our correctly predicted bar while the false positives and false negatives make up our incorrectly predicted bar (quotation marks?). Here it is easy to see how successful to the model is by how much larger the correctly predicted bar is than the incorrectly predicted bar. The model was able to accurately predicted 252 patients while only missing 40 patients.
 
 ![stacked_bar_chart_best_model](/assets/img/stacked_bar_chart_confusion_matrix_svc.png "Stacked Bar Chart of SVC Model Four")
 
