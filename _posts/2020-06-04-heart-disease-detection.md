@@ -120,7 +120,7 @@ Below the four models which give predicted probabilities (Support Vector Machine
 | Random Forest Classifer Six                                                                                                                                | 0.768    | 0.717  | 0.826     | 246           | 46              |
 | Logistic Regression Three                                                                                                                                  | 0.765    | 0.736  | 0.796     | 244           | 48              |
 
-## Visualize Best Model
+## Visualize Best Model [<sub><sup>View code</sup></sub>](#f)
 The next step was visualizing the results of the best model in an easy to understand way. The first visual below - a confusion matrix - is a fundamental assessement tool for classification problems. It is a crosstabulation of the acutal and predicted classes and _quantifies the confusion_ of the classifier. Here it details the prediction results of the best model, the Support Vector Machine Classification Model #4.
 * The top left corner of the confusion matrix indicates the 170 patients which had no presence of heart disease (i.e., their actual value) and were predicted as such (i.e., their predicted value). These are labeled as true negatives.
 * The top right corner, designated as false positives, denotes the 16 patients which had no presence of heart disease but were deemed to have heart disease by the model.
@@ -2315,6 +2315,158 @@ model_search_all[['columns', 'f1_score', 'recall', 'precision', 'total_correct',
                                                             'total_correct': 'Total Correct',
                                                             'total_wrong': 'Total Incorrect'}).to_csv("final_models_table.csv", index=False)
 ```
+
+## f
+
+Confusion Matrix of Best Model
+```python
+conf_matrix = [model_search_all.loc[model_search_all.cols==('svc_four',)][["true_negatives",
+                                                                           "false_positives"]].values[0].tolist(),
+               model_search_all.loc[model_search_all.cols==('svc_four',)][["false_negatives",
+                                                                           "true_positives"]].values[0].tolist()]
+group_names = ['Correctly Predicted To\nNot Have Heart Disease\n', 'Incorrectly Predicted To\nHave Heart Disease\n',
+               'Incorrectly Predicted To\nNot Have Heart Disease\n', 'Correctly Predicted To\nHave Heart Disease\n']
+group_counts = conf_matrix[0] + conf_matrix[1]
+labels = [f"{v1}\n{v2}" for v1, v2 in zip(group_names, group_counts)]
+labels = np.asarray(labels).reshape(2, 2)
+tick_labels = ['No Presence of Heart Disease', 'Presence of Heart Disease']
+# Set figsize to size of second monitor
+plt.rcParams['figure.figsize'] = [19.2, 9.99]
+fig, axes = plt.subplots(nrows=1, ncols=1)
+fig.subplots_adjust(left=0.21, right=0.81, top=0.90, bottom=0.12, hspace=0.7, wspace = 0.25)
+sns.heatmap(conf_matrix, annot=labels, annot_kws={"size": 24, "weight": "bold"}, fmt='', xticklabels=tick_labels,
+            yticklabels=tick_labels, cbar=False, cmap=['#b2abd2', '#e66101'],
+            center=model_search_all.loc[model_search_all.cols==('svc_four',)][["false_positives", "false_negatives"]].values.max())
+plt.xticks(weight="bold", size=16)
+plt.yticks(rotation=90, va='center', weight="bold", size=16)
+plt.ylabel('True Value of Patient', weight="bold", size=20, labelpad=30)
+plt.xlabel('Predicted Value of Patient', weight="bold", size=20, labelpad=30)
+plt.title('Prediction Results for Support Vector Machine Classifier Model #4', pad = 15, fontdict={"weight": "bold", "size": 26})
+plt.show()
+```
+
+Stacked Bar Chart of Best Model
+```python
+# Build stacked bar chart
+# Create bar_chart of confusion matrix results
+bar_chart = model_search_all.loc[model_search_all.cols==('svc_four',)][["true_negatives", "false_positives",
+                                                                        "false_negatives", "true_positives"]]
+
+# Stacked bar chart of correctly predicted and incorrectly predicted
+stacked_bar_chart = pd.DataFrame(columns=['Correctly Predicted', 'Incorrectly Predicted'])
+# Obtain totals of correctly predicted and incorrectly predicted patients
+stacked_bar_chart["Correctly Predicted"] = bar_chart.filter(regex='true').sum(axis=1)
+stacked_bar_chart["Incorrectly Predicted"] = bar_chart.filter(regex='false').sum(axis=1)
+
+# Unpivot DataFrame from wide to long format
+stacked_bar_chart = pd.melt(stacked_bar_chart).sort_values(by='value', ascending=False)
+
+# # Obtain minimums of correctly predicted and incorrectly predicted patients
+stacked_bar_chart["value_two"] = [bar_chart.filter(regex='true').min(axis=1).values[0],
+                                        bar_chart.filter(regex='false').min(axis=1).values[0]]
+
+# Rename columns of long format DataFrame accordingly
+stacked_bar_chart = stacked_bar_chart.rename(columns={'variable': 'Patient Outcomes', 'value': 'total',
+                                                      'value_two': 'minimum'})
+
+# Define hue and label
+stacked_bar_chart['hue_label'] = list(np.where(stacked_bar_chart.total >
+                      model_search_all.loc[model_search_all.cols==('svc_four',)][["false_positives",
+                                            "false_negatives"]].values.sum(), 'Correctly Predicted', 'Incorrectly Predicted'))
+# Set colors
+colors = {"Correctly Predicted": "#e66101", "Incorrectly Predicted": "#b2abd2"}
+# Set figsize to size of second monitor
+plt.rcParams['figure.figsize'] = [19.2,9.99]
+fig, axes = plt.subplots(nrows=1, ncols=1)
+fig.subplots_adjust(left=0.19, right=0.83, top=0.90, bottom=0.12, hspace=0.7, wspace = 0.25)
+sns_stacked_bar_plot = sns.barplot(x=stacked_bar_chart['Patient Outcomes'], y=stacked_bar_chart.total,
+          hue=stacked_bar_chart['hue_label'], palette=colors, dodge=False)
+sns_stacked_bar_plot = sns.barplot(x=stacked_bar_chart['Patient Outcomes'], y=stacked_bar_chart.minimum,
+          hue=None, palette=colors, dodge=False)
+for p in sns_stacked_bar_plot.patches:
+    print(p._height)
+    if p._height in stacked_bar_chart.total.values:
+        sns_stacked_bar_plot.annotate(int(p._height -
+                                      stacked_bar_chart.loc[stacked_bar_chart.total==p._height, 'minimum'].values[0]), (p.get_x() + p.get_width() / 2., (p._height -
+                                      stacked_bar_chart.loc[stacked_bar_chart.total==p._height, 'minimum'].values[0])/2 +
+                                      stacked_bar_chart.loc[stacked_bar_chart.total==p._height, 'minimum'].values[0]),
+                                      ha='center', va='center', weight='bold', fontsize=18)
+        # Add totals above bars
+        sns_stacked_bar_plot.annotate(int(p._height), (p.get_x() + p.get_width() / 2., p.get_height()), ha='center',
+                       va='center', xytext=(0, 10), textcoords='offset points', weight='bold', fontsize=20)
+    elif p._height in stacked_bar_chart.minimum.values:
+        print(p._height, p._height/2)
+        sns_stacked_bar_plot.annotate(int(p._height), (p.get_x() + p.get_width() / 2., p._height/2),
+                                      ha='center', va='center', weight='bold', fontsize=18)
+# Set edge color to black for bars
+for patch in sns_stacked_bar_plot.patches:
+    patch.set_edgecolor('black')
+plt.xticks(weight="bold", size=16)
+# plt.yticks(weight="bold", size=16)
+plt.yticks([])
+plt.xlabel('Patient Outcomes', weight="bold", size=18, labelpad=20)
+plt.ylabel('')
+plt.title('Prediction Results for Support Vector Machine Classifier Model #4', fontdict={"weight": "bold", "size": 24},
+          pad=10.0)
+plt.legend(title="Legend", prop={'weight':'bold', 'size': 15})
+# Add 10 onto y to account for pad
+plt.text(x=0.7, y=(stacked_bar_chart.total.max() - stacked_bar_chart.total.min())/2 + stacked_bar_chart.total.min()+10,
+         s = "Overall Accuracy: " + "{:.1%}".format(model_search_all.loc[model_search_all.cols==('svc_four',)]
+        ['total_correct'].values[0]/(model_search_all.loc[model_search_all.cols==('svc_four',)]['total_correct'].values[0]
+                                     +model_search_all.loc[model_search_all.cols==('svc_four',)]['total_wrong'].values[0])),
+         fontdict={"weight": "bold", "size": 22}, bbox=dict(facecolor='none', edgecolor='black', pad=10.0, linewidth=3))
+plt.show()
+```
+
+Bar Chart of Best Model
+```python
+# Bar chart of confusion matrix results
+bar_chart = model_search_all.loc[model_search_all.cols==('svc_four',)][["true_negatives", "false_positives",
+                                                                        "false_negatives", "true_positives"]]
+
+# Rename column names accordingly
+# for col in bar_chart.columns:
+#     bar_chart = bar_chart.rename(columns={col: col.replace("_", " ").title()})
+bar_chart = bar_chart.rename(columns={'true_negatives': 'Correctly Predicted To\nNot Have Heart Disease',
+                          'false_positives': 'Incorrectly Predicted To\nHave Heart Disease',
+                          'false_negatives': 'Incorrectly Predicted To\nNot Have Heart Disease',
+                          'true_positives': 'Correctly Predicted To\nHave Heart Disease'})
+
+# Unpivot DataFrame from wide to long format
+bar_chart = pd.melt(bar_chart).sort_values(by='value', ascending=False)
+
+# Rename columns of long format DataFrame accordingly
+bar_chart = bar_chart.rename(columns={'variable': 'Patient Outcomes'})
+
+# Define hue and label
+bar_chart['hue_label'] = list(np.where(bar_chart.value >
+                      model_search_all.loc[model_search_all.cols==('svc_four',)][["false_positives",
+                                            "false_negatives"]].values.max(), 'Correctly Predicted', 'Incorrectly Predicted'))
+# Set colors
+colors = {"Correctly Predicted": "#e66101", "Incorrectly Predicted": "#b2abd2"}
+# Set figsize to size of second monitor
+plt.rcParams['figure.figsize'] = [19.2,9.99]
+fig, axes = plt.subplots(nrows=1, ncols=1)
+fig.subplots_adjust(left=0.19, right=0.83, top=0.90, bottom=0.12, hspace=0.7, wspace = 0.25)
+sns_bar_plot = sns.barplot(x=bar_chart['Patient Outcomes'], y=bar_chart.value,
+          hue=bar_chart['hue_label'], palette=colors, dodge=False)
+# Set edge color to black for bars
+for patch in sns_bar_plot.patches:
+    patch.set_edgecolor('black')
+plt.xticks(weight="bold", size=16)
+plt.yticks(weight="bold", size=16)
+plt.xlabel('Patient Outcomes', weight="bold", size=18, labelpad=20)
+plt.ylabel('')
+plt.title('Prediction Results for Support Vector Machine Classifier Model #4', fontdict={"weight": "bold", "size": 24})
+plt.legend(title="Legend", prop={'weight':'bold', 'size': 15})
+plt.text(x=1.05, y=140, s = "Overall Accuracy: " + "{:.1%}".format(model_search_all.loc[model_search_all.cols==('svc_four',)]
+        ['total_correct'].values[0]/(model_search_all.loc[model_search_all.cols==('svc_four',)]['total_correct'].values[0]
+                                     +model_search_all.loc[model_search_all.cols==('svc_four',)]['total_wrong'].values[0])),
+         fontdict={"weight": "bold", "size": 22}, bbox=dict(facecolor='none', edgecolor='black', pad=10.0, linewidth=3))
+plt.show()
+```
+
+Create Heart
 
 
 (Put code at bottom - base off table of contents and say for all code (script) - go to the Github page for the project (give link to heart disease))
