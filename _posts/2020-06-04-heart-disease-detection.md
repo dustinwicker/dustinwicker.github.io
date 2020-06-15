@@ -1595,7 +1595,325 @@ for index, (vars_to_drop, cat_vars_to_model) in enumerate(zip(variables_to_drop_
 # Fill in model_type columns
 top_model_results['model_type'] = top_model_results['model_type'].fillna(value='logit')
 ```
+Random Forest
+```python
+# Unique variable combination runs
+for index, (vars_to_drop, cat_vars_to_model) in enumerate(zip(variables_to_drop_list,
+                                                              categorical_variables_for_modeling_list), start=1):
+    print(f"Model run: {index}")
+    # Create copy of hungarian for non-regression modeling
+    model = hungarian.copy()
+    # Drop columns
+    model = model.drop(columns=vars_to_drop)
+    # Dummy variable categorical variables
+    model = pd.get_dummies(data=model, columns=cat_vars_to_model, drop_first=False)
+    # Create target variable
+    y = model['num']
+    # Create feature variables
+    x = model.drop(columns='num')
 
+    # Define parameters of Random Forest Classifier
+    random_forest_model = RandomForestClassifier(random_state=1)
+    # Define parameters for grid search
+    param_grid = {'n_estimators': np.arange(10, 111, step=5), 'criterion': ['gini', 'entropy'],
+                  'max_features': np.arange(2, 25, step=3)}
+    cv = ShuffleSplit(n_splits=5, test_size=0.3)
+
+    # Define grid search CV parameters
+    grid_search = GridSearchCV(random_forest_model, param_grid, cv=cv) # , scoring='recall' # warm_start=True
+    # Loop to iterate through least important variables according to random_forest_feature_importance and grid search
+    x_all = list(x)
+    model_search_rfc = []
+    while True:
+        print("--------------------------------")
+        print(len(list(x)))
+        print(print(param_grid['max_features']))
+        print("--------------------------------")
+        # try:
+        grid_search.fit(x, y)
+        print(f'Best parameters for current grid seach: {grid_search.best_params_}')
+        print(f'Best score for current grid seach: {grid_search.best_score_}')
+        # Define parameters of Random Forest Classifier from grid search
+        random_forest_model = RandomForestClassifier(criterion=grid_search.best_params_['criterion'],
+                                                     max_features=grid_search.best_params_['max_features'],
+                                                     n_estimators=grid_search.best_params_['n_estimators'],
+                                                     random_state=1)
+        # Cross-validate and predict using Random Forest Classifer
+        random_forest_predict = cross_val_predict(random_forest_model, x, y, cv=5)
+        print(confusion_matrix(y_true=y, y_pred=random_forest_predict))
+        conf_matr = confusion_matrix(y_true=y, y_pred=random_forest_predict)
+        model_search_rfc.append([grid_search.best_params_, grid_search.best_score_, conf_matr[0][0], conf_matr[0][1],
+                                 conf_matr[1][0], conf_matr[1][1], set(x_all).difference(x)])
+        # Run random forest with parameters from grid search to obtain feature importances
+        random_forest_feature_importance = pd.DataFrame(data=[list(x),
+                    RandomForestClassifier(criterion=grid_search.best_params_['criterion'],
+                     max_features=grid_search.best_params_['max_features'],
+                     n_estimators=grid_search.best_params_['n_estimators'], random_state=1).fit(x,y).feature_importances_.tolist()]).T.rename(columns={0:'variable',
+                     1:'importance'}).sort_values(by='importance', ascending=False)
+        print(random_forest_feature_importance)
+        if len(random_forest_feature_importance.loc[random_forest_feature_importance.importance<0.01]) > 0:
+            for i in range(1, len(random_forest_feature_importance.loc[random_forest_feature_importance.importance<0.01])+1):
+                print(f"'Worst' variable being examined: {random_forest_feature_importance.loc[random_forest_feature_importance.importance<0.01].variable.values[-i]}")
+                bottom_variable = random_forest_feature_importance.loc[random_forest_feature_importance.importance<0.01].variable.values[-i]
+                bottom_variable = bottom_variable.split('_')[0]
+                bottom_variable = [col for col in list(x) if bottom_variable in col]
+                compare_counter = 0
+                for var in bottom_variable:
+                    if var in random_forest_feature_importance.loc[random_forest_feature_importance.importance<0.01].variable.values:
+                        compare_counter += 1
+                if len(bottom_variable) == compare_counter:
+                    print(f"Following variable(s) will be dropped from x {bottom_variable}")
+                    x = x.drop(columns=bottom_variable)
+                    break
+                else:
+                    print("Next 'worst' variable will be examined for dropping.")
+                    continue
+            else:
+                break
+    # Create DataFrame of random forest classifer results
+    model_search_rfc = pd.DataFrame(model_search_rfc, columns=['best_model_params_grid_search', 'best_score_grid_search',
+                                                 'true_negatives', 'false_positives',
+                                                 'false_negatives', 'true_positives', 'variables_not_used'])
+        # Create recall and precision columns
+    model_search_rfc['recall'] = model_search_rfc.true_positives/(model_search_rfc.true_positives + model_search_rfc.false_negatives)
+    model_search_rfc['precision'] = model_search_rfc.true_positives/(model_search_rfc.true_positives + model_search_rfc.false_positives)
+    model_search_rfc['f1_score'] = 2 * (model_search_rfc.precision * model_search_rfc.recall) / (model_search_rfc.precision + model_search_rfc.recall)
+    # Sort DataFrame
+    model_search_rfc = model_search_rfc.sort_values(by=['f1_score'], ascending=False)
+    print(model_search_rfc)
+
+    if len(model_search_rfc.loc[model_search_rfc.f1_score==model_search_rfc.f1_score.max()]) > 1:
+        top_model_result_rfc = model_search_rfc.loc[(model_search_rfc.f1_score==model_search_rfc.f1_score.max()) &
+            (model_search_rfc['variables_not_used'].apply(len) == max(map(lambda x: len(x[list(model_search_rfc).index('variables_not_used')]),
+             model_search_rfc.loc[model_search_rfc.f1_score==model_search_rfc.f1_score.max()].values)))]
+        if len(top_model_result_rfc) > 1:
+            print("Fix multiple best model problem for rfc")
+            break
+    else:
+        top_model_result_rfc = model_search_rfc.loc[model_search_rfc.f1_score==model_search_rfc.f1_score.max()]
+    top_model_results = top_model_results.append(other=top_model_result_rfc, sort=False)
+    print(f"Top rfc model: \n {top_model_result_rfc}")
+
+    # Append top_model_result_rfc results to all_model_results DataFrame
+    # Re-create feature variables
+    x = model.drop(columns='num')
+    rfc_predict_proba = cross_val_predict(RandomForestClassifier(criterion=top_model_result_rfc["best_model_params_grid_search"].values[0]['criterion'],
+                     max_features=top_model_result_rfc["best_model_params_grid_search"].values[0]['max_features'],
+                     n_estimators=top_model_result_rfc["best_model_params_grid_search"].values[0]['n_estimators']),
+                     x[[x for x in list(x) if x not in list(top_model_result_rfc['variables_not_used'].values[0])]], y,
+                                          cv=5, method='predict_proba')
+    all_model_results['rfc_'+inflect.engine().number_to_words(index)+'_pred_zero'] = rfc_predict_proba[:,0]
+    all_model_results['rfc_'+inflect.engine().number_to_words(index)+'_pred_one'] = rfc_predict_proba[:,1]
+
+# Fill in model_type columns
+top_model_results['model_type'] = top_model_results['model_type'].fillna(value='rfc')
+```
+
+Support Vector Machine
+```python
+# Unique variable combination runs
+for index, (vars_to_drop, cat_vars_to_model) in enumerate(zip(variables_to_drop_list,
+                                                              categorical_variables_for_modeling_list), start=1):
+    print(f"Model run: {index}")
+    # Create copy of hungarian for non-regression modeling
+    model = hungarian.copy()
+    # Drop columns
+    model = model.drop(columns=vars_to_drop)
+    # Dummy variable categorical variables
+    model = pd.get_dummies(data=model, columns=cat_vars_to_model, drop_first=False)
+    # Create target variable
+    y = model['num']
+    # Create feature variables
+    x = model.drop(columns='num')
+
+    # Create copy of x for standard scaling
+    x_std = x.copy()
+    # print(list(x_std)[list(x_std).index('sex_0')-1])
+    x_std.loc[:, :list(x_std)[list(x_std).index('sex_0')-1]] = scaler.fit_transform(x_std.loc[:, :list(x_std)[list(x_std).index('sex_0')-1]])
+
+    # Define parameters of SVC
+    svc_model = SVC(kernel='linear')
+    # Recursive feature elimination
+    rfe_svc = pd.DataFrame(data=[list(x_std), RFE(svc_model, n_features_to_select=1).fit(x_std, y).ranking_.tolist()]).T.\
+        rename(columns={0: 'variable', 1: 'rfe_ranking'}).sort_values(by='rfe_ranking').reset_index(drop=True)
+    svc_model = SVC(random_state=1)
+    param_grid = {'kernel': ['rbf', 'sigmoid', 'linear'], 'C': np.arange(0.10, 2.41, step=0.05), 'gamma': ['scale', 'auto']}
+    cv = ShuffleSplit(n_splits=5, test_size=0.3)
+    # Define grid search CV parameters
+    grid_search = GridSearchCV(svc_model, param_grid, cv=cv)
+
+    # Loop through features based on recursive feature elimination evaluation - top to bottom
+    model_search_svc = []
+    svc_variable_list = []
+    for i in range(len(rfe_svc)):
+        if rfe_svc['variable'][i] not in svc_variable_list:
+            svc_variable_list.extend([rfe_svc['variable'][i]])
+            # Add related one-hot encoded variables if variable is categorical
+            if svc_variable_list[-1].split('_')[-1] in sorted([x for x in list(set([x.split('_')[-1] for x in list(x_std)])) if len(x) == 1]):
+                svc_variable_list.extend([var for var in list(x_std) if svc_variable_list[-1].split('_')[0] in var and var != svc_variable_list[-1]])
+            print(svc_variable_list)
+            grid_search.fit(x_std[svc_variable_list], y)
+            print(f'Best parameters for current grid seach: {grid_search.best_params_}')
+            print(f'Best score for current grid seach: {grid_search.best_score_}')
+            # Define parameters of Support-vector machine classifer from grid search
+            svc_model = SVC(kernel=grid_search.best_params_['kernel'], C=grid_search.best_params_['C'],
+                            gamma=grid_search.best_params_['gamma'], random_state=1)
+            # Cross-validate and predict using Support-vector machine classifer
+            svc_predict = cross_val_predict(svc_model, x_std[svc_variable_list], y, cv=5)
+            print(confusion_matrix(y_true=y, y_pred=svc_predict))
+            conf_matr = confusion_matrix(y_true=y, y_pred=svc_predict)
+            model_search_svc.append([grid_search.best_params_, grid_search.best_score_, conf_matr[0][0],
+                                     conf_matr[0][1], conf_matr[1][0], conf_matr[1][1], list(x_std[svc_variable_list])])
+    # Create DataFrame of svc results
+    model_search_svc = pd.DataFrame(model_search_svc, columns=['best_model_params_grid_search', 'best_score_grid_search',
+                                                 'true_negatives', 'false_positives',
+                                                 'false_negatives', 'true_positives', 'variables_used'])
+    # Create recall, precision, f1-score columns
+    model_search_svc['recall'] = model_search_svc.true_positives/(model_search_svc.true_positives + model_search_svc.false_negatives)
+    model_search_svc['precision'] = model_search_svc.true_positives/(model_search_svc.true_positives + model_search_svc.false_positives)
+    model_search_svc['f1_score'] = 2 * (model_search_svc.precision * model_search_svc.recall) / (model_search_svc.precision + model_search_svc.recall)
+    # Sort DataFrame
+    model_search_svc = model_search_svc.sort_values(by=['f1_score'], ascending=False)
+    print(model_search_svc)
+
+    # Choose top model from svc model search
+    if len(model_search_svc.loc[model_search_svc.f1_score==model_search_svc.f1_score.max()]) > 1:
+        top_model_result_svc = model_search_svc.loc[(model_search_svc.f1_score == model_search_svc.f1_score.max()) &
+            (model_search_svc['variables_used'].apply(len) == min(map(lambda x: len(x[list(model_search_svc).index('variables_used')]),
+             model_search_svc.loc[model_search_svc.f1_score==model_search_svc.f1_score.max()].values)))]
+        if len(top_model_result_svc) > 1:
+            print('break here')
+            break
+            # top_model_result_svc = top_model_result_svc.loc[top_model_result_svc.best_score_grid_search == top_model_result_svc.best_score_grid_search.max()]
+    else:
+        top_model_result_svc = model_search_svc.loc[model_search_svc.f1_score==model_search_svc.f1_score.max()]
+    top_model_results = top_model_results.append(other=top_model_result_svc, sort=False)
+    print(f"Top svc model: \n {top_model_result_svc}")
+
+    # Append top_model_result_svc results to all_model_results DataFrame
+    all_model_results['svc_'+inflect.engine().number_to_words(index)] = cross_val_predict(SVC(
+        kernel=top_model_result_svc['best_model_params_grid_search'].values[0]['kernel'],
+        C=top_model_result_svc['best_model_params_grid_search'].values[0]['C'],
+        gamma=top_model_result_svc['best_model_params_grid_search'].values[0]['gamma']),
+        x_std[top_model_result_svc['variables_used'].values[0]], y, cv=5)
+
+# Fill in model_type columns
+top_model_results['model_type'] = top_model_results['model_type'].fillna(value='svc')
+```
+
+K-Nearest Neighbors
+```python
+# Unique variable combination runs
+for index, (vars_to_drop, cat_vars_to_model) in enumerate(zip(variables_to_drop_list,
+                                                              categorical_variables_for_modeling_list), start=1):
+    print(f"Model run: {index}")
+    # Create copy of hungarian for non-regression modeling
+    model = hungarian.copy()
+    # Drop columns
+    model = model.drop(columns=vars_to_drop)
+    # Dummy variable categorical variables
+    model = pd.get_dummies(data=model, columns=cat_vars_to_model, drop_first=False)
+    # Create target variable
+    y = model['num']
+    # Create feature variables
+    x = model.drop(columns='num')
+
+    # Create copy of x for standard scaling
+    x_std = x.copy()
+    x_std.loc[:, :list(x_std)[list(x_std).index('sex_0')-1]] = scaler.fit_transform(x_std.loc[:, :list(x_std)[list(x_std).index('sex_0')-1]])
+
+    # Use Recursive Feature Elimination from SVC
+    # Define parameters of SVC
+    svc_model = SVC(kernel='linear', random_state=1)
+    # Feature importance DataFrame
+    feature_info = pd.DataFrame(data=[list(x_std), RFE(svc_model, n_features_to_select=1).fit(x_std, y).ranking_.tolist()]).T.\
+        rename(columns={0: 'variable', 1: 'rfe_svc'}).reset_index(drop=True)
+
+    # Define parameters of Random Forest Classifier
+    random_forest_model = RandomForestClassifier(random_state=1)
+    # Merge feature importances from random forest classifer on feature_info
+    feature_info = feature_info.merge(pd.DataFrame(data=[list(x), random_forest_model.fit(x,y).feature_importances_.tolist()]).T.\
+        rename(columns={0: 'variable', 1: 'feature_importance_rfc'}), on='variable')
+    # Sort values by descending random forest classifier feature importance to create ranking column
+    feature_info = feature_info.sort_values(by='feature_importance_rfc', ascending=False)
+    feature_info['feature_importance_rfc_ranking'] = np.arange(1,len(feature_info)+1)
+
+    # Define parameters of Gradient Boosting Classifier
+    gbm_model = GradientBoostingClassifier(random_state=1)
+    # Merge feature importances from gradient boosting classifer on feature_info
+    feature_info = feature_info.merge(pd.DataFrame(data=[list(x), gbm_model.fit(x,y).feature_importances_.tolist()]).T.\
+        rename(columns={0: 'variable', 1: 'feature_importance_gbm'}), on='variable')
+    # Sort values by descending gradient boosting classifier feature importance to create ranking column
+    feature_info = feature_info.sort_values(by='feature_importance_gbm', ascending=False)
+    feature_info['feature_importance_gbm_ranking'] = np.arange(1,len(feature_info)+1)
+
+    # Get average of three RFE/feature importance columns
+    feature_info['feature_importance_avg'] = feature_info[['rfe_svc', 'feature_importance_rfc_ranking', 'feature_importance_gbm_ranking']].mean(axis=1)
+    # Sort values by average column
+    feature_info = feature_info.sort_values(by='feature_importance_avg', ascending=True).reset_index(drop=True)
+
+    # Define parameters of kNN model
+    knn_model = KNeighborsClassifier(metric='minkowski')
+    # Define parameters of grid search
+    param_grid = {'n_neighbors': np.arange(9, 47, step=2), 'weights': ['uniform', 'distance']}
+    # Define parameters of shuffle split
+    cv = ShuffleSplit(n_splits=5, test_size=0.3)
+    # Define grid search CV parameters
+    grid_search = GridSearchCV(knn_model, param_grid, cv=cv) # , scoring='recall'
+    # Append model results to this list
+    model_search_knn = []
+    # Begin top to bottom process - looking at most important variables (by RFE ranking first and adding on)
+    knn_variable_list = []
+    for i in range(len(feature_info)):
+        if feature_info['variable'][i] not in knn_variable_list:
+            knn_variable_list.extend([feature_info['variable'][i]])
+            # Add related one-hot encoded variables if variable is categorical
+            if knn_variable_list[-1].split('_')[-1] in sorted([x for x in list(set([x.split('_')[-1] for x in list(x_std)])) if len(x) == 1]):
+                knn_variable_list.extend([var for var in list(x_std) if knn_variable_list[-1].split('_')[0] in var and var != knn_variable_list[-1]])
+            print(knn_variable_list)
+            grid_search.fit(x_std[knn_variable_list], y)
+            print(f'Best parameters for current grid seach: {grid_search.best_params_}')
+            print(f'Best score for current grid seach: {grid_search.best_score_}')
+            # Define parameters of k-nearest neighbors from grid search
+            knn_model = KNeighborsClassifier(metric='minkowski', n_neighbors=grid_search.best_params_['n_neighbors'],
+                            weights=grid_search.best_params_['weights'])
+            # Cross-validate and predict using Support-vector machine classifer
+            knn_predict = cross_val_predict(knn_model, x_std[knn_variable_list], y, cv=5)
+            print(confusion_matrix(y_true=y, y_pred=knn_predict))
+            conf_matr = confusion_matrix(y_true=y, y_pred=knn_predict)
+            model_search_knn.append([grid_search.best_params_, grid_search.best_score_, conf_matr[0][0],
+                                     conf_matr[0][1], conf_matr[1][0], conf_matr[1][1], list(x_std[knn_variable_list])])
+    # Create DataFrame of k-nearest neighbors results
+    model_search_knn = pd.DataFrame(model_search_knn, columns=['best_model_params_grid_search', 'best_score_grid_search',
+                                                 'true_negatives', 'false_positives',
+                                                 'false_negatives', 'true_positives', 'variables_used'])
+    # Create recall, precision, f1-score columns
+    model_search_knn['recall'] = model_search_knn.true_positives/(model_search_knn.true_positives + model_search_knn.false_negatives)
+    model_search_knn['precision'] = model_search_knn.true_positives/(model_search_knn.true_positives + model_search_knn.false_positives)
+    model_search_knn['f1_score'] = 2 * (model_search_knn.precision * model_search_knn.recall) / (model_search_knn.precision + model_search_knn.recall)
+    # Sort DataFrame
+    model_search_knn = model_search_knn.sort_values(by=['f1_score'], ascending=False)
+    print(model_search_knn)
+
+    if len(model_search_knn.loc[model_search_knn.f1_score==model_search_knn.f1_score.max()]) > 1:
+        print("Fix multiple best model problem for rfc")
+        break
+    else:
+        top_model_result_knn = model_search_knn.loc[model_search_knn.f1_score==model_search_knn.f1_score.max()]
+    top_model_results = top_model_results.append(other=top_model_result_knn, sort=False)
+    print(f"Top knn model: \n {top_model_result_knn}")
+
+    # Append top_model_result_knn results to all_model_results DataFrame
+    knn_predict_proba = cross_val_predict(KNeighborsClassifier(metric='minkowski',
+                               n_neighbors=top_model_result_knn['best_model_params_grid_search'].values[0]['n_neighbors'],
+                               weights=top_model_result_knn['best_model_params_grid_search'].values[0]['weights']),
+                     x_std[top_model_result_knn['variables_used'].values[0]], y, cv=5, method='predict_proba')
+    all_model_results['knn_'+inflect.engine().number_to_words(index)+'_pred_zero'] = knn_predict_proba[:,0]
+    all_model_results['knn_'+inflect.engine().number_to_words(index)+'_pred_one'] = knn_predict_proba[:,1]
+
+# Fill in model_type columns
+top_model_results['model_type'] = top_model_results['model_type'].fillna(value='knn')
+```
 
 
 (Put code at bottom - base off table of contents and say for all code (script) - go to the Github page for the project (give link to heart disease))
