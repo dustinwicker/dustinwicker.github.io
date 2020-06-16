@@ -26,7 +26,7 @@ Code snippets will be provided for each section outlined in the [Project Overvie
 # Project Overview  
 ## i.    [Data Ingestion](#data-ingestionview-code)
 ## ii.   [Data Cleaning](#data-cleaningview-code)
-## iii.  [Exploratory Data Analysis](#exploratory-data-analysis)
+## iii.  [Exploratory Data Analysis](#exploratory-data-analysisview-code)
 ## iv.  [Model Building](#model-building)
 ## v.   [Model Visualization, Comparison, and Selection](#model-visualization-comparison-and-selection)
 ## vi.  [Visualize Best Model](#visualize-best-model)
@@ -35,7 +35,7 @@ Code snippets will be provided for each section outlined in the [Project Overvie
 ## Data Ingestion [<sub><sup>(View code)</sup></sub>](#a)  
 The first step was obtaining the [data](https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/hungarian.data) and [data dictionary](https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/heart-disease.names) from the UCI Machine Learning Repository. The files were saved in an appropriate location on my machine and then read into Python.
 
-## **Data Cleaning** [<sub><sup>(View code)</sup></sub>](#b)
+## Data Cleaning [<sub><sup>(View code)</sup></sub>](#b)
 After the data was properly read into into Python and the appropriate column names were supplied, data cleaning was performed. 
 This involved:
 * Removing unnecessary columns
@@ -46,7 +46,7 @@ This involved:
 * Imputing missing values for patients using K-Nearest Neighbors, an advanced data imputation method
 * Setting the target variable ("num") to a binary range as previous studies have done
 
-## Exploratory Data Analysis               [<sub><sup>View code</sup></sub>](#b)
+## Exploratory Data Analysis [<sub><sup>(View code)</sup></sub>](#c)
 The following three images provide a sample of the analysis performed.
 
 ![Heatmap of Continous Predictor Variables](/assets/img/heatmap_continous_predictor_variables.png "Heatmap of Continous Predictor Variables")
@@ -73,9 +73,9 @@ Including the details above, this step also involved:
    * Descriptive Statistics
 * Feature Engineering (do visualization will of this done?)
 * Additional Data Visualizations
-* Additonal Data Transformations [<sub><sup>View code</sup></sub>](#c)
+* Additonal Data Transformations
 
-## Model Building [<sub><sup>View code</sup></sub>](#d)
+## Model Building [<sub><sup>(View code)</sup></sub>](#d)
 After exploring our data to obtain a greater understanding of it and using that information to perform feature engineering and data transformations, it was time to build and optimize models.
 * Five different machine learning algorithms were used  
    * Logistic Regression  
@@ -90,7 +90,7 @@ After exploring our data to obtain a greater understanding of it and using that 
    * Cross-validation
    * Feature importance techniques
    
-## Model Visualization, Comparison, and Selection [<sub><sup>View code</sup></sub>](#e)
+## Model Visualization, Comparison, and Selection [<sub><sup>(View code)</sup></sub>](#e)
 * ROC Curves were built based on each model's predicted probabilities to visually compare model performance at various cut-off values.  
 Below the four models which give predicted probabilities (Support Vector Machines do not give predicted probabilities, only class membership) are plotted, and each plot contains seven ROC curves - one for each unique sets of variables. The most amount of variation can be seen in the Random Forest Classifier models, and the least amount in the Logistic Regression models due to the fact variables had to be statistically signifcant to be included in the model.
 
@@ -120,7 +120,7 @@ Below the four models which give predicted probabilities (Support Vector Machine
 | Random Forest Classifer Six                                                                                                                                | 0.768    | 0.717  | 0.826     | 246           | 46              |
 | Logistic Regression Three                                                                                                                                  | 0.765    | 0.736  | 0.796     | 244           | 48              |
 
-## Visualize Best Model [<sub><sup>View code</sup></sub>](#f)
+## Visualize Best Model [<sub><sup>(View code)</sup></sub>](#f)
 The next step was visualizing the results of the best model in an easy to understand way. The first visual below - a confusion matrix - is a fundamental assessement tool for classification problems. It is a crosstabulation of the acutal and predicted classes and _quantifies the confusion_ of the classifier. Here it details the prediction results of the best model, the Support Vector Machine Classification Model #4.
 * The top left corner of the confusion matrix indicates the 170 patients which had no presence of heart disease (i.e., their actual value) and were predicted as such (i.e., their predicted value). These are labeled as true negatives.
 * The top right corner, designated as false positives, denotes the 16 patients which had no presence of heart disease but were deemed to have heart disease by the model.
@@ -135,16 +135,18 @@ The following visualziation shows the same results as above, just now in a more 
 ![stacked_bar_chart_best_model](/assets/img/stacked_bar_chart_confusion_matrix_svc.png "Stacked Bar Chart of SVC Model Four")
 
 
-## Model Usefulness  
+## Model Usefulness [<sub><sup>(View code)</sup></sub>](#e)  
 The final step, and argubably most critical one, is explaining how the results could be utilized in a medical facility setting to benefit medical practitioners and their patients.
 * The model could be implemented, along with the patient's formal checkups and examinations, to assist medical practitioners in correctly diagnosing heart disease in their patients.  
 * It would allow practitioners to get an in-depth understanding of which factors contribute to heart disease, and set up a prehabilitation routine for their patients that would help decrease those factors (such as helping the patient establish a diet and exercise regimen to decrease their serum cholesterol). This would provide patients a path towards a clean bill of health, and prevent possible heart disease in the future.
 
 
 
+
 # a
-```python
+
 # Import libraries and modules
+```python
 import os
 import yaml
 import pickle
