@@ -18,7 +18,7 @@ A summary of this models results can be seen directly below, and a full summary 
 | **Support Vector Machine Classifier Four**                                                                                                                      | **0.804**    | **0.774**  | **0.837**     | **252**           | **40**             |
 
 The usefulness of being able to accurately anticipate and predict the presence of heart disease cannot be understated. Heart disease is the **world's _leading_ cause of death for both men and women**.  
-* Approximately **647,000 American lives are lost each year** to the disease - accounting for **one in every four U.S. deaths**.  
+* Approximately **647,000 American lives are lost _each year_** to the disease - accounting for **one in every four U.S. deaths**.  
 * The cost of heart disease in the United States, from 2014 to 2015, totaled **$219 billion**. This included the cost of health care services, medicines, and lost productivity. (Cite sources) (give info about how my model is useful)
  
 Code snippets will be provided for each section outlined in the [Project Overview](#project-overview) at the bottom of this page. The snippets will encompass the entire script, just broken into their related sections. If you would like to view the code script in its entirety, please visit this [link](https://github.com/dustinwicker/Heart-Disease-Detection/blob/master/heart_disease_code.py/?target=%22_blank%22).
@@ -51,7 +51,7 @@ The following three images provide a sample of the analysis performed.
 
 ![Heatmap of Continous Predictor Variables](/assets/img/heatmap_continous_predictor_variables.png "Heatmap of Continous Predictor Variables")
 
-This heatmap shows correlation coefficients between the initial continuous variables plus two features creating in the early Feature Engineering stages, "Days Between Cardiac Catheterization and Electrocardiogram" and "PCA variable for 'Height at Rest' and 'Height at Peak Exercise'", created in the early stages of feature enginering. This visualization gives you information that is useful in performing data transformations and (further) feature engineering. 
+This heatmap shows correlation coefficients between the initial continuous variables plus two variables, "Days Between Cardiac Catheterization and Electrocardiogram" and "PCA variable for 'Height at Rest' and 'Height at Peak Exercise'", created in the early stages of feature enginering. This visualization gives you information that is useful in performing data transformations and (further) feature engineering. 
 
 ![Distribution_of_Continuous_Features_by_Target](/assets/img/distribution_of_continuous_features_by_target.png "Distributions of Continuous Features by Target")
 
