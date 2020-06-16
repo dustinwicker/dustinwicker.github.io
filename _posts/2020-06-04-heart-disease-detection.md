@@ -20,7 +20,7 @@ A summary of this models results can be seen directly below, and a full summary 
 
 The usefulness of being able to accurately anticipate and predict the presence of heart disease cannot be understated. Heart disease is the world's leading cause of death for both men and women. Approximately 647,000 American lives are lost each year to the disease - accounting for one in every four U.S. deaths. The cost of heart disease in the United States, from 2014 to 2015, totaled $219 billion. This includes the cost of health care services, medicines, and lost productivity. (Cite sources)
  
-Code snippets will be provided for each section outlined in the [Project Overview](#project-overview) at the bottom of this page. The snippets will encompass the entire script, just broken into their related sections. If you would like to view the code script in its entirety, please visit this [link](https://github.com/dustinwicker/Heart-Disease-Detection/blob/master/heart_disease_code.py/?target=_blank)}.
+Code snippets will be provided for each section outlined in the [Project Overview](#project-overview) at the bottom of this page. The snippets will encompass the entire script, just broken into their related sections. If you would like to view the code script in its entirety, please visit this [link](https://github.com/dustinwicker/Heart-Disease-Detection/blob/master/heart_disease_code.py/?target=_blank).
  
 # Project Overview  
 ## i.    [Data Ingestion](#data-ingestionview-code)
@@ -34,7 +34,7 @@ Code snippets will be provided for each section outlined in the [Project Overvie
 ## Data Ingestion [<sub><sup>(View code)</sup></sub>](#data-ingestion)  
 The first step was obtaining the [data](https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/hungarian.data) and [data dictionary](https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/heart-disease.names) from the UCI Machine Learning Repository. The files were saved in an appropriate location on my machine and then read into Python.
 
-## Data Cleaning [<sub><sup>(View code)</sup></sub>](#b)
+## Data Cleaning [<sub><sup>(View code)</sup></sub>](#data-cleaning)
 After the data was properly read into into Python and the appropriate column names were supplied, data cleaning was performed. 
 This involved:
 * Removing unnecessary columns
@@ -45,7 +45,7 @@ This involved:
 * Imputing missing values for patients using K-Nearest Neighbors, an advanced data imputation method
 * Setting the target variable ("num") to a binary range as previous studies have done
 
-## Exploratory Data Analysis [<sub><sup>(View code)</sup></sub>](#c)
+## Exploratory Data Analysis [<sub><sup>(View code)</sup></sub>](#exploratory-data-analysis)
 The following three images provide a sample of the analysis performed.
 
 ![Heatmap of Continous Predictor Variables](/assets/img/heatmap_continous_predictor_variables.png "Heatmap of Continous Predictor Variables")
@@ -74,7 +74,7 @@ Including the details above, this step also involved:
 * Additional Data Visualizations
 * Additonal Data Transformations
 
-## Model Building [<sub><sup>(View code)</sup></sub>](#d)
+## Model Building [<sub><sup>(View code)</sup></sub>](#model-building)
 After exploring our data to obtain a greater understanding of it and using that information to perform feature engineering and data transformations, it was time to build and optimize models.
 * Five different machine learning algorithms were used  
    * Logistic Regression  
@@ -89,7 +89,7 @@ After exploring our data to obtain a greater understanding of it and using that 
    * Cross-validation
    * Feature importance techniques
    
-## Model Visualization, Comparison, and Selection [<sub><sup>(View code)</sup></sub>](#e)
+## Model Visualization, Comparison, and Selection [<sub><sup>(View code)</sup></sub>](#model-visualization-comparison-and-selection)
 * ROC Curves were built based on each model's predicted probabilities to visually compare model performance at various cut-off values.  
 Below the four models which give predicted probabilities (Support Vector Machines do not give predicted probabilities, only class membership) are plotted, and each plot contains seven ROC curves - one for each unique sets of variables. The most amount of variation can be seen in the Random Forest Classifier models, and the least amount in the Logistic Regression models due to the fact variables had to be statistically signifcant to be included in the model.
 
@@ -119,7 +119,7 @@ Below the four models which give predicted probabilities (Support Vector Machine
 | Random Forest Classifer Six                                                                                                                                | 0.768    | 0.717  | 0.826     | 246           | 46              |
 | Logistic Regression Three                                                                                                                                  | 0.765    | 0.736  | 0.796     | 244           | 48              |
 
-## Visualize Best Model [<sub><sup>(View code)</sup></sub>](#f)
+## Visualize Best Model [<sub><sup>(View code)</sup></sub>](#visualize-best-model)
 The next step was visualizing the results of the best model in an easy to understand way. The first visual below - a confusion matrix - is a fundamental assessement tool for classification problems. It is a crosstabulation of the acutal and predicted classes and _quantifies the confusion_ of the classifier. Here it details the prediction results of the best model, the Support Vector Machine Classification Model #4.
 * The top left corner of the confusion matrix indicates the 170 patients which had no presence of heart disease (i.e., their actual value) and were predicted as such (i.e., their predicted value). These are labeled as true negatives.
 * The top right corner, designated as false positives, denotes the 16 patients which had no presence of heart disease but were deemed to have heart disease by the model.
@@ -224,7 +224,7 @@ headers = ['id', 'ccf', 'age', 'sex', 'painloc', 'painexer', 'relrest', 'pncaden
 hungarian = pd.DataFrame(new_file, columns=headers)
 ```
   
-# b
+# Data Cleaning
 
 **Remove unnecessary columns**  
 ```python
@@ -852,13 +852,13 @@ for i in range(0, len(chol_prediction)):
 # Supply prediction back to appropriate patient
 hungarian.loc[hungarian[impute_variable]==-9, impute_variable] = chol_prediction
 ```
-Set target variable to binary range
+**Set target variable to binary range**
 ```python
 # Set y variable to 0-1 range (as previous studies have done)
 hungarian.loc[hungarian.num > 0, "num"] = 1
 ```
 
-# c
+# Exploratory Data Analysis
 ```python
 # Determine 'strong' alpha value based on sample size
 sample_size_one, strong_alpha_value_one = 100, 0.001
@@ -927,7 +927,7 @@ continuous_variables_spelled_out_dict = {'age': 'Age', 'trestbps': 'Resting Bloo
                                          'rldv5_rldv5e_pca': "PCA variable for 'Height at Rest' and 'Height at Peak Exercise'"}
 ```
 
-Heatmap of Continous Predictor Variables
+**Heatmap of Continous Predictor Variables**
 ```python
 # Heatmap of correlations
 # Only return bottom portion of heatmap as top is duplicate and diagonal is redundant
@@ -946,11 +946,11 @@ ax.set_xticklabels(labels=continuous_variables_spelled_out_dict.values(),fontdic
 ax.set_yticklabels(labels=continuous_variables_spelled_out_dict.values(),fontdict ={'fontweight': 'bold', 'fontsize':10})
 ax.set_title("Heatmap of Continuous Predictor Features", fontdict ={'fontweight': 'bold', 'fontsize': 22})
 ```
-DataFrame of continuous variable correlations greater than 0.6 and less than -0.6 (more numerical alternative to above heatmap)
+**DataFrame of Continuous Variable Correlations Greater Than 0.6 and Less Than -0.6 (More Numerical Alternative to Above Heatmap)**
 ```python
 print(hungarian[continuous_variables].corr()[(hungarian[continuous_variables].corr()>0.6) | (hungarian[continuous_variables].corr()<-0.6)])
 ```
-Histograms of Continuous Features by Target
+**Histograms of Continuous Features by Target**
 ```python
 fig, axes = plt.subplots(nrows=5, ncols=3)
 fig.subplots_adjust(left=0.17, right=0.83, top=0.90, bottom=0.10, hspace=0.7, wspace = 0.25)
@@ -964,7 +964,7 @@ legends_spelled_out_dict = {0: "No Presence of Heart Disease", 1: "Presence of H
 fig.legend(handles, legends_spelled_out_dict.values(), loc='upper left', bbox_to_anchor=(0.68, 0.99), prop={'weight':'bold'})
 ```
 
-Normality Tests
+**Normality Tests**
 ```python
 # Check normality of continuous variables
 for continuous in continuous_variables:
@@ -987,7 +987,7 @@ for continuous in continuous_variables:
     print('\n')
 ```
 
-Data Transformations (Box-Cox Transformation)
+**Data Transformations (Box-Cox Transformation)**
 ```python
 # Boxcox necessary variables that reject the null hypothesis from normaltest in scipy.stats
 hungarian['trestbps_boxcox'] = stats.boxcox(x=hungarian.trestbps)[0]
@@ -1000,7 +1000,7 @@ for boxcox_var in filter(lambda x: '_boxcox' in x, hungarian.columns):
                                                             boxcox_var.split("_")[0]] + " Box-Cox"
 ```
 
-Data Transformation of Serum Cholestrol - Distributions with KDE Overlaid
+**Data Transformation of Serum Cholestrol - Distributions with KDE Overlaid**
 ```python
 # Compare original distribution with boxcox'd distribution for chol
 fig, axes = plt.subplots(nrows=1, ncols=2, sharey=True)
@@ -1022,7 +1022,7 @@ for i in range(len(axes)):
     axes[i].set_xticklabels(axes[i].get_xticklabels(), fontweight='bold')
 ```
 
-Histograms of Continuous Features and their Box-Cox'd Versions by Target
+**Histograms of Continuous Features and Their Box-Cox'd Versions by Target**
 ```python
 # Plot original and boxcox'd distributions to each other and against num
 # Create list of boxcox'd variables and their originals
@@ -1042,7 +1042,7 @@ fig.legend(handles, legends_spelled_out_dict.values(), loc='upper left', bbox_to
            prop={'weight': 'bold', 'size': 14})
 ```
 
-Chi-Square Tests
+**Chi-Square Tests**
 ```python
 
 # Pearson chi-square tests
@@ -1058,7 +1058,7 @@ chi_square_analysis_df = pd.DataFrame(chi_square_analysis_list, columns=['variab
 # Determine categorical variables that reject null
 chi_square_analysis_df.loc[chi_square_analysis_df.p_value <= strong_alpha_value]
 ```
-Contingency Tables, Odds Ratios, Descriptive Statistics, Chi-Square Tests
+**Contingency Tables, Odds Ratios, Descriptive Statistics, Data Visualizations, Chi-Square Tests**
 ```python
 # Crosstab of age and num
 pd.crosstab(index=hungarian.age,columns=hungarian.num, normalize=True)
@@ -1283,7 +1283,8 @@ else:
         f"Fail to reject the null of no association between {contingency.index.name} and diagnosis of heart disease. "
         f"The probability of a heart disease diagnosis is the same regardless of chest pain type.")
 ```
-Feature Engineering
+
+**Feature Engineering**
 ```python
 hungarian["thalach_div_by_thalrest"] = hungarian["thalach"]/hungarian["thalrest"]
 hungarian["tpeakbps_div_by_tpeakbpd"] = hungarian["tpeakbps"]/hungarian["tpeakbpd"]
@@ -1309,7 +1310,7 @@ hungarian["thalrest_boxcox_div_by_rldv5"] = hungarian["thalrest_boxcox"]/hungari
 hungarian['agebinned'] = pd.cut(x=hungarian.age, bins=5, labels = ['0', '1', '2', '3', '4'])
 ```
 
-DataFrame of continuous variable correlations greater than 0.6 and less than 1.0 and less than -0.6 and greater than -1.0 with entirely null columns dropped - all feature engineered variables included
+**DataFrame of Continuous Variable Correlations Greater Than 0.6 and Less Than 1.0 and Correlations Less Than -0.6 and Greater Than -1.0 With Entirely Null Columns Dropped - All Feature Engineered Variables Included
 ```python
 # Add boxcox'd variables to continuous_variables list
 continuous_variables.extend([x for x in list(hungarian) if 'boxcox' in x])
@@ -1323,9 +1324,9 @@ hungarian[continuous_variables].corr()[((hungarian[continuous_variables].corr() 
                                               (hungarian[continuous_variables].corr()>-1.0))].dropna(axis=1, how='all')
 ```
 
-# d
+# Model Building
 
-DataFrame to append model results
+**DataFrame to Append Model Results**
 ```python
 # Create empty DataFrame to append all model results to
 all_model_results = pd.DataFrame()
@@ -1336,14 +1337,14 @@ top_model_results = pd.DataFrame(columns=['model_type', 'solver', 'best_model_pa
                                           'model_params_grid_search'])
 ```
 
-Copy of patient DataFrame for modeling and save target variable for later use
+**Copy of hungarian DataFrame for Modeling and Save Target Variable for Later Use
 ```python
 model = hungarian.copy()
 # Save target variable for use with pickle files
 model['num'].to_pickle("hungarian_target_variable.pkl")
 ```
 
-Create unique set of variables
+**Create Unique Set of Variables**
 ```python
 # Drop columns
 variables_to_drop_for_modeling_one = ['id', 'ekgyr', 'ekgmo', 'ekgday', 'cyr', 'cmo', 'cday', 'lvx3', 'lvx4', 'lvf',
@@ -1455,7 +1456,7 @@ categorical_variables_for_modeling_list = [categorical_variables_for_modeling_on
                                            categorical_variables_for_modeling_six,
                                            categorical_variables_for_modeling_seven]
 ```
-Logistic Regression
+**Logistic Regression**
 ```python
 # Unique variable combination runs
 for index, (vars_to_drop, cat_vars_to_model) in enumerate(zip(variables_to_drop_list,
@@ -1610,7 +1611,7 @@ for index, (vars_to_drop, cat_vars_to_model) in enumerate(zip(variables_to_drop_
 # Fill in model_type columns
 top_model_results['model_type'] = top_model_results['model_type'].fillna(value='logit')
 ```
-Random Forest
+**Random Forest**
 ```python
 # Unique variable combination runs
 for index, (vars_to_drop, cat_vars_to_model) in enumerate(zip(variables_to_drop_list,
@@ -1724,7 +1725,7 @@ for index, (vars_to_drop, cat_vars_to_model) in enumerate(zip(variables_to_drop_
 top_model_results['model_type'] = top_model_results['model_type'].fillna(value='rfc')
 ```
 
-Support Vector Machine
+**Support Vector Machine**
 ```python
 # Unique variable combination runs
 for index, (vars_to_drop, cat_vars_to_model) in enumerate(zip(variables_to_drop_list,
@@ -1816,7 +1817,7 @@ for index, (vars_to_drop, cat_vars_to_model) in enumerate(zip(variables_to_drop_
 top_model_results['model_type'] = top_model_results['model_type'].fillna(value='svc')
 ```
 
-K-Nearest Neighbors
+**K-Nearest Neighbors**
 ```python
 # Unique variable combination runs
 for index, (vars_to_drop, cat_vars_to_model) in enumerate(zip(variables_to_drop_list,
@@ -1930,7 +1931,7 @@ for index, (vars_to_drop, cat_vars_to_model) in enumerate(zip(variables_to_drop_
 top_model_results['model_type'] = top_model_results['model_type'].fillna(value='knn')
 ```
 
-Gradient Boosting
+**Gradient Boosting**
 ```python
 # Unique variable combination runs
 for index, (vars_to_drop, cat_vars_to_model) in enumerate(zip(variables_to_drop_list,
@@ -2132,7 +2133,7 @@ for index, (vars_to_drop, cat_vars_to_model) in enumerate(zip(variables_to_drop_
 top_model_results['model_type'] = top_model_results['model_type'].fillna(value='gbm')
 ```
 
-Save created DataFrames
+**Save Created Model Results DataFrames**
 ```python
 # Save top_model_results to csv
 top_model_results.to_pickle('top_model_results.pkl')
@@ -2140,9 +2141,9 @@ top_model_results.to_pickle('top_model_results.pkl')
 all_model_results.to_pickle('all_model_results.pkl')
 ```
 
-# e
+# Model Visualization Comparison and Selection
 
-Load in model result DataFrames if needed
+**Load in Model Results DataFrames if Needed**
 ```python
 # Check if DataFrame is already loaded in - if not, load from pickle file
 try:
@@ -2165,7 +2166,7 @@ except NameError:
     with open('hungarian_target_variable.pkl', 'rb') as hungarian_target_variable_pkl:
         y = pickle.load(hungarian_target_variable_pkl)
 ```
-ROC Curves
+**ROC Curves**
 ```python
 # Dict of model names and their spelled out verions
 model_names_spelled_out = {'logit': 'Logistic Regression', 'rfc': 'Random Forest Classifer', 'knn': 'K-Nearest Neighbors',
@@ -2195,7 +2196,7 @@ handles, legends = ax.get_legend_handles_labels()
 legends = ['Model ' + legend.title() for legend in legends]
 fig.legend(handles, legends, loc='upper left', bbox_to_anchor=(0.90, 0.85), prop={'weight':'bold'})
 ```
-Select best model for each algorithm
+**Select Best Model for Each Algorithm**
 ```python
 # Re-assign index of top_model_results
 top_model_results.index = list(itertools.chain.from_iterable(itertools.repeat(range(1,8), 5)))
@@ -2267,7 +2268,7 @@ all_cut_offs_results["svc_" + inflect.engine().number_to_words(
         top_model_from_each_algorithm.loc[top_model_from_each_algorithm.model_type=="svc"].index[0])]
 ```
 
-Determine combination of models or stand alone model which provides best results
+**Determine Combination of Models or Stand Alone Model Which Provides Best Results**
 ```python
 # Get combinations of length 1,3, and 5 (take mode of 3 and 5)
 model_search_all = []
@@ -2293,7 +2294,7 @@ model_search_all = model_search_all.sort_values(by=['total_correct','f1_score'],
 print(model_search_all)
 ```
 
-Create model results summary table for display
+**Create Model Results Summary Table for Display**
 ```python
 # Spell out all model names - return list of lists
 column_all = []
@@ -2318,9 +2319,9 @@ model_search_all[['columns', 'f1_score', 'recall', 'precision', 'total_correct',
                                                             'total_wrong': 'Total Incorrect'}).to_csv("final_models_table.csv", index=False)
 ```
 
-## f
+## Visualize Best Model
 
-Confusion Matrix of Best Model
+**Confusion Matrix of Best Model**
 ```python
 conf_matrix = [model_search_all.loc[model_search_all.cols==('svc_four',)][["true_negatives",
                                                                            "false_positives"]].values[0].tolist(),
@@ -2347,7 +2348,7 @@ plt.title('Prediction Results for Support Vector Machine Classifier Model #4', p
 plt.show()
 ```
 
-Stacked Bar Chart of Best Model
+**Stacked Bar Chart of Best Model**
 ```python
 # Build stacked bar chart
 # Create bar_chart of confusion matrix results
@@ -2420,7 +2421,7 @@ plt.text(x=0.7, y=(stacked_bar_chart.total.max() - stacked_bar_chart.total.min()
 plt.show()
 ```
 
-Bar Chart of Best Model
+**Bar Chart of Best Model**
 ```python
 # Bar chart of confusion matrix results
 bar_chart = model_search_all.loc[model_search_all.cols==('svc_four',)][["true_negatives", "false_positives",
@@ -2468,7 +2469,7 @@ plt.text(x=1.05, y=140, s = "Overall Accuracy: " + "{:.1%}".format(model_search_
 plt.show()
 ```
 
-Create Heart
+**Create Heart**
 ```python
 plt.figure()
 x = np.linspace(-2, 2, 1500)
