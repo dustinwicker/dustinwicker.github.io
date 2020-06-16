@@ -18,20 +18,20 @@ A summary of this models results can be seen directly below, and a full summary 
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | :------: | :----: | :-------: | :-----------: | :-------------: |
 | **Support Vector Machine Classifier Four**                                                                                                                      | **0.804**    | **0.774**  | **0.837**     | **252**           | **40**             |
 
-The usefulness of being able to accurately anticipate and predict the presence of heart disease cannot be understated. Heart disease is the world's leading cause of death for both men and women. Approximately 647,000 American lives are lost each year to the disease - accounting for one in every four U.S. deaths. The cost of heart disease in the United States, from 2014 to 2015, totaled $219 billion. This includes the cost of health care services, medicines, and lost productivity
+The usefulness of being able to accurately anticipate and predict the presence of heart disease cannot be understated. Heart disease is the world's leading cause of death for both men and women. Approximately 647,000 American lives are lost each year to the disease - accounting for one in every four U.S. deaths. The cost of heart disease in the United States, from 2014 to 2015, totaled $219 billion. This includes the cost of health care services, medicines, and lost productivity. (Cite sources)
  
-Code snippets will be provided for each section outlined in the [Project Overview](#project-overview) at the bottom of this page. If you would like to view the entire code script, please visit this [link](https://github.com/dustinwicker/Heart-Disease-Detection/blob/master/heart_disease_code.py).
+Code snippets will be provided for each section outlined in the [Project Overview](#project-overview) at the bottom of this page. The snippets will encompass the entire script, just broken into their related sections. If you would like to view the code script in its entirety, please visit this [link](https://github.com/dustinwicker/Heart-Disease-Detection/blob/master/heart_disease_code.py).
  
 # Project Overview  
 ## i.    [Data Ingestion](#data-ingestionview-code)
 ## ii.   [Data Cleaning](#data-cleaningview-code)
 ## iii.  [Exploratory Data Analysis](#exploratory-data-analysisview-code)
-## iv.  [Model Building](#model-building)
-## v.   [Model Visualization, Comparison, and Selection](#model-visualization-comparison-and-selection)
-## vi.  [Visualize Best Model](#visualize-best-model)
-## vii. [Model Usefulness](#model-usefulness)
+## iv.  [Model Building](#model-buildingview-code)
+## v.   [Model Visualization, Comparison, and Selection](#model-visualization-comparison-and-selectionview-code)
+## vi.  [Visualize Best Model](#visualize-best-modelview-code)
+## vii. [Model Usefulness](#model-usefulnessview-code)
   
-## Data Ingestion [<sub><sup>(View code)</sup></sub>](#a)  
+## Data Ingestion [<sub><sup>(View code)</sup></sub>](#data-ingestion)  
 The first step was obtaining the [data](https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/hungarian.data) and [data dictionary](https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/heart-disease.names) from the UCI Machine Learning Repository. The files were saved in an appropriate location on my machine and then read into Python.
 
 ## Data Cleaning [<sub><sup>(View code)</sup></sub>](#b)
@@ -142,9 +142,9 @@ The final step, and argubably most critical one, is explaining how the results c
 
 
 
-# a
+# Data Ingestion
 
-# Import libraries and modules
+**Import libraries and modules**
 ```python
 import os
 import yaml
@@ -225,7 +225,8 @@ hungarian = pd.DataFrame(new_file, columns=headers)
 ```
   
 # b
-Remove unnecessary columns  
+
+**Remove unnecessary columns**  
 ```python
 # List of columns to drop
 cols_to_drop =['ccf', 'pncaden', 'smoke', 'cigs', 'years', 'dm', 'famhist', 'dig', 'ca', 'restckm', 'exerckm',
@@ -237,13 +238,13 @@ cols_to_drop =['ccf', 'pncaden', 'smoke', 'cigs', 'years', 'dm', 'famhist', 'dig
 hungarian = hungarian.drop(columns=cols_to_drop)  
 ```
 
-Convert column types  
+**Convert column types**  
 ```python
 # Convert all columns to numeric
 hungarian = hungarian.apply(pd.to_numeric)
 ```
 
-Correct data discrepancies  
+**Correct data discrepancies**  
 ```python
 ### Fix possible patient id issues
 # Find ids that are not unique to patients
@@ -253,7 +254,7 @@ print(hungarian.id.value_counts()[hungarian.id.value_counts()!=1])
 hungarian.loc[hungarian.loc[hungarian.id==1132].index[-1], 'id'] = hungarian.id.max() + 1
 ```
 
-Remove patients with a large percentage of missing values  
+**Remove patients with a large percentage of missing values**  
 ```python
 # Drop patients with "significant" number of missing values (use 10%, can adjust accordingly)
 # Determine missing value percentage per patient (-9 is the missing attribute value)
@@ -263,7 +264,7 @@ missing_value_perc_per_patient = (hungarian == -9).sum(axis=1)[(hungarian == -9)
 # Remove patients with > 10% missing values
 hungarian = hungarian.drop(missing_value_perc_per_patient[missing_value_perc_per_patient>0.10].index.values)
 ```
-Impute missing values  
+**Impute missing values**  
 ```python
 ### Imputing missing values (marked as -9 per data dictionary)
 cols_with_missing_values = [(col, hungarian[col].value_counts()[-9]) for col in list(hungarian) if -9 in hungarian[col].unique()]
