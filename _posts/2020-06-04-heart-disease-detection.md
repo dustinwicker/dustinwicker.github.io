@@ -22,7 +22,7 @@ The usefulness of being able to accurately anticipate and predict the presence o
  
 Code snippets will be provided for each section outlined in the [Project Overview](#project-overview) at the bottom of this page. The snippets will encompass the entire script, just broken into their related sections. If you would like to view the code script in its entirety, please visit this [link](https://github.com/dustinwicker/Heart-Disease-Detection/blob/master/heart_disease_code.py/?target="_blank").
 
-<a href="https://github.com/dustinwicker/Heart-Disease-Detection/blob/master/heart_disease_code.py">test</a>
+<a href="https://github.com/dustinwicker/Heart-Disease-Detection/blob/master/heart_disease_code.py" target="_blank">test</a>
  
 # Project Overview  
 ## i.    [Data Ingestion](#data-ingestionview-code)
