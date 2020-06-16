@@ -18,8 +18,7 @@ A summary of this models results can be seen directly below, and a full summary 
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | :------: | :----: | :-------: | :-----------: | :-------------: |
 | **Support Vector Machine Classifier Four**                                                                                                                      | **0.804**    | **0.774**  | **0.837**     | **252**           | **40**             |
 
-The usefulness of being able to accurately anticipate and predict
- (Put usefulness up here as well in bullets)
+The usefulness of being able to accurately anticipate and predict the presence of heart disease cannot be understated. Heart disease is the world's leading cause of death for both men and women. Approximately 647,000 American lives are lost each year to the disease - accounting for one in every four U.S. deaths. The cost of heart disease in the United States, from 2014 to 2015, totaled $219 billion. This includes the cost of health care services, medicines, and lost productivity
  
 Code snippets will be provided for each section outlined in the [Project Overview](#project-overview) at the bottom of this page. If you would like to view the entire code script, please visit this [link](https://github.com/dustinwicker/Heart-Disease-Detection/blob/master/heart_disease_code.py).
  
