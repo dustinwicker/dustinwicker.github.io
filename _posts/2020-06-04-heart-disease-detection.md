@@ -10,21 +10,18 @@ image: heart.png
 ## Project Summary  
 * **Statistical analysis**, **data mining techniques**, and **five machine learning models** were built and ensembled to **accurately predict the presence of heart disease in patients from the Hungarian Institute of Cardiology in Budapest**.  
 * The model which provided the optimal combination of total patients predicted correctly and F1 Score, while being the most parsimonious, was the **Support Vector Machine Classification Model #4**. It was able to **correctly predict** the presence, or lack thereof, of heart disease in **86% of patients**.  
-  
-  
+
 A summary of this models results can be seen directly below, and a full summary of all sixteen models can be found in the [Model Visualization, Comparison, and Selection section](#model-visualization-comparison-and-selection).
 
 | Model                                                                                                                                                   | F1 Score | Recall | Precision | Total Correct | Total Incorrect |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | :------: | :----: | :-------: | :-----------: | :-------------: |
 | **Support Vector Machine Classifier Four**                                                                                                                      | **0.804**    | **0.774**  | **0.837**     | **252**           | **40**             |
 
-The usefulness of being able to accurately anticipate and predict the presence of heart disease cannot be understated. Heart disease is the world's leading cause of death for both men and women. Approximately 647,000 American lives are lost each year to the disease - accounting for one in every four U.S. deaths. The cost of heart disease in the United States, from 2014 to 2015, totaled $219 billion. This includes the cost of health care services, medicines, and lost productivity. (Cite sources)
+The usefulness of being able to accurately anticipate and predict the presence of heart disease cannot be understated. Heart disease is the **world's _leading_ cause of death for both men and women**.  
+* Approximately **647,000 American lives are lost each year** to the disease - accounting for **one in every four U.S. deaths**.  
+* The cost of heart disease in the United States, from 2014 to 2015, totaled **$219 billion**. This included the cost of health care services, medicines, and lost productivity. (Cite sources) (give info about how my model is useful)
  
 Code snippets will be provided for each section outlined in the [Project Overview](#project-overview) at the bottom of this page. The snippets will encompass the entire script, just broken into their related sections. If you would like to view the code script in its entirety, please visit this [link](https://github.com/dustinwicker/Heart-Disease-Detection/blob/master/heart_disease_code.py/?target=%22_blank%22).
-
-<a href="https://github.com/dustinwicker/Heart-Disease-Detection/blob/master/heart_disease_code.py" target="_blank">test</a>
-
-<a href="https://github.com/dustinwicker/Heart-Disease-Detection/blob/master/heart_disease_code.py" target="_blank">Hello, world!</a>
  
 # Project Overview  
 ## i.    [Data Ingestion](#data-ingestionview-code)
@@ -45,7 +42,7 @@ This involved:
 * Converting column types
 * Correcting any data discrepancies
 * Removing patients with a large percentage of missing values
-   * In this particular case, large meant 10% and as a result, two patients were removed from the data set.
+   * In this particular case, large meant 10%. As a result, two patients were removed from the data set.
 * Imputing missing values for patients using K-Nearest Neighbors, an advanced data imputation method
 * Setting the target variable ("num") to a binary range as previous studies have done
 
@@ -54,7 +51,7 @@ The following three images provide a sample of the analysis performed.
 
 ![Heatmap of Continous Predictor Variables](/assets/img/heatmap_continous_predictor_variables.png "Heatmap of Continous Predictor Variables")
 
-This heatmap shows correlation coefficients between the initial continuous variables plus two features, "Days Between Cardiac Catheterization and Electrocardiogram" and "PCA variable for 'Height at Rest' and 'Height at Peak Exercise'", created in the early stages of feature enginering. This visualization gives you information that is useful in performing data transformations and (further) feature engineering. 
+This heatmap shows correlation coefficients between the initial continuous variables plus two features creating in the early Feature Engineering stages, "Days Between Cardiac Catheterization and Electrocardiogram" and "PCA variable for 'Height at Rest' and 'Height at Peak Exercise'", created in the early stages of feature enginering. This visualization gives you information that is useful in performing data transformations and (further) feature engineering. 
 
 ![Distribution_of_Continuous_Features_by_Target](/assets/img/distribution_of_continuous_features_by_target.png "Distributions of Continuous Features by Target")
 
@@ -268,7 +265,7 @@ missing_value_perc_per_patient = (hungarian == -9).sum(axis=1)[(hungarian == -9)
 # Remove patients with > 10% missing values
 hungarian = hungarian.drop(missing_value_perc_per_patient[missing_value_perc_per_patient>0.10].index.values)
 ```
-**Impute missing values**  
+**Impute missing values using K-Nearest Neighbors**  
 ```python
 ### Imputing missing values (marked as -9 per data dictionary)
 cols_with_missing_values = [(col, hungarian[col].value_counts()[-9]) for col in list(hungarian) if -9 in hungarian[col].unique()]
