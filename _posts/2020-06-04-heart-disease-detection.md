@@ -10,6 +10,7 @@ image: heart.png
 The usefulness of being able to accurately anticipate and predict the presence of heart disease cannot be understated. Heart disease is the **world's _leading_ cause of death for both men and women**<sup> 1</sup>.  
 * Approximately **647,000 American lives are lost _each year_** to the disease - accounting for **one in every four U.S. deaths**<sup> 2,3</sup>.  
 * The cost of heart disease in the United States, from 2014 to 2015, totaled **$219 billion**<sup> 3</sup>. This included the cost of health care services such as tests and procedures, medicines, and lost productivity.  
+<br>  
 This project details the process I took to build a model that is capable of predicting the presence of heart disease in patients as well as outlining ways to use it in order to combat the devestation caused by this disease.
 
 ## Project Summary  
@@ -64,12 +65,16 @@ There is a histogram for each of the initial continuous features against the tar
 ![Serum_Cholesterol_Distribution_with_KDE_Overlaid](/assets/img/chol_data_transformation.png "Serum Cholesterol Distribution with KDE Overlaid")
 
 The above histograms show Serum Cholesterol on the left with no data transformation performed and on the right with a Box-Cox transformation applied.  
-* Notice the high, positive kurtosis value (please note this value is an _adjusted verison of Pearson's kurtosis_, known as the _excess kurtosis_, where three is subtracted from the original kurtosis value to provide the comparison to a normal distribution - a value of 0.0 would be the excess kurtosis value of a normal distribution) labeled on the left histogram.  
-   * This is a lepotkurtotic distribution, meaning there is more data in these tails than in the tails of a normal distribution.  
-* The positive skewness value indicates a right-tailed distribution (a value of 0.0 would indicate a normal distribution).  
-* The kernel density esimation, which can be thought of as a locally smoothed version of the histogram, is overlaid to help visualize the shape. Both components, the lepotkurtotic distribution and right-tailed distribution, can be seen in the visualization.  
-  
-The histogram to the right shows Serum Cholestorl with a Box-Cox transformation performed. Notice the much lower kurtosis value, although still postive and representing a lepotkurtotic distribution. The skewness value is nearly zero, representing much more normally-distributed data. Comparing the two histograms, it is evident the Box-Cox transformation was helpful in making the data into more of a normal distribution. This change makes it more useful for modeling purposes so the Box-Cox'd version of Serum Cholestorl will be used from here on out.
+* Regarding the left histogram:
+   * Notice the high, positive kurtosis value (please note this value is an _adjusted verison of Pearson's kurtosis_, known as the _excess kurtosis_, where three is subtracted from the original kurtosis value to provide the comparison to a normal distribution - a value of 0.0 would be the excess kurtosis value of a normal distribution) labeled on the left histogram.  
+        * This is a lepotkurtotic distribution, meaning there is more data in these tails than in the tails of a normal distribution.  
+   * The positive skewness value indicates a right-tailed distribution (a value of 0.0 would indicate a normal distribution).  
+   * The kernel density esimation, which can be thought of as a locally smoothed version of the histogram, is overlaid to help visualize the shape. Both components, the lepotkurtotic distribution and right-tailed distribution, can be seen in the visualization with the help of the overlaid kernel density esimation.  
+* The histogram to the right shows Serum Cholestorl with a Box-Cox transformation performed. 
+   * Notice the much lower kurtosis value, although still postive and representing a lepotkurtotic distribution.  
+   * The skewness value is nearly zero, representing much more normally-distributed data.  
+<br>
+Comparing the two histograms, it is evident the Box-Cox transformation was helpful in making the data into more of a normal distribution. This change makes it more useful for modeling purposes so the Box-Cox'd version of Serum Cholestorl will be used from here on out.
 
 Including the details above, this step also involved:
 * Statistical Analysis
@@ -98,15 +103,17 @@ After exploring our data to obtain a greater understanding of it and using that 
    * Feature importance techniques
    
 ## Model Visualization, Comparison, and Selection [<sub><sup>(View code)</sup></sub>](#model-visualization-comparison-and-selection)
-* ROC Curves were built based on each model's predicted probabilities to visually compare model performance at various cut-off values.  
-The four models which give predicted probabilities (Support Vector Machines do not give predicted probabilities, only class membership) are plotted below, and each plot contains seven ROC curves - one for each unique sets of variables. The most amount of variation can be seen in the Random Forest Classifier models, and the least amount in the Logistic Regression models due to the fact variables had to be statistically signifcant to be included in the model.
+* ROC Curves were built based on each model's predicted probabilities to visually compare model performance at various cut-off values. 
+<br>
+The four models which give predicted probabilities (Support Vector Machines do not give predicted probabilities, only class membership) are plotted below, and each plot contains seven ROC curves - one for each unique sets of variables.  
+* The most amount of variation can be seen in the Random Forest Classifier models, and the least amount in the Logistic Regression models due to the fact variables had to be statistically signifcant to be included in the model.
 
 ![ROC Curves](/assets/img/roc_cruves.png "ROC Curves")
 
 * The best model for each algorithm was selected based on a combination of the total patients predicted correctly and F1 Score.
 * From there, model predictions were assembled to determine which combination (or stand alone model) provided the best results.
 * A summary of the model results can be seen below.
-* The best model, the Support Vector Machine Classification Model #4, is bolded. It is the most parsimonious model which provided the optimal combination of total patients predicted correctly and F1 Score.
+* The best model, the Support Vector Machine Classification Model #4, is **bolded**. It is the most parsimonious model which provided the optimal combination of total patients predicted correctly and F1 Score.
 
 | Model(s)                                                                                                                                                   | F1 Score | Recall | Precision | Total Correct | Total Incorrect |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | :------: | :----: | :-------: | :-----------: | :-------------: |
@@ -128,7 +135,9 @@ The four models which give predicted probabilities (Support Vector Machines do n
 | Logistic Regression Three                                                                                                                                  | 0.765    | 0.736  | 0.796     | 244           | 48              |
 
 ## Visualize Best Model [<sub><sup>(View code)</sup></sub>](#visualize-best-model)
-The next step was visualizing the results of the best model in an easy to understand way. The first visual below - a confusion matrix - is a fundamental assessement tool for classification problems. It is a crosstabulation of the acutal and predicted classes and _quantifies the confusion_ of the classifier. Here it details the prediction results of the best model, the Support Vector Machine Classification Model #4.
+The next step was visualizing the results of the best model in an easy to understand way.
+<br>
+The first visual below - a confusion matrix - is a fundamental assessement tool for classification problems. It is a crosstabulation of the acutal and predicted classes and _quantifies the confusion_ of the classifier. Here it details the prediction results of the best model, the Support Vector Machine Classification Model #4.
 * The top left corner of the confusion matrix indicates the 170 patients which had no presence of heart disease (i.e., their actual value) and were predicted as such (i.e., their predicted value). These are labeled as true negatives.
 * The top right corner, designated as false positives, denotes the 16 patients which had no presence of heart disease but were deemed to have heart disease by the model.
 * The bottom left corner, known as false negatives, represents the 24 patients who actually had the presence of heart disease but were predicted by the model to not have heart disease.
@@ -137,7 +146,9 @@ When looking at a confusion matrix, we want the true negative and true positive 
 
 ![confusion_matrix_best_model](/assets/img/confusion_matrix_svc.png "Confusion Matrix of SVC Model Four")
 
-The following visualziation shows the same results as above, just now in a more concise format. This stacked bar chart condenses our results into patients who were correctly predicted and incorrectly predicted. As expected, the true negatives and true positives make up our correctly predicted bar while the false positives and false negatives make up our incorrectly predicted bar (quotation marks?). Here it is easy to see how successful the model is by how much larger the correctly predicted bar is than the incorrectly predicted bar. The model was able to accurately predicted 252 patients while only missing 40 patients.
+The following visualziation shows the same results as above, just now in a more concise format. This stacked bar chart condenses our results into patients who were correctly predicted and incorrectly predicted.
+* As expected, the true negatives and true positives make up our 'Correctly Predicted' bar while the false positives and false negatives make up our 'Incorrectly Predicted' bar.  
+* It is easy to see how successful the model is by how much larger the 'Correctly Predicted' bar is than the 'Incorrectly Predicted' bar. The model was able to **accurately predict 252 patients while only missing 40 patients**.
 
 ![stacked_bar_chart_best_model](/assets/img/stacked_bar_chart_confusion_matrix_svc.png "Stacked Bar Chart of SVC Model Four")
 
@@ -145,10 +156,10 @@ The following visualziation shows the same results as above, just now in a more 
 ## Model Usefulness [<sub><sup>(View code)</sup></sub>](#e)  
 The final step, and argubably most critical one, is explaining how the results could be utilized in a medical facility setting to benefit medical practitioners and their patients.
 * The model could be implemented, along with the patient's formal checkups and examinations, to assist medical practitioners in correctly diagnosing heart disease in their patients.  
-* It would allow practitioners to get an in-depth understanding of which factors contribute to heart disease, and set up a prehabilitation routine for their patients that would help decrease those factors (such as helping the patient establish a diet and exercise regimen to decrease their serum cholesterol). This would provide patients a path towards a clean bill of health, and prevent possible heart disease in the future.
-(add more)
-<br>
-<br>  
+* It would allow practitioners to get an in-depth understanding of which factors contribute to heart disease, and set up a prehabilitation routine for their patients that would help decrease those factors.  
+   * Such as helping the patient establish a diet to decrease their serum cholesterol and an exercise regimen that could help lower their blood pressure.
+   * This would provide patients a path towards a clean bill of health, and prevent possible heart disease in the future.
+* With the patient being in a better state of health, they can avoid distressing tests and procedures, evade medications, and get back to leading a productive, wholesome life.
 
 # Data Ingestion
 
@@ -869,6 +880,8 @@ hungarian.loc[hungarian.num > 0, "num"] = 1
 <p style="text-align: right;"><a href="#data-cleaningview-code"><sub><sup>Go Back to Data Cleaning</sup></sub></a></p> 
 
 # Exploratory Data Analysis
+
+**Determine Appropriate Alpha Value and Feature Engineering**
 ```python
 # Determine 'strong' alpha value based on sample size
 sample_size_one, strong_alpha_value_one = 100, 0.001
