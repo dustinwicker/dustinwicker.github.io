@@ -144,7 +144,8 @@ The final step, and argubably most critical one, is explaining how the results c
 * It would allow practitioners to get an in-depth understanding of which factors contribute to heart disease, and set up a prehabilitation routine for their patients that would help decrease those factors (such as helping the patient establish a diet and exercise regimen to decrease their serum cholesterol). This would provide patients a path towards a clean bill of health, and prevent possible heart disease in the future.
 (add more)
 <br>
-<br>
+<br>  
+
 # Data Ingestion
 
 **Import libraries and modules**
