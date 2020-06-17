@@ -7,9 +7,9 @@ tags: [healthcare,data science,data analysis,machine learning]
 image: heart.png
 ---
 
-The usefulness of being able to accurately anticipate and predict the presence of heart disease cannot be understated. Heart disease is the **world's _leading_ cause of death for both men and women**<sup>1</sup>.  
-* Approximately **647,000 American lives are lost _each year_** to the disease - accounting for **one in every four U.S. deaths**<sup>2,3</sup>.  
-* The cost of heart disease in the United States, from 2014 to 2015, totaled **$219 billion**<sup>3</sup>. This included the cost of health care services such as tests and procedures, medicines, and lost productivity.
+The usefulness of being able to accurately anticipate and predict the presence of heart disease cannot be understated. Heart disease is the **world's _leading_ cause of death for both men and women**<sup> 1</sup>.  
+* Approximately **647,000 American lives are lost _each year_** to the disease - accounting for **one in every four U.S. deaths**<sup> 2,3</sup>.  
+* The cost of heart disease in the United States, from 2014 to 2015, totaled **$219 billion**<sup> 3</sup>. This included the cost of health care services such as tests and procedures, medicines, and lost productivity.  
 This project details the process I took to build a model that is capable of predicting the presence of heart disease in patients as well as outlining ways to use it in order to combat the devestation caused by this disease.
 
 ## Project Summary  
@@ -34,7 +34,7 @@ Code snippets will be provided for each section outlined in the [Project Overvie
 ## vii. [Model Usefulness](#model-usefulnessview-code)
   
 ## Data Ingestion [<sub><sup>(View code)</sup></sub>](#data-ingestion)  
-The first step was obtaining the [data](https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/hungarian.data) and [data dictionary](https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/heart-disease.names) from the UCI Machine Learning Repository<sup>4</sup>. The files were saved in an appropriate location on my machine and then read into Python.
+The first step was obtaining the [data](https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/hungarian.data) and [data dictionary](https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/heart-disease.names) from the UCI Machine Learning Repository<sup> 4</sup>. The files were saved in an appropriate location and then read into Python.
 
 ## Data Cleaning [<sub><sup>(View code)</sup></sub>](#data-cleaning)
 After the data was properly read into into Python and the appropriate column names were supplied, data cleaning was performed. 
@@ -52,18 +52,22 @@ The following three images provide a sample of the analysis performed.
 
 ![Heatmap of Continous Predictor Variables](/assets/img/heatmap_continous_predictor_variables.png "Heatmap of Continous Predictor Variables")
 
-This heatmap shows correlation coefficients between each of the initial continuous variables plus two features, "Days Between Cardiac Catheterization and Electrocardiogram" and "PCA variable for 'Height at Rest' and 'Height at Peak Exercise'", created in the early stages of feature enginering. This visualization gives you information that is useful in performing data transformations and (further) feature engineering. Each unique cell, with its color, helps to provide information on the strength of the _linear_ relationship between the two variables that interact to make it up.
+This heatmap shows correlation coefficients between each of the initial continuous variables plus two features, "Days Between Cardiac Catheterization and Electrocardiogram" and "PCA variable for 'Height at Rest' and 'Height at Peak Exercise'", created in the early stages of feature enginering. This visualization gives you information that is useful in performing data transformations and further feature engineering. Each unique cell, with its color, helps to provide information on the strength of the _linear_ relationship between the two variables that interact to make it up.
 * Take, as an example, the cell that is made up of 'METs Achieved' and 'Duration of Exercise Test (Minutes).' The darker green color indicates a positive correlation which _implies_ a postive relationship between the two variables. So as 'METs Achieved' goes up, 'Duration of Exercise Test (Minutes)' has a _tendency_ of going up.
-* For an example of a negative correlation between two of the features, observe 'Maximum Heart Rate Achieved' and 'Age.' The dark pink color that makes up their cell suggest a negative corrleation - this _implies_ a negative relationship between 'Maximum Heart Rate Achieved' and 'Age.' As 'Maximum Heart Rate Achieved' goes up, 'Age' has a _tendency_ of going down.
+* For an example of a negative correlation between two features, observe 'Maximum Heart Rate Achieved' and 'Age.' The dark pink color that makes up their cell suggest a negative corrleation - this _implies_ a negative relationship between 'Maximum Heart Rate Achieved' and 'Age.' As 'Maximum Heart Rate Achieved' goes up, 'Age' has a _tendency_ of going down.
 
 ![Distribution_of_Continuous_Features_by_Target](/assets/img/distribution_of_continuous_features_by_target.png "Distributions of Continuous Features by Target")
 
 There is a histogram for each of the initial continuous features against the target variable (diagnosis of heart disease). This visualization allows you to see which of the predictor variables have noticeable differences in their distributions when split on the target and would therefore be useful in prediction.  
-* A solid example of this is 'Maximum Heart Rate Achieved.' The blue histogram, which makes up the patients who have no presence of heart disease, is shifted to the right along the x-axis. The majority of those patients are able to achieve a higher maximum heart rate than the patients which do have a presence of heart disease (the orange histogram).
+* A solid example of this is 'Maximum Heart Rate Achieved.' The blue histogram, which makes up the patients who have no presence of heart disease, is shifted to the right along the x-axis. The majority of those patients are able to achieve a higher maximum heart rate than the patients who do have a presence of heart disease (the orange histogram).
 
 ![Serum_Cholesterol_Distribution_with_KDE_Overlaid](/assets/img/chol_data_transformation.png "Serum Cholesterol Distribution with KDE Overlaid")
 
-The above histograms show Serum Cholesterol on the left with no data transformation performed. Notice the high, positive kurtosis value (please note this value is an adjusted verison of Pearson's kurtosis, known as the excess kurtosis, where three is subtracted from the original kurtosis value to provide the comparison to a normal distribution - a value of 0.0 would be the excess kurtosis value of a normal distribution). This is a lepotkurtotic distribution, meaning there is more data in these tails than in the tails of a normal distribution. The positive skewness value indicates a right-tailed distribution (again, a value of 0.0 would indicate a normal distribution). The kernel density esimation, which can be thought of as a locally smoothed version of the histogram, is overlaid to help visualize the shape. Both components, the lepotkurtotic distribution and right-tailed distribution, can be seen in the visualization.  
+The above histograms show Serum Cholesterol on the left with no data transformation performed and on the right with a Box-Cox transformation applied.  
+* Notice the high, positive kurtosis value (please note this value is an _adjusted verison of Pearson's kurtosis_, known as the _excess kurtosis_, where three is subtracted from the original kurtosis value to provide the comparison to a normal distribution - a value of 0.0 would be the excess kurtosis value of a normal distribution) labeled on the left histogram.  
+   * This is a lepotkurtotic distribution, meaning there is more data in these tails than in the tails of a normal distribution.  
+* The positive skewness value indicates a right-tailed distribution (a value of 0.0 would indicate a normal distribution).  
+* The kernel density esimation, which can be thought of as a locally smoothed version of the histogram, is overlaid to help visualize the shape. Both components, the lepotkurtotic distribution and right-tailed distribution, can be seen in the visualization.  
   
 The histogram to the right shows Serum Cholestorl with a Box-Cox transformation performed. Notice the much lower kurtosis value, although still postive and representing a lepotkurtotic distribution. The skewness value is nearly zero, representing much more normally-distributed data. Comparing the two histograms, it is evident the Box-Cox transformation was helpful in making the data into more of a normal distribution. This change makes it more useful for modeling purposes so the Box-Cox'd version of Serum Cholestorl will be used from here on out.
 
