@@ -13,7 +13,8 @@ The usefulness of being able to accurately anticipate and predict the presence o
 This project details the process I took to build a model that is capable of predicting the presence of heart disease in patients as well as outlining ways to use it in order to combat the devestation caused by this disease.
 (This project details how I predicted heart disease and explain usefulness too)  below outlines the details and usefulness of a project that predicts heart disease
 
-U+2081
+(U+2081)
+<sup>U+2081</sup>
 
 ## Project Summary  
 * **Statistical analysis**, **data mining techniques**, and **five machine learning models** were built and ensembled to **accurately predict the presence of heart disease in patients from the Hungarian Institute of Cardiology in Budapest**.  
