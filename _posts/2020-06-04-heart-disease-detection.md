@@ -9,8 +9,7 @@ image: heart.png
 
 The usefulness of being able to accurately anticipate and predict the presence of heart disease cannot be understated. Heart disease is the **world's _leading_ cause of death for both men and women**<sup> 1</sup>.  
 * Approximately **647,000 American lives are lost _each year_** to the disease - accounting for **one in every four U.S. deaths**<sup> 2,3</sup>.  
-* The cost of heart disease in the United States, from 2014 to 2015, totaled **$219 billion**<sup> 3</sup>. This included the cost of health care services such as tests and procedures, medicines, and lost productivity.  
-<br>  
+* The cost of heart disease in the United States, from 2014 to 2015, totaled **$219 billion**<sup> 3</sup>. This included the cost of health care services such as tests and procedures, medicines, and lost productivity.<br>
 This project details the process I took to build a model that is capable of predicting the presence of heart disease in patients as well as outlining ways to use it in order to combat the devestation caused by this disease.
 
 ## Project Summary  
@@ -72,8 +71,7 @@ The above histograms show Serum Cholesterol on the left with no data transformat
    * The kernel density esimation, which can be thought of as a locally smoothed version of the histogram, is overlaid to help visualize the shape. Both components, the lepotkurtotic distribution and right-tailed distribution, can be seen in the visualization with the help of the overlaid kernel density esimation.  
 * The histogram to the right shows Serum Cholestorl with a Box-Cox transformation performed. 
    * Notice the much lower kurtosis value, although still postive and representing a lepotkurtotic distribution.  
-   * The skewness value is nearly zero, representing much more normally-distributed data.  
-<br>
+   * The skewness value is nearly zero, representing much more normally-distributed data.<br>
 Comparing the two histograms, it is evident the Box-Cox transformation was helpful in making the data into more of a normal distribution. This change makes it more useful for modeling purposes so the Box-Cox'd version of Serum Cholestorl will be used from here on out.
 
 Including the details above, this step also involved:
@@ -103,8 +101,7 @@ After exploring our data to obtain a greater understanding of it and using that 
    * Feature importance techniques
    
 ## Model Visualization, Comparison, and Selection [<sub><sup>(View code)</sup></sub>](#model-visualization-comparison-and-selection)
-* ROC Curves were built based on each model's predicted probabilities to visually compare model performance at various cut-off values. 
-<br>
+* ROC Curves were built based on each model's predicted probabilities to visually compare model performance at various cut-off values.<br> 
 The four models which give predicted probabilities (Support Vector Machines do not give predicted probabilities, only class membership) are plotted below, and each plot contains seven ROC curves - one for each unique sets of variables.  
 * The most amount of variation can be seen in the Random Forest Classifier models, and the least amount in the Logistic Regression models due to the fact variables had to be statistically signifcant to be included in the model.
 
@@ -159,8 +156,7 @@ The final step, and argubably most critical one, is explaining how the results c
 * It would allow practitioners to get an in-depth understanding of which factors contribute to heart disease, and set up a prehabilitation routine for their patients that would help decrease those factors.  
    * Such as helping the patient establish a diet to decrease their serum cholesterol and an exercise regimen that could help lower their blood pressure.
    * This would provide patients a path towards a clean bill of health, and prevent possible heart disease in the future.
-* With the patient being in a better state of health, they can avoid distressing tests and procedures, evade medications, and get back to leading a productive, wholesome life.
-<br>
+* With the patient being in a better state of health, they can avoid distressing tests and procedures, evade medications, and get back to leading a productive, wholesome life.<br>
 # Data Ingestion
 
 **Import libraries and modules**
