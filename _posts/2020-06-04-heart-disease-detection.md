@@ -227,10 +227,7 @@ headers = ['id', 'ccf', 'age', 'sex', 'painloc', 'painexer', 'relrest', 'pncaden
 # Convert lists of list into DataFrame and supply column names
 hungarian = pd.DataFrame(new_file, columns=headers)
 ```
-[<sub><sup>(Go Back to Data Ingestion)</sup></sub>](#data-ingestionview-code)  
-<p style="text-align: center;"><a href="#data-ingestionview-code"><sub><sup>Go Back to Data Ingestion</sup></sub></a></p>  
-<p style="text-align: center;">Centered text</p>
-
+<p style="text-align: right;"><a href="#data-ingestionview-code"><sub><sup>Go Back to Data Ingestion</sup></sub></a></p>  
 
 # Data Cleaning
 
@@ -864,7 +861,8 @@ hungarian.loc[hungarian[impute_variable]==-9, impute_variable] = chol_prediction
 ```python
 # Set y variable to 0-1 range (as previous studies have done)
 hungarian.loc[hungarian.num > 0, "num"] = 1
-```
+```  
+<p style="text-align: right;"><a href="#data-cleaningview-code"><sub><sup>Go Back to Data Cleaning</sup></sub></a></p> 
 
 # Exploratory Data Analysis
 ```python
@@ -1330,7 +1328,8 @@ hungarian[continuous_variables].corr()[((hungarian[continuous_variables].corr() 
                                               (hungarian[continuous_variables].corr() < 1.0)) | 
                                              ((hungarian[continuous_variables].corr()<-0.6) & 
                                               (hungarian[continuous_variables].corr()>-1.0))].dropna(axis=1, how='all')
-```
+```  
+<p style="text-align: right;"><a href="#exploratory-data-analysisview-code"><sub><sup>Go Back to Exploratory Data Analysis</sup></sub></a></p> 
 
 # Model Building
 
@@ -2147,7 +2146,8 @@ top_model_results['model_type'] = top_model_results['model_type'].fillna(value='
 top_model_results.to_pickle('top_model_results.pkl')
 # Save all_model_results to csv
 all_model_results.to_pickle('all_model_results.pkl')
-```
+```  
+<p style="text-align: right;"><a href="#model-buildingview-code"><sub><sup>Go Back to Model Building</sup></sub></a></p> 
 
 # Model Visualization Comparison and Selection
 
@@ -2325,7 +2325,8 @@ model_search_all[['columns', 'f1_score', 'recall', 'precision', 'total_correct',
                                                             'recall': 'Recall', 'precision': 'Precision',
                                                             'total_correct': 'Total Correct',
                                                             'total_wrong': 'Total Incorrect'}).to_csv("final_models_table.csv", index=False)
-```
+```  
+<p style="text-align: right;"><a href="#model-visualization-comparison-and-selectionview-code"><sub><sup>Go Back to Model Visualization, Comparison, and Selection</sup></sub></a></p> 
 
 ## Visualize Best Model
 
@@ -2500,7 +2501,8 @@ plt.legend(title="Patient Outcomes", handles=[correctly_predicted_patch, incorre
 #            color='black', horizontalalignment='center')
 plt.axis('off')
 plt.show()
-```
+```  
+<p style="text-align: right;"><a href="#visualize-best-modelview-code"><sub><sup>Go Back to Visualize Best Model</sup></sub></a></p> 
 
 (Put code at bottom - base off table of contents and say for all code (script) - go to the Github page for the project (give link to heart disease))
 
