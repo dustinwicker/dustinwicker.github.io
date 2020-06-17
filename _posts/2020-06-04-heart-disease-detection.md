@@ -11,7 +11,7 @@ The usefulness of being able to accurately anticipate and predict the presence o
 * Approximately **647,000 American lives are lost _each year_** to the disease - accounting for **one in every four U.S. deaths**<sup> 2,3</sup>.  
 * The cost of heart disease in the United States, from 2014 to 2015, totaled **$219 billion**<sup> 3</sup>. This included the cost of health care services such as tests and procedures, medicines, and lost productivity.  
   
-  This project details the process I took to build a model that is capable of predicting the presence of heart disease in patients as well as outlining ways to use it in order to combat the devestation caused by this disease.
+This project details the process I took to build a model that is capable of predicting the presence of heart disease in patients as well as outlining ways to use it in order to combat the devestation caused by this disease.
 
 ## Project Summary  
 * **Statistical analysis**, **data mining techniques**, and **five machine learning models** were built and ensembled to **accurately predict the presence of heart disease in patients from the Hungarian Institute of Cardiology in Budapest**.  
