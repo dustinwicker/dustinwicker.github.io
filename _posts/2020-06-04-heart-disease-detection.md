@@ -7,14 +7,10 @@ tags: [healthcare,data science,data analysis,machine learning]
 image: heart.png
 ---
 
-The usefulness of being able to accurately anticipate and predict the presence of heart disease cannot be understated. Heart disease is the **world's _leading_ cause of death for both men and women**<sup></sup>.  
-* Approximately **647,000 American lives are lost _each year_** to the disease - accounting for **one in every four U.S. deaths**.  
-* The cost of heart disease in the United States, from 2014 to 2015, totaled **$219 billion**. This included the cost of health care services, medicines, and lost productivity. (Cite sources) 
+The usefulness of being able to accurately anticipate and predict the presence of heart disease cannot be understated. Heart disease is the **world's _leading_ cause of death for both men and women**<sup>1</sup>.  
+* Approximately **647,000 American lives are lost _each year_** to the disease - accounting for **one in every four U.S. deaths**<sup>2,3</sup>.  
+* The cost of heart disease in the United States, from 2014 to 2015, totaled **$219 billion**<sup>3</sup>. This included the cost of health care services such as tests and procedures, medicines, and lost productivity.
 This project details the process I took to build a model that is capable of predicting the presence of heart disease in patients as well as outlining ways to use it in order to combat the devestation caused by this disease.
-(This project details how I predicted heart disease and explain usefulness too)  below outlines the details and usefulness of a project that predicts heart disease
-
-(U+2081)
-<sup>U+2081</sup>
 
 ## Project Summary  
 * **Statistical analysis**, **data mining techniques**, and **five machine learning models** were built and ensembled to **accurately predict the presence of heart disease in patients from the Hungarian Institute of Cardiology in Budapest**.  
@@ -38,7 +34,7 @@ Code snippets will be provided for each section outlined in the [Project Overvie
 ## vii. [Model Usefulness](#model-usefulnessview-code)
   
 ## Data Ingestion [<sub><sup>(View code)</sup></sub>](#data-ingestion)  
-The first step was obtaining the [data](https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/hungarian.data) and [data dictionary](https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/heart-disease.names) from the UCI Machine Learning Repository. The files were saved in an appropriate location on my machine and then read into Python.
+The first step was obtaining the [data](https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/hungarian.data) and [data dictionary](https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/heart-disease.names) from the UCI Machine Learning Repository<sup>4</sup>. The files were saved in an appropriate location on my machine and then read into Python.
 
 ## Data Cleaning [<sub><sup>(View code)</sup></sub>](#data-cleaning)
 After the data was properly read into into Python and the appropriate column names were supplied, data cleaning was performed. 
@@ -2506,8 +2502,11 @@ plt.legend(title="Patient Outcomes", handles=[correctly_predicted_patch, incorre
 plt.axis('off')
 plt.show()
 ```  
-<p style="text-align: right;"><a href="#visualize-best-modelview-code"><sub><sup>Go Back to Visualize Best Model</sup></sub></a></p> 
-
-(Put code at bottom - base off table of contents and say for all code (script) - go to the Github page for the project (give link to heart disease))
+<p style="text-align: right;"><a href="#visualize-best-modelview-code"><sub><sup>Go Back to Visualize Best Model</sup></sub></a></p>   
+# References
+1. Heron, M.[Deaths: Leading causes for 2017 pdf icon[PDF – 3 M]](https://www.cdc.gov/nchs/data/nvsr/nvsr68/nvsr68_06-508.pdf). _National Vital Statistics Reports;68(6)_. Accessed November 19, 2019.  
+2. Benjamin EJ, Muntner P, Alonso A, Bittencourt MS, Callaway CW, Carson AP, et al. Heart disease and stroke statistics—2019 update: a report from the American Heart Association. _Circulation_. 2019;139(10):e56–528.  
+3. Fryar CD, Chen T-C, Li X.[Prevalence of uncontrolled risk factors for cardiovascular disease: United States, 1999–2010 pdf icon[PDF-494K]](https://www.cdc.gov/nchs/data/databriefs/db103.pdf). NCHS data brief, no. 103. Hyattsville, MD: National Center for Health Statistics; 2012. Accessed May 9, 2019.
+4. Dua, D. and Graff, C. (2019). UCI Machine Learning Repository [http://archive.ics.uci.edu/ml]. Irvine, CA: University of California, School of Information and Computer Science.
 
 Questions: how else could the model be useful? Other visuals that could be useful to visualize the results? Any strategies that could make the model more useful? Feature engineering ideas? Any questions or lack of understanding on code?
