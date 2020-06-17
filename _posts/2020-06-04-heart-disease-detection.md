@@ -7,6 +7,11 @@ tags: [healthcare,data science,data analysis,machine learning]
 image: heart.png
 ---
 
+The usefulness of being able to accurately anticipate and predict the presence of heart disease cannot be understated. Heart disease is the **world's _leading_ cause of death for both men and women**.  
+* Approximately **647,000 American lives are lost _each year_** to the disease - accounting for **one in every four U.S. deaths**.  
+* The cost of heart disease in the United States, from 2014 to 2015, totaled **$219 billion**. This included the cost of health care services, medicines, and lost productivity. (Cite sources) (give info about how my model is useful)
+(This project details how I predicted heart disease and explain usefulness too)  below outlines the details and usefulness of a project that predicts heart disease
+
 ## Project Summary  
 * **Statistical analysis**, **data mining techniques**, and **five machine learning models** were built and ensembled to **accurately predict the presence of heart disease in patients from the Hungarian Institute of Cardiology in Budapest**.  
 * The model which provided the optimal combination of total patients predicted correctly and F1 Score, while being the most parsimonious, was the **Support Vector Machine Classification Model #4**. It was able to **correctly predict** the presence, or lack thereof, of heart disease in **86% of patients**.  
@@ -16,10 +21,6 @@ A summary of this models results can be seen directly below, and a full summary 
 | Model                                                                                                                                                   | F1 Score | Recall | Precision | Total Correct | Total Incorrect |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | :------: | :----: | :-------: | :-----------: | :-------------: |
 | **Support Vector Machine Classifier Four**                                                                                                                      | **0.804**    | **0.774**  | **0.837**     | **252**           | **40**             |
-
-The usefulness of being able to accurately anticipate and predict the presence of heart disease cannot be understated. Heart disease is the **world's _leading_ cause of death for both men and women**.  
-* Approximately **647,000 American lives are lost _each year_** to the disease - accounting for **one in every four U.S. deaths**.  
-* The cost of heart disease in the United States, from 2014 to 2015, totaled **$219 billion**. This included the cost of health care services, medicines, and lost productivity. (Cite sources) (give info about how my model is useful)
  
 Code snippets will be provided for each section outlined in the [Project Overview](#project-overview) at the bottom of this page. The snippets will encompass the entire script, just broken into their related sections. If you would like to view the code script in its entirety, please visit this [link](https://github.com/dustinwicker/Heart-Disease-Detection/blob/master/heart_disease_code.py/?target=%22_blank%22).
  
@@ -51,12 +52,14 @@ The following three images provide a sample of the analysis performed.
 
 ![Heatmap of Continous Predictor Variables](/assets/img/heatmap_continous_predictor_variables.png "Heatmap of Continous Predictor Variables")
 
-This heatmap shows correlation coefficients between the initial continuous variables plus two variables, "Days Between Cardiac Catheterization and Electrocardiogram" and "PCA variable for 'Height at Rest' and 'Height at Peak Exercise'", created in the early stages of feature enginering. This visualization gives you information that is useful in performing data transformations and (further) feature engineering. 
+This heatmap shows correlation coefficients between each of the initial continuous variables plus two features, "Days Between Cardiac Catheterization and Electrocardiogram" and "PCA variable for 'Height at Rest' and 'Height at Peak Exercise'", created in the early stages of feature enginering. This visualization gives you information that is useful in performing data transformations and (further) feature engineering. Each unique cell, with its color, helps to provide information on the strength of the _linear_ relationship between the two variables that interact to make it up.
+* Take, as an example, the cell that is made up of 'METs Achieved' and 'Duration of Exercise Test (Minutes).' The darker green color indicates a positive correlation which _implies_ a postive relationship between the two variables. So as 'METs Achieved' goes up, 'Duration of Exercise Test (Minutes)' has a _tendency_ of going up.
+* For an example of a negative correlation between two of the features, observe 'Maximum Heart Rate Achieved' and 'Age.' The dark pink color that makes up their cell suggest a negative corrleation - this _implies_ a negative relationship between 'Maximum Heart Rate Achieved' and 'Age.' As 'Maximum Heart Rate Achieved' goes up, 'Age' has a _tendency_ of going down.
 
 ![Distribution_of_Continuous_Features_by_Target](/assets/img/distribution_of_continuous_features_by_target.png "Distributions of Continuous Features by Target")
 
-There is a histogram for each of the initial continuous features against the target variable (diagnosis of heart disease). This visualization allows you to see which of the predictor variables have noticeable differences in their distributions when split on the target and would therefore be useful in prediction  
-* A good example of this is "Maximum Heart Rate Achieved."
+There is a histogram for each of the initial continuous features against the target variable (diagnosis of heart disease). This visualization allows you to see which of the predictor variables have noticeable differences in their distributions when split on the target and would therefore be useful in prediction.  
+* A solid example of this is 'Maximum Heart Rate Achieved.' The blue histogram, which makes up the patients who have no presence of heart disease, is shifted to the right along the x-axis. The majority of those patients are able to achieve a higher maximum heart rate than the patients which do have a presence of heart disease (the orange histogram).
 
 ![Serum_Cholesterol_Distribution_with_KDE_Overlaid](/assets/img/chol_data_transformation.png "Serum Cholesterol Distribution with KDE Overlaid")
 
@@ -71,28 +74,28 @@ Including the details above, this step also involved:
    * Contingency Tables
    * Odds Ratios
    * Descriptive Statistics
-* Feature Engineering (do visualization will of this done?)
+* Additional Feature Engineering
 * Additional Data Visualizations
 * Additonal Data Transformations
 
 ## Model Building [<sub><sup>(View code)</sup></sub>](#model-building)
 After exploring our data to obtain a greater understanding of it and using that information to perform feature engineering and data transformations, it was time to build and optimize models.
-* Five different machine learning algorithms were used  
+* Five different machine learning algorithms were used:  
    * Logistic Regression  
    * Random Forest 
    * K-Nearest Neighbors
    * Support Vector Machine
    * Gradient Boosting
 * Seven unique sets of variables were created with each set containing continuous and categorical features
-* Each model was run on every set of variables (for a total of 35 models) - bold 35 models
-* Every model run was optimized using
+* Each model was run on every set of variables - **total of 35 models**
+* Every model run was optimized using:
    * Grid search  
    * Cross-validation
    * Feature importance techniques
    
 ## Model Visualization, Comparison, and Selection [<sub><sup>(View code)</sup></sub>](#model-visualization-comparison-and-selection)
 * ROC Curves were built based on each model's predicted probabilities to visually compare model performance at various cut-off values.  
-Below the four models which give predicted probabilities (Support Vector Machines do not give predicted probabilities, only class membership) are plotted, and each plot contains seven ROC curves - one for each unique sets of variables. The most amount of variation can be seen in the Random Forest Classifier models, and the least amount in the Logistic Regression models due to the fact variables had to be statistically signifcant to be included in the model.
+The four models which give predicted probabilities (Support Vector Machines do not give predicted probabilities, only class membership) are plotted below, and each plot contains seven ROC curves - one for each unique sets of variables. The most amount of variation can be seen in the Random Forest Classifier models, and the least amount in the Logistic Regression models due to the fact variables had to be statistically signifcant to be included in the model.
 
 ![ROC Curves](/assets/img/roc_cruves.png "ROC Curves")
 
@@ -130,7 +133,7 @@ When looking at a confusion matrix, we want the true negative and true positive 
 
 ![confusion_matrix_best_model](/assets/img/confusion_matrix_svc.png "Confusion Matrix of SVC Model Four")
 
-The following visualziation shows the same results as above, just now in a more concise format. This stacked bar chart condenses our results into correctly predicted and incorrectly predicted. As expected, the true negatives and true positives make up our correctly predicted bar while the false positives and false negatives make up our incorrectly predicted bar (quotation marks?). Here it is easy to see how successful to the model is by how much larger the correctly predicted bar is than the incorrectly predicted bar. The model was able to accurately predicted 252 patients while only missing 40 patients.
+The following visualziation shows the same results as above, just now in a more concise format. This stacked bar chart condenses our results into patients who were correctly predicted and incorrectly predicted. As expected, the true negatives and true positives make up our correctly predicted bar while the false positives and false negatives make up our incorrectly predicted bar (quotation marks?). Here it is easy to see how successful the model is by how much larger the correctly predicted bar is than the incorrectly predicted bar. The model was able to accurately predicted 252 patients while only missing 40 patients.
 
 ![stacked_bar_chart_best_model](/assets/img/stacked_bar_chart_confusion_matrix_svc.png "Stacked Bar Chart of SVC Model Four")
 
@@ -139,10 +142,9 @@ The following visualziation shows the same results as above, just now in a more 
 The final step, and argubably most critical one, is explaining how the results could be utilized in a medical facility setting to benefit medical practitioners and their patients.
 * The model could be implemented, along with the patient's formal checkups and examinations, to assist medical practitioners in correctly diagnosing heart disease in their patients.  
 * It would allow practitioners to get an in-depth understanding of which factors contribute to heart disease, and set up a prehabilitation routine for their patients that would help decrease those factors (such as helping the patient establish a diet and exercise regimen to decrease their serum cholesterol). This would provide patients a path towards a clean bill of health, and prevent possible heart disease in the future.
-
-
-
-
+(add more)
+<br>
+<br>
 # Data Ingestion
 
 **Import libraries and modules**
