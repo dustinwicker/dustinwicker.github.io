@@ -2503,7 +2503,7 @@ plt.axis('off')
 plt.show()
 ```  
 <p style="text-align: right;"><a href="#visualize-best-modelview-code"><sub><sup>Go Back to Visualize Best Model</sup></sub></a></p>   
-# References
+# References  
 1. Heron, M.[Deaths: Leading causes for 2017 pdf icon[PDF – 3 M]](https://www.cdc.gov/nchs/data/nvsr/nvsr68/nvsr68_06-508.pdf). _National Vital Statistics Reports;68(6)_. Accessed November 19, 2019.  
 2. Benjamin EJ, Muntner P, Alonso A, Bittencourt MS, Callaway CW, Carson AP, et al. Heart disease and stroke statistics—2019 update: a report from the American Heart Association. _Circulation_. 2019;139(10):e56–528.  
 3. Fryar CD, Chen T-C, Li X.[Prevalence of uncontrolled risk factors for cardiovascular disease: United States, 1999–2010 pdf icon[PDF-494K]](https://www.cdc.gov/nchs/data/databriefs/db103.pdf). NCHS data brief, no. 103. Hyattsville, MD: National Center for Health Statistics; 2012. Accessed May 9, 2019.
