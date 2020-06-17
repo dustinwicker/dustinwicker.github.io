@@ -7,10 +7,13 @@ tags: [healthcare,data science,data analysis,machine learning]
 image: heart.png
 ---
 
-The usefulness of being able to accurately anticipate and predict the presence of heart disease cannot be understated. Heart disease is the **world's _leading_ cause of death for both men and women**.  
+The usefulness of being able to accurately anticipate and predict the presence of heart disease cannot be understated. Heart disease is the **world's _leading_ cause of death for both men and women**<sup></sup>.  
 * Approximately **647,000 American lives are lost _each year_** to the disease - accounting for **one in every four U.S. deaths**.  
-* The cost of heart disease in the United States, from 2014 to 2015, totaled **$219 billion**. This included the cost of health care services, medicines, and lost productivity. (Cite sources) (give info about how my model is useful)
+* The cost of heart disease in the United States, from 2014 to 2015, totaled **$219 billion**. This included the cost of health care services, medicines, and lost productivity. (Cite sources) 
+This project details the process I took to build a model that is capable of predicting the presence of heart disease in patients as well as outlining ways to use it in order to combat the devestation caused by this disease.
 (This project details how I predicted heart disease and explain usefulness too)  below outlines the details and usefulness of a project that predicts heart disease
+
+U+2081
 
 ## Project Summary  
 * **Statistical analysis**, **data mining techniques**, and **five machine learning models** were built and ensembled to **accurately predict the presence of heart disease in patients from the Hungarian Institute of Cardiology in Budapest**.  
