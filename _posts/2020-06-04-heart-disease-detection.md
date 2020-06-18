@@ -134,8 +134,8 @@ The four models which give predicted probabilities (Support Vector Machines do n
 | Logistic Regression Three                                                                                                                                  | 0.765    | 0.736  | 0.796     | 244           | 48              |
 
 ## Visualize Best Model [<sub><sup>(View code)</sup></sub>](#visualize-best-model)
-The next step was visualizing the results of the best model in an easy to understand way.
-<br>
+The next step was visualizing the results of the best model in an easy to understand way.  
+  
 The first visual below - a confusion matrix - is a fundamental assessement tool for classification problems. It is a crosstabulation of the acutal and predicted classes and _quantifies the confusion_ of the classifier. Here it details the prediction results of the best model, the Support Vector Machine Classification Model #4.
 * The top left corner of the confusion matrix indicates the 170 patients which had no presence of heart disease (i.e., their actual value) and were predicted as such (i.e., their predicted value). These are labeled as true negatives.
 * The top right corner, designated as false positives, denotes the 16 patients which had no presence of heart disease but were deemed to have heart disease by the model.
