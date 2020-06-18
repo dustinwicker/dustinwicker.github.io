@@ -96,7 +96,7 @@ After exploring our data to obtain a greater understanding of it and using that 
    * Gradient Boosting
 * Seven unique sets of variables were created with each set containing continuous and categorical features
 * Each model was run on every set of variables - **total of 35 models**
-* Every model run was optimized using:
+* **Every model run was optimized** using:
    * Grid search  
    * Cross-validation
    * Feature importance techniques
