@@ -162,7 +162,8 @@ The final step, and argubably most critical one, is explaining how the results c
 * With the patient being in a better state of health, they can avoid distressing tests and procedures, evade medications, and get back to leading a productive, wholesome life.  
   
 # Questions for Consideration: 
-how else could the model be useful? Other visuals that could be useful to visualize the results? Any strategies that could make the model more useful? Feature engineering ideas? Any questions or lack of understanding on code?
+* How else could the model be useful? 
+* What are other visualizations that could be useful to understand the data and results? Feature engineering ideas? Any questions or lack of understanding on code?
   
 # Data Ingestion
 
