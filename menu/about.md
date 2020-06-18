@@ -2,11 +2,11 @@
 layout: page
 title: Hi, I'm Dustin! I love to use data to solve problems and help others better understand the world around them.
 ---
-<div style="text-align:center" markdown="1" "height:42px;width:42px">
+<div style="text-align:center" markdown="1" "height:42px;width:42px"
 
 ![Photo of Dustin Wicker](/assets/img/dustin_wicker.jpg "Dustin Wicker")
 
-</div>
+></div>
 
 Lagrange is a minimalist Jekyll theme. The purpose of this theme is to provide a simple, clean, content-focused blogging platform for your personal site or blog. Below you can find everything you need to get started.
 
