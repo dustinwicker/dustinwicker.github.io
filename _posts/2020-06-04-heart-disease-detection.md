@@ -1364,7 +1364,7 @@ top_model_results = pd.DataFrame(columns=['model_type', 'solver', 'best_model_pa
                                           'model_params_grid_search'])
 ```
 
-**Copy of hungarian DataFrame for Modeling and Save Target Variable for Later Use
+**Copy of hungarian DataFrame for Modeling and Save Target Variable for Later Use**
 ```python
 model = hungarian.copy()
 # Save target variable for use with pickle files
