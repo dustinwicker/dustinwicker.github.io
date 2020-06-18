@@ -158,7 +158,10 @@ The final step, and argubably most critical one, is explaining how the results c
 * It would allow practitioners to get an in-depth understanding of which factors contribute to heart disease, and set up a prehabilitation routine for their patients that would help decrease those factors.  
    * Such as helping the patient establish a diet to decrease their serum cholesterol and an exercise regimen that could help lower their blood pressure.
    * This would provide patients a path towards a clean bill of health, and prevent possible heart disease in the future.
-* With the patient being in a better state of health, they can avoid distressing tests and procedures, evade medications, and get back to leading a productive, wholesome life.<br>
+* With the patient being in a better state of health, they can avoid distressing tests and procedures, evade medications, and get back to leading a productive, wholesome life.  
+  
+  
+  
 # Data Ingestion
 
 **Import libraries and modules**
