@@ -137,13 +137,14 @@ The four models which give predicted probabilities (Support Vector Machines do n
 The next step was visualizing how the best model performed in an easy to understand way.  
   
 The first visual below - a confusion matrix - is a fundamental assessement tool for classification problems. It is a crosstabulation of the acutal and predicted classes and _quantifies the confusion_ of the classifier. Here it details the prediction results of the best model, the Support Vector Machine Classification Model #4.
+
+![confusion_matrix_best_model](/assets/img/confusion_matrix_svc.png "Confusion Matrix of SVC Model Four")  
+  
 * The top left corner of the confusion matrix indicates the 170 patients which had no presence of heart disease (i.e., their actual value) and were predicted as such (i.e., their predicted value). These are labeled as true negatives.
 * The top right corner, designated as false positives, denotes the 16 patients which had no presence of heart disease but were deemed to have heart disease by the model.
 * The bottom left corner, known as false negatives, represents the 24 patients who actually had the presence of heart disease but were predicted by the model to not have heart disease.
 * The bottom right corner shows the 82 patients who had a presence of heart disease and were correctly predicted by the model to have that presence. These patients are signified as true positives.
 When looking at a confusion matrix, we want the true negative and true positive values to be high and the false positive and false negative values to be low. This indicates a highly accurate model, which is exactly what we have here.
-
-![confusion_matrix_best_model](/assets/img/confusion_matrix_svc.png "Confusion Matrix of SVC Model Four")
 
 The following visualziation shows the same results as above, just now in a more concise format. This stacked bar chart condenses our results into patients who were correctly predicted and incorrectly predicted.
 * As expected, the true negatives and true positives make up our 'Correctly Predicted' bar while the false positives and false negatives make up our 'Incorrectly Predicted' bar.  
