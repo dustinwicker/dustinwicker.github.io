@@ -160,7 +160,8 @@ The final step, and argubably most critical one, is explaining how the results c
    * This would provide patients a path towards a clean bill of health, and prevent possible heart disease in the future.
 * With the patient being in a better state of health, they can avoid distressing tests and procedures, evade medications, and get back to leading a productive, wholesome life.  
   
-  
+# Questions for Consideration: 
+how else could the model be useful? Other visuals that could be useful to visualize the results? Any strategies that could make the model more useful? Feature engineering ideas? Any questions or lack of understanding on code?
   
 # Data Ingestion
 
@@ -2526,5 +2527,3 @@ plt.show()
 2. Benjamin EJ, Muntner P, Alonso A, Bittencourt MS, Callaway CW, Carson AP, et al. Heart disease and stroke statistics—2019 update: a report from the American Heart Association. _Circulation_. 2019;139(10):e56–528.  
 3. Fryar CD, Chen T-C, Li X.[Prevalence of uncontrolled risk factors for cardiovascular disease: United States, 1999–2010 [PDF-494K]](https://www.cdc.gov/nchs/data/databriefs/db103.pdf). NCHS data brief, no. 103. Hyattsville, MD: National Center for Health Statistics; 2012. Accessed May 9, 2019.
 4. Dua, D. and Graff, C. (2019). UCI Machine Learning Repository [[http://archive.ics.uci.edu/ml]](http://archive.ics.uci.edu/ml). Irvine, CA: University of California, School of Information and Computer Science.
-
-Questions: how else could the model be useful? Other visuals that could be useful to visualize the results? Any strategies that could make the model more useful? Feature engineering ideas? Any questions or lack of understanding on code?
