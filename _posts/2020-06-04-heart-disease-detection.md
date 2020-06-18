@@ -102,7 +102,8 @@ After exploring our data to obtain a greater understanding of it and using that 
    * Feature importance techniques
    
 ## Model Visualization, Comparison, and Selection [<sub><sup>(View code)</sup></sub>](#model-visualization-comparison-and-selection)
-* ROC Curves were built based on each model's predicted probabilities to visually compare model performance at various cut-off values.<br> 
+* ROC Curves were built based on each model's predicted probabilities to visually compare model performance at various cut-off values.  
+  
 The four models which give predicted probabilities (Support Vector Machines do not give predicted probabilities, only class membership) are plotted below, and each plot contains seven ROC curves - one for each unique sets of variables.  
 * The most amount of variation can be seen in the Random Forest Classifier models, and the least amount in the Logistic Regression models due to the fact variables had to be statistically signifcant to be included in the model.
 
