@@ -162,7 +162,7 @@ The final step, and argubably most critical one, is explaining how the results c
    * This would provide patients a path towards a clean bill of health, and prevent possible heart disease in the future.
 * With the patient being in a better state of health, they can avoid distressing tests and procedures, evade medications, and get back to leading a productive, wholesome life.  
   
-# Questions for Consideration 
+## Questions for Consideration 
 * How else could the model be useful? 
 * What are other visualizations that could be useful to understand the data and results? 
 * Are there external variables or ones that could be engineered from the existing set that could potentially improve the model's performance?
