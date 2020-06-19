@@ -229,7 +229,7 @@ file = [value.replace(",\n", "") for value in file]
 file = list(filter(None, file))
 
 # Convert list to lists of list
-attributes_per_patient = 76 # len(file)/number of patients
+attributes_per_patient = int(len(file)/294)    # len(file)/number of patients
 i = 0
 new_file = []
 while i < len(file):
