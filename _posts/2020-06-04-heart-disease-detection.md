@@ -33,7 +33,7 @@ Code snippets will be provided for each section outlined in the [Project Overvie
 ## v.   [Model Visualization, Comparison, and Selection](#model-visualization-comparison-and-selectionview-code)
 ## vi.  [Visualize Best Model](#visualize-best-modelview-code)
 ## vii. [Model Usefulness](#model-usefulnessview-code)
-## viii. [Questions for Consideration](#questions-for-consideration-1) 
+## viii.[Questions for Consideration](#questions-for-consideration) 
   
 ## Data Ingestion [<sub><sup>(View code)</sup></sub>](#data-ingestion)  
 The first step was obtaining the [data](https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/hungarian.data) and [data dictionary](https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/heart-disease.names) from the UCI Machine Learning Repository<sup> 4</sup>. The files were saved in an appropriate location and then read into Python.
