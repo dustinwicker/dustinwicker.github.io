@@ -33,6 +33,7 @@ Code snippets will be provided for each section outlined in the [Project Overvie
 ## v.   [Model Visualization, Comparison, and Selection](#model-visualization-comparison-and-selectionview-code)
 ## vi.  [Visualize Best Model](#visualize-best-modelview-code)
 ## vii. [Model Usefulness](#model-usefulnessview-code)
+## viii. [Questions for Consideration](#questions-for-consideration-1) 
   
 ## Data Ingestion [<sub><sup>(View code)</sup></sub>](#data-ingestion)  
 The first step was obtaining the [data](https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/hungarian.data) and [data dictionary](https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/heart-disease.names) from the UCI Machine Learning Repository<sup> 4</sup>. The files were saved in an appropriate location and then read into Python.
@@ -161,9 +162,10 @@ The final step, and argubably most critical one, is explaining how the results c
    * This would provide patients a path towards a clean bill of health, and prevent possible heart disease in the future.
 * With the patient being in a better state of health, they can avoid distressing tests and procedures, evade medications, and get back to leading a productive, wholesome life.  
   
-# Questions for Consideration: 
+# Questions for Consideration 
 * How else could the model be useful? 
-* What are other visualizations that could be useful to understand the data and results? Feature engineering ideas? Any questions or lack of understanding on code?
+* What are other visualizations that could be useful to understand the data and results? 
+* Are there external variables or ones that could be engineered from the existing set that could potentially improve the model's performance?
   
 # Data Ingestion
 
