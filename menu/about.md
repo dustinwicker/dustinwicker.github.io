@@ -14,3 +14,5 @@ Welcome to my blog and portfolio! This space is meant to serve two purposes:
 * A place the wonderful people I mentor, as well as others looking to gain knowledge about data science and analytics, can come and learn.
 
 [link]({{ site.github.url }}{% post_url %}
+
+[Getting Started]({{ site.github.url }}{% post_url %})
