@@ -7,7 +7,7 @@ tags: [healthcare,data science,data analysis,machine learning,statistics,data vi
 image: heart.png
 ---
 
-test4
+test5
 The usefulness of being able to accurately anticipate and predict the presence of heart disease cannot be understated. Heart disease is the **world's _leading_ cause of death for both men and women**<sup> 1</sup>.  
 * Approximately **647,000 American lives are lost _each year_** to the disease - accounting for **one in every four U.S. deaths**<sup> 2,3</sup>.  
 * The cost of heart disease in the United States, from 2014 to 2015, totaled **$219 billion**<sup> 3</sup>. This included the cost of health care services such as tests and procedures, medicines, and lost productivity.  
