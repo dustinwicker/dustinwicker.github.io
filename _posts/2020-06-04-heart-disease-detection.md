@@ -11,7 +11,7 @@ The usefulness of being able to accurately anticipate and predict the presence o
 * Approximately **647,000 American lives are lost _each year_** to the disease - accounting for **one in every four U.S. deaths**<sup> 2,3</sup>.  
 * The cost of heart disease in the United States, from 2014 to 2015, totaled **$219 billion**<sup> 3</sup>. This included the cost of health care services such as tests and procedures, medicines, and lost productivity.  
   
-This project details the process I took to build a model that is capable of predicting the presence of heart disease in patients as well as outlining ways to use it in order to combat the devestation caused by this disease.
+This project details the process I took to build a model that is capable of predicting the presence of heart disease in patients as well as outlining ways to use it in order to combat the devestation caused by the disease. Please leave a comment at the bottom of the page to let me know your thoughts about the project and the actions I took to arrive at the final model. At the end of the [Project Overview](#project-overview), there are questions posed for reflection and deliberation - feel free to answer one of those if you would like.
 
 ## Project Summary  
 * **Statistical analysis**, **data mining techniques**, and **five machine learning models** were built and ensembled to **accurately predict the presence of heart disease in patients from the Hungarian Institute of Cardiology in Budapest**.  
@@ -167,7 +167,7 @@ The final step, and argubably most critical one, is explaining how the results c
 * What are other visualizations that could be useful to understand the data and results? 
 * Are there external variables or ones that could be engineered from the existing set that could potentially improve the model's performance?
   
-# Data Ingestion
+## Data Ingestion
 
 **Import libraries and modules**
 ```python
@@ -250,7 +250,7 @@ hungarian = pd.DataFrame(new_file, columns=headers)
 ```
 <p style="text-align: right;"><a href="#data-ingestionview-code"><sub><sup>Go Back to Data Ingestion</sup></sub></a></p>  
 
-# Data Cleaning
+## Data Cleaning
 
 **Remove unnecessary columns**  
 ```python
@@ -885,7 +885,7 @@ hungarian.loc[hungarian.num > 0, "num"] = 1
 ```  
 <p style="text-align: right;"><a href="#data-cleaningview-code"><sub><sup>Go Back to Data Cleaning</sup></sub></a></p> 
 
-# Exploratory Data Analysis
+## Exploratory Data Analysis
 
 **Determine Appropriate Alpha Value and Feature Engineering**
 ```python
@@ -1354,7 +1354,7 @@ hungarian[continuous_variables].corr()[((hungarian[continuous_variables].corr() 
 ```  
 <p style="text-align: right;"><a href="#exploratory-data-analysisview-code"><sub><sup>Go Back to Exploratory Data Analysis</sup></sub></a></p> 
 
-# Model Building
+## Model Building
 
 **DataFrame to Append Model Results**
 ```python
@@ -2172,7 +2172,7 @@ all_model_results.to_pickle('all_model_results.pkl')
 ```  
 <p style="text-align: right;"><a href="#model-buildingview-code"><sub><sup>Go Back to Model Building</sup></sub></a></p> 
 
-# Model Visualization Comparison and Selection
+## Model Visualization Comparison and Selection
 
 **Load in Model Results DataFrames if Needed**
 ```python
