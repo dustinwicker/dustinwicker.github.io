@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "Central Limit Theorem"
-author: "Paul Le"
+title: "Web Scraping"
+author: "Dustin Wicker"
 categories: journal
 tags: [documentation,sample]
 image: spools.jpg
