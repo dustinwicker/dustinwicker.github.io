@@ -4,7 +4,6 @@ title: "Learning Resources"
 author: "Paul Le"
 categories: journal
 tags: [documentation,sample]
-permalink: teaching_resources.html
 image: spools.jpg
 ---
 
