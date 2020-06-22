@@ -3,7 +3,7 @@ layout: page
 title: Teaching Resources
 ---
 <ul class="posts">
-  {% for post in site.posts %}
+  {% for post in site.teaching_resources %}
 
     {% unless post.next %}
       <h3>{{ post.date | date: '%Y' }}</h3>
