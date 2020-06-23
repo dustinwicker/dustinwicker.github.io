@@ -29,3 +29,4 @@ author:              'Paul Le'
 #  path: rss-feed.xml
 collections:
   teaching:
+    output: true
