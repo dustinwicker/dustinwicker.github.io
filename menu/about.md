@@ -3,16 +3,10 @@ layout: page
 title: Hi, I'm Dustin! I love to use data to solve problems and help others better understand the world around them.
 ---
 
-<!---<div style="text-align:left" markdown="1">
+<div style="text-align:left" markdown="1">
 
 ![Photo of Dustin Wicker](/assets/img/dustin_wicker.jpg "Dustin Wicker") 
 
-</div> --->
-<div class="entry-content">
-  <p>
-    <img src="/assets/img/dustin_wicker.jpg" alt="" class="align-left"> 
-   The rest of this paragraph is filler for the sake of seeing the text wrap around the 150×150 image, which is 
-  </p>
 </div>
        
 
