@@ -9,9 +9,20 @@ title: Hi, I'm Dustin! I love to use data to solve problems and help others bett
 
 </div>  
 I work as a Data Science Mentor for Thinkful where I engage with students in a one-on-one setting, and lead them through a cirriculum specializing in Python, SQL, and Spark. Through their time with me, we work through topics such as:
-
--------:|------|----------
-1.0     |<ul><li>Supports</li><li>lists</li><li>with HTML</li></ul> |<ul><li>Supports</li><li>lists</li><li>with HTML</li></ul>
+* Data Cleaning
+* Exploratory Data Analysis
+* Visualizations
+* Web Scraping and APIs
+* Statistics
+* Experimental Design
+* A/B Testing
+* Supervised Learning
+* Unsupervised Learning
+* Deep Learning
+* Machine Learning
+* Big Data
+* Time Series 
+* Natural Language Processing
 
 FightPandemics
 my past experience includes Cognizant
