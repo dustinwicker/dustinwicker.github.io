@@ -3,7 +3,11 @@ layout: page
 title: Hi, I'm Dustin! I love to use data to solve problems and help others better understand the world around them.
 ---
 
+<div style="text-align:left" markdown="1">
 
+![Photo of Dustin Wicker](/assets/img/dustin_wicker.jpg "Dustin Wicker") Here's some text
+
+</div> 
 
 Welcome to my blog and portfolio! This space is meant to serve two purposes:  
 * A platform where I can **[post](https://dustinwicker.github.io/menu/posts.html)** to explain projects I have created and worked on. These will demonstrate the full spectrum of data science skills I possess, with explanations, visualizations, and code detailing the steps I took to solve the task at hand.
