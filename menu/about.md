@@ -10,7 +10,8 @@ title: Hi, I'm Dustin! I love to use data to solve problems and help others bett
 </div> --->
 
 <p>
-  <img src="/assets/img/dustin_wicker.jpg" alt="" class="align-left"> "The rest of this paragraph is filler for the sake of seeing the text wrap around the 150×150 image, which is" 
+  <img src="/assets/img/dustin_wicker.jpg" alt="" class="align-left"> 
+  " The rest of this paragraph is filler for the sake of seeing the text wrap around the 150×150 image, which is " 
 </p>
        
 
