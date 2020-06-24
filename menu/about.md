@@ -7,9 +7,7 @@ title: Hi, I'm Dustin! I love to use data to solve problems and help others bett
     <img src="/assets/img/dustin_wicker.jpg" alt="img"/>
 </div>
 <div style="display:inline-block;">
-    <div>This is some text. This is some more text. This is some more text.This is some more text.This is some more text.This is some more text.This is some more text.This is some more text.This is some more text.This is some more text.This is some more text.This is some more text.This is some more text.This is some more text.This is some more text.This is some more text.</div>
-    <div>Feel free to contact me at any of the below and continue reading to learn more about my website! I hope you enjoy.</div>
-    <div>Phoner</div>
+    <div>This is some text.</div>
 </div>
 
 Welcome to my blog and portfolio! This space is meant to serve two purposes:  
