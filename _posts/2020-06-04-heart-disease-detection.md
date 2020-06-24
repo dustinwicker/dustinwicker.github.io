@@ -172,7 +172,7 @@ The final step, and argubably most critical one, is explaining how the results c
   
 ## Data Ingestion
 
-**Import libraries and modules**
+**Import Libraries and Packages**
 ```python
 import os
 import yaml
@@ -255,7 +255,7 @@ hungarian = pd.DataFrame(new_file, columns=headers)
 
 ## Data Cleaning
 
-**Remove unnecessary columns**  
+**Remove Unnecessary Columns**  
 ```python
 # List of columns to drop
 cols_to_drop =['ccf', 'pncaden', 'smoke', 'cigs', 'years', 'dm', 'famhist', 'dig', 'ca', 'restckm', 'exerckm',
@@ -267,13 +267,13 @@ cols_to_drop =['ccf', 'pncaden', 'smoke', 'cigs', 'years', 'dm', 'famhist', 'dig
 hungarian = hungarian.drop(columns=cols_to_drop)  
 ```
 
-**Convert column types**  
+**Convert Column Types**  
 ```python
 # Convert all columns to numeric
 hungarian = hungarian.apply(pd.to_numeric)
 ```
 
-**Correct data discrepancies**  
+**Correct Data Discrepancies**  
 ```python
 ### Fix possible patient id issues
 # Find ids that are not unique to patients
@@ -283,7 +283,7 @@ print(hungarian.id.value_counts()[hungarian.id.value_counts()!=1])
 hungarian.loc[hungarian.loc[hungarian.id==1132].index[-1], 'id'] = hungarian.id.max() + 1
 ```
 
-**Remove patients with a large percentage of missing values**  
+**Remove Patients with a Large Percentage of Missing Values**  
 ```python
 # Drop patients with "significant" number of missing values (use 10%, can adjust accordingly)
 # Determine missing value percentage per patient (-9 is the missing attribute value)
@@ -293,7 +293,7 @@ missing_value_perc_per_patient = (hungarian == -9).sum(axis=1)[(hungarian == -9)
 # Remove patients with > 10% missing values
 hungarian = hungarian.drop(missing_value_perc_per_patient[missing_value_perc_per_patient>0.10].index.values)
 ```
-**Impute missing values using K-Nearest Neighbors**  
+**Impute Missing Values Using K-Nearest Neighbors**  
 ```python
 ### Imputing missing values (marked as -9 per data dictionary)
 cols_with_missing_values = [(col, hungarian[col].value_counts()[-9]) for col in list(hungarian) if -9 in hungarian[col].unique()]
@@ -881,7 +881,7 @@ for i in range(0, len(chol_prediction)):
 # Supply prediction back to appropriate patient
 hungarian.loc[hungarian[impute_variable]==-9, impute_variable] = chol_prediction
 ```
-**Set target variable to binary range**
+**Set Target Variable to Binary Range**
 ```python
 # Set y variable to 0-1 range (as previous studies have done)
 hungarian.loc[hungarian.num > 0, "num"] = 1
