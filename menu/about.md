@@ -10,16 +10,7 @@ title: Hi, I'm Dustin! I love to use data to solve problems and help others bett
 </div>  
 I work as a Data Science Mentor for Thinkful where I engage with students in a one-on-one setting, and lead them through a cirriculum specializing in Python, SQL, and Spark. Through their time with me, we work through topics such as:
 
-<table border="0">
- <tr>
-    <td><b style="font-size:30px">Title</b></td>
-    <td><b style="font-size:30px">Title 2</b></td>
- </tr>
- <tr>
-    <td>Lorem ipsum ...</td>
-    <td>Lorem ipsum ...</td>
- </tr>
-</table>
+* hello                 * goodbye
 
 FightPandemics
 my past experience includes Cognizant
