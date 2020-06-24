@@ -23,6 +23,7 @@ I work as a Data Science Mentor for Thinkful where I engage with students in a o
 * Natural Language Processing
 * Big Data
 * Web Scraping and APIs  
+
 Along the way, I help them to assimiliate professional development and interview skills, build their personal portfolio, and offer resume writing tips.  
   
 The opportunity to teach people the full data science stack is an absolute blessing. I am able to interact with a wonderful group of individuals and strengthen my understanding of key data science topics. However, I want to push myself to learn new things, stretch my abilities to gain more skills, and help others in a different way. Mentoring is certainly something I will do in some capacity for a long time as I love teaching others, but I am open to new job opportunities, whether they are the full-time or freelancing type.
