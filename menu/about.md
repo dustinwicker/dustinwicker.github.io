@@ -3,18 +3,12 @@ layout: page
 title: Hi, I'm Dustin! I love to use data to solve problems and help others better understand the world around them.
 ---
 
-<div style="text-align:left" markdown="1">
-
-![Photo of Dustin Wicker](/assets/img/dustin_wicker.jpg "Dustin Wicker")
-
-</div> 
-
 <div style="display:inline-block;vertical-align:top;">
     <img src="/assets/img/dustin_wicker.jpg" alt="img"/>
 </div>
 <div style="display:inline-block;">
-    <div>Email</div>
-    <div>Gender</div>
+    <div>This is some text. This is some more text. This is some more text.This is some more text.This is some more text.This is some more text.This is some more text.This is some more text.This is some more text.This is some more text.This is some more text.This is some more text.This is some more text.This is some more text.This is some more text.This is some more text.</div>
+    <div>Feel free to contact me at any of the below and continue reading to learn more about my website! I hope you enjoy.</div>
     <div>Phoner</div>
 </div>
 
