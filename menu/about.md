@@ -3,12 +3,28 @@ layout: page
 title: Hi, I'm Dustin! I love to use data to solve problems and help others better understand the world around them.
 ---
 
-<div style="text-align:left" markdown="1">
+<div style="text-align:center" markdown="1">
 
 ![Photo of Dustin Wicker](/assets/img/dustin_wicker.jpg "Dustin Wicker") 
 
-</div>
-       
+</div>  
+I work as a Data Science Mentor for Thinkful where I engage with students in a one-on-one setting, and lead them through a cirriculum specializing in Python, SQL, and Spark. Through their time with me, we work through topics such as:
+
+<table border="0">
+ <tr>
+    <td><b style="font-size:30px">Title</b></td>
+    <td><b style="font-size:30px">Title 2</b></td>
+ </tr>
+ <tr>
+    <td>Lorem ipsum ...</td>
+    <td>Lorem ipsum ...</td>
+ </tr>
+</table>
+
+FightPandemics
+my past experience includes Cognizant
+
+
 
 Welcome to my blog and portfolio! This space is meant to serve two purposes:  
 * A platform where I can **[post](https://dustinwicker.github.io/menu/posts.html)** to explain projects I have created and worked on. These will demonstrate the full spectrum of data science skills I possess, with explanations, visualizations, and code detailing the steps I took to solve the task at hand.
