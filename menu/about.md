@@ -8,7 +8,7 @@ title: Hi, I'm Dustin! I love to use data to solve problems and help others bett
 </div>
 <div style="display:inline-block;">
     <div>I am a Data Science Mentor for Thinkful.</div>
-    <div>Please feel free to reach out to me at any of the links listed under my **[Contact Information]**(https://dustinwicker.github.io/menu/contact.html).</div>
+    <div>Please feel free to reach out to me at any of the links listed under my **[Contact Information](https://dustinwicker.github.io/menu/contact.html)**.</div>
 </div>
 
 Welcome to my blog and portfolio! This space is meant to serve two purposes:  
