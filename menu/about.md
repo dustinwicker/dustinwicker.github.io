@@ -4,7 +4,7 @@ title: Hi, I'm Dustin! I love to use data to solve problems and help others bett
 ---
 
 <div style="text-align:left" markdown="1">
-<p>test</p>
+
 ![Photo of Dustin Wicker](/assets/img/dustin_wicker.jpg "Dustin Wicker")
 </div> 
 
