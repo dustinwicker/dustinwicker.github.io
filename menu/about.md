@@ -8,11 +8,12 @@ title: Hi, I'm Dustin! I love to use data to solve problems and help others bett
 ![Photo of Dustin Wicker](/assets/img/dustin_wicker.jpg "Dustin Wicker") 
 
 </div> --->
-
-<p>
-  <img src="/assets/img/dustin_wicker.jpg" alt="" class="align-left"> 
+<div class="entry-content">
+  <p>
+    <img src="/assets/img/dustin_wicker.jpg" alt="" class="align-left"> 
    The rest of this paragraph is filler for the sake of seeing the text wrap around the 150×150 image, which is 
-</p>
+  </p>
+</div>
        
 
 Welcome to my blog and portfolio! This space is meant to serve two purposes:  
