@@ -7,11 +7,13 @@ tags: [healthcare,data science,data analysis,machine learning,statistics,data vi
 image: heart.png
 ---
 
-The usefulness of being able to accurately anticipate and predict the presence of heart disease cannot be understated. Heart disease is the **world's _leading_ cause of death for both men and women**<sup> 1</sup>.  
-* Approximately **647,000 American lives are lost _each year_** to the disease - accounting for **one in every four U.S. deaths**<sup> 2,3</sup>.  
+The usefulness of being able to accurately anticipate and predict the presence of heart disease cannot be understated. Heart disease is the **world's** **_leading_** **cause of death for both men and women**<sup> 1</sup>.  
+* Approximately **647,000 American lives are lost** **_each year_** to the disease - accounting for **one in every four U.S. deaths**<sup> 2,3</sup>.  
 * The cost of heart disease in the United States, from 2014 to 2015, totaled **$219 billion**<sup> 3</sup>. This included the cost of health care services such as tests and procedures, medicines, and lost productivity.  
   
-This project details the process I took to build a model that is capable of predicting the presence of heart disease in patients as well as outlining ways to use it in order to combat the devestation caused by the disease. Please leave a comment at the bottom of the page to let me know your thoughts about the project and the actions I took to arrive at the final model. At the end of the [Project Overview](#project-overview), there are questions posed for reflection and deliberation - feel free to answer one of those if you would like.
+This project details the process I took to build a model that is capable of predicting the presence of heart disease in patients as well as outlining ways to use it in order to combat the devastation caused by the disease.  
+  
+ Please leave a comment at the bottom of the page to let me know your thoughts on the project and the actions I took to arrive at the final model. At the end of the [Project Overview](#project-overview), there are questions posed for reflection and deliberation - feel free to answer one of those too if you would like.
 
 ## Project Summary  
 * **Statistical analysis**, **data mining techniques**, and **five machine learning models** were built and ensembled to **accurately predict the presence of heart disease in patients from the Hungarian Institute of Cardiology in Budapest**.  
@@ -23,7 +25,7 @@ A summary of this models results can be seen directly below, and a full summary 
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | :------: | :----: | :-------: | :-----------: | :-------------: |
 | **Support Vector Machine Classifier Four**                                                                                                                      | **0.804**    | **0.774**  | **0.837**     | **252**           | **40**             |
  
-Code snippets will be provided for each section outlined in the [Project Overview](#project-overview) at the bottom of this page. The snippets will encompass the entire script, just broken into their related sections. If you would like to view the code script in its entirety, please visit this [link](https://github.com/dustinwicker/Heart-Disease-Detection/blob/master/heart_disease_code.py/?target=%22_blank%22).
+Code snippets will be provided for each section outlined in the [Project Overview](#project-overview) at the bottom of the page. The snippets will encompass the entire script, broken into their related sections. If you would like to view the code script in its entirety, please visit this [link](https://github.com/dustinwicker/Heart-Disease-Detection/blob/master/heart_disease_code.py/?target=%22_blank%22).
  
 # Project Overview  
 ## i.    [Data Ingestion](#data-ingestionview-code)
@@ -39,7 +41,7 @@ Code snippets will be provided for each section outlined in the [Project Overvie
 The first step was obtaining the [data](https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/hungarian.data) and [data dictionary](https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/heart-disease.names) from the UCI Machine Learning Repository<sup> 4</sup>. The files were saved in an appropriate location and then read into Python.
 
 ## Data Cleaning [<sub><sup>(View code)</sup></sub>](#data-cleaning)
-After the data was properly read into into Python and the appropriate column names were supplied, data cleaning was performed. 
+After the data was properly read into Python and the appropriate column names were supplied, data cleaning was performed. 
 This involved:
 * Removing unnecessary columns
 * Converting column types
@@ -54,26 +56,27 @@ The following three images provide a sample of the analysis performed.
 
 ![Heatmap of Continous Predictor Variables](/assets/img/heatmap_continous_predictor_variables.png "Heatmap of Continous Predictor Variables")
 
-This heatmap shows correlation coefficients between each of the initial continuous variables plus two features, "Days Between Cardiac Catheterization and Electrocardiogram" and "PCA variable for 'Height at Rest' and 'Height at Peak Exercise'", created in the early stages of feature enginering. This visualization gives you information that is useful in performing data transformations and further feature engineering. Each unique cell, with its color, helps to provide information on the strength of the _linear_ relationship between the two variables that interact to make it up.
+This heatmap shows correlation coefficients between each of the initial continuous variables plus two features, "Days Between Cardiac Catheterization and Electrocardiogram" and "PCA variable for 'Height at Rest' and 'Height at Peak Exercise'", created in the early stages of feature engineering. This visualization gives you information that is useful in performing data transformations and further feature engineering. Each unique cell, with its color, helps to provide information on the strength of the _linear_ relationship between the two variables that interact to make it up.
 * Take, as an example, the cell that is made up of 'METs Achieved' and 'Duration of Exercise Test (Minutes).' The darker green color indicates a positive correlation which _implies_ a postive relationship between the two variables. So as 'METs Achieved' goes up, 'Duration of Exercise Test (Minutes)' has a _tendency_ of going up.
-* For an example of a negative correlation between two features, observe 'Maximum Heart Rate Achieved' and 'Age.' The dark pink color that makes up their cell suggest a negative corrleation - this _implies_ a negative relationship between 'Maximum Heart Rate Achieved' and 'Age.' As 'Maximum Heart Rate Achieved' goes up, 'Age' has a _tendency_ of going down.
+* For an example of a negative correlation between two features, observe 'Maximum Heart Rate Achieved' and 'Age.' The dark pink color that makes up this cell suggests a negative corrleation - this _implies_ a negative relationship between 'Maximum Heart Rate Achieved' and 'Age.' As 'Maximum Heart Rate Achieved' goes up, 'Age' has a _tendency_ of going down.
+  
 
 ![Distribution_of_Continuous_Features_by_Target](/assets/img/distribution_of_continuous_features_by_target.png "Distributions of Continuous Features by Target")
 
-There is a histogram for each of the initial continuous features against the target variable (diagnosis of heart disease). This visualization allows you to see which of the predictor variables have noticeable differences in their distributions when split on the target and would therefore be useful in prediction.  
+Above, there is a histogram for each of the initial continuous features against the target variable (diagnosis of heart disease) plus the two features created in the early stages of feature engineering, "Days Between Cardiac Catheterization and Electrocardiogram" and "PCA variable for 'Height at Rest' and 'Height at Peak Exercise'." This visualization allows you to see which of the predictor variables have noticeable differences in their distributions when split on the target, and would therefore be useful in prediction.  
 * A solid example of this is 'Maximum Heart Rate Achieved.' The blue histogram, which makes up the patients who have no presence of heart disease, is shifted to the right along the x-axis. The majority of those patients are able to achieve a higher maximum heart rate than the patients who do have a presence of heart disease (the orange histogram).
 
 ![Serum_Cholesterol_Distribution_with_KDE_Overlaid](/assets/img/chol_data_transformation.png "Serum Cholesterol Distribution with KDE Overlaid")
 
 The above histograms show Serum Cholesterol on the left with no data transformation performed and on the right with a Box-Cox transformation applied.  
 * Regarding the left histogram:
-   * Notice the high, positive kurtosis value (please note this value is an _adjusted verison of Pearson's kurtosis_, known as the _excess kurtosis_, where three is subtracted from the original kurtosis value to provide the comparison to a normal distribution - a value of 0.0 would be the excess kurtosis value of a normal distribution) labeled on the left histogram.  
-        * This is a lepotkurtotic distribution, meaning there is more data in these tails than in the tails of a normal distribution.  
+   * Notice the high, positive kurtosis value (please note this value is an _adjusted verison of Pearson's kurtosis_, known as _excess kurtosis_, where three is subtracted from the original kurtosis value to provide the comparison to a normal distribution - a value of 0.0 would be the excess kurtosis value of a normal distribution) labeled on the left histogram.  
+        * This is a leptokurtotic distribution, meaning there is more data in these tails than in the tails of a normal distribution.  
    * The positive skewness value indicates a right-tailed distribution (a value of 0.0 would indicate a normal distribution).  
-   * The kernel density esimation, which can be thought of as a locally smoothed version of the histogram, is overlaid to help visualize the shape. Both components, the lepotkurtotic distribution and right-tailed distribution, can be seen in the visualization with the help of the overlaid kernel density esimation.  
+   * The kernel density estimation, which can be thought of as a locally smoothed version of the histogram, is overlaid to help visualize the shape. Both components, the lepotokurtotic distribution and right-tailed distribution, can be seen in the visualization with the help of the overlaid kernel density estimation.  
 * The histogram to the right shows Serum Cholestorl with a Box-Cox transformation performed. 
-   * Notice the much lower kurtosis value, although still postive and representing a lepotkurtotic distribution.  
-   * The skewness value is nearly zero, representing much more normally-distributed data.<br>
+   * Notice the much lower kurtosis value, although still postive and representing a leptokurtotic distribution.  
+   * The skewness value is now nearly zero, representing much more normally-distributed data.  
 Comparing the two histograms, it is evident the Box-Cox transformation was helpful in making the data into more of a normal distribution. This change makes it more useful for modeling purposes so the Box-Cox'd version of Serum Cholestorl will be used from here on out.
 
 Including the details above, this step also involved:
@@ -96,7 +99,7 @@ After exploring our data to obtain a greater understanding of it and using that 
    * Support Vector Machine
    * Gradient Boosting
 * Seven unique sets of variables were created with each set containing continuous and categorical features
-* Each model was run on every set of variables - **total of 35 models**
+* Each model was run on every set of variables for a **total of 35 models**
 * **Every model run was optimized** using:
    * Grid search  
    * Cross-validation
@@ -104,13 +107,13 @@ After exploring our data to obtain a greater understanding of it and using that 
    
 ## Model Visualization, Comparison, and Selection [<sub><sup>(View code)</sup></sub>](#model-visualization-comparison-and-selection)
 * ROC Curves were built based on each model's predicted probabilities to visually compare model performance at various cut-off values.  
+
+![ROC Curves](/assets/img/roc_cruves.png "ROC Curves")  
   
-The four models which give predicted probabilities (Support Vector Machines do not give predicted probabilities, only class membership) are plotted below, and each plot contains seven ROC curves - one for each unique sets of variables.  
-* The most amount of variation can be seen in the Random Forest Classifier models, and the least amount in the Logistic Regression models due to the fact variables had to be statistically signifcant to be included in the model.
+The four models which give predicted probabilities (Support Vector Machines do not give predicted probabilities, only class membership) are plotted above, and each plot contains seven ROC curves - one for each unique model run.  
+* The most amount of variation can be seen in the Random Forest Classifier models, and the least amount in the Logistic Regression models due to the fact variables had to be statistically signifcant to be included in the latter model.  
 
-![ROC Curves](/assets/img/roc_cruves.png "ROC Curves")
-
-* The best model for each algorithm was selected based on a combination of the total patients predicted correctly and F1 Score.
+* The best model for each of the five algorithms was selected based on a combination of the total patients predicted correctly and F1 Score.
 * From there, model predictions were assembled to determine which combination (or stand alone model) provided the best results.
 * A summary of the model results can be seen below.
 * The best model, the Support Vector Machine Classification Model #4, is **bolded**. It is the most parsimonious model which provided the optimal combination of total patients predicted correctly and F1 Score.
@@ -169,7 +172,7 @@ The final step, and argubably most critical one, is explaining how the results c
   
 ## Data Ingestion
 
-**Import libraries and modules**
+**Import Libraries and Packages**
 ```python
 import os
 import yaml
@@ -252,7 +255,7 @@ hungarian = pd.DataFrame(new_file, columns=headers)
 
 ## Data Cleaning
 
-**Remove unnecessary columns**  
+**Remove Unnecessary Columns**  
 ```python
 # List of columns to drop
 cols_to_drop =['ccf', 'pncaden', 'smoke', 'cigs', 'years', 'dm', 'famhist', 'dig', 'ca', 'restckm', 'exerckm',
@@ -264,13 +267,13 @@ cols_to_drop =['ccf', 'pncaden', 'smoke', 'cigs', 'years', 'dm', 'famhist', 'dig
 hungarian = hungarian.drop(columns=cols_to_drop)  
 ```
 
-**Convert column types**  
+**Convert Column Types**  
 ```python
 # Convert all columns to numeric
 hungarian = hungarian.apply(pd.to_numeric)
 ```
 
-**Correct data discrepancies**  
+**Correct Data Discrepancies**  
 ```python
 ### Fix possible patient id issues
 # Find ids that are not unique to patients
@@ -280,7 +283,7 @@ print(hungarian.id.value_counts()[hungarian.id.value_counts()!=1])
 hungarian.loc[hungarian.loc[hungarian.id==1132].index[-1], 'id'] = hungarian.id.max() + 1
 ```
 
-**Remove patients with a large percentage of missing values**  
+**Remove Patients with a Large Percentage of Missing Values**  
 ```python
 # Drop patients with "significant" number of missing values (use 10%, can adjust accordingly)
 # Determine missing value percentage per patient (-9 is the missing attribute value)
@@ -290,7 +293,7 @@ missing_value_perc_per_patient = (hungarian == -9).sum(axis=1)[(hungarian == -9)
 # Remove patients with > 10% missing values
 hungarian = hungarian.drop(missing_value_perc_per_patient[missing_value_perc_per_patient>0.10].index.values)
 ```
-**Impute missing values using K-Nearest Neighbors**  
+**Impute Missing Values Using K-Nearest Neighbors**  
 ```python
 ### Imputing missing values (marked as -9 per data dictionary)
 cols_with_missing_values = [(col, hungarian[col].value_counts()[-9]) for col in list(hungarian) if -9 in hungarian[col].unique()]
@@ -878,7 +881,7 @@ for i in range(0, len(chol_prediction)):
 # Supply prediction back to appropriate patient
 hungarian.loc[hungarian[impute_variable]==-9, impute_variable] = chol_prediction
 ```
-**Set target variable to binary range**
+**Set Target Variable to Binary Range**
 ```python
 # Set y variable to 0-1 range (as previous studies have done)
 hungarian.loc[hungarian.num > 0, "num"] = 1
