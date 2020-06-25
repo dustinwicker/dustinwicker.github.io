@@ -4,6 +4,8 @@
     less than 1 minute read
   {% elsif words < 360 %}
     1 minute read
+  {% elsif words < 13000 %}
+    20 minute read
   {% else %}
     {{ words | divided_by:180 }} minute read
   {% endif %}
