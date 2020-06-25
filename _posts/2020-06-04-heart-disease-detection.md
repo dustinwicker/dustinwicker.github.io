@@ -116,7 +116,7 @@ The four models which give predicted probabilities (Support Vector Machines do n
 * The best model for each of the five algorithms was selected based on a combination of the total patients predicted correctly and F1 Score.
 * From there, model predictions were assembled to determine which combination (or stand alone model) provided the best results.
 * A summary of the model results can be seen below.
-* The best model, the Support Vector Machine Classification Model #4, is **bolded**. It is the most parsimonious model which provided the optimal combination of total patients predicted correctly and F1 Score.
+   * The best model, the Support Vector Machine Classification Model #4, is **bolded**. It is the most parsimonious model which provided the optimal combination of total patients predicted correctly and F1 Score.
 
 | Model(s)                                                                                                                                                   | F1 Score | Recall | Precision | Total Correct | Total Incorrect |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | :------: | :----: | :-------: | :-----------: | :-------------: |
@@ -144,10 +144,10 @@ The first visual below - a confusion matrix - is a fundamental assessement tool 
 
 ![confusion_matrix_best_model](/assets/img/confusion_matrix_svc.png "Confusion Matrix of SVC Model Four")  
   
-* The top left corner of the confusion matrix indicates the 170 patients which had no presence of heart disease (i.e., their actual value) and were predicted as such (i.e., their predicted value). These are labeled as true negatives.
-* The top right corner, designated as false positives, denotes the 16 patients which had no presence of heart disease but were deemed to have heart disease by the model.
+* The top left corner of the confusion matrix indicates the 170 patients who had no presence of heart disease (i.e., their actual value) and were predicted as such (i.e., their predicted value). These are labeled as true negatives.
+* The top right corner, designated as false positives, denotes the 16 patients who had no presence of heart disease but were deemed to have heart disease by the model.
 * The bottom left corner, known as false negatives, represents the 24 patients who actually had the presence of heart disease but were predicted by the model to not have heart disease.
-* The bottom right corner shows the 82 patients who had a presence of heart disease and were correctly predicted by the model to have that presence. These patients are signified as true positives.
+* The bottom right corner shows the 82 patients who had a presence of heart disease and were correctly predicted by the model to have that presence. These patients are signified as true positives.  
 When looking at a confusion matrix, we want the true negative and true positive values to be high and the false positive and false negative values to be low. This indicates a highly accurate model, which is exactly what we have here.
 
 The next visualziation shows the same results as above, just now in a more concise format. This stacked bar chart condenses our results into patients who were correctly predicted and incorrectly predicted.
