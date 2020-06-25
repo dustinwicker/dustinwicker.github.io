@@ -34,7 +34,7 @@ Code snippets will be provided for each section outlined in the [Project Overvie
 ## iv.  [Model Building](#model-buildingview-code)
 ## v.   [Model Visualization, Comparison, and Selection](#model-visualization-comparison-and-selectionview-code)
 ## vi.  [Visualize Best Model](#visualize-best-modelview-code)
-## vii. [Model Usefulness](#model-usefulnessview-code)
+## vii. [Model Usefulness](#model-usefulness-1)
 ## viii.[Questions for Consideration](#questions-for-consideration) 
   
 ## Data Ingestion [<sub><sup>(View code)</sup></sub>](#data-ingestion)  
