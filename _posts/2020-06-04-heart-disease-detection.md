@@ -110,8 +110,7 @@ After exploring our data to obtain a greater understanding of it and using that 
 
 ![ROC Curves](/assets/img/roc_cruves.png "ROC Curves")  
   
-The four models which give predicted probabilities (Support Vector Machines do not give predicted probabilities, only class membership) are plotted above, and each plot contains seven ROC curves - one for each unique model run.  
-   * The most amount of variation can be seen in the Random Forest Classifier models, and the least amount in the Logistic Regression models due to the fact variables had to be statistically signifcant to be included in the latter model.  
+The four models which give predicted probabilities (Support Vector Machines do not give predicted probabilities, only class membership) are plotted above, and each plot contains seven ROC curves - one for each unique model run. The most amount of variation can be seen in the Random Forest Classifier models, and the least amount in the Logistic Regression models due to the fact variables had to be statistically signifcant to be included in the latter model.  
 
 * The best model for each of the five algorithms was selected based on a combination of the total patients predicted correctly and F1 Score.
 * From there, model predictions were assembled to determine which combination (or stand alone model) provided the best results.
@@ -140,7 +139,7 @@ The four models which give predicted probabilities (Support Vector Machines do n
 ## Visualize Best Model [<sub><sup>(View code)</sup></sub>](#visualize-best-model)
 The next step was visualizing how the best model performed in an easy to understand way.  
   
-The first visual below - a confusion matrix - is a fundamental assessement tool for classification problems. It is a crosstabulation of the acutal and predicted classes and _quantifies the confusion_ of the classifier. Here it details the prediction results of the best model, the Support Vector Machine Classification Model #4.
+The first visual below - a **confusion matrix**  - is a fundamental assessement tool for classification problems. It is a crosstabulation of the acutal and predicted classes and _quantifies the confusion_ of the classifier. Here it details the prediction results of the best model, the Support Vector Machine Classification Model #4.
 
 ![confusion_matrix_best_model](/assets/img/confusion_matrix_svc.png "Confusion Matrix of SVC Model Four")  
   
@@ -150,7 +149,7 @@ The first visual below - a confusion matrix - is a fundamental assessement tool 
 * The bottom right corner shows the 82 patients who had a presence of heart disease and were correctly predicted by the model to have that presence. These patients are signified as true positives.  
 When looking at a confusion matrix, we want the true negative and true positive values to be high and the false positive and false negative values to be low. This indicates a highly accurate model, which is exactly what we have here.
 
-The next visualziation shows the same results as above, just now in a more concise format. This stacked bar chart condenses our results into patients who were correctly predicted and those who were incorrectly predicted.
+The next visualziation shows the same results as above, just now in a more concise format. This **stacked bar chart**  condenses our results into patients who were correctly predicted and those who were incorrectly predicted.
 
 ![stacked_bar_chart_best_model](/assets/img/stacked_bar_chart_confusion_matrix_svc.png "Stacked Bar Chart of SVC Model Four")  
   
