@@ -146,6 +146,7 @@ The first visual below - a **confusion matrix**  - is a fundamental assessement 
 * The top right corner, designated as false positives, denotes the 16 patients who had no presence of heart disease but were deemed to have heart disease by the model.
 * The bottom left corner, known as false negatives, represents the 24 patients who actually had the presence of heart disease but were predicted by the model to not have heart disease.
 * The bottom right corner shows the 82 patients who had a presence of heart disease and were correctly predicted by the model to have that presence. These patients are signified as true positives.  
+  
 When looking at a confusion matrix, we want the true negative and true positive values to be high and the false positive and false negative values to be low. This indicates a highly accurate model, which is exactly what we have here.
 
 The next visualziation shows the same results as above, just now in a more concise format. This **stacked bar chart**  condenses our results into patients who were correctly predicted and those who were incorrectly predicted.
