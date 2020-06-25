@@ -157,10 +157,10 @@ The next visualziation shows the same results as above, just now in a more conci
 * It is easy to see how successful the model is by how much larger the 'Correctly Predicted' bar is than the 'Incorrectly Predicted' bar. The model was able to **accurately predict 252 patients while only missing 40 patients**.
 
 ## Model Usefulness 
-The final step, and argubably most critical one, is explaining how the results could be utilized in a medical facility setting to benefit medical practitioners and their patients.
+The final step, and argubably the most critical one, is explaining how the results could be utilized in a medical facility setting to benefit medical practitioners and their patients.
 * The model could be implemented, along with the patient's formal checkups and examinations, to assist medical practitioners in correctly diagnosing heart disease in their patients.  
 * It would allow practitioners to get an in-depth understanding of which factors contribute to heart disease, and set up a prehabilitation routine for their patients that would help decrease those factors.  
-   * Such as helping the patient establish a diet to decrease their serum cholesterol and an exercise regimen that could help lower their blood pressure.
+   * Parts of the routine would include helping the patient establish a diet to decrease their serum cholesterol and formulating an exercise regimen that could help lower their blood pressure.
    * This would provide patients a path towards a clean bill of health, and prevent possible heart disease in the future.
 * With the patient being in a better state of health, they can avoid distressing tests and procedures, evade medications, and get back to leading a productive, wholesome life.  
   
