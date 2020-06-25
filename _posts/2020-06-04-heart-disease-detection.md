@@ -112,8 +112,7 @@ After exploring our data to obtain a greater understanding of it and using that 
   
 The four models which give predicted probabilities (Support Vector Machines do not give predicted probabilities, only class membership) are plotted above, and each plot contains seven ROC curves - one for each unique model run. The most amount of variation can be seen in the Random Forest Classifier models, and the least amount in the Logistic Regression models due to the fact variables had to be statistically signifcant to be included in the latter model.  
 
-* The best model for each of the five algorithms was selected based on a combination of the total patients predicted correctly and F1 Score.
-* From there, model predictions were assembled to determine which combination (or stand alone model) provided the best results.
+The **best model for _each of the five algorithms_ was selected based on a combination of the total patients predicted correctly and F1 Score**. From there, model predictions were assembled to determine which combination (or stand alone model) provided the best results.
 * A summary of the model results can be seen below.
    * The best model, the Support Vector Machine Classification Model #4, is **bolded**. It is the most parsimonious model which provided the optimal combination of total patients predicted correctly and F1 Score.
 
