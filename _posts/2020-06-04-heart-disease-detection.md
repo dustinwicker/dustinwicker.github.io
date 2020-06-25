@@ -150,14 +150,14 @@ The first visual below - a confusion matrix - is a fundamental assessement tool 
 * The bottom right corner shows the 82 patients who had a presence of heart disease and were correctly predicted by the model to have that presence. These patients are signified as true positives.  
 When looking at a confusion matrix, we want the true negative and true positive values to be high and the false positive and false negative values to be low. This indicates a highly accurate model, which is exactly what we have here.
 
-The next visualziation shows the same results as above, just now in a more concise format. This stacked bar chart condenses our results into patients who were correctly predicted and incorrectly predicted.
+The next visualziation shows the same results as above, just now in a more concise format. This stacked bar chart condenses our results into patients who were correctly predicted and those who were incorrectly predicted.
 
 ![stacked_bar_chart_best_model](/assets/img/stacked_bar_chart_confusion_matrix_svc.png "Stacked Bar Chart of SVC Model Four")  
   
 * As expected, the true negatives and true positives make up our 'Correctly Predicted' bar while the false positives and false negatives make up our 'Incorrectly Predicted' bar.  
 * It is easy to see how successful the model is by how much larger the 'Correctly Predicted' bar is than the 'Incorrectly Predicted' bar. The model was able to **accurately predict 252 patients while only missing 40 patients**.
 
-## Model Usefulness [<sub><sup>(View code)</sup></sub>](#e)  
+## Model Usefulness 
 The final step, and argubably most critical one, is explaining how the results could be utilized in a medical facility setting to benefit medical practitioners and their patients.
 * The model could be implemented, along with the patient's formal checkups and examinations, to assist medical practitioners in correctly diagnosing heart disease in their patients.  
 * It would allow practitioners to get an in-depth understanding of which factors contribute to heart disease, and set up a prehabilitation routine for their patients that would help decrease those factors.  
