@@ -46,6 +46,11 @@ url = "https://www.ford.com/cars/mustang/models/"
 driver.get(url=url)
 ```  
   
-To find the necessary information needed to extract the data:
+To find the necessary information needed to extract the data:  
+![Distribution_of_Continuous_Features_by_Target](/assets/img/visual_guide_to_get_scraping_info_1.png "Distributions of Continuous Features by Target")
+![Distribution_of_Continuous_Features_by_Target](/assets/img/visual_guide_to_get_scraping_info_2.png "Distributions of Continuous Features by Target")
+![Distribution_of_Continuous_Features_by_Target](/assets/img/visual_guide_to_get_scraping_info_3.png "Distributions of Continuous Features by Target")
+![Distribution_of_Continuous_Features_by_Target](/assets/img/visual_guide_to_get_scraping_info_4.png "Distributions of Continuous Features by Target")
+![Distribution_of_Continuous_Features_by_Target](/assets/img/visual_guide_to_get_scraping_info_5.png "Distributions of Continuous Features by Target")
 
 
