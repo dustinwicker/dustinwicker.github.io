@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "Predicting the Presence of Heart Disease in Patients"
+title: "Predicting the Presence of Heart Disease in Patients using Python"
 author: "Dustin Wicker"
 categories: journal
-tags: [healthcare,data science,data analysis,machine learning,statistics,data visualization,data mining]
+tags: [healthcare,data science,data analysis,machine learning,statistics,data visualization,data mining,python]
 image: heart.png
 ---
 
