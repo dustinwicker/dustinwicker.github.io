@@ -3,7 +3,7 @@ layout: post
 title: "Web Scraping"
 author: "Dustin Wicker"
 categories: journal
-tags: [documentation,sample]
+tags: [web scraping,data science, data analysis]
 image: spools.jpg
 ---
 
