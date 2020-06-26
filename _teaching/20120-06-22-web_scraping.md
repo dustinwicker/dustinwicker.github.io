@@ -97,6 +97,8 @@ cars = driver.find_elements_by_xpath("//div[@class='vehicleTile section']")
 ```
 
 ```
+cars
+Out[18]: 
 [<selenium.webdriver.remote.webelement.WebElement (session="3b276f6f5df22154cb9b8fb2141eb262", element="0.8182600666874935-1")>,
  <selenium.webdriver.remote.webelement.WebElement (session="3b276f6f5df22154cb9b8fb2141eb262", element="0.8182600666874935-2")>,
  <selenium.webdriver.remote.webelement.WebElement (session="3b276f6f5df22154cb9b8fb2141eb262", element="0.8182600666874935-3")>,
