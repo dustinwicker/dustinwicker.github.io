@@ -114,10 +114,11 @@ Out[1]:
  <selenium.webdriver.remote.webelement.WebElement (session="3b276f6f5df22154cb9b8fb2141eb262", element="0.8182600666874935-11")>]
  ```
  
- Lets inspect the first car to see the information we scraped for it
- * Use ```.text``` on the web elements returned to see the information
- ```python
- # Lets observe the first car
+Lets inspect the first car to see the information we scraped for it  
+* Use ```.text``` on the web elements returned to see the information  
+   
+```python
+# Lets observe the first car
 first_car = cars[0].text
 # Print first_car
 first_car
