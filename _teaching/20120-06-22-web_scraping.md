@@ -67,10 +67,10 @@ Option 2:
 Option 3:
 * Use a keyboard shortcut
    * Mac: Command+Option+C
-   * Windows/Linux: Control+Shift+C
+   * Windows/Linux: Control+Shift+C  
   
-
-* All three of these options will open up the Elements panel where the DOM (Document Object Model) can be inspected - this the information we will use to web scrape
+  
+All three of these options will open up the Elements panel where the DOM (Document Object Model) can be inspected - this the information we will use to web scrape
 ![Distribution_of_Continuous_Features_by_Target](/assets/img/visual_guide_to_get_scraping_info_5.png "Distributions of Continuous Features by Target")
 
 
