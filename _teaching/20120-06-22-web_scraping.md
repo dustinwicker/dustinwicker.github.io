@@ -79,5 +79,5 @@ Now it is time to determine the necessary element or elements that contain the c
   
 * Put your cursor around one of the cars so you obtain, via the colored rectangles, the car's picture, starting price, miles per gallon, and leasing price information as demonstrated in the left image below.
 * Click and the Elements panel will highlight the particular element of interest. In this case, it's a div element with a class equal to "wrap."
-* Shifting focus to the Elements panel, notice the line "<!-- START VEHICLE TILE -->"
+* Shifting focus to the Elements panel, notice the line '''"<!-- START VEHICLE TILE -->"'''
 ![test1](/assets/img/visual_guide_to_get_scraping_info_8.png "test1")              ![test2](/assets/img/visual_guide_to_get_scraping_info_9.png "test2")
