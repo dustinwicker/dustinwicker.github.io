@@ -244,9 +244,9 @@ for i in range(len(cars)):
 car_results_list[0]
 
 Out[12]: ['2020', 'MUSTANG ECOBOOST® FASTBACK', '26670', '21', '31', '315']
-```
+```  
 
-Convert the list of lists to DataFrame
+Convert the list of lists to DataFrame  
 ```python
 cars_df = pd.DataFrame(data=car_results_list, columns=['year', 'car_name', 'price', 'city_mpg', 'hwy_mpg', 'lease_mo'])
 print(cars_df)
@@ -264,3 +264,4 @@ Out[13]:
 8   2020  MUSTANG SHELBY GT350®                  60440  14       21      NaN    
 9   2020  MUSTANG SHELBY® GT350R                 73435  14       21      NaN    
 10  2020  MUSTANG SHELBY® GT500®                 72900  NaN      NaN     NaN 
+```
