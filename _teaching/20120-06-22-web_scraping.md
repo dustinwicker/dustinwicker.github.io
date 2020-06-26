@@ -96,9 +96,10 @@ Here is how we will use that informaton to extract the data
 cars = driver.find_elements_by_xpath("//div[@class='vehicleTile section']")
 ```
 
+Lets observe the web elements obtained
 ```
 cars
-Out[18]: 
+
 [<selenium.webdriver.remote.webelement.WebElement (session="3b276f6f5df22154cb9b8fb2141eb262", element="0.8182600666874935-1")>,
  <selenium.webdriver.remote.webelement.WebElement (session="3b276f6f5df22154cb9b8fb2141eb262", element="0.8182600666874935-2")>,
  <selenium.webdriver.remote.webelement.WebElement (session="3b276f6f5df22154cb9b8fb2141eb262", element="0.8182600666874935-3")>,
@@ -111,3 +112,22 @@ Out[18]:
  <selenium.webdriver.remote.webelement.WebElement (session="3b276f6f5df22154cb9b8fb2141eb262", element="0.8182600666874935-10")>,
  <selenium.webdriver.remote.webelement.WebElement (session="3b276f6f5df22154cb9b8fb2141eb262", element="0.8182600666874935-11")>]
  ```
+ 
+ Lets inspect the first car to see the information we scraped for it
+ * Use ```.text``` on the web elements returned to see the information
+ ```
+ # Lets observe the first car
+first_car = cars[0].text
+# Print first_car
+first_car
+
+'2020 MUSTANG ECOBOOST® FASTBACK\nStarting at $26,670 1 \nEPA-Est. MPG 21 City / 31 HWY 2 \nLease at $315/mo 7 \nPress here for information on 2020 Ford Mustang monthly pricing'
+
+
+# Print type of first_car
+type(first_car)
+
+str
+
+```
+ 
