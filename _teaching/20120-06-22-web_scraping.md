@@ -95,3 +95,17 @@ Here is how we will use that informaton to extract the data
 # Obtain vehicle information for each of the displayed Mustangs
 cars = driver.find_elements_by_xpath("//div[@class='vehicleTile section']")
 ```
+
+```
+[<selenium.webdriver.remote.webelement.WebElement (session="3b276f6f5df22154cb9b8fb2141eb262", element="0.8182600666874935-1")>,
+ <selenium.webdriver.remote.webelement.WebElement (session="3b276f6f5df22154cb9b8fb2141eb262", element="0.8182600666874935-2")>,
+ <selenium.webdriver.remote.webelement.WebElement (session="3b276f6f5df22154cb9b8fb2141eb262", element="0.8182600666874935-3")>,
+ <selenium.webdriver.remote.webelement.WebElement (session="3b276f6f5df22154cb9b8fb2141eb262", element="0.8182600666874935-4")>,
+ <selenium.webdriver.remote.webelement.WebElement (session="3b276f6f5df22154cb9b8fb2141eb262", element="0.8182600666874935-5")>,
+ <selenium.webdriver.remote.webelement.WebElement (session="3b276f6f5df22154cb9b8fb2141eb262", element="0.8182600666874935-6")>,
+ <selenium.webdriver.remote.webelement.WebElement (session="3b276f6f5df22154cb9b8fb2141eb262", element="0.8182600666874935-7")>,
+ <selenium.webdriver.remote.webelement.WebElement (session="3b276f6f5df22154cb9b8fb2141eb262", element="0.8182600666874935-8")>,
+ <selenium.webdriver.remote.webelement.WebElement (session="3b276f6f5df22154cb9b8fb2141eb262", element="0.8182600666874935-9")>,
+ <selenium.webdriver.remote.webelement.WebElement (session="3b276f6f5df22154cb9b8fb2141eb262", element="0.8182600666874935-10")>,
+ <selenium.webdriver.remote.webelement.WebElement (session="3b276f6f5df22154cb9b8fb2141eb262", element="0.8182600666874935-11")>]
+ ```
