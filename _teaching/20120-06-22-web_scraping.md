@@ -79,5 +79,14 @@ Now it is time to determine the necessary element or elements that contain the c
   
 * Put your cursor around one of the cars so you obtain, via the colored rectangles, the car's picture, starting price, miles per gallon, and leasing price information as demonstrated in the left image below.
 * Click and the Elements panel will highlight the particular element of interest. In this case, it's a div element with a class equal to "wrap."
-* Shifting focus to the Elements panel, notice the line '''"<!-- START VEHICLE TILE -->"'''
-![test1](/assets/img/visual_guide_to_get_scraping_info_8.png "test1")              ![test2](/assets/img/visual_guide_to_get_scraping_info_9.png "test2")
+![test1](/assets/img/visual_guide_to_get_scraping_info_8.png "test1")              ![test2](/assets/img/visual_guide_to_get_scraping_info_9.png "test2")  
+* Shifting focus to the Elements panel above on the right, notice the line "START VEHICLE TILE" comment.
+   * Given that a div element with a class equal to "wrap" is likely not unique, pulling something more specific will help us be more certain we are obtaining the results we want.
+   * In the Elements panel, move the cursor up to the div element with the class "vehicleTile section.
+   * All the information we need to web scrape is contained in the rectangle created by hovering over that div. We have located the correct element we need.  
+  
+Here is how we wil use that informaton to extract the data
+```python
+# Obtain vehicle information for each of the displayed Mustangs
+cars = driver.find_elements_by_xpath("//div[@class='vehicleTile section']")
+```
