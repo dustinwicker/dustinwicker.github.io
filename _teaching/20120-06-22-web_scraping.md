@@ -73,7 +73,7 @@ Option 3:
 All three of these options will open up the Elements panel where the DOM (Document Object Model) can be inspected - this the information we will use to web scrape
 ![Distribution_of_Continuous_Features_by_Target](/assets/img/visual_guide_to_get_scraping_info_5.png "Distributions of Continuous Features by Target")  
   
-Now it is time to determine the necessary element or elements that contain the car information we need.
+Now it is time to determine the necessary element or elements that contain the car information we need.  
 ![Distribution_of_Continuous_Features_by_Target](/assets/img/visual_guide_to_get_scraping_info_7.png "Distributions of Continuous Features by Target")  
 
 ![test1](/assets/img/visual_guide_to_get_scraping_info_8.png "test1") ![test2](/assets/img/visual_guide_to_get_scraping_info_9.png "test2")
