@@ -46,7 +46,7 @@ url = "https://www.ford.com/cars/mustang/models/"
 driver.get(url=url)
 ```  
   
-To find the necessary information needed to extract the data, you have a few options.
+To find the necessary information needed to extract the data, you have a few options.  
 Option 1: 
 * Right-click on the webpage and select 'Inspect'
 ![Distribution_of_Continuous_Features_by_Target](/assets/img/visual_guide_to_get_scraping_info_6.png "Distributions of Continuous Features by Target")  
@@ -67,6 +67,7 @@ Option 3:
 * Use a keyboard shortcut
    * Mac: Command+Option+C
    * Windows/Linux: Control+Shift+C
+  
 
 * All three of these options will open up the Elements panel where the DOM (Document Object Model) can be inspected - this the information we will use to web scrape
 ![Distribution_of_Continuous_Features_by_Target](/assets/img/visual_guide_to_get_scraping_info_5.png "Distributions of Continuous Features by Target")
