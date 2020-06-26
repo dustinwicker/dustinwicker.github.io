@@ -34,7 +34,7 @@ Code snippets will be provided for each section outlined in the [Project Overvie
 ## iv.  [Model Building](#model-buildingview-code)
 ## v.   [Model Visualization, Comparison, and Selection](#model-visualization-comparison-and-selectionview-code)
 ## vi.  [Visualize Best Model](#visualize-best-modelview-code)
-## vii. [Model Usefulness](#model-usefulnessview-code)
+## vii. [Model Usefulness](#model-usefulness)
 ## viii.[Questions for Consideration](#questions-for-consideration) 
   
 ## Data Ingestion [<sub><sup>(View code)</sup></sub>](#data-ingestion)  
@@ -110,13 +110,11 @@ After exploring our data to obtain a greater understanding of it and using that 
 
 ![ROC Curves](/assets/img/roc_cruves.png "ROC Curves")  
   
-The four models which give predicted probabilities (Support Vector Machines do not give predicted probabilities, only class membership) are plotted above, and each plot contains seven ROC curves - one for each unique model run.  
-* The most amount of variation can be seen in the Random Forest Classifier models, and the least amount in the Logistic Regression models due to the fact variables had to be statistically signifcant to be included in the latter model.  
+The four models which give predicted probabilities (Support Vector Machines do not give predicted probabilities, only class membership) are plotted above, and each plot contains seven ROC curves - one for each unique model run. The most amount of variation can be seen in the Random Forest Classifier models, and the least amount in the Logistic Regression models due to the fact variables had to be statistically signifcant to be included in the latter model.  
 
-* The best model for each of the five algorithms was selected based on a combination of the total patients predicted correctly and F1 Score.
-* From there, model predictions were assembled to determine which combination (or stand alone model) provided the best results.
+The **best model for _each of the five algorithms_ was selected based on F1 Score**. For the **four models that gave predicted probabilities, the cut-off value chosen for each model was the one which provided the optimal combination of total patients predicted correctly and F1 Score**. From there, model predictions were assembled to determine which combination (or stand alone model) provided the best results.
 * A summary of the model results can be seen below.
-* The best model, the Support Vector Machine Classification Model #4, is **bolded**. It is the most parsimonious model which provided the optimal combination of total patients predicted correctly and F1 Score.
+   * The best model, the Support Vector Machine Classification Model #4, is **bolded**. It is the most parsimonious model which provided the optimal combination of total patients predicted correctly and F1 Score.
 
 | Model(s)                                                                                                                                                   | F1 Score | Recall | Precision | Total Correct | Total Incorrect |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | :------: | :----: | :-------: | :-----------: | :-------------: |
@@ -140,28 +138,29 @@ The four models which give predicted probabilities (Support Vector Machines do n
 ## Visualize Best Model [<sub><sup>(View code)</sup></sub>](#visualize-best-model)
 The next step was visualizing how the best model performed in an easy to understand way.  
   
-The first visual below - a confusion matrix - is a fundamental assessement tool for classification problems. It is a crosstabulation of the acutal and predicted classes and _quantifies the confusion_ of the classifier. Here it details the prediction results of the best model, the Support Vector Machine Classification Model #4.
+The first visual below - a **confusion matrix**  - is a fundamental assessement tool for classification problems. It is a crosstabulation of the acutal and predicted classes and _quantifies the confusion_ of the classifier. Here it details the prediction results of the best model, the Support Vector Machine Classification Model #4.
 
 ![confusion_matrix_best_model](/assets/img/confusion_matrix_svc.png "Confusion Matrix of SVC Model Four")  
   
-* The top left corner of the confusion matrix indicates the 170 patients which had no presence of heart disease (i.e., their actual value) and were predicted as such (i.e., their predicted value). These are labeled as true negatives.
-* The top right corner, designated as false positives, denotes the 16 patients which had no presence of heart disease but were deemed to have heart disease by the model.
+* The top left corner of the confusion matrix indicates the 170 patients who had no presence of heart disease (i.e., their actual value) and were predicted as such (i.e., their predicted value). These are labeled as true negatives.
+* The top right corner, designated as false positives, denotes the 16 patients who had no presence of heart disease but were deemed to have heart disease by the model.
 * The bottom left corner, known as false negatives, represents the 24 patients who actually had the presence of heart disease but were predicted by the model to not have heart disease.
-* The bottom right corner shows the 82 patients who had a presence of heart disease and were correctly predicted by the model to have that presence. These patients are signified as true positives.
+* The bottom right corner shows the 82 patients who had a presence of heart disease and were correctly predicted by the model to have that presence. These patients are signified as true positives.  
+  
 When looking at a confusion matrix, we want the true negative and true positive values to be high and the false positive and false negative values to be low. This indicates a highly accurate model, which is exactly what we have here.
 
-The next visualziation shows the same results as above, just now in a more concise format. This stacked bar chart condenses our results into patients who were correctly predicted and incorrectly predicted.
+The next visualziation shows the same results as above, just now in a more concise format. This **stacked bar chart**  condenses our results into patients who were correctly predicted and those who were incorrectly predicted.
 
 ![stacked_bar_chart_best_model](/assets/img/stacked_bar_chart_confusion_matrix_svc.png "Stacked Bar Chart of SVC Model Four")  
   
 * As expected, the true negatives and true positives make up our 'Correctly Predicted' bar while the false positives and false negatives make up our 'Incorrectly Predicted' bar.  
 * It is easy to see how successful the model is by how much larger the 'Correctly Predicted' bar is than the 'Incorrectly Predicted' bar. The model was able to **accurately predict 252 patients while only missing 40 patients**.
 
-## Model Usefulness [<sub><sup>(View code)</sup></sub>](#e)  
-The final step, and argubably most critical one, is explaining how the results could be utilized in a medical facility setting to benefit medical practitioners and their patients.
+## Model Usefulness 
+The final step, and argubably the most critical one, is explaining how the results could be utilized in a medical facility setting to benefit medical practitioners and their patients.
 * The model could be implemented, along with the patient's formal checkups and examinations, to assist medical practitioners in correctly diagnosing heart disease in their patients.  
 * It would allow practitioners to get an in-depth understanding of which factors contribute to heart disease, and set up a prehabilitation routine for their patients that would help decrease those factors.  
-   * Such as helping the patient establish a diet to decrease their serum cholesterol and an exercise regimen that could help lower their blood pressure.
+   * Parts of the routine would include helping the patient establish a diet to decrease their serum cholesterol and formulating an exercise regimen that could help lower their blood pressure.
    * This would provide patients a path towards a clean bill of health, and prevent possible heart disease in the future.
 * With the patient being in a better state of health, they can avoid distressing tests and procedures, evade medications, and get back to leading a productive, wholesome life.  
   
@@ -969,13 +968,14 @@ mask = np.zeros_like(continuous_variable_correlations)
 # Mark upper half and diagonal of mask as True
 mask[np.triu_indices_from(mask)] = True
 # Correlation heatmap
-f, ax = plt.subplots(figsize=(9, 6))
-f.subplots_adjust(left=0.32, right=0.89, top=0.95, bottom=0.32)
-ax = sns.heatmap(hungarian[continuous_variables].corr(), cmap='PiYG', mask=mask, linewidths=.5, linecolor="white", cbar=True)
-ax.set_xticklabels(labels=continuous_variables_spelled_out_dict.values(),fontdict ={'fontweight': 'bold', 'fontsize':10},
+f, ax = plt.subplots()
+f.subplots_adjust(left=0.31, right=1.06, top=0.96, bottom=0.43)
+ax = sns.heatmap(hungarian[continuous_variables].corr(), cmap='PiYG', mask=mask, linewidths=.5, linecolor="white",
+                 cbar=True, cbar_kws={'weight': 'bold'})
+ax.set_xticklabels(labels=continuous_variables_spelled_out_dict.values(),fontdict ={'fontweight': 'bold', 'fontsize':14},
                    rotation=45, ha="right",
                    rotation_mode="anchor")
-ax.set_yticklabels(labels=continuous_variables_spelled_out_dict.values(),fontdict ={'fontweight': 'bold', 'fontsize':10})
+ax.set_yticklabels(labels=continuous_variables_spelled_out_dict.values(),fontdict ={'fontweight': 'bold', 'fontsize':14})
 ax.set_title("Heatmap of Continuous Predictor Features", fontdict ={'fontweight': 'bold', 'fontsize': 22})
 ```
 **DataFrame of Continuous Variable Correlations Greater Than 0.6 and Less Than -0.6 (More Numerical Alternative to Above Heatmap)**
@@ -985,15 +985,15 @@ print(hungarian[continuous_variables].corr()[(hungarian[continuous_variables].co
 **Histograms of Continuous Features by Target**
 ```python
 fig, axes = plt.subplots(nrows=5, ncols=3)
-fig.subplots_adjust(left=0.17, right=0.83, top=0.90, bottom=0.10, hspace=0.7, wspace = 0.25)
+fig.subplots_adjust(left=0.03, right=.97, top=0.90, bottom=0.03, hspace=0.7, wspace=0.25)
 fig.suptitle('Distributions of Continuous Features by Target', fontweight='bold', fontsize= 22)
 for ax, continuous in zip(axes.flatten(), continuous_variables):
     for num_value in hungarian.num.unique():
         ax.hist(hungarian.loc[hungarian.num == num_value, continuous], alpha=0.7, label=num_value)
-        ax.set_title(continuous_variables_spelled_out_dict[continuous], fontdict ={'fontweight': 'bold', 'fontsize': 10})
+        ax.set_title(continuous_variables_spelled_out_dict[continuous], fontdict ={'fontweight': 'bold', 'fontsize': 15})
 handles, legends = ax.get_legend_handles_labels()
 legends_spelled_out_dict = {0: "No Presence of Heart Disease", 1: "Presence of Heart Disease"}
-fig.legend(handles, legends_spelled_out_dict.values(), loc='upper left', bbox_to_anchor=(0.68, 0.99), prop={'weight':'bold'})
+fig.legend(handles, legends_spelled_out_dict.values(), loc='upper left', bbox_to_anchor=(0.70, 1), prop={'weight': 'bold'})
 ```
 
 **Normality Tests**
@@ -1036,22 +1036,24 @@ for boxcox_var in filter(lambda x: '_boxcox' in x, hungarian.columns):
 ```python
 # Compare original distribution with boxcox'd distribution for chol
 fig, axes = plt.subplots(nrows=1, ncols=2, sharey=True)
-fig.suptitle('Distributions with Kernel Density Estimation (KDE) Overlaid ', fontweight='bold', fontsize= 22)
+fig.subplots_adjust(left=0.05, right=.99, top=0.90, bottom=0.04)
+fig.suptitle('Distributions with Kernel Density Estimation (KDE) Overlaid ', fontweight='bold', fontsize=26)
 for ax, variable in zip(axes.flatten(), ['chol', 'chol_boxcox']):
     print(ax, variable)
     ax.hist(hungarian[variable])
-    ax2 = hungarian[variable].plot.kde(ax=ax, secondary_y=True)
+    ax2 = hungarian[variable].plot.kde(ax=ax, secondary_y=True, linewidth=8, alpha=0.8)
     ax2.grid(False)
     ax2.set_yticks([])
     ax2.set_title(continuous_variables_spelled_out_dict[variable], fontdict={'fontweight': 'bold', 'fontsize': 24})
-    ax.text(0.78, 0.75, f"Kurtosis value: {'{:.3}'.format(stats.kurtosis(a=hungarian[variable], fisher=True))}\n"
+    ax.text(0.78, 0.85, f"Kurtosis value: {'{:.3}'.format(stats.kurtosis(a=hungarian[variable], fisher=True))}\n"
                       f"Sknewness value: {'{:.3}'.format(stats.skew(a=hungarian[variable]))}",
             horizontalalignment='center', verticalalignment='center', transform=ax.transAxes,
-            bbox=dict(facecolor='none', edgecolor='black', pad=10.0, linewidth=3), weight='bold', fontsize=14)
-    ax.set_ylabel('Density', fontdict={'fontweight': 'bold', 'fontsize': 18})
+            bbox=dict(facecolor='none', edgecolor='black', pad=10.0, linewidth=4), weight='bold', fontsize=17)
+    ax.set_ylabel('Density', fontdict={'fontweight': 'bold', 'fontsize': 22})
 # Expand figure to desired size first before running below code (this makes xtick labels appear and then can therefore be bolded)
 for i in range(len(axes)):
-    axes[i].set_xticklabels(axes[i].get_xticklabels(), fontweight='bold')
+    axes[i].set_xticklabels(axes[i].get_xticklabels(), fontweight='bold', fontsize=18)
+axes[0].set_yticklabels(axes[0].get_yticklabels(), fontweight='bold', fontsize=18)
 ```
 
 **Histograms of Continuous Features and Their Box-Cox'd Versions by Target**
@@ -2207,28 +2209,27 @@ model_names_spelled_out = {'logit': 'Logistic Regression', 'rfc': 'Random Forest
                            'svc': 'Support Vector Machine Classifier', 'gbm': 'Gradient Boosting Classifer'}
 
 # Build ROC Curves for all models which give prediction probabilities (i.e. all but SVC)
-# Set figsize to size of second monitor
-plt.rcParams['figure.figsize'] = [19.2, 9.99]
-# Histograms for all continuous variable against num
 fig, axes = plt.subplots(nrows=2, ncols=2)
-fig.subplots_adjust(left=0.10, right=0.90, top=0.90, bottom=0.10, hspace=0.35, wspace=0.20)
+fig.subplots_adjust(left=0.05, right=0.87, top=0.90, bottom=0.07, hspace=0.35, wspace=0.20)
 fig.suptitle('ROC (Receiver Operating Characteristic) Curves', fontweight= 'bold', fontsize= 22)
 for ax, value in zip(axes.flatten(), list(unique_everseen([x.split("_")[0] for x in all_model_results.columns if 'pred' in x]))):
     # ROC Curve plot
-    # plt.figure(figsize=(13,7.5))
-    # Draw ROC Curves for all logit models on one plot
     for pred_one_col in [x for x in all_model_results.columns if (x[0:len(value)] == value) & (x[-len('pred_one'):] == 'pred_one')]:
         fpr, tpr, thresholds = roc_curve(y, all_model_results[pred_one_col])
         ax.plot(fpr, tpr, label=pred_one_col.split("_")[1])
         ax.plot([0, 1], [0, 1],'r--')
         ax.set_xlim([0.0, 1.0])
         ax.set_ylim([0.0, 1.05])
-        ax.set_xlabel('False Positive Rate', fontdict={'fontweight': 'bold', 'fontsize': 18})
-        ax.set_ylabel('True Positive Rate', fontdict={'fontweight': 'bold', 'fontsize': 18})
+        ax.set_xlabel('False Positive Rate', fontdict={'fontweight': 'bold', 'fontsize': 18}, labelpad=15)
+        ax.set_ylabel('True Positive Rate', fontdict={'fontweight': 'bold', 'fontsize': 18}, labelpad=15)
         ax.set_title(f'{model_names_spelled_out[value]} Models', fontdict={'fontweight': 'bold', 'fontsize': 24})
 handles, legends = ax.get_legend_handles_labels()
 legends = ['Model ' + legend.title() for legend in legends]
-fig.legend(handles, legends, loc='upper left', bbox_to_anchor=(0.90, 0.85), prop={'weight':'bold'})
+fig.legend(handles, legends, loc='upper left', bbox_to_anchor=(0.87, 0.85), prop={'weight':'bold', 'size':16})
+# Expand figure to desired size first before running below code (this makes xtick and ytick labels appear and then can therefore be bolded)
+for ax in axes.flatten():
+    ax.set_yticklabels(labels=ax.get_yticklabels(), fontweight="bold")
+    ax.set_xticklabels(labels=ax.get_xticklabels(), fontweight="bold")
 ```
 **Select Best Model for Each Algorithm**
 ```python
@@ -2371,15 +2372,15 @@ tick_labels = ['No Presence of Heart Disease', 'Presence of Heart Disease']
 # Set figsize to size of second monitor
 plt.rcParams['figure.figsize'] = [19.2, 9.99]
 fig, axes = plt.subplots(nrows=1, ncols=1)
-fig.subplots_adjust(left=0.21, right=0.81, top=0.90, bottom=0.12, hspace=0.7, wspace = 0.25)
-sns.heatmap(conf_matrix, annot=labels, annot_kws={"size": 24, "weight": "bold"}, fmt='', xticklabels=tick_labels,
+fig.subplots_adjust(left=0.07, right=0.99, top=0.94, bottom=0.11)
+sns.heatmap(conf_matrix, annot=labels, annot_kws={"size": 26, "weight": "bold"}, fmt='', xticklabels=tick_labels,
             yticklabels=tick_labels, cbar=False, cmap=['#b2abd2', '#e66101'],
             center=model_search_all.loc[model_search_all.cols==('svc_four',)][["false_positives", "false_negatives"]].values.max())
-plt.xticks(weight="bold", size=16)
-plt.yticks(rotation=90, va='center', weight="bold", size=16)
-plt.ylabel('True Value of Patient', weight="bold", size=20, labelpad=30)
-plt.xlabel('Predicted Value of Patient', weight="bold", size=20, labelpad=30)
-plt.title('Prediction Results for Support Vector Machine Classifier Model #4', pad = 15, fontdict={"weight": "bold", "size": 26})
+plt.xticks(weight="bold", size=20)
+plt.yticks(rotation=90, va='center', weight="bold", size=20)
+plt.ylabel('True Value of Patient', weight="bold", size=24, labelpad=30)
+plt.xlabel('Predicted Value of Patient', weight="bold", size=24, labelpad=30)
+plt.title('Prediction Results for Support Vector Machine Classifier Model #4', pad=15, fontdict={"weight": "bold", "size": 28})
 plt.show()
 ```
 
@@ -2416,7 +2417,7 @@ colors = {"Correctly Predicted": "#e66101", "Incorrectly Predicted": "#b2abd2"}
 # Set figsize to size of second monitor
 plt.rcParams['figure.figsize'] = [19.2,9.99]
 fig, axes = plt.subplots(nrows=1, ncols=1)
-fig.subplots_adjust(left=0.19, right=0.83, top=0.90, bottom=0.12, hspace=0.7, wspace = 0.25)
+fig.subplots_adjust(left=0.01, right=0.99, top=0.95, bottom=0.12)
 sns_stacked_bar_plot = sns.barplot(x=stacked_bar_chart['Patient Outcomes'], y=stacked_bar_chart.total,
           hue=stacked_bar_chart['hue_label'], palette=colors, dodge=False)
 sns_stacked_bar_plot = sns.barplot(x=stacked_bar_chart['Patient Outcomes'], y=stacked_bar_chart.minimum,
@@ -2425,34 +2426,35 @@ for p in sns_stacked_bar_plot.patches:
     print(p._height)
     if p._height in stacked_bar_chart.total.values:
         sns_stacked_bar_plot.annotate(int(p._height -
-                                      stacked_bar_chart.loc[stacked_bar_chart.total==p._height, 'minimum'].values[0]), (p.get_x() + p.get_width() / 2., (p._height -
+                                      stacked_bar_chart.loc[stacked_bar_chart.total==p._height, 'minimum'].values[0]),
+                                      (p.get_x() + p.get_width() / 2., (p._height -
                                       stacked_bar_chart.loc[stacked_bar_chart.total==p._height, 'minimum'].values[0])/2 +
                                       stacked_bar_chart.loc[stacked_bar_chart.total==p._height, 'minimum'].values[0]),
-                                      ha='center', va='center', weight='bold', fontsize=18)
+                                      ha='center', va='center', weight='bold', fontsize=30)
         # Add totals above bars
         sns_stacked_bar_plot.annotate(int(p._height), (p.get_x() + p.get_width() / 2., p.get_height()), ha='center',
-                       va='center', xytext=(0, 10), textcoords='offset points', weight='bold', fontsize=20)
+                       va='center', xytext=(0, 12), textcoords='offset points', weight='bold', fontsize=30)
     elif p._height in stacked_bar_chart.minimum.values:
         print(p._height, p._height/2)
         sns_stacked_bar_plot.annotate(int(p._height), (p.get_x() + p.get_width() / 2., p._height/2),
-                                      ha='center', va='center', weight='bold', fontsize=18)
+                                      ha='center', va='center', weight='bold', fontsize=30)
 # Set edge color to black for bars
 for patch in sns_stacked_bar_plot.patches:
     patch.set_edgecolor('black')
-plt.xticks(weight="bold", size=16)
-# plt.yticks(weight="bold", size=16)
+    patch.set_linewidth(5)
+plt.xticks(weight="bold", size=30)
 plt.yticks([])
-plt.xlabel('Patient Outcomes', weight="bold", size=18, labelpad=20)
+plt.xlabel('Patient Outcomes', weight="bold", size=28, labelpad=20)
 plt.ylabel('')
-plt.title('Prediction Results for Support Vector Machine Classifier Model #4', fontdict={"weight": "bold", "size": 24},
+plt.title('Prediction Results for Support Vector Machine Classifier Model #4', fontdict={"weight": "bold", "size": 28},
           pad=10.0)
-plt.legend(title="Legend", prop={'weight':'bold', 'size': 15})
+plt.legend(title="", prop={'weight':'bold', 'size': 20})
 # Add 10 onto y to account for pad
 plt.text(x=0.7, y=(stacked_bar_chart.total.max() - stacked_bar_chart.total.min())/2 + stacked_bar_chart.total.min()+10,
          s = "Overall Accuracy: " + "{:.1%}".format(model_search_all.loc[model_search_all.cols==('svc_four',)]
         ['total_correct'].values[0]/(model_search_all.loc[model_search_all.cols==('svc_four',)]['total_correct'].values[0]
                                      +model_search_all.loc[model_search_all.cols==('svc_four',)]['total_wrong'].values[0])),
-         fontdict={"weight": "bold", "size": 22}, bbox=dict(facecolor='none', edgecolor='black', pad=10.0, linewidth=3))
+         fontdict={"weight": "bold", "size": 40}, bbox=dict(facecolor='none', edgecolor='black', pad=10.0, linewidth=3))
 plt.show()
 ```
 
@@ -2482,8 +2484,6 @@ bar_chart['hue_label'] = list(np.where(bar_chart.value >
                                             "false_negatives"]].values.max(), 'Correctly Predicted', 'Incorrectly Predicted'))
 # Set colors
 colors = {"Correctly Predicted": "#e66101", "Incorrectly Predicted": "#b2abd2"}
-# Set figsize to size of second monitor
-plt.rcParams['figure.figsize'] = [19.2,9.99]
 fig, axes = plt.subplots(nrows=1, ncols=1)
 fig.subplots_adjust(left=0.19, right=0.83, top=0.90, bottom=0.12, hspace=0.7, wspace = 0.25)
 sns_bar_plot = sns.barplot(x=bar_chart['Patient Outcomes'], y=bar_chart.value,
@@ -2496,7 +2496,7 @@ plt.yticks(weight="bold", size=16)
 plt.xlabel('Patient Outcomes', weight="bold", size=18, labelpad=20)
 plt.ylabel('')
 plt.title('Prediction Results for Support Vector Machine Classifier Model #4', fontdict={"weight": "bold", "size": 24})
-plt.legend(title="Legend", prop={'weight':'bold', 'size': 15})
+plt.legend(title="", prop={'weight':'bold', 'size': 15})
 plt.text(x=1.05, y=140, s = "Overall Accuracy: " + "{:.1%}".format(model_search_all.loc[model_search_all.cols==('svc_four',)]
         ['total_correct'].values[0]/(model_search_all.loc[model_search_all.cols==('svc_four',)]['total_correct'].values[0]
                                      +model_search_all.loc[model_search_all.cols==('svc_four',)]['total_wrong'].values[0])),
@@ -2510,17 +2510,17 @@ plt.figure()
 x = np.linspace(-2, 2, 1500)
 y1 = np.lib.scimath.sqrt(1-(abs(x)-1)**2)
 y2 = -3 * np.lib.scimath.sqrt(1-(abs(x)/2)**0.5)
-plt.fill_between(x, y1, where = x>.7, color=colors['Incorrectly Predicted'])
-plt.fill_between(x, y1, where = x<=.7, color=colors['Correctly Predicted'])
+plt.fill_between(x, y1, where=x > .7, color=colors['Incorrectly Predicted'])
+plt.fill_between(x, y1, where=x <= .7, color=colors['Correctly Predicted'])
 plt.fill_between(x, y2, color=colors['Correctly Predicted'])
-plt.xlim([-2.5, 3.7])
+plt.xlim([-2.7, 4.5])
 correctly_predicted_patch = mpatches.Patch(color=colors['Correctly Predicted'],
                            label="".join([key for key, value in colors.items() if value == colors['Correctly Predicted']]))
 incorrectly_predicted_patch = mpatches.Patch(color=colors['Incorrectly Predicted'],
                            label="".join([key for key, value in colors.items() if value == colors['Incorrectly Predicted']]))
 plt.legend(title="Patient Outcomes", handles=[correctly_predicted_patch, incorrectly_predicted_patch],
-           prop={'weight':'bold', 'size': 15}, title_fontsize=18)
-# Add text if wanted
+           prop={'weight':'bold', 'size': 16}, title_fontsize=18, bbox_to_anchor=(.97, 1.08))
+# Add text to display overall accuracy if desired
 # plt.text(0, -1.2, "{:.1%}".format(model_search_all.loc[model_search_all.cols==('svc_four',)]
 #         ['total_correct'].values[0]/(model_search_all.loc[model_search_all.cols==('svc_four',)]['total_correct'].values[0]
 #         +model_search_all.loc[model_search_all.cols==('svc_four',)]['total_wrong'].values[0])), fontsize=50, fontweight='bold',

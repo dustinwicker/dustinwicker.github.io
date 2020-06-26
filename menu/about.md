@@ -28,7 +28,7 @@ Along the way, I help them to assimiliate professional development and interview
   
 The opportunity to teach people the full data science stack is an absolute blessing. I am able to interact with a wonderful group of individuals and strengthen my understanding of key data science topics. However, I want to push myself to learn new things, stretch my abilities to gain more skills, and help others in a different way. Mentoring is certainly something I will do in some capacity for a long time as I love teaching others, but I am open to new job opportunities, whether they are the full-time or freelancing type.
 * To contact me regarding job opportunities, feel free to reach out at any of the options **[here](https://dustinwicker.github.io/menu/contact.html)**. I look forward to hearing from you!
-* If you would like to view my resume, please follow this **[link](https://github.com/dustinwicker/Resume)**.
+* If you would like to view my resume, please follow this **[link](https://github.com/dustinwicker/Resume/blob/master/Resume%20-%20Dustin%20Wicker.pdf)** (you may need to scroll down a little to view the document).
 
 As for this blog and portfolio, This space is meant to serve two purposes:  
 * A platform where I can **[post](https://dustinwicker.github.io/menu/posts.html)** to explain projects I have created and worked on. These will demonstrate the full spectrum of data science skills I possess, with explanations, visualizations, and code detailing the steps I took to solve the task at hand.
