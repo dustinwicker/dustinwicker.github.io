@@ -265,3 +265,37 @@ Out[13]:
 9   2020  MUSTANG SHELBY® GT350R                 73435  14       21      NaN    
 10  2020  MUSTANG SHELBY® GT500®                 72900  NaN      NaN     NaN 
 ```
+
+As a final data cleaning step, lets remove all non-ASCII characters to make string easier to work with
+```python
+# Dictionary to detect non-ASCII characters
+find = dict.fromkeys(range(128), '')
+
+# Get a list of all non-ascii characters in car_name column
+non_ascii_characters_list = []
+for car in cars_df['car_name']:
+    for letter in list(car):
+        if letter.translate(find):
+            if letter.translate(find) not in non_ascii_characters_list:
+                non_ascii_characters_list.append(letter.translate(find))
+
+for symbol in non_ascii_characters_list:
+    for index, value in enumerate(cars_df['car_name']):
+        cars_df.loc[index]['car_name'] = cars_df.loc[index]['car_name'].replace(symbol, '')
+        
+print(cars_df)
+
+Out[14]: 
+    year                              car_name  price city_mpg hwy_mpg lease_mo
+0   2020  MUSTANG ECOBOOST FASTBACK             26670  21       31      315    
+1   2020  MUSTANG ECOBOOST PREMIUM FASTBACK     31685  21       31      374    
+2   2020  MUSTANG ECOBOOST CONVERTIBLE          32170  20       28      412    
+3   2020  MUSTANG GT FASTBACK                   35880  15       25      502    
+4   2020  MUSTANG ECOBOOST PREMIUM CONVERTIBLE  37185  20       28      476    
+5   2020  MUSTANG GT PREMIUM CONVERTIBLE        45380  15       25      631    
+6   2020  MUSTANG GT PREMIUM FASTBACK           39880  15       25      557    
+7   2020  MUSTANG BULLITT                       47705  15       25      663    
+8   2020  MUSTANG SHELBY GT350                  60440  14       21      NaN    
+9   2020  MUSTANG SHELBY GT350R                 73435  14       21      NaN    
+10  2020  MUSTANG SHELBY GT500                  72900  NaN      NaN     NaN
+```
