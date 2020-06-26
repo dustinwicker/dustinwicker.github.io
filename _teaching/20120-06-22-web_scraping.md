@@ -3,7 +3,7 @@ layout: post
 title: "Web Scraping"
 author: "Dustin Wicker"
 categories: journal
-tags: [web scraping,data science, data analysis]
+tags: [automobiles,cars,web scraping,data science,data analysis]
 image: spools.jpg
 ---
 
@@ -73,7 +73,11 @@ Option 3:
 All three of these options will open up the Elements panel where the DOM (Document Object Model) can be inspected - this the information we will use to web scrape
 ![Distribution_of_Continuous_Features_by_Target](/assets/img/visual_guide_to_get_scraping_info_5.png "Distributions of Continuous Features by Target")  
   
-Now it is time to determine the necessary element or elements that contain the car information we need.  
+Now it is time to determine the necessary element or elements that contain the car information we need.
+* Head to the Elements panel, and click on the icon in the upper left hand corner. This will allow you to select an element on the page, and inspect it.
 ![Distribution_of_Continuous_Features_by_Target](/assets/img/visual_guide_to_get_scraping_info_7.png "Distributions of Continuous Features by Target")  
-
+  
+* Put your cursor around one of the cars so you obtain, via the colored rectangles, the car's picture, starting price, miles per gallon, and leasing price information as demonstrated in the left image below.
+* Click and the Elements panel will highlight the particular element of interest. In this case, it's a div element with a class equal to "wrap."
+* Shifting focus to the Elements panel, notice the line "<!-- START VEHICLE TILE -->"
 ![test1](/assets/img/visual_guide_to_get_scraping_info_8.png "test1")              ![test2](/assets/img/visual_guide_to_get_scraping_info_9.png "test2")
