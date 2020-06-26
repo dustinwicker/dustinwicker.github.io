@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Web Scraping"
+title: "Web Scraping using Selenium with Python"
 author: "Dustin Wicker"
 categories: journal
 tags: [automobiles,cars,web scraping,data science,data analysis]
@@ -70,22 +70,25 @@ Option 3:
    * Windows/Linux: Control+Shift+C  
   
   
-All three of these options will open up the Elements panel where the DOM (Document Object Model) can be inspected - this the information we will use to web scrape
+All three of these options will open up the Elements panel where the DOM (Document Object Model) can be inspected - this is the information we will use to web scrape  
+  
 ![Distribution_of_Continuous_Features_by_Target](/assets/img/visual_guide_to_get_scraping_info_5.png "Distributions of Continuous Features by Target")  
   
-Now it is time to determine the necessary element or elements that contain the car information we need.
+Now it is time to determine the necessary element or elements that contain the car information we need.  
 * Head to the Elements panel, and click on the icon in the upper left hand corner. This will allow you to select an element on the page, and inspect it.
 ![Distribution_of_Continuous_Features_by_Target](/assets/img/visual_guide_to_get_scraping_info_7.png "Distributions of Continuous Features by Target")  
   
-* Put your cursor around one of the cars so you obtain, via the colored rectangles, the car's picture, starting price, miles per gallon, and leasing price information as demonstrated in the left image below.
+* Put your cursor around one of the cars so you obtain, via the colored rectangles, the car's picture, starting price, miles per gallon, and leasing price information as demonstrated in the left image below.  
+  
 * Click and the Elements panel will highlight the particular element of interest. In this case, it's a div element with a class equal to "wrap."
 ![test1](/assets/img/visual_guide_to_get_scraping_info_8.png "test1")              ![test2](/assets/img/visual_guide_to_get_scraping_info_9.png "test2")  
+  
 * Shifting focus to the Elements panel above on the right, notice the line "START VEHICLE TILE" comment.
    * Given that a div element with a class equal to "wrap" is likely not unique, pulling something more specific will help us be more certain we are obtaining the results we want.
    * In the Elements panel, move the cursor up to the div element with the class "vehicleTile section.
    * All the information we need to web scrape is contained in the rectangle created by hovering over that div. We have located the correct element we need.  
   
-Here is how we wil use that informaton to extract the data
+Here is how we will use that informaton to extract the data
 ```python
 # Obtain vehicle information for each of the displayed Mustangs
 cars = driver.find_elements_by_xpath("//div[@class='vehicleTile section']")
