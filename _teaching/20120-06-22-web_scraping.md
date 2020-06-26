@@ -49,20 +49,21 @@ driver.get(url=url)
 To find the necessary information needed to extract the data, you have a few options.  
   
 Option 1: 
-* Right-click on the webpage and select 'Inspect'
+* Right-click on the webpage and select 'Inspect'  
+  
 ![Distribution_of_Continuous_Features_by_Target](/assets/img/visual_guide_to_get_scraping_info_6.png "Distributions of Continuous Features by Target")  
   
 
-Option 2:
-* Click on the three vertical dots in the upper right hand corner
+Option 2:  
+* Click on the three vertical dots in the upper right hand corner  
 ![Distribution_of_Continuous_Features_by_Target](/assets/img/visual_guide_to_get_scraping_info_1.png "Distributions of Continuous Features by Target")  
   
-* With the panel open, come down and click or hover over 'More Tools'
+* With the panel open, come down and click or hover over 'More Tools'  
 ![Distribution_of_Continuous_Features_by_Target](/assets/img/visual_guide_to_get_scraping_info_2.png "Distributions of Continuous Features by Target")  
 
 * Clicking over hovering over 'More Tools' will open up another panel - in that new panel, click on 'Developer Tools'
-   * Notice the keyboard shortcut available
-![Distribution_of_Continuous_Features_by_Target](/assets/img/visual_guide_to_get_scraping_info_4.png "Distributions of Continuous Features by Target")  
+   * Notice the keyboard shortcut available  
+ ![Distribution_of_Continuous_Features_by_Target](/assets/img/visual_guide_to_get_scraping_info_4.png "Distributions of Continuous Features by Target")  
 
 Option 3:
 * Use a keyboard shortcut
@@ -77,6 +78,7 @@ All three of these options will open up the Elements panel where the DOM (Docume
 Now it is time to determine the necessary element or elements that contain the car information we need.  
 * Head to the Elements panel, and click on the icon in the upper left hand corner. This will allow you to select an element on the page, and inspect it.
 ![Distribution_of_Continuous_Features_by_Target](/assets/img/visual_guide_to_get_scraping_info_7.png "Distributions of Continuous Features by Target")  
+  
   
 * Put your cursor around one of the cars so you obtain, via the colored rectangles, the car's picture, starting price, miles per gallon, and leasing price information as demonstrated in the left image below.  
   
