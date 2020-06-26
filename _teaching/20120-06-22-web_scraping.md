@@ -97,9 +97,10 @@ cars = driver.find_elements_by_xpath("//div[@class='vehicleTile section']")
 ```
 
 Lets observe the web elements obtained
-```
+```python
 cars
 
+Out[1]:
 [<selenium.webdriver.remote.webelement.WebElement (session="3b276f6f5df22154cb9b8fb2141eb262", element="0.8182600666874935-1")>,
  <selenium.webdriver.remote.webelement.WebElement (session="3b276f6f5df22154cb9b8fb2141eb262", element="0.8182600666874935-2")>,
  <selenium.webdriver.remote.webelement.WebElement (session="3b276f6f5df22154cb9b8fb2141eb262", element="0.8182600666874935-3")>,
@@ -115,19 +116,150 @@ cars
  
  Lets inspect the first car to see the information we scraped for it
  * Use ```.text``` on the web elements returned to see the information
- ```
+ ```python
  # Lets observe the first car
 first_car = cars[0].text
 # Print first_car
 first_car
 
+Out[2]:
 '2020 MUSTANG ECOBOOST® FASTBACK\nStarting at $26,670 1 \nEPA-Est. MPG 21 City / 31 HWY 2 \nLease at $315/mo 7 \nPress here for information on 2020 Ford Mustang monthly pricing'
 
 
 # Print type of first_car
 type(first_car)
 
+Out[3]:
 str
 
+
+# Lets split on the new line (\n) since it separates the various pieces of information of interest
+first_car = first_car.split("\n")
+# Print type
+type(first_car)
+
+Out[4]: list
+
+
+# Lets get all of our desired information from the first car - year, car model, price, city mpg, hwy mpg, lease/mo
+# year
+first_car[0][0:4]
+
+Out[5]: '2020'
+
+
+# car model
+first_car[0][4:].strip()
+
+Out[6]: 'MUSTANG ECOBOOST® FASTBACK'
+
+
+# price
+# Locate the position of the '$'
+first_car[1].index('$')
+# Use the position of the $ to find the full price
+first_car[1][first_car[1].index('$'): first_car[1].index('$')+7]
+# Remove the $ and , so we can get the integer value
+first_car[1][first_car[1].index('$'): first_car[1].index('$')+7].replace("$", "").replace(",", "")
+
+Out[7]: '26670'
+
+
+# city mpg
+first_car[2].split("/")[0].split('MPG')[1].strip()[0:2]
+
+Out[8]: '21'
+
+
+# hwy mpg
+first_car[2].split("/")[1].strip().split('HWY')[0].strip()
+
+Out[9]: '31'
+
+
+# lease/mo
+# Locate the position of the '$' and use the position of the $ to find the lease/mo amount
+first_car[3][first_car[3].index('$'):first_car[3].index('$')+4]
+# Remove the $ so we can get the integer value
+first_car[3][first_car[3].index('$'):first_car[3].index('$')+4].replace("$", "")
+
+Out[10]: '315
 ```
+
+Lets apply the above methodologies to all cars extracted from the website to get their specific information
+```python
+# Use an empty list to capture the results
+car_results_list = []
+for i in range(len(cars)):
+    # Use this list to capture the results of each car. After each for loop run, we append these results to our other
+    # 'main' list (car_results_list)
+    specific_car_info_list = []
+    car = cars[i].text.split("\n")
+    # year
+    specific_car_info_list.extend([car[0][0:4]])
+    # car model
+    specific_car_info_list.extend([car[0][4:].strip()])
+    # price
+    specific_car_info_list.extend([car[1][car[1].index('$'): car[1].index('$') + 7].replace("$", "").replace(",", "")])
+    # The following try/except blocks allow us to check if that car listing has the information we want to capture.
+    # If it does not (i.e., we hit the except part, we extend an nan onto that car's specific information list)
+    try:
+        specific_car_info_list.extend([car[2].split("/")[0].split('MPG')[1].strip()[0:2]])  # city mpg
+    except IndexError:
+        print('No city mpg for this vehicle.')
+        specific_car_info_list.extend([np.nan])
+    try:
+        specific_car_info_list.extend([car[2].split("/")[1].strip().split('HWY')[0].strip()])  # hwy mpg
+    except:
+        print('No hwy mpg for this vehicle.')
+        specific_car_info_list.extend([np.nan])
+    try:
+        specific_car_info_list.extend([car[3][car[3].index('$'):car[3].index('$') + 4].replace("$", "")])  # lease/mo
+    except:
+        print('No lease/mo for this vehicle.')
+        specific_car_info_list.extend([np.nan])
+    car_results_list.append(specific_car_info_list)
+ ```
  
+ Now we have a list of lists - each specific list contains information for one car
+ ```python
+ print(car_results_list)
+ 
+ Out[11]: 
+[['2020', 'MUSTANG ECOBOOST® FASTBACK', '26670', '21', '31', '315'],
+ ['2020', 'MUSTANG ECOBOOST® PREMIUM FASTBACK', '31685', '21', '31', '374'],
+ ['2020', 'MUSTANG ECOBOOST® CONVERTIBLE', '32170', '20', '28', '412'],
+ ['2020', 'MUSTANG GT FASTBACK', '35880', '15', '25', '502'],
+ ['2020', 'MUSTANG ECOBOOST® PREMIUM CONVERTIBLE', '37185', '20', '28', '476'],
+ ['2020', 'MUSTANG GT PREMIUM CONVERTIBLE', '45380', '15', '25', '631'],
+ ['2020', 'MUSTANG GT PREMIUM FASTBACK', '39880', '15', '25', '557'],
+ ['2020', 'MUSTANG BULLITT™', '47705', '15', '25', '663'],
+ ['2020', 'MUSTANG SHELBY GT350®', '60440', '14', '21', nan],
+ ['2020', 'MUSTANG SHELBY® GT350R', '73435', '14', '21', nan],
+ ['2020', 'MUSTANG SHELBY® GT500®', '72900', nan, nan, nan]]
+
+
+# Notice the first element in the list corresponds to the first car
+car_results_list[0]
+
+Out[12]: ['2020', 'MUSTANG ECOBOOST® FASTBACK', '26670', '21', '31', '315']
+```
+
+Convert the list of lists to DataFrame
+```python
+cars_df = pd.DataFrame(data=car_results_list, columns=['year', 'car_name', 'price', 'city_mpg', 'hwy_mpg', 'lease_mo'])
+print(cars_df)
+
+Out[13]:
+    year                               car_name  price city_mpg hwy_mpg lease_mo
+0   2020  MUSTANG ECOBOOST® FASTBACK             26670  21       31      315    
+1   2020  MUSTANG ECOBOOST® PREMIUM FASTBACK     31685  21       31      374    
+2   2020  MUSTANG ECOBOOST® CONVERTIBLE          32170  20       28      412    
+3   2020  MUSTANG GT FASTBACK                    35880  15       25      502    
+4   2020  MUSTANG ECOBOOST® PREMIUM CONVERTIBLE  37185  20       28      476    
+5   2020  MUSTANG GT PREMIUM CONVERTIBLE         45380  15       25      631    
+6   2020  MUSTANG GT PREMIUM FASTBACK            39880  15       25      557    
+7   2020  MUSTANG BULLITT™                       47705  15       25      663    
+8   2020  MUSTANG SHELBY GT350®                  60440  14       21      NaN    
+9   2020  MUSTANG SHELBY® GT350R                 73435  14       21      NaN    
+10  2020  MUSTANG SHELBY® GT500®                 72900  NaN      NaN     NaN 
