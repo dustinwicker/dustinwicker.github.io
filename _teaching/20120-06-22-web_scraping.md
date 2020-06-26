@@ -3,7 +3,7 @@ layout: post
 title: "Web Scraping"
 author: "Dustin Wicker"
 categories: journal
-tags: [documentation,sample]
+tags: [web scraping,data science, data analysis]
 image: spools.jpg
 ---
 
@@ -31,7 +31,7 @@ pd.set_option('display.max_colwidth', -1)
 pd.set_option('display.max_rows', 200)
 ```  
   
-Now it is time to set WebDriver options, define the WebDriver, and then load it in our current brower session
+Now it is time to set WebDriver options, define the WebDriver, and then load it in our current brower session.
 * The '--headless' argument runs the web browser with no user interface; it essentially allows the browser to operate in the background without any pop-up window. This is a great tool to use once you feel comfortable web scraping and want to automate a task without starting up the user interface of the browser.
 ```python
 # Webdriver options
@@ -46,13 +46,34 @@ url = "https://www.ford.com/cars/mustang/models/"
 driver.get(url=url)
 ```  
   
-To find the necessary information needed to extract the data:  
-![Distribution_of_Continuous_Features_by_Target](/assets/img/visual_guide_to_get_scraping_info_1.png "Distributions of Continuous Features by Target")  
+To find the necessary information needed to extract the data, you have a few options.  
+  
+Option 1: 
+* Right-click on the webpage and select 'Inspect'
+![Distribution_of_Continuous_Features_by_Target](/assets/img/visual_guide_to_get_scraping_info_6.png "Distributions of Continuous Features by Target")  
+  
 
+Option 2:
+* Click on the three vertical dots in the upper right hand corner
+![Distribution_of_Continuous_Features_by_Target](/assets/img/visual_guide_to_get_scraping_info_1.png "Distributions of Continuous Features by Target")  
+  
+* With the panel open, come down and click or hover over 'More Tools'
 ![Distribution_of_Continuous_Features_by_Target](/assets/img/visual_guide_to_get_scraping_info_2.png "Distributions of Continuous Features by Target")  
 
+* Clicking over hovering over 'More Tools' will open up another panel - in that new panel, click on 'Developer Tools'
+   * Notice the keyboard shortcut available
 ![Distribution_of_Continuous_Features_by_Target](/assets/img/visual_guide_to_get_scraping_info_4.png "Distributions of Continuous Features by Target")  
 
-![Distribution_of_Continuous_Features_by_Target](/assets/img/visual_guide_to_get_scraping_info_5.png "Distributions of Continuous Features by Target")
+Option 3:
+* Use a keyboard shortcut
+   * Mac: Command+Option+C
+   * Windows/Linux: Control+Shift+C  
+  
+  
+All three of these options will open up the Elements panel where the DOM (Document Object Model) can be inspected - this the information we will use to web scrape
+![Distribution_of_Continuous_Features_by_Target](/assets/img/visual_guide_to_get_scraping_info_5.png "Distributions of Continuous Features by Target")  
+  
+Now it is time to determine the necessary element or elements that contain the car information we need.  
+![Distribution_of_Continuous_Features_by_Target](/assets/img/visual_guide_to_get_scraping_info_7.png "Distributions of Continuous Features by Target")  
 
-
+![test1](/assets/img/visual_guide_to_get_scraping_info_8.png "test1") ![test2](/assets/img/visual_guide_to_get_scraping_info_9.png "test2")
