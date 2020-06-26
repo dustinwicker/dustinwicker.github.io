@@ -47,6 +47,7 @@ driver.get(url=url)
 ```  
   
 To find the necessary information needed to extract the data, you have a few options.  
+  
 Option 1: 
 * Right-click on the webpage and select 'Inspect'
 ![Distribution_of_Continuous_Features_by_Target](/assets/img/visual_guide_to_get_scraping_info_6.png "Distributions of Continuous Features by Target")  
