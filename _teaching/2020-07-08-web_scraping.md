@@ -73,7 +73,7 @@ driver.get(url=url)
    * Windows/Linux: Control+Shift+C  
   
   
-**All three of these options will open up the Elements panel where the DOM (Document Object Model) can be inspected - this is the information we will use to web scrape**.  
+**All three options will open up the Elements panel where the DOM (Document Object Model) can be inspected - this is the information we will use to web scrape**.  
   
 ![Elements_panel](/assets/img/visual_guide_to_get_scraping_info_5.png "Elements panel where Document Object Model(DOM) can be inspected")  
   
