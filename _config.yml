@@ -30,4 +30,3 @@ author:              'Dustin Wicker'
 collections:
   teaching:
     output: true
-    permalink: none
