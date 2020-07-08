@@ -13,9 +13,9 @@ Web scraping, the act of extracting data from websites, is an extremely useful t
   
 This tutorial details how to pull 2020 Mustang information from Ford's site using a popular open-source web-based automation tool called [Selenium](https://selenium-python.readthedocs.io/).
 
-Run the code as you are following along. This will ensure you understand each piece of the process and gain the knowledge to web scrape on your own. If you are interested in viewing and obtaining the full script, please visit this [link](https://github.com/dustinwicker/Thinkful/blob/master/car_scrape.py).
+Run the code as you are following along. This will ensure you understand each piece of the process, and help you gain the knowledge to web scrape on your own. If you are interested in viewing and obtaining the full script, please visit this [link](https://github.com/dustinwicker/Thinkful/blob/master/car_scrape.py).
 
-The first step will be importing necessary libraries and packages and setting display options to make our output easier to read.
+The first step is **importing necessary libraries and packages and setting display options to make our output easier to read**.
 ```python
 # Import libraries and packages
 import pandas as pd
@@ -31,8 +31,8 @@ pd.set_option('display.max_colwidth', -1)
 pd.set_option('display.max_rows', 200)
 ```  
   
-Now it is time to set WebDriver options, define the WebDriver, and then load it in our current brower session.
-* The '--headless' argument runs the web browser with no user interface; it essentially allows the browser to operate in the background without any pop-up window. This is a great tool to use once you feel comfortable web scraping and want to automate a task without starting up the user interface of the browser.
+Now it is time to **set WebDriver options, define the WebDriver, and load the WebDriver in our current brower session**.
+* The **'--headless' argument** runs the web browser with **no user interface**; it essentially allows the browser to operate in the background without any pop-up window. This is a great tool to use once you feel comfortable web scraping, and want to automate a task without starting up the user interface of the browser. For now we will comment the argument out, but feel free to use it once you have run the code a few times from top to botoom and feel ready.
 ```python
 # Webdriver options
 options = Options()
