@@ -85,7 +85,7 @@ driver.get(url=url)
 * Put your cursor around one of the cars so you obtain, via the colored rectangles, the car's picture, starting price, miles per gallon, and leasing price information as demonstrated in the image below.  
   
 * Click and the Elements panel will highlight the particular element of interest. In this case, it's a div element with a class of wrap.
-![Element_of_interest](/assets/img/visual_guide_to_get_scraping_info_8.png "Div element of interest with class of wrap")              ![Element_panel_of_element_of_interest](/assets/img/visual_guide_to_get_scraping_info_9.png "Element panel with div element of interest selected")  
+![Element_of_interest](/assets/img/visual_guide_to_get_scraping_info_8.png "Div element of interest with class of wrap")              ![Element_panel_of_element_of_interest](/assets/img/visual_guide_to_get_scraping_info_9.png "Element panel with div element of interest highlighted")  
   
 * Shifting focus to the Elements panel above on the right, notice the **"START VEHICLE TILE" comment**.
    * Given that a div element with a class equal to "wrap" is likely not unique, pulling something _more specific_ will help us be certain we are obtaining the correct results.
