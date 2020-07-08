@@ -13,7 +13,7 @@ Web scraping, the act of extracting data from websites, is an extremely useful t
   
 This tutorial details how to pull 2020 Mustang information from Ford's site using a popular open-source web-based automation tool called [Selenium](https://selenium-python.readthedocs.io/).
 * Using the data scraped from this tutorial would allow you to compare the price and lease amount per month to the city and highway miles per gallon information of 2020 Ford Mustang's to get the most economical and fuel-efficient car.
-* Using (and expanding) on this tutorial to extract information on all 2020 Ford models, plus other car companies such as Toyota and Chevrolet, would allow you to build a recommendation system to help people find the right car for their preferences.
+* Using (and expanding) on this tutorial to extract information on all 2020 Ford models, plus other car companies such as Toyota and Chevrolet, would allow you to build a recommendation system that helps people find the right car for their preferences.
 
 Run the code as you are following along. This will ensure you understand each piece of the process, and help you gain the knowledge to web scrape on your own. If you are interested in viewing and obtaining the full script, please visit this [link](https://github.com/dustinwicker/Thinkful/blob/master/car_scrape.py).
 
