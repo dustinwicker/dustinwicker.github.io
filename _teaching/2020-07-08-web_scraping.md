@@ -53,19 +53,19 @@ driver.get(url=url)
 **Option 1**: 
 * Right-click on the webpage and select 'Inspect'  
   
-![Distribution_of_Continuous_Features_by_Target](/assets/img/visual_guide_to_get_scraping_info_6.png "Distributions of Continuous Features by Target")  
+![Right_click_on_the_webpage_and_select_Inspect](/assets/img/visual_guide_to_get_scraping_info_6.png "Right-click and select 'Inspect'")  
   
 
 **Option 2**:  
 * Click on the three vertical dots in the upper right-hand corner  
-![Distribution_of_Continuous_Features_by_Target](/assets/img/visual_guide_to_get_scraping_info_1.png "Distributions of Continuous Features by Target")  
+![Click_on_three_vertical_dots](/assets/img/visual_guide_to_get_scraping_info_1.png "Click on the three vertical dots")  
   
 * With the panel open, come down and click or hover over 'More Tools'  
-![Distribution_of_Continuous_Features_by_Target](/assets/img/visual_guide_to_get_scraping_info_2.png "Distributions of Continuous Features by Target")  
+![Click_or_hover_over_More_Tools](/assets/img/visual_guide_to_get_scraping_info_2.png "Click or hover over 'More Tools'")  
 
 * Clicking over hovering over 'More Tools' will open up another panel - in this new panel, click on 'Developer Tools'
    * Notice there is keyboard shortcut available as well for quicker access
- ![Distribution_of_Continuous_Features_by_Target](/assets/img/visual_guide_to_get_scraping_info_4.png "Distributions of Continuous Features by Target")  
+ ![In_new_panel_click_on_Developer_Tools](/assets/img/visual_guide_to_get_scraping_info_4.png "In this new panel, click on 'Developer Tools't")  
 
 **Option 3**:
 * Use a keyboard shortcut
@@ -75,17 +75,17 @@ driver.get(url=url)
   
 **All three of these options will open up the Elements panel where the DOM (Document Object Model) can be inspected - this is the information we will use to web scrape**.  
   
-![Distribution_of_Continuous_Features_by_Target](/assets/img/visual_guide_to_get_scraping_info_5.png "Distributions of Continuous Features by Target")  
+![Elements_panel](/assets/img/visual_guide_to_get_scraping_info_5.png "Elements panel where Document Object Model(DOM) can be inspected")  
   
 **It is now time to determine the necessary element or elements that contain the car information we need**.  
 * Head to the Elements panel, and click on the icon in the upper left-hand corner. This will allow you to select a specific element on the page, and inspect it.
-![Distribution_of_Continuous_Features_by_Target](/assets/img/visual_guide_to_get_scraping_info_7.png "Distributions of Continuous Features by Target")  
+![Click_icon_upper_left_hand_corner](/assets/img/visual_guide_to_get_scraping_info_7.png "Click on the icon in the upper left-hand corner to select a specific element on the page")  
   
   
 * Put your cursor around one of the cars so you obtain, via the colored rectangles, the car's picture, starting price, miles per gallon, and leasing price information as demonstrated in the image below.  
   
 * Click and the Elements panel will highlight the particular element of interest. In this case, it's a div element with a class of wrap.
-![test1](/assets/img/visual_guide_to_get_scraping_info_8.png "test1")              ![test2](/assets/img/visual_guide_to_get_scraping_info_9.png "test2")  
+![Element_of_interest](/assets/img/visual_guide_to_get_scraping_info_8.png "Div element of interest with class of wrap")              ![Element_panel_of_element_of_interest](/assets/img/visual_guide_to_get_scraping_info_9.png "Element panel with div element of interest selected")  
   
 * Shifting focus to the Elements panel above on the right, notice the **"START VEHICLE TILE" comment**.
    * Given that a div element with a class equal to "wrap" is likely not unique, pulling something _more specific_ will help us be certain we are obtaining the correct results.
