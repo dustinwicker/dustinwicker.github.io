@@ -9,7 +9,7 @@ image: ford_mustang.jpg
 
 Web scraping, the act of extracting data from websites, is an extremely useful tool for data scientists in today's data-packed world.
 * Being able to effectively web scrape means the **_internet is your database_**
-* The technique can be utilized in multiple different ways, ranging from scraping pertinent data from COVID-19 related websites to help fellow volunteers create an altruistic meta-platform (link to FightPandemics) that brings people and organizations together to selling items on Poshmark (put link in for post to this) to scraping Google Search results. (to decipher trends and patterns?)  
+* The technique can be utilized in multiple different ways, ranging from scraping pertinent data from COVID-19 related websites to help fellow volunteers create an [altruistic meta-platform](https://fightpandemics.com/) that brings people and organizations together to selling items programmatically on Poshmark to scraping Google Search results.  
   
 This tutorial details how to pull 2020 Mustang information from Ford's site using a popular open-source web-based automation tool called [Selenium](https://selenium-python.readthedocs.io/).
 
