@@ -31,8 +31,8 @@ pd.set_option('display.max_colwidth', -1)
 pd.set_option('display.max_rows', 200)
 ```  
   
-Now it is time to **set WebDriver options, define the WebDriver, and load the WebDriver in our current brower session**.
-* The **'--headless' argument** runs the web browser with **no user interface**; it essentially allows the browser to operate in the background without any pop-up window. This is a great tool to use once you feel comfortable web scraping, and want to automate a task without starting up the user interface of the browser. For now we will comment the argument out, but feel free to use it once you have run the code a few times from top to botoom and feel ready.
+Now it is time to **set WebDriver options, define the WebDriver, and load the WebDriver in our current browser session**.
+* The **'--headless' argument** runs the web browser with **no user interface**; it essentially allows the browser to operate in the background without any pop-up window. This is a great tool to use once you feel comfortable web scraping, and want to automate a task without starting up the user interface of the browser. For now we will comment the argument out, but feel free to use it once you have run the code a few times from top to bottom and feel ready.
 ```python
 # Webdriver options
 options = Options()
@@ -82,7 +82,7 @@ It is now time to **determine the necessary element or elements that contain the
   
 * Put your cursor around one of the cars so you obtain, via the colored rectangles, the car's picture, starting price, miles per gallon, and leasing price information as demonstrated in the image below.  
   
-* Click and the Elements panel will highlight the particular element of interest. In this case, it's a div element with a class equal to "wrap."
+* Click and the Elements panel will highlight the particular element of interest. In this case, it's a div element with a class of wrap.
 ![test1](/assets/img/visual_guide_to_get_scraping_info_8.png "test1")              ![test2](/assets/img/visual_guide_to_get_scraping_info_9.png "test2")  
   
 * Shifting focus to the Elements panel above on the right, notice the **"START VEHICLE TILE" comment**.
@@ -90,13 +90,13 @@ It is now time to **determine the necessary element or elements that contain the
    * In the Elements panel, move the cursor up to the div element with the class "vehicleTile section.
    * All the information we need to web scrape is contained in the rectangle created by hovering over that div. We have located the correct element we need.  
   
-Here is how we will **use that informaton to extract the data**.
+Here is how we will **use that information to extract the data**.
 ```python
 # Obtain vehicle information for each of the displayed Mustangs
 cars = driver.find_elements_by_xpath("//div[@class='vehicleTile section']")
 ```
 
-Lets **observe the web elements obtained**.
+**Lets observe the web elements obtained**.
 ```python
 cars
 
@@ -224,7 +224,7 @@ for i in range(len(cars)):
     car_results_list.append(specific_car_info_list)
  ```
  
- Now we have a **list of lists** - each specific list contains information for one car.
+Now we have a **list of lists** - each specific list contains information for one car.
  ```python
  print(car_results_list)
  
