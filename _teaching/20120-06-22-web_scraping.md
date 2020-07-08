@@ -13,7 +13,7 @@ Web scraping, the act of extracting data from websites, is an extremely useful t
   
 This tutorial details how to pull 2020 Mustang information from Ford's site using a popular open-source web-based automation tool called [Selenium](https://selenium-python.readthedocs.io/).
 
-Run the code as you're following along and also give link to Google Colab file on Github.
+Run the code as you are following along. The full script can be viewed in its entirety at this [link](https://github.com/dustinwicker/Thinkful/blob/master/car_scrape.py).
 
 The first step will be importing necessary libraries and packages and setting display options to make our output easier to read.
 ```python
