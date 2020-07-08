@@ -5,7 +5,7 @@ title: Contact
 
 ### [Email](mailto:dustinlwicker@gmail.com "Click to send me an email")
 
-### [Linkedin](https://www.linkedin.com/in/dustin-wicker/ "Click to view my Linkedin profile")
+### [LinkedIn](https://www.linkedin.com/in/dustin-wicker/ "Click to view my LinkedIn profile")
 
 ### [Github](https://github.com/dustinwicker "Click to view my Github profile")
 
