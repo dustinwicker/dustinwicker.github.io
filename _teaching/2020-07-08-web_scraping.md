@@ -65,7 +65,7 @@ driver.get(url=url)
 
 * Clicking over hovering over 'More Tools' will open up another panel - in this new panel, click on 'Developer Tools'
    * Notice there is keyboard shortcut available as well for quicker access
- ![In_new_panel_click_on_Developer_Tools](/assets/img/visual_guide_to_get_scraping_info_4.png "In this new panel, click on 'Developer Tools't")  
+ ![In_new_panel_click_on_Developer_Tools](/assets/img/visual_guide_to_get_scraping_info_4.png "In this new panel, click on 'Developer Tools'")  
 
 **Option 3**:
 * Use a keyboard shortcut
