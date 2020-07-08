@@ -9,15 +9,15 @@ image: ford_mustang.jpg
 
 Web scraping, the act of extracting data from websites, is an extremely useful tool for data scientists in today's data-packed world.
 * Being able to effectively web scrape means the **_internet is your database_**
-* The technique can be utilized in multiple different ways, ranging from scraping pertinent data from COVID-19 related websites to help fellow volunteers create an [altruistic meta-platform](https://fightpandemics.com/) that brings people and organizations together to selling items programmatically on Poshmark to scraping Google Search results.  
+* The technique can be utilized in multiple different ways, ranging from scraping pertinent data from COVID-19 related websites to help fellow volunteers create an [altruistic meta-platform](https://fightpandemics.com/ "FightPandemics - A place to offer and receive help") that brings people and organizations together to selling items programmatically on Poshmark to scraping Google Search results.  
   
-This tutorial details how to pull 2020 Mustang information from Ford's site using a popular open-source web-based automation tool called [Selenium](https://selenium-python.readthedocs.io/).
+This tutorial details how to pull 2020 Mustang information from Ford's site using a popular open-source web-based automation tool called [Selenium](https://selenium-python.readthedocs.io/ "Selenium with Python").
 * Using the data scraped from this tutorial would allow you to compare the price and lease amount per month to the city and highway miles per gallon information of 2020 Ford Mustang's to get the most economical and fuel-efficient car.
 * Using (and expanding) on this tutorial to extract information on all 2020 Ford models, plus other car companies such as Toyota and Chevrolet, would allow you to build a recommendation system that helps people find the right car for their preferences.
 
-Run the code as you are following along. This will ensure you understand each piece of the process, and help you gain the knowledge to web scrape on your own. If you are interested in viewing and obtaining the full script, please visit this [link](https://github.com/dustinwicker/Thinkful/blob/master/car_scrape.py).
+Run the code as you are following along. This will ensure you understand each piece of the process, and help you gain the knowledge to web scrape on your own. If you are interested in viewing and obtaining the full script, please visit this [link](https://github.com/dustinwicker/Thinkful/blob/master/car_scrape.py "Github link to code").
 
-The first step is **importing necessary libraries and packages and setting display options to make our output easier to read**.
+**The first step is importing necessary libraries and packages and setting display options to make our output easier to read**.
 ```python
 # Import libraries and packages
 import pandas as pd
@@ -33,7 +33,7 @@ pd.set_option('display.max_colwidth', -1)
 pd.set_option('display.max_rows', 200)
 ```  
   
-Now it is time to **set WebDriver options, define the WebDriver, and load the WebDriver in our current browser session**.
+**Now it is time to set WebDriver options, define the WebDriver, and load the WebDriver in our current browser session**.
 * The **'--headless' argument** runs the web browser with **no user interface**; it essentially allows the browser to operate in the background without any pop-up window. This is a great tool to use once you feel comfortable web scraping, and want to automate a task without starting up the user interface of the browser. For now we will comment the argument out, but feel free to use it once you have run the code a few times from top to bottom and feel ready.
 ```python
 # Webdriver options
@@ -48,7 +48,7 @@ url = "https://www.ford.com/cars/mustang/models/"
 driver.get(url=url)
 ```  
   
-To **find the necessary information needed to extract the data**, you have a few options.  
+**To find the necessary information needed to extract the data, you have a few options**.  
   
 **Option 1**: 
 * Right-click on the webpage and select 'Inspect'  
@@ -73,11 +73,11 @@ To **find the necessary information needed to extract the data**, you have a few
    * Windows/Linux: Control+Shift+C  
   
   
-All three of these options will open up the **Elements panel where the DOM (Document Object Model) can be inspected - this is the information we will use to web scrape**.  
+**All three of these options will open up the Elements panel where the DOM (Document Object Model) can be inspected - this is the information we will use to web scrape**.  
   
 ![Distribution_of_Continuous_Features_by_Target](/assets/img/visual_guide_to_get_scraping_info_5.png "Distributions of Continuous Features by Target")  
   
-It is now time to **determine the necessary element or elements that contain the car information we need**.  
+**It is now time to determine the necessary element or elements that contain the car information we need**.  
 * Head to the Elements panel, and click on the icon in the upper left-hand corner. This will allow you to select a specific element on the page, and inspect it.
 ![Distribution_of_Continuous_Features_by_Target](/assets/img/visual_guide_to_get_scraping_info_7.png "Distributions of Continuous Features by Target")  
   
@@ -92,7 +92,7 @@ It is now time to **determine the necessary element or elements that contain the
    * In the Elements panel, move the cursor up to the div element with the class "vehicleTile section.
    * All the information we need to web scrape is contained in the rectangle created by hovering over that div. We have located the correct element we need.  
   
-Here is how we will **use that information to extract the data**.
+**Here is how we will use that information to extract the data**.
 ```python
 # Obtain vehicle information for each of the displayed Mustangs
 cars = driver.find_elements_by_xpath("//div[@class='vehicleTile section']")
