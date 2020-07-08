@@ -4,7 +4,7 @@ title: "Web Scraping using Selenium with Python"
 author: "Dustin Wicker"
 categories: journal
 tags: [automobiles,cars,web scraping,data science,data analysis,selenium,python]
-image: spools.jpg
+image: ford_mustang.jpg
 ---
 
 Web scraping, the act of extracting data from websites, is an extremely useful tool for a data scientist in today's data-packed world.
