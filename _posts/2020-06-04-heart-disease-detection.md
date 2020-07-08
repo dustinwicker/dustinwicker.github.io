@@ -17,7 +17,7 @@ This project details the process I took to build a model that is capable of pred
 
 ## Project Summary  
 * **Statistical analysis**, **data mining techniques**, and **five machine learning models** were built and ensembled to **accurately predict the presence of heart disease in patients from the Hungarian Institute of Cardiology in Budapest**.  
-* The model which provided the optimal combination of total patients predicted correctly and F1 Score, while being the most parsimonious, was the **Support Vector Machine Classification Model #4**. It was able to **correctly predict** the presence, or lack thereof, of heart disease in **86% of patients**.  
+* The model that provided the optimal combination of total patients predicted correctly and F1 Score, while being the most parsimonious, was the **Support Vector Machine Classification Model #4**. It was able to **correctly predict** the presence, or lack thereof, of heart disease in **86% of patients**.  
 
 A summary of this models results can be seen directly below, and a full summary of all sixteen models can be found in the [Model Visualization, Comparison, and Selection section](#model-visualization-comparison-and-selectionview-code).
 
@@ -58,7 +58,7 @@ The following three images provide a sample of the analysis performed.
 
 This heatmap shows correlation coefficients between each of the initial continuous variables plus two features, "Days Between Cardiac Catheterization and Electrocardiogram" and "PCA variable for 'Height at Rest' and 'Height at Peak Exercise'", created in the early stages of feature engineering. This visualization gives you information that is useful in performing data transformations and further feature engineering. Each unique cell, with its color, helps to provide information on the strength of the _linear_ relationship between the two variables that interact to make it up.
 * Take, as an example, the cell that is made up of 'METs Achieved' and 'Duration of Exercise Test (Minutes).' The darker green color indicates a positive correlation which _implies_ a postive relationship between the two variables. So as 'METs Achieved' goes up, 'Duration of Exercise Test (Minutes)' has a _tendency_ of going up.
-* For an example of a negative correlation between two features, observe 'Maximum Heart Rate Achieved' and 'Age.' The dark pink color that makes up this cell suggests a negative corrleation - this _implies_ a negative relationship between 'Maximum Heart Rate Achieved' and 'Age.' As 'Maximum Heart Rate Achieved' goes up, 'Age' has a _tendency_ of going down.
+* For an example of a negative correlation between two features, observe 'Maximum Heart Rate Achieved' and 'Age.' The dark pink color that makes up this cell suggests a negative correlation - this _implies_ a negative relationship between 'Maximum Heart Rate Achieved' and 'Age.' As 'Maximum Heart Rate Achieved' goes up, 'Age' has a _tendency_ of going down.
   
 
 ![Distribution_of_Continuous_Features_by_Target](/assets/img/distribution_of_continuous_features_by_target.png "Distributions of Continuous Features by Target")
@@ -70,14 +70,14 @@ Above, there is a histogram for each of the initial continuous features against 
 
 The above histograms show Serum Cholesterol on the left with no data transformation performed and on the right with a Box-Cox transformation applied.  
 * Regarding the left histogram:
-   * Notice the high, positive kurtosis value (please note this value is an _adjusted verison of Pearson's kurtosis_, known as _excess kurtosis_, where three is subtracted from the original kurtosis value to provide the comparison to a normal distribution - a value of 0.0 would be the excess kurtosis value of a normal distribution) labeled on the left histogram.  
+   * Notice the high, positive kurtosis value (please note this value is an _adjusted version of Pearson's kurtosis_, known as _excess kurtosis_, where three is subtracted from the original kurtosis value to provide the comparison to a normal distribution - a value of 0.0 would be the excess kurtosis value of a normal distribution) labeled on the left histogram.  
         * This is a leptokurtotic distribution, meaning there is more data in these tails than in the tails of a normal distribution.  
    * The positive skewness value indicates a right-tailed distribution (a value of 0.0 would indicate a normal distribution).  
    * The kernel density estimation, which can be thought of as a locally smoothed version of the histogram, is overlaid to help visualize the shape. Both components, the lepotokurtotic distribution and right-tailed distribution, can be seen in the visualization with the help of the overlaid kernel density estimation.  
-* The histogram to the right shows Serum Cholestorl with a Box-Cox transformation performed. 
-   * Notice the much lower kurtosis value, although still postive and representing a leptokurtotic distribution.  
-   * The skewness value is now nearly zero, representing much more normally-distributed data.  
-Comparing the two histograms, it is evident the Box-Cox transformation was helpful in making the data into more of a normal distribution. This change makes it more useful for modeling purposes so the Box-Cox'd version of Serum Cholestorl will be used from here on out.
+* The histogram to the right shows Serum Cholesterol with a Box-Cox transformation performed. 
+   * Notice the much lower kurtosis value, although still positive and representing a leptokurtotic distribution.  
+   * The skewness value is now nearly zero, representing much more normally distributed data.  
+Comparing the two histograms, it is evident the Box-Cox transformation was helpful in making the data into more of a normal distribution. This change makes it more useful for modeling purposes so the Box-Cox'd version of Serum Cholesterol will be used from here on out.
 
 Including the details above, this step also involved:
 * Statistical Analysis
@@ -88,7 +88,7 @@ Including the details above, this step also involved:
    * Descriptive Statistics
 * Additional Feature Engineering
 * Additional Data Visualizations
-* Additonal Data Transformations
+* Additional Data Transformations
 
 ## Model Building [<sub><sup>(View code)</sup></sub>](#model-building)
 After exploring our data to obtain a greater understanding of it and using that information to perform feature engineering and data transformations, it was time to build and optimize models.
@@ -110,35 +110,35 @@ After exploring our data to obtain a greater understanding of it and using that 
 
 ![ROC Curves](/assets/img/roc_cruves.png "ROC Curves")  
   
-The four models which give predicted probabilities (Support Vector Machines do not give predicted probabilities, only class membership) are plotted above, and each plot contains seven ROC curves - one for each unique model run. The most amount of variation can be seen in the Random Forest Classifier models, and the least amount in the Logistic Regression models due to the fact variables had to be statistically signifcant to be included in the latter model.  
+The four models that give predicted probabilities (Support Vector Machines do not give predicted probabilities, only class membership) are plotted above, and each plot contains seven ROC curves - one for each unique model run. The most amount of variation can be seen in the Random Forest Classifier models, and the least amount in the Logistic Regression models due to the fact variables had to be statistically significant to be included in the latter model.  
 
-The **best model for _each of the five algorithms_ was selected based on F1 Score**. For the **four models that gave predicted probabilities, the cut-off value chosen for each model was the one which provided the optimal combination of total patients predicted correctly and F1 Score**. From there, model predictions were assembled to determine which combination (or stand alone model) provided the best results.
+The **best model for _each of the five algorithms_ was selected based on F1 Score**. For the **four models that gave predicted probabilities, the cut-off value chosen for each model was the one that provided the optimal combination of total patients predicted correctly and F1 Score**. From there, model predictions were assembled to determine which combination (or stand alone model) provided the best results.
 * A summary of the model results can be seen below.
-   * The best model, the Support Vector Machine Classification Model #4, is **bolded**. It is the most parsimonious model which provided the optimal combination of total patients predicted correctly and F1 Score.
+   * The best model, the Support Vector Machine Classification Model #4, is **bolded**. It is the most parsimonious model that provided the optimal combination of total patients predicted correctly and F1 Score.
 
 | Model(s)                                                                                                                                                   | F1 Score | Recall | Precision | Total Correct | Total Incorrect |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | :------: | :----: | :-------: | :-----------: | :-------------: |
-| Gradient Boosting Classifer Five, K-Nearest Neighbors Five, Support Vector Machine Classifier Four                                                         | 0.802    | 0.745  | 0.868     | 253           | 39              |
+| Gradient Boosting Classifier Five, K-Nearest Neighbors Five, Support Vector Machine Classifier Four                                                         | 0.802    | 0.745  | 0.868     | 253           | 39              |
 | **Support Vector Machine Classifier Four**                                                                                                                      | **0.804**    | **0.774**  | **0.837**     | **252**           | **40**             |
-| Gradient Boosting Classifer Five, Random Forest Classifer Six, Support Vector Machine Classifier Four                                                      | 0.798    | 0.745  | 0.859     | 252           | 40              |
-| Gradient Boosting Classifer Five, K-Nearest Neighbors Five, Logistic Regression Three, Random Forest Classifer Six, Support Vector Machine Classifier Four | 0.798    | 0.745  | 0.859     | 252           | 40              |
-| Logistic Regression Three, Random Forest Classifer Six, Support Vector Machine Classifier Four                                                             | 0.792    | 0.755  | 0.833     | 250           | 42              |
+| Gradient Boosting Classifier Five, Random Forest Classifier Six, Support Vector Machine Classifier Four                                                      | 0.798    | 0.745  | 0.859     | 252           | 40              |
+| Gradient Boosting Classifier Five, K-Nearest Neighbors Five, Logistic Regression Three, Random Forest Classifier Six, Support Vector Machine Classifier Four | 0.798    | 0.745  | 0.859     | 252           | 40              |
+| Logistic Regression Three, Random Forest Classifier Six, Support Vector Machine Classifier Four                                                             | 0.792    | 0.755  | 0.833     | 250           | 42              |
 | K-Nearest Neighbors Five                                                                                                                                   | 0.786    | 0.726  | 0.856     | 250           | 42              |
-| K-Nearest Neighbors Five, Random Forest Classifer Six, Support Vector Machine Classifier Four                                                              | 0.786    | 0.726  | 0.856     | 250           | 42              |
+| K-Nearest Neighbors Five, Random Forest Classifier Six, Support Vector Machine Classifier Four                                                              | 0.786    | 0.726  | 0.856     | 250           | 42              |
 | K-Nearest Neighbors Five, Logistic Regression Three, Support Vector Machine Classifier Four                                                                | 0.786    | 0.745  | 0.832     | 249           | 43              |
 | Gradient Boosting Classifer Five, K-Nearest Neighbors Five, Logistic Regression Three                                                                      | 0.782    | 0.726  | 0.846     | 249           | 43              |
-| Gradient Boosting Classifer Five, Logistic Regression Three, Support Vector Machine Classifier Four                                                        | 0.782    | 0.726  | 0.846     | 249           | 43              |
-| Gradient Boosting Classifer Five                                                                                                                           | 0.771    | 0.698  | 0.860     | 248           | 44              |
-| Gradient Boosting Classifer Five, Logistic Regression Three, Random Forest Classifer Six                                                                   | 0.772    | 0.717  | 0.835     | 247           | 45              |
-| K-Nearest Neighbors Five, Logistic Regression Three, Random Forest Classifer Six                                                                           | 0.772    | 0.717  | 0.835     | 247           | 45              |
-| Gradient Boosting Classifer Five, K-Nearest Neighbors Five, Random Forest Classifer Six                                                                    | 0.769    | 0.708  | 0.843     | 247           | 45              |
-| Random Forest Classifer Six                                                                                                                                | 0.768    | 0.717  | 0.826     | 246           | 46              |
+| Gradient Boosting Classifier Five, Logistic Regression Three, Support Vector Machine Classifier Four                                                        | 0.782    | 0.726  | 0.846     | 249           | 43              |
+| Gradient Boosting Classifier Five                                                                                                                           | 0.771    | 0.698  | 0.860     | 248           | 44              |
+| Gradient Boosting Classifier Five, Logistic Regression Three, Random Forest Classifier Six                                                                   | 0.772    | 0.717  | 0.835     | 247           | 45              |
+| K-Nearest Neighbors Five, Logistic Regression Three, Random Forest Classifier Six                                                                           | 0.772    | 0.717  | 0.835     | 247           | 45              |
+| Gradient Boosting Classifier Five, K-Nearest Neighbors Five, Random Forest Classifier Six                                                                    | 0.769    | 0.708  | 0.843     | 247           | 45              |
+| Random Forest Classifier Six                                                                                                                                | 0.768    | 0.717  | 0.826     | 246           | 46              |
 | Logistic Regression Three                                                                                                                                  | 0.765    | 0.736  | 0.796     | 244           | 48              |
 
 ## Visualize Best Model [<sub><sup>(View code)</sup></sub>](#visualize-best-model)
 The next step was visualizing how the best model performed in an easy to understand way.  
   
-The first visual below - a **confusion matrix**  - is a fundamental assessement tool for classification problems. It is a crosstabulation of the acutal and predicted classes and _quantifies the confusion_ of the classifier. Here it details the prediction results of the best model, the Support Vector Machine Classification Model #4.
+The first visual below - a **confusion matrix**  - is a fundamental assessment tool for classification problems. It is a cross tabulation of the actual and predicted classes and _quantifies the confusion_ of the classifier. Here it details the prediction results of the best model, the Support Vector Machine Classification Model #4.
 
 ![confusion_matrix_best_model](/assets/img/confusion_matrix_svc.png "Confusion Matrix of SVC Model Four")  
   
@@ -149,7 +149,7 @@ The first visual below - a **confusion matrix**  - is a fundamental assessement 
   
 When looking at a confusion matrix, we want the true negative and true positive values to be high and the false positive and false negative values to be low. This indicates a highly accurate model, which is exactly what we have here.
 
-The next visualziation shows the same results as above, just now in a more concise format. This **stacked bar chart**  condenses our results into patients who were correctly predicted and those who were incorrectly predicted.
+The next visualization shows the same results as above, just now in a more concise format. This **stacked bar chart**  condenses our results into patients who were correctly predicted and those who were incorrectly predicted.
 
 ![stacked_bar_chart_best_model](/assets/img/stacked_bar_chart_confusion_matrix_svc.png "Stacked Bar Chart of SVC Model Four")  
   
@@ -157,7 +157,7 @@ The next visualziation shows the same results as above, just now in a more conci
 * It is easy to see how successful the model is by how much larger the 'Correctly Predicted' bar is than the 'Incorrectly Predicted' bar. The model was able to **accurately predict 252 patients while only missing 40 patients**.
 
 ## Model Usefulness 
-The final step, and argubably the most critical one, is explaining how the results could be utilized in a medical facility setting to benefit medical practitioners and their patients.
+The final step, and arguably the most critical one, is explaining how the results could be utilized in a medical facility setting to benefit medical practitioners and their patients.
 * The model could be implemented, along with the patient's formal checkups and examinations, to assist medical practitioners in correctly diagnosing heart disease in their patients.  
 * It would allow practitioners to get an in-depth understanding of which factors contribute to heart disease, and set up a prehabilitation routine for their patients that would help decrease those factors.  
    * Parts of the routine would include helping the patient establish a diet to decrease their serum cholesterol and formulating an exercise regimen that could help lower their blood pressure.
