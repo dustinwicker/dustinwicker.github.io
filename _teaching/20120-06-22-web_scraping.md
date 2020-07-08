@@ -36,7 +36,7 @@ Now it is time to **set WebDriver options, define the WebDriver, and load the We
 ```python
 # Webdriver options
 options = Options()
-# # Make call to Chrome headless
+# # Make call to Chrome
 # options.add_argument('--headless')
 # Define Chrome webdriver for site
 driver = webdriver.Chrome(options=options)
@@ -46,57 +46,57 @@ url = "https://www.ford.com/cars/mustang/models/"
 driver.get(url=url)
 ```  
   
-To find the necessary information needed to extract the data, you have a few options.  
+To **find the necessary information needed to extract the data**, you have a few options.  
   
-Option 1: 
+**Option 1**: 
 * Right-click on the webpage and select 'Inspect'  
   
 ![Distribution_of_Continuous_Features_by_Target](/assets/img/visual_guide_to_get_scraping_info_6.png "Distributions of Continuous Features by Target")  
   
 
-Option 2:  
-* Click on the three vertical dots in the upper right hand corner  
+**Option 2**:  
+* Click on the three vertical dots in the upper right-hand corner  
 ![Distribution_of_Continuous_Features_by_Target](/assets/img/visual_guide_to_get_scraping_info_1.png "Distributions of Continuous Features by Target")  
   
 * With the panel open, come down and click or hover over 'More Tools'  
 ![Distribution_of_Continuous_Features_by_Target](/assets/img/visual_guide_to_get_scraping_info_2.png "Distributions of Continuous Features by Target")  
 
-* Clicking over hovering over 'More Tools' will open up another panel - in that new panel, click on 'Developer Tools'
-   * Notice the keyboard shortcut available  
+* Clicking over hovering over 'More Tools' will open up another panel - in this new panel, click on 'Developer Tools'
+   * Notice there is keyboard shortcut available as well for quicker access
  ![Distribution_of_Continuous_Features_by_Target](/assets/img/visual_guide_to_get_scraping_info_4.png "Distributions of Continuous Features by Target")  
 
-Option 3:
+**Option 3**:
 * Use a keyboard shortcut
    * Mac: Command+Option+C
    * Windows/Linux: Control+Shift+C  
   
   
-All three of these options will open up the Elements panel where the DOM (Document Object Model) can be inspected - this is the information we will use to web scrape  
+All three of these options will open up the **Elements panel where the DOM (Document Object Model) can be inspected - this is the information we will use to web scrape**.  
   
 ![Distribution_of_Continuous_Features_by_Target](/assets/img/visual_guide_to_get_scraping_info_5.png "Distributions of Continuous Features by Target")  
   
-Now it is time to determine the necessary element or elements that contain the car information we need.  
-* Head to the Elements panel, and click on the icon in the upper left hand corner. This will allow you to select an element on the page, and inspect it.
+It is now time to **determine the necessary element or elements that contain the car information we need**.  
+* Head to the Elements panel, and click on the icon in the upper left-hand corner. This will allow you to select a specific element on the page, and inspect it.
 ![Distribution_of_Continuous_Features_by_Target](/assets/img/visual_guide_to_get_scraping_info_7.png "Distributions of Continuous Features by Target")  
   
   
-* Put your cursor around one of the cars so you obtain, via the colored rectangles, the car's picture, starting price, miles per gallon, and leasing price information as demonstrated in the left image below.  
+* Put your cursor around one of the cars so you obtain, via the colored rectangles, the car's picture, starting price, miles per gallon, and leasing price information as demonstrated in the image below.  
   
 * Click and the Elements panel will highlight the particular element of interest. In this case, it's a div element with a class equal to "wrap."
 ![test1](/assets/img/visual_guide_to_get_scraping_info_8.png "test1")              ![test2](/assets/img/visual_guide_to_get_scraping_info_9.png "test2")  
   
-* Shifting focus to the Elements panel above on the right, notice the line "START VEHICLE TILE" comment.
-   * Given that a div element with a class equal to "wrap" is likely not unique, pulling something more specific will help us be more certain we are obtaining the results we want.
+* Shifting focus to the Elements panel above on the right, notice the **"START VEHICLE TILE" comment**.
+   * Given that a div element with a class equal to "wrap" is likely not unique, pulling something _more specific_ will help us be certain we are obtaining the correct results.
    * In the Elements panel, move the cursor up to the div element with the class "vehicleTile section.
    * All the information we need to web scrape is contained in the rectangle created by hovering over that div. We have located the correct element we need.  
   
-Here is how we will use that informaton to extract the data
+Here is how we will **use that informaton to extract the data**.
 ```python
 # Obtain vehicle information for each of the displayed Mustangs
 cars = driver.find_elements_by_xpath("//div[@class='vehicleTile section']")
 ```
 
-Lets observe the web elements obtained
+Lets **observe the web elements obtained**.
 ```python
 cars
 
@@ -114,8 +114,8 @@ Out[1]:
  <selenium.webdriver.remote.webelement.WebElement (session="3b276f6f5df22154cb9b8fb2141eb262", element="0.8182600666874935-11")>]
  ```
  
-Lets inspect the first car to see the information we scraped for it  
-* Use ```.text``` on the web elements returned to see the information  
+**Lets inspect the first car to see the information we scraped for it**.
+* Use ```.text``` on the web element to return the text within the element.
    
 ```python
 # Lets observe the first car
@@ -125,29 +125,31 @@ first_car
 
 Out[2]:
 '2020 MUSTANG ECOBOOST® FASTBACK\nStarting at $26,670 1 \nEPA-Est. MPG 21 City / 31 HWY 2 \nLease at $315/mo 7 \nPress here for information on 2020 Ford Mustang monthly pricing'
+```
 
-
+```python
 # Print type of first_car
 type(first_car)
 
 Out[3]:
 str
+```
 
-
+```python
 # Lets split on the new line (\n) since it separates the various pieces of information of interest
 first_car = first_car.split("\n")
 # Print type
 type(first_car)
 
 Out[4]: list
+```
 
-
+```python
 # Lets get all of our desired information from the first car - year, car model, price, city mpg, hwy mpg, lease/mo
 # year
 first_car[0][0:4]
 
 Out[5]: '2020'
-
 
 # car model
 first_car[0][4:].strip()
@@ -187,7 +189,7 @@ first_car[3][first_car[3].index('$'):first_car[3].index('$')+4].replace("$", "")
 Out[10]: '315
 ```
 
-Lets apply the above methodologies to all cars extracted from the website to get their specific information
+**Lets apply the above methodologies to all cars extracted from the website to get their specific information**.
 ```python
 # Use an empty list to capture the results
 car_results_list = []
@@ -222,7 +224,7 @@ for i in range(len(cars)):
     car_results_list.append(specific_car_info_list)
  ```
  
- Now we have a list of lists - each specific list contains information for one car
+ Now we have a **list of lists** - each specific list contains information for one car.
  ```python
  print(car_results_list)
  
@@ -246,7 +248,7 @@ car_results_list[0]
 Out[12]: ['2020', 'MUSTANG ECOBOOST® FASTBACK', '26670', '21', '31', '315']
 ```  
 
-Convert the list of lists to DataFrame  
+**Convert the list of lists to a DataFrame**.  
 ```python
 cars_df = pd.DataFrame(data=car_results_list, columns=['year', 'car_name', 'price', 'city_mpg', 'hwy_mpg', 'lease_mo'])
 print(cars_df)
@@ -266,7 +268,7 @@ Out[13]:
 10  2020  MUSTANG SHELBY® GT500®                 72900  NaN      NaN     NaN 
 ```
 
-As a final data cleaning step, lets remove all non-ASCII characters to make string easier to work with
+**As a final data cleaning step, lets remove all non-ASCII characters to make the strings easier to work with**.
 ```python
 # Dictionary to detect non-ASCII characters
 find = dict.fromkeys(range(128), '')
