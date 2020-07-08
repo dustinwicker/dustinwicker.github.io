@@ -1032,7 +1032,7 @@ for boxcox_var in filter(lambda x: '_boxcox' in x, hungarian.columns):
                                                             boxcox_var.split("_")[0]] + " Box-Cox"
 ```
 
-**Data Transformation of Serum Cholestrol - Distributions with KDE Overlaid**
+**Data Transformation of Serum Cholesterol - Distributions with KDE Overlaid**
 ```python
 # Compare original distribution with boxcox'd distribution for chol
 fig, axes = plt.subplots(nrows=1, ncols=2, sharey=True)
