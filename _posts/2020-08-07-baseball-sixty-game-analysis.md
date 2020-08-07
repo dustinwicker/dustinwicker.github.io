@@ -8,8 +8,12 @@ image: mountains.jpg
 ---
 
 
-This project details the process I took to build a model that is capable of predicting the presence of heart disease in patients as well as outlining ways to use it in order to combat the devastation caused by the disease.  
-  
+Since Major League Baseball announed on June 23, 2020 they were officially coming back and instituting a sixty-game baseball season, I have found myself contemplating how worthwile this shortened season will be. Will this season go down in the hollowed record books as being as meaningful as those of past seasons, or will the proverbial baseball asterick be placed next to it and it's outcomes? I compiled data for the last twenty-five baseball seasons (1995 - 2019), and analyzed it using statisical methods and visualizations to answer this question. Follow along to determine if you should celebrate (socially distanced of course) 
+
+
+To answer this question,  to determine if the teams in playoff contention at the sixty-game mark were the same teams that ended up making the playoffs at season's end. 
+
+
  Please leave a comment at the bottom of the page to let me know your thoughts on the project and the actions I took to arrive at the final model. At the end of the [Project Overview](#project-overview), there are questions posed for reflection and deliberation - feel free to answer one of those too if you would like.
 
 ## Project Summary  
