@@ -4,7 +4,7 @@ title: "Examining the Effectiveness of a Sixty Game Baseball Season using Python
 author: "Dustin Wicker"
 categories: journal
 tags: [data science,data analysis,statistics,hypothesis testing,data visualization,data mining,data cleaning,web scraping,python]
-image: heart.png
+image: mountains.jpg
 ---
 
 
