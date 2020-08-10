@@ -7,7 +7,6 @@ I was so glad to work with Dustin when he was on my team at Cognizant Technology
 - Yu Wang, Ph.D.  
   Former Engagement Manager at Cognizant Technology Solutions and Current Director of Data Science & Advanced Analytics at Bayer Pharmaceuticals<br>
 <br>
-<br>
 
 Dustin is an outstanding full-stack data scientist with skillsets ranging from exploratory analysis and data visualization to predictive modeling using ML and deep learning algorithms. He has demonstrated fluency in SQL, Python, and PySpark. He was a great mentor when I first entered the data science field, helping me to understand basic Python, as well as statistical and machine learning concepts. He further helped me to apply that knowledge to solving real-world problems. Additionally, what makes Dustin a great data scientist is that he is able to approach problems with creativity and empathy to help his clients.  He can connect with and explain complicated concepts to both technical and non-technical audiences so that teams can arrive at the best performing results collectively.  
   - Jinny Kwon  
