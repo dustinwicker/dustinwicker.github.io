@@ -1,12 +1,13 @@
 ---
 layout: post
-title: "Examining the Effectiveness of a Sixty Game Baseball Season using Python"
+title: "Examining the Effectiveness of MLB's 2020 Sixty Game Baseball Season using Python"
 author: "Dustin Wicker"
 categories: journal
 tags: [data science,data analysis,statistics,hypothesis testing,data visualization,data mining,data cleaning,web scraping,python]
 image: mountains.jpg
 ---
 
+*** UNDER CONSTRUCTION ***
 
 Since Major League Baseball announed on June 23, 2020 they were officially coming back and instituting a sixty-game baseball season, I have found myself contemplating how worthwile this shortened season will be. Will this season go down in the hollowed record books as being as meaningful as those of past seasons, or will the proverbial baseball asterick be placed next to it and it's outcomes? I compiled data for the last twenty-five baseball seasons (1995 - 2019), and analyzed it using statisical methods and visualizations to answer this question. Follow along to determine if you should celebrate (socially distanced of course) 
 
