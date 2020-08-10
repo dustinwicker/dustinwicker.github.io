@@ -4,7 +4,7 @@ title: "Examining the Effectiveness of MLB's 2020 Sixty Game Baseball Season usi
 author: "Dustin Wicker"
 categories: journal
 tags: [data science,data analysis,statistics,hypothesis testing,data visualization,data mining,data cleaning,web scraping,python]
-image: mountains.jpg
+image: atlanta_braves.jpg
 ---
 
 *** UNDER CONSTRUCTION ***
