@@ -945,7 +945,7 @@ continuous_variables.append('rldv5_rldv5e_pca')
 
 # Dicitionary with continuous variable as key and spelled out version of variablea as value
 continuous_variables_spelled_out_dict = {'age': 'Age', 'trestbps': 'Resting Blood Pressure (On Admission)',
-                                         'chol': 'Serum Cholestoral', 'thaldur': 'Duration of Exercise Test (Minutes)',
+                                         'chol': 'Serum Cholesterol', 'thaldur': 'Duration of Exercise Test (Minutes)',
                                          'met': 'METs Achieved', 'thalach': 'Maximum Heart Rate Achieved',
                                          'thalrest': 'Resting Heart Rate',
                                          'tpeakbps': 'Peak Exercise Blood Pressure (Systolic)',
@@ -971,7 +971,7 @@ mask[np.triu_indices_from(mask)] = True
 f, ax = plt.subplots()
 f.subplots_adjust(left=0.31, right=1.06, top=0.96, bottom=0.43)
 ax = sns.heatmap(hungarian[continuous_variables].corr(), cmap='PiYG', mask=mask, linewidths=.5, linecolor="white",
-                 cbar=True, cbar_kws={'weight': 'bold'})
+                 cbar=True)
 ax.set_xticklabels(labels=continuous_variables_spelled_out_dict.values(),fontdict ={'fontweight': 'bold', 'fontsize':14},
                    rotation=45, ha="right",
                    rotation_mode="anchor")
@@ -1032,7 +1032,7 @@ for boxcox_var in filter(lambda x: '_boxcox' in x, hungarian.columns):
                                                             boxcox_var.split("_")[0]] + " Box-Cox"
 ```
 
-**Data Transformation of Serum Cholestrol - Distributions with KDE Overlaid**
+**Data Transformation of Serum Cholesterol - Distributions with KDE Overlaid**
 ```python
 # Compare original distribution with boxcox'd distribution for chol
 fig, axes = plt.subplots(nrows=1, ncols=2, sharey=True)
@@ -1689,7 +1689,7 @@ for index, (vars_to_drop, cat_vars_to_model) in enumerate(zip(variables_to_drop_
                                                      max_features=grid_search.best_params_['max_features'],
                                                      n_estimators=grid_search.best_params_['n_estimators'],
                                                      random_state=1)
-        # Cross-validate and predict using Random Forest Classifer
+        # Cross-validate and predict using Random Forest Classifier
         random_forest_predict = cross_val_predict(random_forest_model, x, y, cv=5)
         print(confusion_matrix(y_true=y, y_pred=random_forest_predict))
         conf_matr = confusion_matrix(y_true=y, y_pred=random_forest_predict)
@@ -1721,7 +1721,7 @@ for index, (vars_to_drop, cat_vars_to_model) in enumerate(zip(variables_to_drop_
                     continue
             else:
                 break
-    # Create DataFrame of random forest classifer results
+    # Create DataFrame of random forest classifier results
     model_search_rfc = pd.DataFrame(model_search_rfc, columns=['best_model_params_grid_search', 'best_score_grid_search',
                                                  'true_negatives', 'false_positives',
                                                  'false_negatives', 'true_positives', 'variables_not_used'])
@@ -1806,10 +1806,10 @@ for index, (vars_to_drop, cat_vars_to_model) in enumerate(zip(variables_to_drop_
             grid_search.fit(x_std[svc_variable_list], y)
             print(f'Best parameters for current grid seach: {grid_search.best_params_}')
             print(f'Best score for current grid seach: {grid_search.best_score_}')
-            # Define parameters of Support-vector machine classifer from grid search
+            # Define parameters of Support-vector machine classifier from grid search
             svc_model = SVC(kernel=grid_search.best_params_['kernel'], C=grid_search.best_params_['C'],
                             gamma=grid_search.best_params_['gamma'], random_state=1)
-            # Cross-validate and predict using Support-vector machine classifer
+            # Cross-validate and predict using Support-vector machine classifier
             svc_predict = cross_val_predict(svc_model, x_std[svc_variable_list], y, cv=5)
             print(confusion_matrix(y_true=y, y_pred=svc_predict))
             conf_matr = confusion_matrix(y_true=y, y_pred=svc_predict)
@@ -1882,7 +1882,7 @@ for index, (vars_to_drop, cat_vars_to_model) in enumerate(zip(variables_to_drop_
 
     # Define parameters of Random Forest Classifier
     random_forest_model = RandomForestClassifier(random_state=1)
-    # Merge feature importances from random forest classifer on feature_info
+    # Merge feature importances from random forest classifier on feature_info
     feature_info = feature_info.merge(pd.DataFrame(data=[list(x), random_forest_model.fit(x,y).feature_importances_.tolist()]).T.\
         rename(columns={0: 'variable', 1: 'feature_importance_rfc'}), on='variable')
     # Sort values by descending random forest classifier feature importance to create ranking column
@@ -1891,7 +1891,7 @@ for index, (vars_to_drop, cat_vars_to_model) in enumerate(zip(variables_to_drop_
 
     # Define parameters of Gradient Boosting Classifier
     gbm_model = GradientBoostingClassifier(random_state=1)
-    # Merge feature importances from gradient boosting classifer on feature_info
+    # Merge feature importances from gradient boosting classifier on feature_info
     feature_info = feature_info.merge(pd.DataFrame(data=[list(x), gbm_model.fit(x,y).feature_importances_.tolist()]).T.\
         rename(columns={0: 'variable', 1: 'feature_importance_gbm'}), on='variable')
     # Sort values by descending gradient boosting classifier feature importance to create ranking column
@@ -1928,7 +1928,7 @@ for index, (vars_to_drop, cat_vars_to_model) in enumerate(zip(variables_to_drop_
             # Define parameters of k-nearest neighbors from grid search
             knn_model = KNeighborsClassifier(metric='minkowski', n_neighbors=grid_search.best_params_['n_neighbors'],
                             weights=grid_search.best_params_['weights'])
-            # Cross-validate and predict using Support-vector machine classifer
+            # Cross-validate and predict using Support-vector machine classifier
             knn_predict = cross_val_predict(knn_model, x_std[knn_variable_list], y, cv=5)
             print(confusion_matrix(y_true=y, y_pred=knn_predict))
             conf_matr = confusion_matrix(y_true=y, y_pred=knn_predict)
@@ -2128,7 +2128,7 @@ for index, (vars_to_drop, cat_vars_to_model) in enumerate(zip(variables_to_drop_
             #     x = x.drop(columns=bottom_variable)
             else:
                 break
-    # Create DataFrame of random forest classifer results
+    # Create DataFrame of random forest classifier results
     model_search_gbm = pd.DataFrame(model_search_gbm, columns=['model_params_grid_search',
                                                  'true_negatives', 'false_positives',
                                                  'false_negatives', 'true_positives', 'variables_not_used'])
@@ -2205,8 +2205,8 @@ except NameError:
 **ROC Curves**
 ```python
 # Dict of model names and their spelled out verions
-model_names_spelled_out = {'logit': 'Logistic Regression', 'rfc': 'Random Forest Classifer', 'knn': 'K-Nearest Neighbors',
-                           'svc': 'Support Vector Machine Classifier', 'gbm': 'Gradient Boosting Classifer'}
+model_names_spelled_out = {'logit': 'Logistic Regression', 'rfc': 'Random Forest Classifier', 'knn': 'K-Nearest Neighbors',
+                           'svc': 'Support Vector Machine Classifier', 'gbm': 'Gradient Boosting Classifier'}
 
 # Build ROC Curves for all models which give prediction probabilities (i.e. all but SVC)
 fig, axes = plt.subplots(nrows=2, ncols=2)
