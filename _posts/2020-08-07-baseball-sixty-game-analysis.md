@@ -4,12 +4,15 @@ title: "Examining the Effectiveness of MLB's 2020 Sixty Game Baseball Season usi
 author: "Dustin Wicker"
 categories: journal
 tags: [data science,data analysis,statistics,hypothesis testing,data visualization,data mining,data cleaning,web scraping,python]
-image: mountains.jpg
+image: atlanta_braves.jpg
 ---
 
 *** UNDER CONSTRUCTION ***
 
-Since Major League Baseball announed on June 23, 2020 they were officially coming back and instituting a sixty-game baseball season, I have found myself contemplating how worthwile this shortened season will be. Will this season go down in the hollowed record books as being as meaningful as those of past seasons, or will the proverbial baseball asterick be placed next to it and it's outcomes? I compiled data for the last twenty-five baseball seasons (1995 - 2019), and analyzed it using statisical methods and visualizations to answer this question. Follow along to determine if you should celebrate (socially distanced of course) 
+On June 23, 2020, Major League Baseball (MLB) announed they were officially coming back and instituting a sixty-game baseball season for the 2020 campaign. Baseball fans everywhere rejoiced; excited to be able to watch the sport they love again, and get a temporary reprieve from the mundane lifestyle set in by the coronavirus pandemic. Since this announcement, I have found myself contemplating how worthwile this shortened season will be. Will this season go down in the hollowed record books as being as meaningful as those of past seasons, or will the proverbial baseball asterick be placed next to it and it's outcomes? I compiled data for the last twenty-five baseball seasons (1995 - 2019), and analyzed it using statisical methods and visualizations to answer this question. 
+
+
+Follow along to determine if you should celebrate (socially distanced of course) 
 
 
 To answer this question,  to determine if the teams in playoff contention at the sixty-game mark were the same teams that ended up making the playoffs at season's end. 
