@@ -33,7 +33,8 @@ The opportunity to teach people the full data science stack is an absolute bless
 As for this blog and portfolio, this space is meant to serve two purposes:  
 * A platform where I can **[post](https://dustinwicker.github.io/menu/posts.html)** to explain projects I have created and worked on. These will demonstrate the full spectrum of data science skills I possess, with explanations, visualizations, and code detailing the steps I took to solve the task at hand.
    * This will allow perspective clients and job opportunities to see the analytical abilities I have, and give them an understanding of the work I can provide to them to solve their data-related challenges.
-* A place the wonderful people I mentor, as well as others looking to gain knowledge about data science and analytics, can **[come and learn](https://dustinwicker.github.io/menu/teaching_resources.html)**.
+* A place the wonderful people I mentor, as well as others looking to gain knowledge about data science and analytics, can come and learn.  
+   * These posts are intended to be **t**eaching **r**esources so to differentate them from regular posts, they will be denoted with (TR) in the title.
    * These are meant to be concise write-ups that clearly explain the topic being explored alongside code that has been conscientiously commented so the reader can gain the understanding they need and are also able to execute the topic effectively in their code script.  
      * If there is a topic you would like to see explained that is not listed, please send me an [email](mailto:dustinlwicker@gmail.com "Click to send me an email"), and I will add it.
   
