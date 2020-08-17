@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Web Scraping using Selenium with Python"
+title: "Web Scraping using Selenium with Python (TR)"
 author: "Dustin Wicker"
 categories: journal
 tags: [automobiles,cars,web scraping,data science,data analysis,selenium,python]

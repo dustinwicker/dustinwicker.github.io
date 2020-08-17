@@ -1046,7 +1046,7 @@ for ax, variable in zip(axes.flatten(), ['chol', 'chol_boxcox']):
     ax2.set_yticks([])
     ax2.set_title(continuous_variables_spelled_out_dict[variable], fontdict={'fontweight': 'bold', 'fontsize': 24})
     ax.text(0.78, 0.85, f"Kurtosis value: {'{:.3}'.format(stats.kurtosis(a=hungarian[variable], fisher=True))}\n"
-                      f"Sknewness value: {'{:.3}'.format(stats.skew(a=hungarian[variable]))}",
+                      f"Skewness value: {'{:.3}'.format(stats.skew(a=hungarian[variable]))}",
             horizontalalignment='center', verticalalignment='center', transform=ax.transAxes,
             bbox=dict(facecolor='none', edgecolor='black', pad=10.0, linewidth=4), weight='bold', fontsize=17)
     ax.set_ylabel('Density', fontdict={'fontweight': 'bold', 'fontsize': 22})
@@ -1348,7 +1348,7 @@ hungarian['agebinned'] = pd.cut(x=hungarian.age, bins=5, labels = ['0', '1', '2'
 ```python
 # Add boxcox'd variables to continuous_variables list
 continuous_variables.extend([x for x in list(hungarian) if 'boxcox' in x])
-# Add iteraction variables to continuous_variables list
+# Add interaction variables to continuous_variables list
 continuous_variables.extend([x for x in list(hungarian) if 'div_by' in x])
 
 # Correlations > 0.6 and < 1.0 and <-0.6 and >-1.0, drop all null columns
