@@ -41,7 +41,7 @@ Code snippets will be provided for each section outlined in the [Project Overvie
 
 ## Exploratory Data Analysis [<sub><sup>(View code)</sup></sub>](#exploratory-data-analysis)
 
-![Heatmap of Continous Predictor Variables](/assets/img/heatmap_continous_predictor_variables.png "Heatmap of Continous Predictor Variables")
+![Line Plot](/assets/img/line_plot_percent_sixty_season_end.png "Line Plot Denoting the Percentage of Teams in Playoff Position at Sixty-Game Mark and Made Playoffs at End of Year")
 
    
 ## Model Visualization, Comparison, and Selection [<sub><sup>(View code)</sup></sub>](#model-visualization-comparison-and-selection)
