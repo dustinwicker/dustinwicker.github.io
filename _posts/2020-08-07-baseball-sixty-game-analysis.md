@@ -47,7 +47,7 @@ Code snippets will be provided for each section outlined in the [Project Overvie
 ## Model Visualization, Comparison, and Selection [<sub><sup>(View code)</sup></sub>](#model-visualization-comparison-and-selection)
 * ROC Curves were built based on each model's predicted probabilities to visually compare model performance at various cut-off values.  
 
-![ROC Curves](/assets/img/roc_cruves.png "ROC Curves")  
+![Swarm_Plot](/assets/img/american_league_swarmplot.png "Swarm Plot Denoting Sixty Game Winning Percentage of Teams and their Season Ending Result")  
 
 ## Questions for Consideration/Analysis Expansion in the Future
 * Pull all teams season ending records and statistics (correlations between 60 game playoff teams and their final result and 60 game standings and playoff teams - their correlations) .54
