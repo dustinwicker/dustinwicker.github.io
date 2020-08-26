@@ -9,13 +9,21 @@ image: atlanta_braves.jpg
 
 *** UNDER CONSTRUCTION ***
 
-On June 23, 2020, Major League Baseball (MLB) announed they were officially coming back and instituting a sixty-game baseball season for the 2020 campaign. Baseball fans everywhere rejoiced; excited to be able to watch the sport they love again, and get a temporary reprieve from the mundane lifestyle set in by the coronavirus pandemic. Since this announcement, I have found myself contemplating how worthwile this shortened season will be. Will this season go down in the hollowed record books as being as meaningful as those of past seasons, or will the proverbial baseball asterick be placed next to it and it's outcomes? I compiled data for the last twenty-five baseball seasons (1995 - 2019), and analyzed it using statisical methods and visualizations to answer this question. 
+On June 23, 2020, Major League Baseball (MLB) announed they were officially coming back and instituting a sixty game baseball season for the 2020 campaign. Baseball fans everywhere rejoiced; excited to be able to watch the sport they love again, and get a temporary reprieve from the mundane lifestyle set in by the coronavirus pandemic. Since this announcement, I have found myself contemplating how worthwile this shortened season will be. There is no doubt an asterick will be placed beside this season and it's outcome, but how large will this proverbial asterick be? To answer this question, I focused my analysis on determining whether or not this sixty game season, plus the expanded postseason format instituted by Major League Baseball, would produce the rightful playoff teams, and give the best teams from each division a shot at the Commissioner's Trophy. Follow along to determine if you should celebrate (socially distanced of course) when your team hoists the crown, or if this season should be viewed merely for it's entertainment purposes.
+
+Before diving into how I obtained the data and the subsequent analysis and visualizations produced, lets get an understanding of the differences between a traditonal baseball season and this 2020 COVID-impacted one.
+
+|                                          | Traditional Season                           | 2020 Season                                                          |
+| ---------------------------------------- | -------------------------------------------- | -------------------------------------------------------------------- |
+| Number of Regular Season Games Played    | 162                                          | 60                                                                   |
+| Number of Playoff Teams from Each League | 5 (3 Division Winners + 2 Wild Card Winners) | 8 (1st and 2nd Place Teams from Each Division + 2 Wild Card Winners) |
+| Number of Total Playoff Teams            | 10                                           | 16                                                                   |
 
 
-Follow along to determine if you should celebrate (socially distanced of course) 
+
+Will this season go down in the hollowed record books as being as meaningful as those of past seasons, or will the proverbial baseball asterick be placed next to it and it's outcomes? I compiled data for the last twenty-five baseball seasons (1995 - 2019), and analyzed it using statisical methods and visualizations to answer this question. entertainment value
 
 
-To answer this question,  to determine if the teams in playoff contention at the sixty-game mark were the same teams that ended up making the playoffs at season's end. 
 
 
  Please leave a comment at the bottom of the page to let me know your thoughts on the project and the actions I took to arrive at the final model. At the end of the [Project Overview](#project-overview), there are questions posed for reflection and deliberation - feel free to answer one of those too if you would like.
