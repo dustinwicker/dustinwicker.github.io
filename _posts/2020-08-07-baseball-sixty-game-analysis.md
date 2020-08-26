@@ -21,7 +21,12 @@ Before diving into how I obtained the data and the subsequent analysis and visua
 
 \* From 1969 through 1993, there were two divisions in each league and only the two division leaders made the playoffs at season's end (for a total of four playoff teams). A new system was instituted for the 1994 season (but first used in 1995 due to a players strike canceling the 1994 playoffs) expanding from two to three divisions per league and adding a wild card team that made the playoffs as the fourth seed. The wild card team was the team with the most wins amongst non-division winners. In 2012, the system was modified yet again to add a second wild card team per league to the playoff mix.
 
-Now that that is out of the way, lets get to the fun stuff. I acquired data for the last twenty-five baseball seasons (1995 - 2019) by web scraping multiple sites using Selenium (to learn how to do this, be sure to check out this [tutorial](https://dustinwicker.github.io/journal/web_scraping.html))
+Now that that is out of the way, lets get to the fun stuff. I acquired data for the last twenty-five baseball seasons (1995 - 2019) by web scraping multiple sites using Selenium (to learn how to do this yourself, be sure to check out this [tutorial](https://dustinwicker.github.io/journal/web_scraping.html)). The data collected involved:  
+* Sixty game records and standings for every team
+* Season ending standings for playoff teams 
+* World Series winners and losers
+* Division team information
+* Full team names
 
 
 
@@ -67,4 +72,5 @@ Code snippets will be provided for each section outlined in the [Project Overvie
 
 ## Questions for Consideration/Analysis Expansion in the Future
 * Pull all teams season ending records and statistics (correlations between 60 game playoff teams and their final result and 60 game standings and playoff teams - their correlations) .54
+Season ending standings for playoff teams - could look more in-depth at correlations
 
