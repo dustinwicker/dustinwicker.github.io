@@ -13,11 +13,17 @@ On June 23, 2020, Major League Baseball (MLB) announed they were officially comi
 
 Before diving into how I obtained the data and the subsequent analysis and visualizations produced, lets get an understanding of the differences between a traditonal baseball season and this 2020 COVID-impacted one.
 
-|                                          | Traditional Season                           | 2020 Season                                                          |
-| ---------------------------------------- | -------------------------------------------- | -------------------------------------------------------------------- |
-| Number of Regular Season Games Played    | 162                                          | 60                                                                   |
-| Number of Playoff Teams from Each League | 5 (3 Division Winners + 2 Wild Card Winners) | 8 (1st and 2nd Place Teams from Each Division + 2 Wild Card Winners) |
-| Number of Total Playoff Teams            | 10                                           | 16                                                                   |
+|                                          | Traditional Season                             | 2020 Season                                                          |
+| ---------------------------------------- | ---------------------------------------------- | -------------------------------------------------------------------- |
+| Number of Regular Season Games Played    | 162                                            | 60                                                                   |
+| Number of Playoff Teams from Each League | 5\* (3 Division Winners + 2 Wild Card Winners) | 8 (1st and 2nd Place Teams from Each Division + 2 Wild Card Winners) |
+| Number of Total Playoff Teams            | 10                                             | 16                                                                   |
+
+\* From 1969 through 1993, there were two divisions in each league and only the two division leaders made the playoffs at season's end (for a total of four playoff teams). A new system was instituted for the 1994 season (but first used in 1995 due to a players strike canceling the 1994 playoffs) expanding from two to three divisions per league and adding a wild card team that made the playoffs as the fourth seed. The wild card team was the team with the most wins amongst non-division winners. In 2012, the system was modified yet again to add a second wild card team per league to the playoff mix.
+
+Now that that is out of the way, lets get to the fun stuff. I acquired data for the last twenty-five baseball seasons (1995 - 2019) by web scraping multiple sites using Selenium (to learn how to do this, be sure to check out this [tutorial](https://dustinwicker.github.io/journal/web_scraping.html))
+
+
 
 
 
