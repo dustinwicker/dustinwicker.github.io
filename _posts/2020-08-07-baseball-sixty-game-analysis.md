@@ -28,7 +28,7 @@ Now that that is out of the way, lets get to the fun stuff. I acquired data for 
 * Division team information
 * Full team names  
 
-The various pieces of data were stored in dictionaries and lists. After performing some cleaning and manipulation, the pieces of data were combined into a MultiIndex DataFrame.
+The various pieces of data were stored in dictionaries and lists. After performing some cleaning and manipulation, the pieces of data were combined into a MultiIndex DataFrame. Useful elements were extracted from the DataFrame to determine whether or not this sixty game season and expanded playoff format would produce the appropriate playoff teams compared to past seasons. Through intricate data analysis and multiple rounds of creating data visualizations, the two 
 
 
 
