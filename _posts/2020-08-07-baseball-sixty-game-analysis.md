@@ -23,10 +23,12 @@ Before diving into how I obtained the data and the subsequent analysis and visua
 
 Now that that is out of the way, lets get to the fun stuff. I acquired data for the last twenty-five baseball seasons (1995 - 2019) by web scraping multiple sites using Selenium (to learn how to do this yourself, be sure to check out this [tutorial](https://dustinwicker.github.io/journal/web_scraping.html)). The data collected involved:  
 * Sixty game records and standings for every team
-* Season ending standings for playoff teams 
+* Season ending records and standings for playoff teams 
 * World Series winners and losers
 * Division team information
-* Full team names
+* Full team names  
+
+The various pieces of data were stored in dictionaries and lists. After performing some cleaning and manipulation, the pieces of data were combined into a MultiIndex DataFrame.
 
 
 
