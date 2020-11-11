@@ -26,8 +26,13 @@ Feel free to message me through my LinkedIn profile if you have any questions.
 
 During my time with Thinkful’s data science program, Dustin was a wonderful touchstone of resources and brainstorming. With his ability to clarify data science techniques, methodologies and technologies in a non-technical manner, he sets himself apart as unique in this field. Dustin is highly skilled in Python as we discussed at length the several advantages to the Python libraries and resources. His methods for parameter optimization, model implementation and his experience in the field are both insightful and incredibly helpful.
 
-Dustin also provided many resources for continued learning, growth and honing personal skills as a programmer and Data Scientist. He is a great mentor and an accomplished Data Scientist with phenomenal aptitude for communication. Dustin is a strong mentor, and Data Scientist, his knowledge and friendly nature make him an absolute pleasure to work with.  
+Dustin also provided many resources for continued learning, growth and honing personal skills as a programmer and Data Scientist. He is a great mentor and an accomplished Data Scientist with phenomenal aptitude for communication. Dustin is a strong mentor, and Data Scientist, his knowledge and friendly nature make him an absolute pleasure to work with.   
   - Sara Jacobi  
+    Graduate of Thinkful's Data Science Program<br>
+<br>
+
+Investing in a bootcamp is often a tough choice for someone looking to make a career change. The insecurity for me was mainly centered on whether I would gain anything additionally from going through a bootcamp versus learning the material on my own. I started the bootcamp in mid-2020 and began working with Dustin as my mentor. His Python expertise and project advice made all the difference. Throughout each mentoring session, Dustin was patient in explaining concepts and was always eager to help. It was not out of the norm for our meetings to run a bit over time. However, he was always more concerned with me leaving with all my questions answered versus the additional time spent. Whether I was asking about statistical tests, model assumptions, PCA, machine learning algorithms, SQL, or general Python code, I was impressed by his wealth of information and his ability to convey it in an understandable manner. Dustin took the time to understand each of my project ideas and was able to make valuable suggestions to improve them. I completed the Thinkful Data Science program in November 2020. Looking back, I can state that the real value of my Thinkful experience was in the bi-weekly meeting with Dustin. I am appreciative of Dustin for helping me get to the finish line and recommend him for all things Data Science.  
+  - Felix Ortega  
     Graduate of Thinkful's Data Science Program<br>
 <br>
 
