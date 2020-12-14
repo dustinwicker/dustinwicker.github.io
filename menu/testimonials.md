@@ -24,9 +24,16 @@ Feel free to message me through my LinkedIn profile if you have any questions.
     Analyst Intern at Mendoza Ventures<br>
 <br>
 
+I had the fortunate experience of receiving mentorship from Dustin during my time in Thinkful’s Data Science program. Beginning our collaboration during the preparatory pre-course, I chose to continue working with Dustin for the duration of the full-time experience. Dustin is incredibly knowledgeable and professional. He was a constant source of support for me, cutting through my blockers with a clever line of code or unique approach. He always provided invaluable insight into the industry with best practices and personal experiences. Dustin was never at a loss for an issue I was facing. He is well versed in statistics, machine learning, and the code that goes into creating a successful data science project. He was also always ready to relate to an issue I was facing with a project of his own. During my time learning neural networks, Dustin was able to relate to my issues and provide solutions by sharing a deep learning project he was working on. Not only did he help me through my own problems, he elevated my work with expert examples of coding solutions. Dustin’s passion for data and using it to benefit others, especially in healthcare, shined through in every interaction. His experience enriched my own. I both learned valuable data science skills and what being a data science professional really means. Dustin constantly went above and beyond, meeting several extra times a week if needed to ensure my success.
+
+I consider working with Dustin one of the highest points of my Thinkful experience. Having him on your team means having a reliable, relatable, and ready data science professional. His calm, cool, and collected demeanor allows him to handle any issue with tact. Dustin has my utmost appreciation and recommendation. I will gladly discuss my experience with him further should the need be if, simply reach out to me through LinkedIn.
+  - Dillan Gump  
+    Graduate of Thinkful's Data Science Program<br>
+<br>
+
 During my time with Thinkful’s data science program, Dustin was a wonderful touchstone of resources and brainstorming. With his ability to clarify data science techniques, methodologies and technologies in a non-technical manner, he sets himself apart as unique in this field. Dustin is highly skilled in Python as we discussed at length the several advantages to the Python libraries and resources. His methods for parameter optimization, model implementation and his experience in the field are both insightful and incredibly helpful.
 
-Dustin also provided many resources for continued learning, growth and honing personal skills as a programmer and Data Scientist. He is a great mentor and an accomplished Data Scientist with phenomenal aptitude for communication. Dustin is a strong mentor, and Data Scientist, his knowledge and friendly nature make him an absolute pleasure to work with.   
+Dustin also provided many resources for continued learning, growth and honing personal skills as a programmer and Data Scientist. He is a great mentor and an accomplished Data Scientist with phenomenal aptitude for communication. Dustin is a strong mentor, and Data Scientist, his knowledge and friendly nature make him an absolute pleasure to work with. 
   - Sara Jacobi  
     Graduate of Thinkful's Data Science Program<br>
 <br>
